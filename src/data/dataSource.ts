@@ -15,7 +15,7 @@ import { loadBundle } from "./loadBundle";
 const CACHE_KEY = "unite-build-optimizer.dataCache.v1";
 const DATA_BASE =
   (import.meta.env.VITE_DATA_BASE_URL as string | undefined) ??
-  "https://aerokita.github.io/unite-build-optimizer/data";
+  "https://aerokita.github.io/Pokemon-UNITE-Build-Tool/data";
 const MANIFEST_URL = `${DATA_BASE}/manifest.json`;
 
 interface CacheEntry { version: string; patchVersion: string; raw: unknown; fetchedAt: number; }

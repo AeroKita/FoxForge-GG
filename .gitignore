@@ -7,6 +7,12 @@ src-tauri/gen/
 *.local
 .DS_Store
 
+# never commit private signing keys / credentials
+*.key
+*.pem
+.env
+.env.*
+
 # extraction pipeline workspace (large unpacked APK content)
 tools/extract/_work/
 tools/vendor/

@@ -15,8 +15,8 @@ There are two ways to use the tool. **No prebuilt installer is published yet**
 2. Clone and enter the project:
 
 ```bash
-git clone https://github.com/AeroKita/unite-build-optimizer.git
-cd unite-build-optimizer
+git clone https://github.com/AeroKita/Pokemon-UNITE-Build-Tool.git
+cd Pokemon-UNITE-Build-Tool
 ```
 
 3. Install dependencies and start the app:

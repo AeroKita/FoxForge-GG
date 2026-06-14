@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 // base: relative "./" by default (works in Tauri + any sub-path); the Pages
-// build overrides with VITE_BASE=/unite-build-optimizer/.
+// build overrides with VITE_BASE=/Pokemon-UNITE-Build-Tool/.
 export default defineConfig({
   base: process.env.VITE_BASE ?? "./",
   plugins: [

@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "validate": "tsx src/engine/validate.ts",
     "tauri": "tauri",
-    "build:pages": "VITE_BASE=/unite-build-optimizer/ npm run build"
+    "build:pages": "VITE_BASE=/Pokemon-UNITE-Build-Tool/ npm run build"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.0",

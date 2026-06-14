@@ -37,7 +37,7 @@ jobs:
           python3 - "$PATCH" "$VER" <<'PY'
           import json, sys
           patch, ver = sys.argv[1], sys.argv[2]
-          base = "https://aerokita.github.io/unite-build-optimizer/data"
+          base = "https://aerokita.github.io/Pokemon-UNITE-Build-Tool/data"
           json.dump({"version": ver, "patchVersion": patch, "url": f"{base}/patch-{patch}.json"},
                     open("public/data/manifest.json", "w"), indent=2)
           PY

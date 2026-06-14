@@ -37,7 +37,7 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://github.com/AeroKita/unite-build-optimizer/releases/latest/download/latest.json"
+        "https://github.com/AeroKita/Pokemon-UNITE-Build-Tool/releases/latest/download/latest.json"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDlFNTU3NUY5OTFBNzg4MDEKUldRQmlLZVIrWFZWbnJEblE1b0tTRWJRQTBjeVFCQStuNE5Ba0pMOGlsK0tkNk96MHk2OCs0dGEK"
     }
