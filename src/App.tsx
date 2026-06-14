@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StoreProvider, useStore } from "./state/store";
 import { pokemonById } from "./data/gameData";
 import { ROLE_COLOR, ROLE_LABEL } from "./ui/theme";
@@ -11,6 +11,8 @@ import { CompareView } from "./components/CompareView";
 import { LevelGraph } from "./components/LevelGraph";
 import { RecommendPanel } from "./components/RecommendPanel";
 import { InventoryManager } from "./components/InventoryManager";
+import { UpdatePanel } from "./components/UpdatePanel";
+import { isTauri, autoUpdateEnabled, checkAppUpdate } from "./ui/runtime";
 
 type Tab = "build" | "compare";
 type Page = "app" | "inventory";
@@ -78,11 +80,26 @@ function Header({ tab, setTab, page, setPage }: { tab: Tab; setTab: (t: Tab) => 
 function Workspace() {
   const [tab, setTab] = useState<Tab>("build");
   const [page, setPage] = useState<Page>("app");
+  const [dataUpdate, setDataUpdate] = useState<string | null>(null);
   const { expert } = useStore();
   const activeTab: Tab = expert ? tab : "build";
+
+  useEffect(() => {
+    const onData = (e: Event) => setDataUpdate((e as CustomEvent).detail?.patch ?? null);
+    window.addEventListener("unite-data-updated", onData);
+    if (isTauri && autoUpdateEnabled()) void checkAppUpdate(true); // silent auto-update on launch
+    return () => window.removeEventListener("unite-data-updated", onData);
+  }, []);
+
   return (
     <div className="min-h-screen bg-bg text-ink">
       <Header tab={tab} setTab={setTab} page={page} setPage={setPage} />
+      {dataUpdate && (
+        <div className="bg-accent px-4 py-2 text-center text-sm text-white">
+          New game data (patch {dataUpdate}) is ready.{" "}
+          <button onClick={() => location.reload()} className="font-semibold underline">Reload to apply</button>
+        </div>
+      )}
       <main className="mx-auto flex max-w-6xl flex-col gap-4 p-4 sm:p-6">
         {page === "inventory" ? (
           <InventoryManager />
@@ -94,6 +111,7 @@ function Workspace() {
                 <PokemonPicker />
                 <LoadoutEditor />
                 <LoadoutBar />
+                <UpdatePanel />
               </div>
               <StatPanel />
             </div>

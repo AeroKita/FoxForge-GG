@@ -1,0 +1,14 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+  <!-- stylized U for UNITE -->
+  <path d="M 340 286 L 340 548 A 172 172 0 0 0 684 548 L 684 286"
+        fill="none" stroke="#ffffff" stroke-width="118" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- accent spark -->
+  <circle cx="512" cy="760" r="34" fill="#22d3ee"/>
+</svg>

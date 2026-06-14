@@ -1,0 +1,49 @@
+name: Refresh game data
+
+# Re-scrapes UNITE-DB and publishes a fresh data bundle + manifest to
+# public/data, which the pages workflow then redeploys. Installed apps (web +
+# desktop) pick up the new `version` on next launch — no app release needed.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # weekly, Monday 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests openpyxl
+      - name: Scrape + normalize
+        working-directory: tools/community
+        run: |
+          python3 fetch.py
+          python3 normalize.py
+          python3 normalize_as_boosts.py
+      - name: Publish bundle + manifest to public/data
+        run: |
+          mkdir -p public/data
+          PATCH=$(python3 -c "import json;print(json.load(open('src/data/patch-1.23.1.1.json'))['patchVersion'])")
+          VER=$(python3 -c "import json;print(json.load(open('src/data/patch-1.23.1.1.json'))['lastUpdated'])")
+          cp "src/data/patch-1.23.1.1.json" "public/data/patch-${PATCH}.json"
+          python3 - "$PATCH" "$VER" <<'PY'
+          import json, sys
+          patch, ver = sys.argv[1], sys.argv[2]
+          base = "https://aerokita.github.io/unite-build-optimizer/data"
+          json.dump({"version": ver, "patchVersion": patch, "url": f"{base}/patch-{patch}.json"},
+                    open("public/data/manifest.json", "w"), indent=2)
+          PY
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore(data): refresh UNITE data $(date -u +%F)"
+          git push
