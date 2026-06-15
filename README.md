@@ -23,7 +23,7 @@ Grab the latest installer from the
 
 | OS | Download |
 | --- | --- |
-| Windows | the `*_x64-setup.exe` installer (or `*_x64_en-US.msi`) |
+| Windows | the `*_x64-setup.exe` installer |
 | macOS (Apple Silicon) | the `*_aarch64.dmg` |
 | macOS (Intel) | the `*_x64.dmg` |
 | Linux | the `.AppImage`, `.deb`, or `.rpm` |
