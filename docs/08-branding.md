@@ -50,18 +50,20 @@ These four spots must match `APP_NAME` for the desktop app and GitHub Releases:
 
 ## Change the icon
 
-The source art is [`tools/app-icon.svg`](../tools/app-icon.svg). After editing it
-(or swapping in new art), regenerate both icon sets:
+The committed source is [`tools/app-icon.png`](../tools/app-icon.png) — a 1024×1024
+master image. To swap in new art, point the generator at any image (it's
+normalized to 1024² RGBA and written back to `tools/app-icon.png`), then refresh
+the desktop set:
 
 ```bash
-# 1. Web/PWA icons (favicon, apple-touch, pwa-192/512) + the 1024px source PNG
-node tools/make-icons.mjs
+# 1. Adopt a new master + regenerate web/PWA icons (favicon, apple-touch, pwa-192/512)
+node tools/make-icons.mjs path/to/new-icon.png
 
-# 2. Desktop (Tauri) icon set — .ico/.icns/.png across all sizes
-npx tauri icon icon-source.png
+# 2. Desktop (Tauri) icon set — .ico/.icns/.png + Store/Android/iOS sizes
+npx tauri icon tools/app-icon.png
 ```
 
-`make-icons.mjs` writes `icon-source.png` (git-ignored) plus the `public/*` PWA
-icons; `tauri icon` consumes that PNG to fill `src-tauri/icons/`. Commit the
-regenerated `public/*` and `src-tauri/icons/*` files. A new desktop release picks
-up the icons automatically; the web icons deploy on the next push to `main`.
+(Run `node tools/make-icons.mjs` with no argument to regenerate the web icons from
+the existing source.) Commit the regenerated `tools/app-icon.png`, `public/*`, and
+`src-tauri/icons/*`. The web icons deploy on the next push to `main`; the desktop
+icons ship with the next tagged release.
