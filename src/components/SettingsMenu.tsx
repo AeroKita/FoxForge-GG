@@ -3,6 +3,7 @@ import { bundle } from "../data/gameData";
 import { cachedPatchVersion, checkDataNow } from "../data/dataSource";
 import { isTauri, autoUpdateEnabled, setAutoUpdate, checkAppUpdate } from "../ui/runtime";
 import { useStore, type Theme } from "../state/store";
+import { APP_NAME, APP_OWNER } from "../ui/brand";
 
 const THEMES: Theme[] = ["light", "dark"];
 
@@ -105,6 +106,11 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
               Running in the browser — the app auto-updates on reload. Install the desktop app for offline use + auto-updates.
             </p>
           )}
+        </Section>
+
+        <Section title="About">
+          <p className="text-sm font-medium">{APP_NAME}</p>
+          <p className="mt-0.5 text-xs text-muted">Created by {APP_OWNER}</p>
         </Section>
       </div>
     </div>

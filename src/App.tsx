@@ -13,7 +13,7 @@ import { RecommendPanel } from "./components/RecommendPanel";
 import { InventoryManager } from "./components/InventoryManager";
 import { SettingsMenu } from "./components/SettingsMenu";
 import { isTauri, autoUpdateEnabled, checkAppUpdate } from "./ui/runtime";
-import { APP_NAME, APP_TAGLINE } from "./ui/brand";
+import { APP_NAME, APP_TAGLINE, LEGAL_DISCLAIMER, copyrightLine } from "./ui/brand";
 
 type Tab = "build" | "compare";
 type Page = "app" | "inventory";
@@ -153,8 +153,12 @@ function Workspace() {
         )}
       </main>
       <footer className="mx-auto max-w-6xl px-6 pb-8 pt-2 text-center text-xs text-faint">
-        Data from UNITE-DB · attack-speed model from community calculator · patch 1.23.1.1
-        {!expert && <> · switch to <span className="font-medium">Expert</span> for attack speed, graphs & compare</>}
+        <p>
+          Data from UNITE-DB · attack-speed model from community calculator · patch 1.23.1.1
+          {!expert && <> · switch to <span className="font-medium">Expert</span> for attack speed, graphs & compare</>}
+        </p>
+        <p className="mx-auto mt-3 max-w-3xl leading-relaxed">{LEGAL_DISCLAIMER}</p>
+        <p className="mt-2">{copyrightLine()}</p>
       </footer>
     </div>
   );
