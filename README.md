@@ -1,8 +1,9 @@
-# Pokémon UNITE Build Optimizer
+# FoxForge GG
 
-A personal tool that helps Pokémon UNITE players design optimized builds —
-recommending Emblem loadouts and Held Items tailored to a selected Pokémon,
-with real-time stat calculation and level-scaling visualization.
+**Forge your UNITE loadout!** A build optimizer for Pokémon UNITE that helps
+players design optimized builds — recommending Emblem loadouts and Held Items
+tailored to a selected Pokémon, with real-time stat calculation and
+level-scaling visualization.
 
 ## Install & Run
 
@@ -22,10 +23,10 @@ Grab the latest installer from the
 
 | OS | Download |
 | --- | --- |
-| Windows | `UNITE.Build.Optimizer_*_x64-setup.exe` (or `..._x64_en-US.msi`) |
-| macOS (Apple Silicon) | `UNITE.Build.Optimizer_*_aarch64.dmg` |
-| macOS (Intel) | `UNITE.Build.Optimizer_*_x64.dmg` |
-| Linux | `.AppImage`, `.deb`, or `.rpm` |
+| Windows | the `*_x64-setup.exe` installer (or `*_x64_en-US.msi`) |
+| macOS (Apple Silicon) | the `*_aarch64.dmg` |
+| macOS (Intel) | the `*_x64.dmg` |
+| Linux | the `.AppImage`, `.deb`, or `.rpm` |
 
 The desktop app **auto-updates** itself when a new version is released. The binaries
 are not OS-code-signed, so expect a one-time warning on first launch:
@@ -70,6 +71,7 @@ The signing secret (`TAURI_SIGNING_PRIVATE_KEY`) is already configured in the re
 - [Implementation Plan](docs/05-implementation-plan.md) — milestones and datamining pipeline
 - [Theme Plan](docs/06-theme-plan.md) — semantic tokens and the light/dark theming approach
 - [Distribution & Updates](docs/07-distribution.md) — Pages web app, desktop installers, auto-update
+- [Branding](docs/08-branding.md) — how to rename the app + regenerate icons
 
 ## Layout
 

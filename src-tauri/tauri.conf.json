@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "UNITE Build Optimizer",
+  "productName": "FoxForge GG",
   "version": "0.1.1",
   "identifier": "gg.aerokita.unitebuildoptimizer",
   "build": {
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "UNITE Build Optimizer",
+        "title": "FoxForge GG",
         "width": 1280,
         "height": 860,
         "minWidth": 380,

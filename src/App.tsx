@@ -11,22 +11,26 @@ import { CompareView } from "./components/CompareView";
 import { LevelGraph } from "./components/LevelGraph";
 import { RecommendPanel } from "./components/RecommendPanel";
 import { InventoryManager } from "./components/InventoryManager";
-import { UpdatePanel } from "./components/UpdatePanel";
+import { SettingsMenu } from "./components/SettingsMenu";
 import { isTauri, autoUpdateEnabled, checkAppUpdate } from "./ui/runtime";
+import { APP_NAME, APP_TAGLINE } from "./ui/brand";
 
 type Tab = "build" | "compare";
 type Page = "app" | "inventory";
 
-function Segmented<T extends string>({ value, options, onChange }: { value: T; options: T[]; onChange: (v: T) => void }) {
+function Segmented<T extends string>({
+  value, options, onChange, disabled = false, title,
+}: { value: T; options: T[]; onChange: (v: T) => void; disabled?: boolean; title?: string }) {
   return (
-    <div className="flex gap-1 rounded-xl bg-white/15 p-1">
+    <div title={title} className={`flex gap-1 rounded-xl bg-white/15 p-1 ${disabled ? "cursor-not-allowed opacity-50" : ""}`}>
       {options.map((o) => (
         <button
           key={o}
+          disabled={disabled}
           onClick={() => onChange(o)}
           className={`rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition ${
             value === o ? "bg-surface text-accent-ink shadow" : "text-white/90 hover:bg-white/10"
-          }`}
+          } ${disabled ? "pointer-events-none" : ""}`}
         >
           {o}
         </button>
@@ -35,45 +39,73 @@ function Segmented<T extends string>({ value, options, onChange }: { value: T; o
   );
 }
 
+function GearIcon() {
+  return (
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  );
+}
+
 function Header({ tab, setTab, page, setPage }: { tab: Tab; setTab: (t: Tab) => void; page: Page; setPage: (p: Page) => void }) {
-  const { loadout, mode, setMode, expert, theme, setTheme } = useStore();
+  const { loadout, mode, setMode, expert } = useStore();
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const p = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) : null;
   const role = p ? ROLE_COLOR[p.role] : null;
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-gradient-to-r from-[var(--color-header-a)] to-[var(--color-header-b)] text-white shadow-sm">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
-        {p ? (
-          <img src={asset(p.imageAsset)} alt={p.displayName} className="h-12 w-12 rounded-full bg-white/20 object-cover ring-2 ring-white/50" />
-        ) : (
-          <div className="h-12 w-12 rounded-full bg-white/20" />
-        )}
-        <div className="flex-1">
-          <h1 className="text-lg font-bold leading-tight">Pokémon UNITE Build Optimizer</h1>
-          <div className="flex items-center gap-2 text-xs text-indigo-100">
-            {p ? (
-              <>
-                <span className="font-medium">{p.displayName}</span>
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${role!.bg} ${role!.text}`}>{ROLE_LABEL[p.role]}</span>
-                <span className="capitalize">{p.attackType}</span>
-              </>
-            ) : (
-              "Select a Pokémon to begin"
+    <>
+      <header className="sticky top-0 z-30 border-b border-line bg-gradient-to-r from-[var(--color-header-a)] to-[var(--color-header-b)] text-white shadow-sm">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
+          {p ? (
+            <img src={asset(p.imageAsset)} alt={p.displayName} className="h-12 w-12 rounded-full bg-white/20 object-cover ring-2 ring-white/50" />
+          ) : (
+            <div className="h-12 w-12 rounded-full bg-white/20" />
+          )}
+          <div className="flex-1">
+            <h1 className="text-lg font-bold leading-tight">{APP_NAME}</h1>
+            <div className="flex items-center gap-2 text-xs text-indigo-100">
+              {p ? (
+                <>
+                  <span className="font-medium">{p.displayName}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${role!.bg} ${role!.text}`}>{ROLE_LABEL[p.role]}</span>
+                  <span className="capitalize">{p.attackType}</span>
+                </>
+              ) : (
+                APP_TAGLINE
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage(page === "inventory" ? "app" : "inventory")}
+              className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25"
+            >
+              {page === "inventory" ? "← Builder" : "★ Emblems"}
+            </button>
+            {page === "app" && <Segmented value={mode} options={["beginner", "expert"]} onChange={setMode} />}
+            {page === "app" && (
+              <Segmented
+                value={expert ? tab : "build"}
+                options={["build", "compare"]}
+                onChange={setTab}
+                disabled={!expert}
+                title={expert ? undefined : "Switch to Expert mode to compare builds"}
+              />
             )}
+            <button
+              onClick={() => setSettingsOpen(true)}
+              aria-label="Settings"
+              title="Settings"
+              className="rounded-xl bg-white/15 p-2 text-white hover:bg-white/25"
+            >
+              <GearIcon />
+            </button>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Segmented value={theme} options={["light", "dark"]} onChange={setTheme} />
-          <button
-            onClick={() => setPage(page === "inventory" ? "app" : "inventory")}
-            className="rounded-xl bg-white/15 px-3 py-1.5 text-sm font-medium text-white hover:bg-white/25"
-          >
-            {page === "inventory" ? "← Builder" : "★ Emblems"}
-          </button>
-          {page === "app" && <Segmented value={mode} options={["beginner", "expert"]} onChange={setMode} />}
-          {page === "app" && expert && <Segmented value={tab} options={["build", "compare"]} onChange={setTab} />}
-        </div>
-      </div>
-    </header>
+      </header>
+      <SettingsMenu open={settingsOpen} onClose={() => setSettingsOpen(false)} />
+    </>
   );
 }
 
@@ -111,7 +143,6 @@ function Workspace() {
                 <PokemonPicker />
                 <LoadoutEditor />
                 <LoadoutBar />
-                <UpdatePanel />
               </div>
               <StatPanel />
             </div>
