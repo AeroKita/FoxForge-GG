@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { priorityWeights, scoreHeldItem, recommendBuild } from "../recommend";
-import { pokemonList, heldItems, heldItemById, setBonuses } from "../../data/gameData";
+import { priorityWeights, scoreHeldItem, recommendBuild, solveOwnedEmblemSet, bestOwnedGrade } from "../recommend";
+import { pokemonList, heldItems, heldItemById, setBonuses, emblems as allEmblems } from "../../data/gameData";
 import type { StatBlock } from "../../types";
 
 const physical = pokemonList.find((p) => p.attackType === "physical")!;
@@ -44,5 +44,37 @@ describe("recommendation engine", () => {
     const muscle = heldItemById.get("muscle-band");
     const focus = heldItemById.get("focus-band");
     if (muscle && focus) expect(scoreHeldItem(muscle, w)).toBeGreaterThan(scoreHeldItem(focus, w));
+  });
+});
+
+describe("Your Emblems (owned) solver", () => {
+  it("reports the best owned grade (gold > silver > bronze) or null", () => {
+    const owned = new Set(["a:silver", "a:bronze", "b:gold"]);
+    expect(bestOwnedGrade("a", owned)).toBe("silver");
+    expect(bestOwnedGrade("b", owned)).toBe("gold");
+    expect(bestOwnedGrade("c", owned)).toBeNull();
+  });
+
+  it("returns nothing when the player owns no emblems", () => {
+    expect(solveOwnedEmblemSet(physical, allEmblems, new Set())).toHaveLength(0);
+  });
+
+  it("only uses owned emblems, at their owned grade, max 10, distinct Pokémon", () => {
+    const pick = allEmblems.slice(0, 14);
+    const owned = new Set([
+      ...pick.slice(0, 12).map((e) => `${e.id}:gold`),
+      `${pick[12].id}:silver`,
+      `${pick[13].id}:bronze`,
+    ]);
+    const set = solveOwnedEmblemSet(physical, allEmblems, owned, { seed: 3 });
+    expect(set.length).toBeGreaterThan(0);
+    expect(set.length).toBeLessThanOrEqual(10);
+    const names = new Set<string>();
+    for (const p of set) {
+      expect(owned.has(`${p.emblemId}:${p.grade}`)).toBe(true); // owned at that grade
+      const e = allEmblems.find((x) => x.id === p.emblemId)!;
+      expect(names.has(e.pokemonName)).toBe(false); // distinct Pokémon
+      names.add(e.pokemonName);
+    }
   });
 });

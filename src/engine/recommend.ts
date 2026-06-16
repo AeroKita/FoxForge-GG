@@ -32,10 +32,30 @@ const STAT_VALUE_SCALE: Record<keyof StatBlock, number> = {
 
 const GOLD_GRADE: EmblemGrade = "gold";
 
-/** Net usefulness of an emblem (gold stats) for a Pokémon: useful positives
- *  minus harmful (needed-stat) negatives; negatives in unneeded stats are free. */
-export function emblemUsefulness(emblem: Emblem, weights: Partial<Record<keyof StatBlock, number>>, unneeded: Set<keyof StatBlock>): number {
-  const stats = emblem.statsByGrade.gold;
+/** Stat block for a grade (platinum mirrors gold; missing grades fall back). */
+function statsForGrade(emblem: Emblem, grade: EmblemGrade): Partial<StatBlock> {
+  if (grade === "platinum") return emblem.statsByGrade.gold;
+  return emblem.statsByGrade[grade] ?? emblem.statsByGrade.gold;
+}
+
+/** Best grade the player owns for an emblem, or null if unowned at every grade. */
+export function bestOwnedGrade(emblemId: string, owned: Set<string>): EmblemGrade | null {
+  for (const g of ["gold", "silver", "bronze"] as const) {
+    if (owned.has(`${emblemId}:${g}`)) return g;
+  }
+  return null;
+}
+
+/** Net usefulness of an emblem for a Pokémon: useful positives minus harmful
+ *  (needed-stat) negatives; negatives in unneeded stats are free. Scored at the
+ *  given grade (defaults to gold). */
+export function emblemUsefulness(
+  emblem: Emblem,
+  weights: Partial<Record<keyof StatBlock, number>>,
+  unneeded: Set<keyof StatBlock>,
+  grade: EmblemGrade = "gold",
+): number {
+  const stats = statsForGrade(emblem, grade);
   let score = 0;
   for (const [stat, value] of Object.entries(stats) as [keyof StatBlock, number][]) {
     if (value > 0) score += (weights[stat] ?? 0.2) * (value / STAT_VALUE_SCALE[stat]);
@@ -131,6 +151,51 @@ export function solveEmblemSet(
     }
     if (!best) break;
     picks.push({ emblemId: best.e.id, grade: GOLD_GRADE });
+    usedPokemon.add(best.e.pokemonName);
+    for (const c of best.e.colors) if (remaining.has(c)) remaining.set(c, (remaining.get(c) ?? 0) - 1);
+  }
+  return picks;
+}
+
+/**
+ * Assemble the best emblem set the player can field from emblems they OWN, each
+ * at its best owned grade. Returns up to 10 picks (fewer if the inventory is
+ * thin) — the "Your Emblems" build that adapts to the user's collection.
+ */
+export function solveOwnedEmblemSet(
+  pokemon: Pokemon,
+  emblems: Emblem[],
+  owned: Set<string>,
+  opts: { seed?: number } = {},
+): EmblemPickResult[] {
+  const byId = new Map(emblems.map((e) => [e.id, e]));
+  const weights = priorityWeights(pokemon);
+  const unneeded = unneededStats(pokemon);
+  const targets = colorTargetsFor(pokemon, byId);
+  const rng = mulberry32(opts.seed ?? 1);
+
+  const ownedList = emblems
+    .map((e) => ({ e, grade: bestOwnedGrade(e.id, owned) }))
+    .filter((x): x is { e: Emblem; grade: EmblemGrade } => x.grade !== null)
+    .filter((x) => withinFloors(x.e, unneeded))
+    .map((x) => ({ ...x, use: emblemUsefulness(x.e, weights, unneeded, x.grade) }));
+
+  const remaining = new Map(targets);
+  const picks: EmblemPickResult[] = [];
+  const usedPokemon = new Set<string>();
+  const need = () => [...remaining.values()].reduce((a, b) => a + Math.max(0, b), 0);
+
+  while (picks.length < 10) {
+    const targetsLeft = need() > 0;
+    let best: { e: Emblem; grade: EmblemGrade; s: number } | null = null;
+    for (const { e, grade, use } of ownedList) {
+      if (usedPokemon.has(e.pokemonName)) continue;
+      const coverage = e.colors.filter((c) => (remaining.get(c) ?? 0) > 0).length;
+      const s = (targetsLeft ? coverage * 10 : 0) + use + rng() * 0.5;
+      if (!best || s > best.s) best = { e, grade, s };
+    }
+    if (!best) break;
+    picks.push({ emblemId: best.e.id, grade: best.grade });
     usedPokemon.add(best.e.pokemonName);
     for (const c of best.e.colors) if (remaining.has(c)) remaining.set(c, (remaining.get(c) ?? 0) - 1);
   }
