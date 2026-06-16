@@ -3,32 +3,10 @@
 
 import bundled from "./patch-1.23.1.1.json";
 import { loadBundle } from "./loadBundle";
-import { loadCachedRaw, refreshDataInBackground } from "./dataSource";
+import { refreshDataInBackground } from "./dataSource";
 import type { Pokemon, HeldItem, BattleItem, Emblem } from "../types";
 
-// Prefer a previously-cached remote bundle when it validates AND is at least as
-// new as the copy bundled at build time; otherwise use the bundled copy. The
-// freshness check stops a stale cache from masking newer bundled data after an
-// app update (and offline, where the remote manifest is unreachable).
-// Synchronous so the rest of the app is unaffected; a background refresh updates
-// the cache for the next launch (and fires `unite-data-updated`).
-function lastUpdatedOf(raw: unknown): string {
-  const v = (raw as { lastUpdated?: unknown } | null)?.lastUpdated;
-  return typeof v === "string" ? v : ""; // ISO YYYY-MM-DD → lexicographic compare
-}
-
-function pickRaw(): unknown {
-  const cached = loadCachedRaw();
-  if (cached) {
-    try {
-      loadBundle(cached); // validate; throws on a corrupt cache
-      if (lastUpdatedOf(cached) >= lastUpdatedOf(bundled)) return cached;
-    } catch { /* corrupt cache → bundled */ }
-  }
-  return bundled;
-}
-
-export const bundle = loadBundle(pickRaw());
+export const bundle = loadBundle(bundled);
 
 if (typeof window !== "undefined") {
   void refreshDataInBackground(bundle.lastUpdated, (patch) =>

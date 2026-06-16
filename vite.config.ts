@@ -10,26 +10,55 @@ import { APP_NAME, APP_SHORT_NAME, APP_DESCRIPTION } from "./src/ui/brand";
 // src-tauri/tauri.conf.json on each release). Injected via `define` below.
 const { version } = createRequire(import.meta.url)("./package.json") as { version: string };
 
-// Recover from stale PWA caches after deploy: an old service worker can serve
-// index.html that references hashed JS bundles that no longer exist → blank page.
-const SW_RECOVERY = `<script>
-(function(){var k="foxforge-sw-recover";
-window.addEventListener("error",function(e){var t=e.target;
-if(!t||t.tagName!=="SCRIPT"||!t.src||!t.src.includes("/assets/index-"))return;
-if(!("serviceWorker"in navigator)||sessionStorage.getItem(k))return;
-sessionStorage.setItem(k,"1");
-navigator.serviceWorker.getRegistrations().then(function(rs){
-return Promise.all(rs.map(function(r){return r.unregister()}));
-}).then(function(){location.reload()});
-},true);})();
-</script>`;
+// GitHub Pages build (VITE_BASE=/FoxForge-GG/): no active service worker.
+// Returning visitors may still have an old SW that serves a stale index.html
+// pointing at removed JS bundles → blank white page. A one-shot self-destructing
+// sw.js (same URL) lets legacy pages unregister + reload; new HTML never re-registers.
+const isPagesDeploy = process.env.VITE_BASE === "/FoxForge-GG/";
 
-// Inject the app name into index.html's <title> from the single brand source,
-// so renaming only needs src/ui/brand.ts (no stray name in the HTML).
+// Runs before the module bundle — purge SW/caches and show a recovery UI if React never mounts.
+const BOOT_SHELL = `<script>
+(function(){
+  function purge(){
+    var ops=[];
+    if("serviceWorker" in navigator){
+      ops.push(navigator.serviceWorker.getRegistrations().then(function(rs){
+        return Promise.all(rs.map(function(r){return r.unregister();}));
+      }));
+    }
+    if(window.caches){
+      ops.push(caches.keys().then(function(ks){
+        return Promise.all(ks.map(function(k){return caches.delete(k);}));
+      }));
+    }
+    return Promise.all(ops);
+  }
+  purge().catch(function(){});
+  window.addEventListener("error",function(e){
+    var t=e.target;
+    if(!t||t.tagName!=="SCRIPT"||!t.src||t.src.indexOf("/assets/index-")===-1)return;
+    if(sessionStorage.getItem("foxforge-sw-recover"))return;
+    sessionStorage.setItem("foxforge-sw-recover","1");
+    purge().then(function(){location.reload();});
+  },true);
+  setTimeout(function(){
+    var r=document.getElementById("root");
+    if(!r||r.childElementCount)return;
+    r.innerHTML='<div style="font:16px/1.5 system-ui,sans-serif;padding:24px;max-width:28rem;margin:40px auto;text-align:center"><p style="font-weight:600;margin:0 0 8px">FoxForge GG didn\\'t load</p><p style="color:#5b6472;margin:0 0 16px">Try clearing cached site data from an older version.</p><button type="button" id="foxforge-recover" style="background:#4f46e5;color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer">Clear cache &amp; reload</button></div>';
+    var btn=document.getElementById("foxforge-recover");
+    if(btn)btn.onclick=function(){
+      try{localStorage.removeItem("unite-build-optimizer.dataCache.v1");}catch(e){}
+      purge().then(function(){location.reload();});
+    };
+  },8000);
+})();
+</script>
+<style>html,body{background:#eef1f5;margin:0}#root{min-height:100vh}</style>`;
+
 const htmlBranding = () => ({
   name: "html-branding",
   transformIndexHtml: (html: string) =>
-    html.replaceAll("__APP_NAME__", APP_NAME).replace("</head>", `${SW_RECOVERY}</head>`),
+    html.replaceAll("__APP_NAME__", APP_NAME).replace("<head>", `<head>${BOOT_SHELL}`),
 });
 
 // base: relative "./" by default (works in Tauri + any sub-path); the Pages
@@ -43,6 +72,9 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
+      // New Pages HTML must not register a SW (self-destruct sw.js is only for legacy tabs).
+      injectRegister: isPagesDeploy ? false : "auto",
+      selfDestroying: isPagesDeploy,
       includeAssets: ["favicon-32.png", "apple-touch-icon.png"],
       manifest: {
         name: APP_NAME,
@@ -58,8 +90,6 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Do not precache index.html — after deploy, a cached shell can point at
-        // removed hashed JS and leave every browser on a blank page until cache clear.
         globPatterns: ["**/*.{js,css}"],
         globIgnores: ["**/index.html"],
         navigateFallback: null,
@@ -75,7 +105,6 @@ export default defineConfig({
       },
     }),
   ],
-  // Tauri-friendly dev server.
   clearScreen: false,
   server: { host: "127.0.0.1", strictPort: true },
   test: { environment: "node", include: ["src/**/*.test.ts"] },
