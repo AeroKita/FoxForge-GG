@@ -1,5 +1,6 @@
 import { EMBLEM_COLOR_HEX } from "../ui/colors";
 import { EMBLEM_SET_INFO, type SetInfoRow } from "../ui/emblemSets";
+import { useModalDismiss } from "../ui/useModalDismiss";
 
 function Row({ r }: { r: SetInfoRow }) {
   return (
@@ -28,6 +29,7 @@ function Row({ r }: { r: SetInfoRow }) {
 
 /** Infographic explaining every emblem color set and its tier bonuses. */
 export function EmblemSetGuide({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useModalDismiss(onClose, open);
   if (!open) return null;
   const stat = EMBLEM_SET_INFO.filter((r) => r.kind === "stat");
   const util = EMBLEM_SET_INFO.filter((r) => r.kind === "utility");

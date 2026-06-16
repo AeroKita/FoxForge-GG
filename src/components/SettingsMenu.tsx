@@ -5,6 +5,7 @@ import { isTauri, autoUpdateEnabled, setAutoUpdate, checkAppUpdate } from "../ui
 import { useStore, type Theme } from "../state/store";
 import { APP_NAME, APP_OWNER } from "../ui/brand";
 import { APP_VERSION } from "../ui/version";
+import { useModalDismiss } from "../ui/useModalDismiss";
 
 const THEMES: Theme[] = ["light", "dark"];
 
@@ -21,6 +22,7 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
   const [dataUpdated, setDataUpdated] = useState(false);
   const activePatch = cachedPatchVersion() ?? bundle.patchVersion;
 
+  useModalDismiss(onClose, open);
   if (!open) return null;
 
   const toggleAuto = () => { const v = !auto; setAuto(v); setAutoUpdate(v); };

@@ -1,5 +1,6 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { asset } from "../ui/asset";
+import { useModalDismiss } from "../ui/useModalDismiss";
 import type { EmblemGrade } from "../types";
 
 export interface PickItem {
@@ -31,6 +32,8 @@ export function PickerModal({ title, items, onPick, onClose, filters, grades, ow
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [ownedOnly, setOwnedOnly] = useState(false);
   const [grade, setGrade] = useState<EmblemGrade>("gold");
+
+  useModalDismiss(onClose);
 
   const isOwned = (id: string) => owned?.has(grades ? `${id}:${grade}` : id);
 
