@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
-import { heldItems, battleItems, emblems, heldItemById, battleItemById, emblemById, ITEM_GRADE_DEFAULT } from "../data/gameData";
+import { heldItems, battleItems, emblems, heldItemById, battleItemById, emblemById } from "../data/gameData";
 import { MAX_EMBLEMS, heldItemGradesOf } from "../state/loadout";
 import { asset } from "../ui/asset";
 import { emblemIconForGrade } from "../ui/emblemIcon";
