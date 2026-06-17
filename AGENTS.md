@@ -47,7 +47,7 @@ FoxForge GG is a three-layer app: a **pure calculation engine**, a **versioned d
 
 User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
 
-Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for Tauri, static hosts, and GitHub Pages sub-paths).
+Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged except for curated builds (see below). The bundled baseline (`src/data/`) and the published runtime copy (`public/data/`) must stay byte-identical. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for Tauri, static hosts, and GitHub Pages sub-paths).
 
 Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respect the same stat model and owned-emblem inventory semantics as the editor.
 
@@ -62,6 +62,12 @@ All effective-stat rendering goes through `deriveBuild`. Level-scaling graphs us
 ### Data Bundle Versioning
 
 Each game patch is a self-contained JSON bundle (e.g. `patch-1.23.1.1.json`) plus optional sidecars (`attackSpeedBoosts.json`). Runtime can fetch updated bundles from GitHub Pages without rebuilding the app binary. Schema changes require zod updates in `loadBundle.ts` and corresponding tests.
+
+Each Pokémon may carry two build arrays:
+- `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`.
+- `creativeBuilds` — **Creative** tab; hand-curated community builds (not emitted by `normalize.py`).
+
+Curated Recommended/Creative additions and build-title renames use `tools/community/add_custom_builds.py` (idempotent; writes both `src/data/` and `public/data/` identically). Scope edits by Pokémon `id`—never global find-replace on build titles (shared strings appear across dozens of Pokémon). Re-running `normalize.py` regenerates `builds` from raw UNITE-DB data and does not preserve `creativeBuilds` or other hand-curated Recommended overrides; re-apply `add_custom_builds.py` after a data refresh unless `normalize.py` gains a curated-merge step.
 
 ### State and Persistence
 
@@ -126,6 +132,14 @@ Game data refresh (not part of routine CI for app logic):
 ```bash
 cd tools/community && source ../extract/.venv/bin/activate
 python3 fetch.py && python3 normalize.py && python3 fetch_art.py && python3 normalize_as_boosts.py
+python3 add_custom_builds.py   # re-apply hand-curated Recommended + Creative builds
+```
+
+Curated-build-only edits (no UNITE-DB re-scrape):
+
+```bash
+python3 tools/community/add_custom_builds.py
+npx tsx src/data/verifyPatch.ts && npm run typecheck && npm test
 ```
 
 ### Design System
