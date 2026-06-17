@@ -134,7 +134,7 @@ cd tools/community && source ../extract/.venv/bin/activate
 python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && python3 fetch_art.py && python3 normalize_as_boosts.py
 ```
 
-`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-*.json` and copies to `public/data/`; edit `curated_builds.json` before re-running to preserve hand-curated Recommended/Creative builds and title overrides.
+`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-*.json`; sync to `public/data/` manually (or via the Refresh game data CI workflow) so the runtime fetch path matches. Edit `curated_builds.json` before re-running to preserve hand-curated Recommended/Creative builds and title overrides.
 
 Curated-build-only edits (no UNITE-DB re-scrape):
 
