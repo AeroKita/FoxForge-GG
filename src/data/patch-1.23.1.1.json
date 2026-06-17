@@ -1,6 +1,6 @@
 {
   "patchVersion": "1.23.1.1",
-  "lastUpdated": "2026-06-16",
+  "lastUpdated": "2026-06-17",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
@@ -494,7 +494,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Lv 40 Scope Lens+Lv 40 Razor Claw",
+          "emblemName": "Critical Hit Specialist",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-attack",
@@ -553,7 +553,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Lv 40 Scope Lens+Lv 40 Razor Claw",
+          "emblemName": "Critical Hit Specialist",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-attack",
@@ -612,7 +612,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Lv 40 Scope Lens+Lv 40 Razor Claw",
+          "emblemName": "Critical Hit Specialist",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-attack",
@@ -671,7 +671,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Lv 40 Scope Lens+Lv 40 Razor Claw",
+          "emblemName": "Critical Hit Specialist",
           "heldItemOptional": "attack-weight",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-attack",
@@ -2938,7 +2938,66 @@
         "description": "",
         "effects": [],
         "iconAsset": "/assets/skills/Articuno/Snow+Cloak.png"
-      }
+      },
+      "builds": [
+        {
+          "name": "Frozen Defender",
+          "emblemName": "Frozen Defender",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "vanguard-bell",
+            "focus-band",
+            "curse-incense"
+          ],
+          "battleItemId": "x-speed",
+          "emblems": [
+            {
+              "emblemId": "086-seel",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "245-suicune",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "134-vaporeon",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "144-articuno",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "226-mantine",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "242-blissey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "221-piloswine",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Blizzard",
+            "Ice Beam"
+          ]
+        }
+      ]
     },
     {
       "id": "azumarill",
@@ -13237,6 +13296,65 @@
             "Leaf Storm"
           ]
         }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Heavy is the Crown",
+          "emblemName": "Heavy is the Crown",
+          "lane": "Center Damage",
+          "heldItemIds": [
+            "drain-crown",
+            "rapid-fire-scarf",
+            "scope-lens"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "229-houndoom",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "228-houndour",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "244-entei",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "077-ponyta",
+              "grade": "silver"
+            },
+            {
+              "emblemId": "005-charmeleon",
+              "grade": "silver"
+            },
+            {
+              "emblemId": "004-charmander",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "136-flareon",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "207-gligar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Razor Leaf",
+            "Leaf Storm"
+          ]
+        }
       ]
     },
     {
@@ -19600,7 +19718,66 @@
         "description": "",
         "effects": [],
         "iconAsset": "/assets/skills/Feraligatr/Torrent.png"
-      }
+      },
+      "builds": [
+        {
+          "name": "Crunchy All-Rounder",
+          "emblemName": "Crunchy All-Rounder",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "razor-claw",
+            "attack-weight",
+            "weakness-policy"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "115-kangaskhan",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "206-dunsparce",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "235-smeargle",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "031-nidoqueen",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Crunch",
+            "Waterfall"
+          ]
+        }
+      ]
     },
     {
       "id": "garchomp",
@@ -20270,6 +20447,65 @@
           "moves": [
             "Dig",
             "Earthquake"
+          ]
+        }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Heavy is the Crown",
+          "emblemName": "Heavy is the Crown",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "drain-crown",
+            "rapid-fire-scarf",
+            "big-root"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "076-golem",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "218-slugma",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "244-entei",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "229-houndoom",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "004-charmander",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "146-moltres",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Dragon Rush",
+            "Dragon Claw"
           ]
         }
       ]
@@ -21449,6 +21685,65 @@
           "moves": [
             "Hex",
             "Sludge Bomb"
+          ]
+        }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Step on the Gas (Special)",
+          "emblemName": "Step on the Gas (Special)",
+          "lane": "Center Damage",
+          "heldItemIds": [
+            "drive-lens",
+            "float-stone",
+            "amulet-coin"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "172-pichu",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "907-floragato",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "193-yanma",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "243-raikou",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "1008-miraidon",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "082-magneton",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "101-electrode",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "100-voltorb",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Sludge Bomb",
+            "Hex"
           ]
         }
       ]
@@ -28279,6 +28574,65 @@
             "Dragon Cheer"
           ]
         }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Step on the Gas (Special)",
+          "emblemName": "Step on the Gas (Special)",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "drive-lens",
+            "curse-incense",
+            "float-stone"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "172-pichu",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "907-floragato",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "193-yanma",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "243-raikou",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "1008-miraidon",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "082-magneton",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "101-electrode",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "100-voltorb",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Mist Ball",
+            "Dragon Breath"
+          ]
+        }
       ]
     },
     {
@@ -28867,6 +29221,65 @@
           "moves": [
             "Draco Meteor",
             "Luster Purge"
+          ]
+        }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Step on the Gas (Special)",
+          "emblemName": "Step on the Gas (Special)",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "drive-lens",
+            "wise-glasses",
+            "float-stone"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "172-pichu",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "907-floragato",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "193-yanma",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "243-raikou",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "1008-miraidon",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "082-magneton",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "101-electrode",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "100-voltorb",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Luster Purge",
+            "Dragon Pulse"
           ]
         }
       ]
@@ -29939,7 +30352,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Punch Rush",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
@@ -29998,7 +30411,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Doggo Zoomies",
           "heldItemOptional": "muscle-band",
           "battleItemId": "full-heal",
           "moves": [
@@ -30056,7 +30469,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Punchy Doggy",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -30114,7 +30527,7 @@
             }
           ],
           "lane": "Path Damage",
-          "emblemName": "Bulk Leaning Standard Physical",
+          "emblemName": "Amplified Aura Cannon",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -30319,6 +30732,65 @@
           "spLifesteal": 0.0,
           "attackSpeed": 0.4,
           "moveSpeed": 4300.0
+        }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Step on the Gas (Physical)",
+          "emblemName": "Step on the Gas (Physical)",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "float-stone",
+            "amulet-coin"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "172-pichu",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "025-pikachu",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "051-dugtrio",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "050-diglett",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "1008-miraidon",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "082-magneton",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "101-electrode",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "100-voltorb",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Extreme Speed",
+            "Bone Rush"
+          ]
         }
       ]
     },
@@ -32387,7 +32859,123 @@
         "description": "",
         "effects": [],
         "iconAsset": "/assets/skills/Meganium/Overgrow.png"
-      }
+      },
+      "builds": [
+        {
+          "name": "Healing Support",
+          "emblemName": "Healing Support",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "rescue-hood",
+            "focus-band",
+            "sp--atk-specs"
+          ],
+          "battleItemId": "potion",
+          "emblems": [
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "071-victreebel",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Grass Knot",
+            "Petal Blizzard"
+          ]
+        },
+        {
+          "name": "Shield Support",
+          "emblemName": "Shield Support",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "rescue-hood",
+            "resonant-guard",
+            "buddy-barrier"
+          ],
+          "battleItemId": "x-speed",
+          "emblems": [
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "071-victreebel",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Grass Knot",
+            "Petal Blizzard"
+          ]
+        }
+      ]
     },
     {
       "id": "meowscarada",
@@ -37481,7 +38069,66 @@
         "description": "",
         "effects": [],
         "iconAsset": "/assets/skills/Moltres/Flame+Body.png"
-      }
+      },
+      "builds": [
+        {
+          "name": "Blazing All-Rounder",
+          "emblemName": "Blazing All-Rounder",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "slick-spoon",
+            "choice-specs",
+            "focus-band"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "242-blissey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "113-chansey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Sky Attack",
+            "Heat Wave"
+          ]
+        }
+      ]
     },
     {
       "id": "mr-mime",
@@ -44556,7 +45203,123 @@
         "description": "",
         "effects": [],
         "iconAsset": "/assets/skills/Skeledirge/Blaze.png"
-      }
+      },
+      "builds": [
+        {
+          "name": "Singing Special Attacker",
+          "emblemName": "Singing Special Attacker",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "slick-spoon",
+            "wise-glasses",
+            "choice-specs"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "071-victreebel",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Hyper Voice",
+            "Snarl"
+          ]
+        },
+        {
+          "name": "Mobile Special Attacker",
+          "emblemName": "Mobile Special Attacker",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "drive-lens",
+            "wise-glasses",
+            "choice-specs"
+          ],
+          "battleItemId": "x-speed",
+          "emblems": [
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "908-meowscarada",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "094-gengar",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "041-zubat",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Hyper Voice",
+            "Snarl"
+          ]
+        }
+      ]
     },
     {
       "id": "slowbro",
@@ -49961,7 +50724,66 @@
         "description": "",
         "effects": [],
         "iconAsset": "/assets/skills/Typhlosion/Blaze.png"
-      }
+      },
+      "builds": [
+        {
+          "name": "Blazing Special Attacker",
+          "emblemName": "Blazing Special Attacker",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "wise-glasses",
+            "slick-spoon",
+            "amulet-coin"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "242-blissey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "144-articuno",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "086-seel",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "043-oddish",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Eruption",
+            "Flame Wheel"
+          ]
+        }
+      ]
     },
     {
       "id": "tyranitar",
@@ -51851,6 +52673,65 @@
           "moves": [
             "Wicked Blow",
             "Throat Chop"
+          ]
+        }
+      ],
+      "creativeBuilds": [
+        {
+          "name": "Flurry of Surging Strikes",
+          "emblemName": "Flurry of Surging Strikes",
+          "lane": "Center Damage",
+          "heldItemIds": [
+            "accel-bracer",
+            "weakness-policy",
+            "muscle-band"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "169-crobat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "197-umbreon",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "168-ariados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "024-arbok",
+              "grade": "silver"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            }
+          ],
+          "moves": [
+            "Surging Strikes",
+            "Liquidation"
           ]
         }
       ]
