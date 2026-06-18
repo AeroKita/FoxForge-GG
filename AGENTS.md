@@ -146,7 +146,7 @@ UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surf
 
 `SettingsMenu` → Appearance exposes a 3-way `System · Light · Dark` control bound to `themePref` / `setThemePref`.
 
-**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`), mode-toggle pill (`--color-mode-basic-*`, `--color-mode-advanced-*`). Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
+**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`), mode-toggle pill (`--color-mode-basic-*`, `--color-mode-advanced-*`). Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html` and intentionally omits `maximum-scale=1` / `user-scalable=no` so pinch-zoom stays available. Base polish also forces `font-size: 16px` on text-entry controls (`input` except range/checkbox/radio, `select`, `textarea`) so iOS Safari does not auto-zoom on focus; the `:not([type=…])` chain keeps specificity above Tailwind `.text-sm`.
 
 Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token rationale: `docs/06-theme-plan.md`.
 

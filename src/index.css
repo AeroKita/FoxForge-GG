@@ -157,6 +157,17 @@ body {
   border-radius: 0.375rem;
 }
 
+/* iOS Safari zooms into any text field whose font-size is < 16px on focus and
+   never zooms back out. Force 16px on text-entry controls so focus never
+   triggers it — while leaving pinch-zoom enabled (unlike maximum-scale=1).
+   The :not([type=...]) chain is deliberate: it raises this selector's
+   specificity above Tailwind's .text-sm utility so the 16px actually wins. */
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  font-size: 16px;
+}
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-surface);
