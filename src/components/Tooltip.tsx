@@ -33,6 +33,7 @@ export function Tooltip({
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
+    firedRef.current = false;
     if (e.pointerType !== "touch" && e.pointerType !== "pen") return;
     start.current = { x: e.clientX, y: e.clientY };
     clearTimer();
