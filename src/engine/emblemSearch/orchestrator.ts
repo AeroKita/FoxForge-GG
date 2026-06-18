@@ -180,7 +180,11 @@ export async function runSearch(
 
   const heuristicProgress = async (pct: number, label: string, cands: number) => {
     candidates = cands;
-    report(heuristicLo + (pct / 100) * (95 - heuristicLo), label);
+    // Map the heuristic's 0–100 onto the remaining bar (heuristicLo→100) so a
+    // heuristic pct of 100 fills the bar completely while still "running",
+    // rather than stalling at 95 until the post-loop Done report (which races
+    // with the overlay closing).
+    report(heuristicLo + (pct / 100) * (100 - heuristicLo), label);
   };
 
   // Prefer parallel restarts (one full heuristic per shard worker, merge best).

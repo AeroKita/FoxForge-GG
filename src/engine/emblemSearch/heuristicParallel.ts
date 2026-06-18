@@ -141,8 +141,20 @@ export async function runHeuristicParallel(
               shardEval[i] = msg.result.candidates;
             }
             shardPct[i] = 100;
-            emitProgress();
-            if (++doneCount === n) finalize();
+            if (++doneCount === n) {
+              // All shards finished — emit a true 100% (emitProgress caps
+              // in-flight updates at 99) so the bar visibly completes before
+              // the orchestrator returns and the overlay closes.
+              const sum = shardEval.reduce((a, b) => a + b, 0);
+              onProgress?.(
+                100,
+                `Heuristic · ${sum.toLocaleString()} candidates (${n} workers)`,
+                sum,
+              );
+              finalize();
+            } else {
+              emitProgress();
+            }
           } else if (msg.type === "error") {
             // Any shard failure → abort all → fall back to single-thread.
             if (!resolved) {
