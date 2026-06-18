@@ -48,10 +48,6 @@
   --color-tab-ink: #9aa1ad;
   --color-tab-active: #4f5bd5;
 
-  /* Legacy header gradient — removed when App.tsx switches to AppBar (Phase 2). */
-  --color-header-a: #4f5bd5;
-  --color-header-b: #3f49b8;
-
   --color-tip-bg: #1a1d23;
   --color-tip-ink: #ffffff;
 
@@ -97,8 +93,6 @@
   --color-an-border: #0e7490;
   --color-an-ink: #67e8f9;
 
-  --color-header-a: #d6006e;
-  --color-header-b: #0891b2;
   --color-tip-bg: #251f40;
   --color-tip-ink: #f4f0ff;
 
