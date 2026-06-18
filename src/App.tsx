@@ -11,7 +11,6 @@ import { CompareScreen } from "./components/screens/CompareScreen";
 import { EmblemsScreen } from "./components/screens/EmblemsScreen";
 import { ItemsScreen } from "./components/screens/ItemsScreen";
 import { SettingsMenu } from "./components/SettingsMenu";
-import { isTauri, autoUpdateEnabled, checkAppUpdate } from "./ui/runtime";
 
 const TAB_KEY = "unite-build-optimizer.tab.v1";
 const VALID_TABS: Tab[] = ["build", "compare", "emblems", "items"];
@@ -62,7 +61,6 @@ function Workspace() {
   useEffect(() => {
     const onData = (e: Event) => setDataUpdate((e as CustomEvent).detail?.patch ?? null);
     window.addEventListener("unite-data-updated", onData);
-    if (isTauri && autoUpdateEnabled()) void checkAppUpdate(true);
     return () => window.removeEventListener("unite-data-updated", onData);
   }, []);
 

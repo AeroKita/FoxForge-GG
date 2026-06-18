@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { bundle } from "../data/gameData";
 import { cachedPatchVersion, checkDataNow } from "../data/dataSource";
-import { isTauri, autoUpdateEnabled, setAutoUpdate, checkAppUpdate } from "../ui/runtime";
 import { useStore, type ThemePref } from "../state/store";
 import { APP_NAME, APP_OWNER, LEGAL_DISCLAIMER, copyrightLine } from "../ui/brand";
 import { APP_VERSION } from "../ui/version";
@@ -15,31 +14,16 @@ const THEME_PREFS: { id: ThemePref; label: string }[] = [
 
 /**
  * App settings, opened from the header gear. Houses appearance (theme) + all
- * update controls (game data on every platform; app auto-update on desktop).
+ * update controls (game data + app version info).
  * Adding a setting = drop another <Section> below — the sheet scrolls.
  */
 export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { themePref, setThemePref } = useStore();
-  const [auto, setAuto] = useState(autoUpdateEnabled());
-  const [appMsg, setAppMsg] = useState("");
   const [dataMsg, setDataMsg] = useState("");
   const [dataUpdated, setDataUpdated] = useState(false);
   const activePatch = cachedPatchVersion() ?? bundle.patchVersion;
 
   if (!open) return null;
-
-  const toggleAuto = () => { const v = !auto; setAuto(v); setAutoUpdate(v); };
-
-  const checkApp = async () => {
-    setAppMsg("Checking…");
-    const r = await checkAppUpdate(true);
-    setAppMsg(
-      r.status === "none" ? "You're on the latest version."
-      : r.status === "updated" ? `Updating to ${r.version}…`
-      : r.status === "error" ? `Update error: ${r.message}`
-      : "Update check unavailable.",
-    );
-  };
 
   const checkData = async () => {
     setDataMsg("Checking…");
@@ -90,33 +74,16 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
             </button>
           )}
 
-          {/* Desktop app updates — Tauri only */}
-          {isTauri ? (
-            <div className="mt-3 border-t border-line-soft pt-3">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-medium">App version</span>
-                <span className="font-mono text-xs text-faint">v{APP_VERSION}</span>
-              </div>
-              <label className="mt-2 flex items-center justify-between gap-2">
-                <span className="text-sm font-medium">Auto-update the app</span>
-                <input type="checkbox" checked={auto} onChange={toggleAuto} className="h-4 w-4 accent-[var(--color-accent)]" />
-              </label>
-              <button type="button" onClick={checkApp} className="mt-2 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise">
-                Check for app updates
-              </button>
-              {appMsg && <p className="mt-1 text-xs text-muted">{appMsg}</p>}
+          {/* App version — web/PWA only */}
+          <div className="mt-3 border-t border-line-soft pt-3">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-sm font-medium">App version</span>
+              <span className="font-mono text-xs text-faint">v{APP_VERSION}</span>
             </div>
-          ) : (
-            <div className="mt-3 border-t border-line-soft pt-3">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-medium">Website version</span>
-                <span className="font-mono text-xs text-faint">v{APP_VERSION}</span>
-              </div>
-              <p className="mt-2 text-xs text-faint">
-                Running in the browser — the app auto-updates on reload. Install the desktop app for offline use + auto-updates.
-              </p>
-            </div>
-          )}
+            <p className="mt-2 text-xs text-faint">
+              The app auto-updates on reload. Install it from your browser ("Add to Home Screen" / "Install") for an offline-capable window.
+            </p>
+          </div>
         </Section>
 
         <Section title="About">

@@ -2,8 +2,6 @@ node_modules/
 dist/
 dev-dist/
 icon-source.png
-src-tauri/target/
-src-tauri/gen/
 *.local
 .DS_Store
 

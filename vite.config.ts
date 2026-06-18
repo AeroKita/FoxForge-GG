@@ -6,8 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { APP_NAME, APP_SHORT_NAME, APP_DESCRIPTION } from "./src/ui/brand";
 
-// Single source for the displayed version: package.json (kept in sync with
-// src-tauri/tauri.conf.json on each release). Injected via `define` below.
+// Single source for the displayed version: package.json. Injected via `define` below.
 const { version } = createRequire(import.meta.url)("./package.json") as { version: string };
 
 // GitHub Pages build (VITE_BASE=/FoxForge-GG/): no active service worker.
@@ -61,8 +60,8 @@ const htmlBranding = () => ({
     html.replaceAll("__APP_NAME__", APP_NAME).replace("<head>", `<head>${BOOT_SHELL}`),
 });
 
-// base: relative "./" by default (works in Tauri + any sub-path); the Pages
-// build overrides with VITE_BASE=/FoxForge-GG/.
+// base: relative "./" by default (works at a domain root or any sub-path); the
+// Pages build overrides with VITE_BASE=/FoxForge-GG/.
 export default defineConfig({
   base: process.env.VITE_BASE ?? "./",
   define: { __APP_VERSION__: JSON.stringify(version) },

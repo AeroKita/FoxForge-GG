@@ -17,14 +17,14 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 - Visualize how a build scales from level 1–15, including attack-speed breakpoints and active combat boosts.
 - Browse curated community builds (UNITE-DB sourced), apply them in one click, or get emblem recommendations constrained by an owned-inventory model.
 - Save up to 20 loadouts locally, compare two builds side-by-side, and share builds via URL hash.
-- Use the tool as a hosted PWA, native desktop app (Tauri), or local dev build.
+- Use the tool as a hosted PWA or local dev build.
 
 ### Key Benefits
 
 - Accuracy-first stat engine that mirrors in-game stacking order, rounding, mitigation, RSB damage, and attack-speed frame logic.
 - Rich visual presentation (portraits, item/emblem icons) with Basic vs Advanced modes to balance simplicity and depth.
 - Patchable game data via versioned JSON bundles—no code changes required for balance updates.
-- Offline-capable distribution options (PWA install, desktop installers with auto-update).
+- Offline-capable distribution via PWA install.
 
 ### Success Criteria
 
@@ -38,8 +38,7 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 - No Nintendo/UNITE account integration—owned emblems are tracked locally for security and ToS reasons.
 - First-party APK datamining is blocked (rotated bundle encryption); community UNITE-DB sourcing is the live data path.
 - Game accuracy is non-negotiable: stacking order and rounding rules must match in-game behavior.
-- GPL-3.0-only license; distribution uses GitHub Pages (web) and signed Tauri auto-updates (desktop).
-- Desktop installers are ad-hoc signed (not Apple/Microsoft code-signed), so first-launch OS warnings are expected.
+- AGPL-3.0-only license; distribution is the GitHub Pages web app (PWA).
 
 ## Architecture & Patterns
 
@@ -49,7 +48,7 @@ FoxForge GG is a three-layer app: a **pure calculation engine**, a **versioned d
 
 User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`BuildSummaryBar`, `StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
 
-Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged; curated builds and label overrides belong in `curated_builds.json` (see below). UNITE-DB ships blank move descriptions for many Pokémon; `tools/community/move_descriptions.json` (Serebii-sourced, via `scrape_serebii.py`) is merged by `normalize.py` to fill only empty move `description` fields—existing UNITE-DB text always wins. Blank passive descriptions are backfilled from the raw passive skill's `rsb.true_desc` in `_raw/pokemon.json` (local UNITE-DB mirror, not Serebii). The bundled baseline (`src/data/`) and the published runtime copy (`public/data/`) must stay byte-identical. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for Tauri, static hosts, and GitHub Pages sub-paths).
+Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged; curated builds and label overrides belong in `curated_builds.json` (see below). UNITE-DB ships blank move descriptions for many Pokémon; `tools/community/move_descriptions.json` (Serebii-sourced, via `scrape_serebii.py`) is merged by `normalize.py` to fill only empty move `description` fields—existing UNITE-DB text always wins. Blank passive descriptions are backfilled from the raw passive skill's `rsb.true_desc` in `_raw/pokemon.json` (local UNITE-DB mirror, not Serebii). The bundled baseline (`src/data/`) and the published runtime copy (`public/data/`) must stay byte-identical. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for static hosts and GitHub Pages sub-paths).
 
 Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respect the same stat model and owned-emblem inventory semantics as the editor.
 
@@ -57,7 +56,7 @@ Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respe
 
 `src/engine/` modules are pure TypeScript with Vitest coverage. `formulas.ts`, `emblems.ts`, `attackSpeed.ts`, `effects.ts`, and `derive.ts` must remain free of React/DOM imports. New combat mechanics extend the engine and data schema first; UI toggles and panels follow.
 
-During the mobile rebuild, these paths stay frozen: `src/engine/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. Patch bundles under `src/data/` and `public/data/` are normally pipeline-generated; keep both copies in sync when making runtime-only exceptions (see Data Bundle Versioning). `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
+Treat these paths as frozen unless a task explicitly requires engine or data-pipeline changes: `src/engine/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. Patch bundles under `src/data/` and `public/data/` are normally pipeline-generated; keep both copies in sync when making runtime-only exceptions (see Data Bundle Versioning). `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
 
 ### Single Derivation Path
 
@@ -83,7 +82,7 @@ Live stats: `deriveBuild(loadout, true, heldSlotGrades)` returns `{ pokemon, eff
 
 ### Data Bundle Versioning
 
-Each game patch is a self-contained JSON bundle (e.g. `patch-1.23.1.1.json`) plus optional sidecars (`attackSpeedBoosts.json`). Runtime can fetch updated bundles from GitHub Pages without rebuilding the app binary. Schema changes require zod updates in `loadBundle.ts` and corresponding tests.
+Each game patch is a self-contained JSON bundle (e.g. `patch-1.23.1.1.json`) plus optional sidecars (`attackSpeedBoosts.json`). Runtime can fetch updated bundles from GitHub Pages without rebuilding or redeploying the app. Schema changes require zod updates in `loadBundle.ts` and corresponding tests.
 
 Each Pokémon may carry two build arrays:
 - `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`. Array order is the tab display order; the first entry auto-applies when the user switches Pokémon (`RecommendPanel`).
@@ -119,9 +118,9 @@ No router library — navigation is local React state.
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField`, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear; Appearance theme picker, Updates with manual game-data check + displayed app version/PWA-install copy, About, Legal), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
-- **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
+- **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`.
 
 ### Semantic Theming
 
@@ -150,9 +149,11 @@ UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surf
 
 Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token rationale: `docs/06-theme-plan.md`.
 
-### Dual Distribution Shell
+### Web distribution & build
 
-The same Vite build serves web (PWA), GitHub Pages (`VITE_BASE=/FoxForge-GG/`), and Tauri desktop (`src-tauri/`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—web distribution concerns live in config, not business logic.
+FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). CI deploys via [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on push to `main`; game-data refresh runs weekly via [`.github/workflows/data.yml`](.github/workflows/data.yml).
+
+Two independent update channels: **app code** (PWA service worker picks up a new deploy on reload) and **game data** (`src/data/dataSource.ts` fetches `data/manifest.json` from Pages; see `docs/07-distribution.md`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—distribution concerns live in config, not business logic.
 
 ### Documentation Authority
 
@@ -160,13 +161,12 @@ Human-oriented deep dives live in `docs/` (architecture, calculation engine, dat
 
 ## Tech Stack & Tooling
 
-TypeScript/React SPA with a pure calculation engine, optional Tauri desktop shell, and community-sourced game data pipelines.
+TypeScript/React SPA with a pure calculation engine and community-sourced game data pipelines.
 
 ### Environment Setup
 
 - **Node.js 24+** (matches CI in `.github/workflows/`).
 - **npm** for JS dependencies and scripts (`package.json`).
-- **Rust toolchain** ([rustup](https://rustup.rs)) only when building or running the Tauri desktop app.
 - **Python 3** with a venv under `tools/extract/.venv` for community data refresh scripts (`tools/community/`).
 
 Clone, `npm install`, and you're ready to develop.
@@ -178,12 +178,11 @@ Clone, `npm install`, and you're ready to develop.
 | Vite 8 | Dev server, production bundler, Vitest host | `vite.config.ts` |
 | TypeScript | Type-checking (`tsc --noEmit`) | `tsconfig.json` |
 | Tailwind CSS v4 | Semantic token styling via `@tailwindcss/vite` | `src/index.css`, `vite.config.ts` |
-| Tauri 2 | Native desktop shell, auto-updater | `src-tauri/tauri.conf.json` |
 | vite-plugin-pwa | PWA manifest + Workbox caching (non-Pages builds) | `vite.config.ts` |
 
-Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run tauri dev`, `npm run tauri build`, `npm run typecheck`.
+Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`.
 
-Version is sourced from `package.json` and kept in sync with `src-tauri/tauri.conf.json` on release.
+Version is sourced from `package.json`.
 
 ### Testing Process
 
@@ -241,7 +240,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |
-| Pickers / settings | `PickerModal` (`BottomSheet fillHeight`; search does not auto-focus on open), `SettingsMenu` (content-fit `BottomSheet`) |
+| Pickers / settings | `PickerModal` (`BottomSheet fillHeight`; search does not auto-focus on open), `SettingsMenu` (content-fit `BottomSheet`; game-data update check + app version) |
 | Grade input | `src/components/GradeField.tsx` — shared tap-to-type grade field (`HeldItemsInventory`, `LoadoutEditor` held-item slots) |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
 | Tooltips | `src/components/Tooltip.tsx` (hover + touch long-press popup), `src/components/tips.tsx` |

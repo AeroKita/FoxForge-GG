@@ -2,7 +2,7 @@
   
 ## Overview  
   
-A personal web/desktop tool that helps Pokémon UNITE players — from casual to  
+A personal web tool that helps Pokémon UNITE players — from casual to  
 competitive — design optimized builds. The user selects a Pokémon, and the tool  
 recommends complementary Emblem loadouts and Held Items based on that Pokémon's  
 stats, moves, abilities, and how those elements interact. The experience should  
