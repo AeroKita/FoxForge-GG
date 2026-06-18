@@ -2,7 +2,7 @@
 
 Agent-oriented project context for **FoxForge GG** (`unite-build-optimizer`) — a Pokémon UNITE build optimizer with a pure calculation engine, versioned game data, and a React UI. Deeper dives live in `docs/`.
 
-A mobile-first UI rebuild is in progress on branch `mobile-first-rebuild`. Planning for that work lives in `../plans/Rebuild/`. This document describes the codebase as it exists today.
+The mobile-first UI is implemented on branch `mobile-first-rebuild` (not merged to `main`). Follow-on polish is tracked in `../plans/Rebuild/`. This document describes the codebase as it exists today.
 
 ## Product Context
 
@@ -102,7 +102,8 @@ Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `mov
 - Owned emblems are keyed per grade (Bronze/Silver/Gold) independently.
 - Held item grades (1–40) are global per item ID, not stored in saved builds or share links. Unique held items (`isUniqueHeldItem`) skip grade storage and controls entirely.
 - Share links encode loadout state in the URL hash (`#b=`).
-- Theme preference (`themePref`), collapsible card open state, and Beginner/Expert mode persist locally (`unite-build-optimizer.theme.v1`, `unite-build-optimizer.mode.v1`).
+- Theme preference (`themePref`) and Beginner/Expert mode persist locally (`unite-build-optimizer.theme.v1`, `unite-build-optimizer.mode.v1`).
+- Collapsible card open state persists per section (`unite-build-optimizer.collapsed.{persistKey}`). First visit defaults: Builds, Held Items, and Effective Stats open; Moves, Save & Load, Combat Analytics, and Active Effects closed.
 - Active tab (`build` | `compare` | `emblems` | `items`) persists locally (`unite-build-optimizer.tab.v1`) for fast-resume on reload.
 
 ### Current UI Shell (`src/App.tsx`)
@@ -115,7 +116,7 @@ No router library — navigation is local React state.
 - **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Expert only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
-- **Layout** — single column, `max-w-2xl` centered. `<main>` padding clears the fixed app bar and tab bar (safe-area aware).
+- **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
 - **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`). `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
@@ -222,6 +223,8 @@ Semantic color and surface tokens are defined in `src/index.css` using Tailwind 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
 
 Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used inside `BottomSheet`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`.
+
+Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px-4 py-3` with `min-h-11` tap row; buttons, chips, tab items, segmented controls, picker tiles, sliders, and emblem grade dots use ≥44px hit areas. Section collapse uses `CollapsibleCard` (`src/components/CollapsibleCard.tsx`) — open state is per `persistKey`, not a global default.
 
 ## Key Components
 
