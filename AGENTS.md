@@ -47,7 +47,7 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 
 FoxForge GG is a three-layer app: a **pure calculation engine**, a **versioned data layer**, and a **React UI** that never reimplements game math inline.
 
-User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
+User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`BuildSummaryBar`, `StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
 
 Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged; curated builds and label overrides belong in `curated_builds.json` (see below). UNITE-DB ships blank move descriptions for many Pokémon; `tools/community/move_descriptions.json` (Serebii-sourced, via `scrape_serebii.py`) is merged by `normalize.py` to fill only empty move `description` fields—existing UNITE-DB text always wins. Blank passive descriptions are backfilled from the raw passive skill's `rsb.true_desc` in `_raw/pokemon.json` (local UNITE-DB mirror, not Serebii). The bundled baseline (`src/data/`) and the published runtime copy (`public/data/`) must stay byte-identical. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for Tauri, static hosts, and GitHub Pages sub-paths).
 
@@ -111,9 +111,10 @@ No router library — navigation is local React state.
 
 - **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon portrait, name, role badge, and attack type (tappable — opens the Pokémon picker overlay). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Beginner/Expert segmented control and settings gear on all tabs.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Expert mode (4 tabs vs 3). Switching from Expert to Beginner while on Compare redirects to Build.
-- **Screens** — `src/components/screens/` wrappers (`BuildScreen`, `EmblemsScreen`, `ItemsScreen`, `CompareScreen`) are thin placeholders; feature components (`RecommendPanel`, `LoadoutEditor`, `InventoryManager`, etc.) exist but are not mounted by them.
+- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Expert only). Pokémon selection is not inline; the hero empty state and app-bar title tap open `PokemonPickerSheet`.
+- **Other tab screens** — `EmblemsScreen`, `ItemsScreen`, and `CompareScreen` are placeholder wrappers; `InventoryManager`, `HeldItemsInventory`, and `CompareView` are not mounted from those screens.
 - **Layout** — single column, `max-w-2xl` centered. `<main>` padding clears the fixed app bar and tab bar (safe-area aware).
-- **Overlays** — `SettingsMenu` (centered modal from gear), Pokémon picker (`BottomSheet` stub in `App.tsx`, title "Choose Pokémon"). `PickerModal` and `HeldItemDetailModal` keep their existing centered-modal shells and are not reachable from the new tab screens.
+- **Overlays** — `SettingsMenu` (centered modal from gear). Pokémon picker: `PokemonPickerSheet` (`src/components/PokemonPicker.tsx`, `BottomSheet` shell, title "Choose Pokémon"; opened from app-bar tap or hero empty state). `PickerModal` and `HeldItemDetailModal` keep their existing centered-modal shells; held/trainer/emblem pickers are reachable from `LoadoutEditor` on the Build tab.
 - **Footer** — legal disclaimer, copyright, and patch line are not rendered in `App.tsx` (strings remain in `src/ui/brand.ts`).
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
@@ -218,7 +219,7 @@ Semantic color and surface tokens are defined in `src/index.css` using Tailwind 
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
 
-Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts`. `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive (bottom sheet on phones, centered card on `sm+`); the Pokémon picker stub in `App.tsx` is its only current caller.
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts`. `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive (bottom sheet on phones, centered card on `sm+`); `PokemonPickerSheet` is its current caller, mounted from `App.tsx`.
 
 ## Key Components
 
@@ -226,10 +227,9 @@ Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts`. `Bo
 | --- | --- |
 | App shell | `src/App.tsx` |
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
-| Tab screen wrappers | `src/components/screens/BuildScreen.tsx`, `EmblemsScreen.tsx`, `ItemsScreen.tsx`, `CompareScreen.tsx` |
-| Builder (not mounted in `BuildScreen`) | `RecommendPanel`, `PokemonPicker`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` |
-| Inventory (not mounted in tab screens) | `InventoryManager`, `HeldItemsInventory` |
-| Compare (not mounted in `CompareScreen`) | `CompareView` |
+| Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Expert) |
+| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (no inline picker on Build) |
+| Tab placeholders | `EmblemsScreen`, `ItemsScreen`, `CompareScreen` — `InventoryManager`, `HeldItemsInventory`, `CompareView` not mounted |
 | Pickers / settings | `PickerModal`, `SettingsMenu` |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
 | Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
