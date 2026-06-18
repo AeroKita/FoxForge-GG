@@ -956,13 +956,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // ---- Render ----
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-xs text-muted">
-        {!expert
-          ? basicUseOwned
-            ? "One-click build optimised for your Pokémon from your owned collection."
-            : "One-click build optimised for your Pokémon from the full emblem dataset."
-          : "Full control over pool, objectives, and scoring."}
-      </p>
 
       {/* ================================================================== */}
       {/* BASIC MODE (global Basic/Advanced toggle)                           */}
@@ -1274,18 +1267,45 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       {/* ================================================================== */}
       {expert && (
         <>
-          {/* Reset to Beginner defaults */}
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-muted">
-              Custom search — adjust any setting below.
-            </p>
-            <button
-              onClick={syncAdvancedFromBasic}
-              className="text-xs font-medium text-accent-ink underline hover:opacity-80"
-            >
-              ↺ Reset to auto defaults
-            </button>
-          </div>
+          {/* Pokémon being optimized */}
+          {pokemon ? (
+            <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
+              <div className="flex items-center gap-3">
+                <img
+                  src={asset(pokemon.imageAsset)}
+                  alt={pokemon.displayName}
+                  className="h-10 w-10 rounded-full bg-white/10 object-cover ring-1 ring-line"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-ink">
+                    {pokemon.displayName}
+                    <span className="ml-2 text-xs font-normal text-muted">
+                      {basicObjectiveDescription(pokemon)} · Lv.{optimizeLevel}
+                    </span>
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted">Custom search — adjust any setting below.</p>
+                </div>
+              </div>
+              <button
+                onClick={syncAdvancedFromBasic}
+                className="text-xs font-medium text-accent-ink underline hover:opacity-80"
+              >
+                ↺ Reset to auto defaults
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
+              <p className="text-xs text-muted">
+                Select a Pokémon to optimize, then adjust any setting below.
+              </p>
+              <button
+                onClick={syncAdvancedFromBasic}
+                className="text-xs font-medium text-accent-ink underline hover:opacity-80"
+              >
+                ↺ Reset to auto defaults
+              </button>
+            </div>
+          )}
 
           {/* Pool section */}
           <CollapsibleCard
