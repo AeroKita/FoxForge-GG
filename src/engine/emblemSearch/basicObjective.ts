@@ -7,10 +7,33 @@
  * Advanced mode, which is pre-filled from these auto-derived values.
  */
 
-import type { Emblem, HeldItem, Pokemon } from "../../types";
+import type { Emblem, EmblemGrade, HeldItem, Pokemon } from "../../types";
 import { colorTargetsFor, priorityWeights, scoreHeldItem, coreItemsFor } from "../recommend";
-import type { PokemonScoringContext, SearchOptions, StatFloors, StatWeights } from "./types";
+import { buildPool } from "./pool";
+import type { EmblemCandidate, PokemonScoringContext, PoolConfig, SearchOptions, StatFloors, StatWeights } from "./types";
 import { deriveDefaultProtectedStats } from "./protectDefaults";
+
+/** Default pool settings when Basic mode loads (owned inventory, gold-only grades). */
+export const BASIC_POOL_DEFAULTS: Readonly<PoolConfig> = {
+  useOwned: true,
+  mixedGrades: true,
+  allowedGrades: new Set<EmblemGrade>(["gold"]),
+};
+
+/**
+ * Build the emblem search pool for Basic mode.
+ * When `useOwned` is true, owned keys are filtered by `allowedGrades` as well.
+ */
+export function buildBasicPool(
+  emblems: Emblem[],
+  ownedKeys: Set<string>,
+  config: Pick<PoolConfig, "useOwned" | "mixedGrades" | "allowedGrades">,
+): EmblemCandidate[] {
+  if (config.useOwned) {
+    return buildPool(emblems, config, ownedKeys, { filterOwnedGrades: true });
+  }
+  return buildPool(emblems, config, ownedKeys);
+}
 
 // ---------------------------------------------------------------------------
 // Objective
@@ -66,6 +89,7 @@ export function deriveBasicObjective(
 /**
  * Build the SearchOptions for Basic mode from a derived objective.
  * Always uses: maximize mode, Pokémon-aware scoring, color-bonus incentive, no hard constraints.
+ * Pair with {@link buildBasicPool}; pool source (owned vs full dataset) is a UI concern.
  */
 export function basicSearchOptions(objective: BasicObjective): SearchOptions {
   return {

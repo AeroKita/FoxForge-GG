@@ -31,9 +31,10 @@ export function emblemToCandidate(emblem: Emblem, grade: EmblemGrade): EmblemCan
  * Build the full candidate pool.
  *
  * - If ownedKeys is provided: include owned emblems.
- *   - mixedGrades=true (default): include all owned grade variants per Pokémon
+ *   - Optional `grades`: restrict to owned keys at these grades only (Basic owned mode).
+ *   - mixedGrades=true (default): include all matching owned grade variants per Pokémon
  *     so the search can mix grades across the 10 slots.
- *   - mixedGrades=false: include only the best-owned grade per Pokémon.
+ *   - mixedGrades=false: include only the best-owned grade per Pokémon (among allowed grades).
  * - Otherwise: include all emblems at the specified grades.
  *
  * goldOnly emblems are excluded from silver/bronze grade levels.
@@ -51,17 +52,23 @@ export function buildCandidatePool(
 
   if (opts.ownedKeys) {
     const mixed = opts.mixedGrades ?? true;
+    const gradeFilter = opts.grades ? new Set(opts.grades) : null;
     for (const emblem of emblems) {
       if (mixed) {
         // Include all owned grades for this emblem (highest stat wins during search)
         for (const g of GRADE_ORDER) {
+          if (gradeFilter && !gradeFilter.has(g)) continue;
           if (!opts.ownedKeys.has(`${emblem.id}:${g}`)) continue;
           if ((g === "bronze" || g === "silver") && emblem.goldOnly) continue;
           candidates.push(emblemToCandidate(emblem, g));
         }
       } else {
-        // Only the best-owned grade
-        const bestGrade = GRADE_ORDER.find((g) => opts.ownedKeys!.has(`${emblem.id}:${g}`));
+        // Only the best-owned grade among allowed grades
+        const bestGrade = GRADE_ORDER.find(
+          (g) =>
+            (!gradeFilter || gradeFilter.has(g)) &&
+            opts.ownedKeys!.has(`${emblem.id}:${g}`),
+        );
         if (!bestGrade) continue;
         candidates.push(emblemToCandidate(emblem, bestGrade));
       }

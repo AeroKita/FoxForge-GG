@@ -6,7 +6,9 @@
  *  BASIC (default)
  *    Single "Find Best Build" button. The engine auto-derives objectives from
  *    the selected Pokémon's role/attack type using recommend.ts meta-knowledge.
- *    Pool = owned emblems only. Held-item suggestions = owned items only
+ *    Pool defaults to owned emblems only; user can toggle to the full dataset.
+ *    Grade checkboxes and mixed-grades control which candidates are in play.
+ *    Held-item suggestions = owned items only
  *    (items the user has explicitly graded; falls back to all if none set).
  *    Shows results: emblem icons, active set bonuses, effective-stat delta,
  *    recommended held items, and Apply buttons.
@@ -41,6 +43,7 @@ import { priorityWeights } from "../engine/recommend";
 import {
   deriveBasicObjective,
   basicSearchOptions,
+  buildBasicPool,
   resolveOwnedHeldItems,
   topPriorityLabels,
   basicObjectiveDescription,
@@ -294,8 +297,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // ---- Top-level mode ----
   const [optimizerMode, setOptimizerMode] = useState<OptimizerMode>("basic");
 
-  // ---- Advanced state (also used when Basic runs) ----
-  const [useOwned, setUseOwned] = useState(true);
+  // ---- Pool state (Basic vs Advanced pool source are independent) ----
+  const [basicUseOwned, setBasicUseOwned] = useState(true);
+  const [useOwned, setUseOwned] = useState(false);
   const [mixedGrades, setMixedGrades] = useState(true);
   const [allowedGrades, setAllowedGrades] = useState<Set<EmblemGrade>>(new Set(["gold"]));
   const [mode, setMode] = useState<SearchMode>("maximize");
@@ -330,10 +334,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // label so the user understands the two dimensions.
   const poolDistinctNames = useMemo(() => distinctPokemonCount(pool), [pool]);
 
-  // Basic mode always uses owned pool; mixedGrades toggle controls grade variants
+  const basicPoolConfig: PoolConfig = { useOwned: basicUseOwned, mixedGrades, allowedGrades };
   const basicPool = useMemo(
-    () => buildPool(allEmblems, { useOwned: true, mixedGrades, allowedGrades: new Set(["gold"]) }, owned),
-    [owned, mixedGrades],
+    () => buildBasicPool(allEmblems, owned, basicPoolConfig),
+    [owned, basicUseOwned, mixedGrades, allowedGrades],
   );
   const basicBuildCount = useMemo(() => approximateBuildCount(basicPool, SLOTS), [basicPool]);
   const basicPoolDistinctNames = useMemo(() => distinctPokemonCount(basicPool), [basicPool]);
@@ -520,12 +524,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     await run(basicPool, opts, setBonuses, effort);
   }, [basicObjective, basicPool, effort, run]);
 
-  // Advanced search
+  // Advanced search (Advanced tab only — pool source toggle applies here, not in Basic)
   const handleAdvancedSearch = useCallback(async () => {
-    const activePool = optimizerMode === "basic" ? basicPool : pool;
-    if (activePool.length < SLOTS) return;
-    await run(activePool, advancedSearchOptions, setBonuses, effort);
-  }, [optimizerMode, basicPool, pool, advancedSearchOptions, effort, run]);
+    if (pool.length < SLOTS) return;
+    await run(pool, advancedSearchOptions, setBonuses, effort);
+  }, [pool, advancedSearchOptions, effort, run]);
 
   // Apply emblem picks to loadout
   const handleApplyEmblems = useCallback(() => {
@@ -628,7 +631,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           <h2 className="text-base font-bold text-ink">⚡ Emblem Optimizer</h2>
           <p className="text-xs text-muted">
             {optimizerMode === "basic"
-              ? "One-click build optimised for your Pokémon from your owned collection."
+              ? basicUseOwned
+                ? "One-click build optimised for your Pokémon from your owned collection."
+                : "One-click build optimised for your Pokémon from the full emblem dataset."
               : "Full control over pool, objectives, and scoring."}
           </p>
         </div>
@@ -678,11 +683,16 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                     {basicPool.length.toLocaleString()} emblem candidate{basicPool.length !== 1 ? "s" : ""}
                     {" · "}{basicPoolDistinctNames} Pokémon
                   </p>
-                  {basicPool.length > basicPoolDistinctNames && (
+                  {basicPool.length > basicPoolDistinctNames && basicUseOwned && (
                     <p className="text-faint">
                       {mixedGrades
                         ? `Mixed grades · ~${formatBuildCount(basicBuildCount)} builds`
                         : "Best owned grade only"}
+                    </p>
+                  )}
+                  {basicPool.length > basicPoolDistinctNames && !basicUseOwned && (
+                    <p className="text-faint">
+                      {[...allowedGrades].sort().join("/")} grades · ~{formatBuildCount(basicBuildCount)} builds
                     </p>
                   )}
                   {ownedHeldItemIds.length > 0 && (
@@ -711,11 +721,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             </div>
           )}
 
-          {/* Not enough owned emblems warning */}
-          {pokemon && basicNotEnoughEmblems && (
+          {/* Not enough emblems in pool */}
+          {pokemon && basicNotEnoughEmblems && basicUseOwned && (
             <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm">
               <p className="font-medium text-amber-700 dark:text-amber-300">
-                You own only {basicPool.length} emblem{basicPool.length !== 1 ? "s" : ""} — need {SLOTS} for a full build.
+                You own only {basicPool.length} emblem{basicPool.length !== 1 ? "s" : ""} matching your grade filters — need {SLOTS} for a full build.
               </p>
               <p className="mt-1 text-xs text-muted">
                 Mark more emblems as owned on the{" "}
@@ -725,14 +735,31 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 >
                   ★ Emblems
                 </button>{" "}
-                page, or{" "}
+                page, allow more grades above, or{" "}
+                <button
+                  onClick={() => setBasicUseOwned(false)}
+                  className="font-medium text-accent-ink underline"
+                >
+                  switch to the full dataset
+                </button>
+                .
+              </p>
+            </div>
+          )}
+          {pokemon && basicNotEnoughEmblems && !basicUseOwned && (
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm">
+              <p className="font-medium text-amber-700 dark:text-amber-300">
+                Only {basicPool.length} emblem candidate{basicPool.length !== 1 ? "s" : ""} in pool — need {SLOTS} for a full build.
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                Enable more grades above, or{" "}
                 <button
                   onClick={() => handleModeSwitch("advanced")}
                   className="font-medium text-accent-ink underline"
                 >
                   switch to Advanced
                 </button>{" "}
-                to use the full dataset.
+                for finer pool control.
               </p>
             </div>
           )}
@@ -772,22 +799,65 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             </div>
           )}
 
-          {/* Mixed grades + Find Best Build */}
+          {/* Pool source + grades */}
           {pokemon && (
-            <label className="flex cursor-pointer items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                checked={mixedGrades}
-                onChange={(e) => setMixedGrades(e.target.checked)}
-                className="accent-accent"
-              />
-              <span>
-                Mixed grades{" "}
-                <span className="text-xs text-faint">
-                  — combine Bronze/Silver/Gold across the 10 slots (recommended)
-                </span>
-              </span>
-            </label>
+            <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
+              <p className="text-xs font-medium text-muted">Search pool</p>
+              <div className="flex flex-wrap gap-3">
+                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                  <input
+                    type="radio"
+                    checked={basicUseOwned}
+                    onChange={() => setBasicUseOwned(true)}
+                    className="accent-accent"
+                  />
+                  <span>Owned emblems only</span>
+                </label>
+                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                  <input
+                    type="radio"
+                    checked={!basicUseOwned}
+                    onChange={() => setBasicUseOwned(false)}
+                    className="accent-accent"
+                  />
+                  <span>Full dataset (all 258)</span>
+                </label>
+              </div>
+              <div className="flex flex-wrap gap-3 text-sm">
+                <span className="text-muted">Grades:</span>
+                {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => (
+                  <label key={g} className="flex cursor-pointer items-center gap-1.5 capitalize">
+                    <input
+                      type="checkbox"
+                      checked={allowedGrades.has(g)}
+                      onChange={(e) => {
+                        const next = new Set(allowedGrades);
+                        e.target.checked ? next.add(g) : next.delete(g);
+                        if (next.size > 0) setAllowedGrades(next);
+                      }}
+                      className="accent-accent"
+                    />
+                    {g}
+                  </label>
+                ))}
+              </div>
+              {basicUseOwned && (
+                <label className="flex cursor-pointer items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={mixedGrades}
+                    onChange={(e) => setMixedGrades(e.target.checked)}
+                    className="accent-accent"
+                  />
+                  <span>
+                    Mixed grades{" "}
+                    <span className="text-xs text-faint">
+                      — combine Bronze/Silver/Gold across the 10 slots (recommended)
+                    </span>
+                  </span>
+                </label>
+              )}
+            </div>
           )}
 
           <div className="flex flex-wrap items-center gap-3">
@@ -826,19 +896,33 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           {searchState.status === "done" && !searchState.result && (
             <p className="rounded-xl border border-line bg-surface px-4 py-3 text-sm text-faint">
               No valid loadout found. Try{" "}
-              <button
-                onClick={() => onNavigate?.("emblems")}
-                className="font-medium text-accent-ink underline"
-              >
-                marking more emblems
-              </button>{" "}
-              as owned, or{" "}
-              <button
-                onClick={() => handleModeSwitch("advanced")}
-                className="font-medium text-accent-ink underline"
-              >
-                switch to Advanced
-              </button>
+              {basicUseOwned ? (
+                <>
+                  <button
+                    onClick={() => onNavigate?.("emblems")}
+                    className="font-medium text-accent-ink underline"
+                  >
+                    marking more emblems
+                  </button>{" "}
+                  as owned, allowing more grades, or{" "}
+                  <button
+                    onClick={() => setBasicUseOwned(false)}
+                    className="font-medium text-accent-ink underline"
+                  >
+                    using the full dataset
+                  </button>
+                </>
+              ) : (
+                <>
+                  enabling more grades or{" "}
+                  <button
+                    onClick={() => handleModeSwitch("advanced")}
+                    className="font-medium text-accent-ink underline"
+                  >
+                    switching to Advanced
+                  </button>
+                </>
+              )}
               .
             </p>
           )}

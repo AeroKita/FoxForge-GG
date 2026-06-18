@@ -15,10 +15,14 @@ import { describe, it, expect } from "vitest";
 import {
   deriveBasicObjective,
   basicSearchOptions,
+  buildBasicPool,
+  BASIC_POOL_DEFAULTS,
   resolveOwnedHeldItems,
   topPriorityLabels,
 } from "../basicObjective";
 import type { HeldItem, Pokemon } from "../../../types";
+import { makeEmblem } from "../../__tests__/fixtures";
+import { buildPool } from "../pool";
 
 // ---------------------------------------------------------------------------
 // Minimal fixtures
@@ -185,6 +189,115 @@ describe("basicSearchOptions", () => {
     const opts = basicSearchOptions(obj);
 
     expect(opts.priorities.attack ?? 0).toBeGreaterThan(opts.priorities.spAttack ?? 0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Test: buildBasicPool — pool source + grade filters
+// ---------------------------------------------------------------------------
+
+describe("buildBasicPool", () => {
+  const emblems = [
+    makeEmblem("OwnedA", ["brown"], { attack: 1 }),
+    makeEmblem("OwnedB", ["white"], { attack: 1 }),
+    makeEmblem("Unowned", ["green"], { attack: 1 }),
+  ];
+  const goldOnly = new Set<"gold" | "silver" | "bronze">(["gold"]);
+
+  it("BASIC_POOL_DEFAULTS use owned inventory by default", () => {
+    expect(BASIC_POOL_DEFAULTS.useOwned).toBe(true);
+    expect(BASIC_POOL_DEFAULTS.mixedGrades).toBe(true);
+    expect(BASIC_POOL_DEFAULTS.allowedGrades.has("gold")).toBe(true);
+  });
+
+  it("owned mode includes only owned grade keys matching allowed grades", () => {
+    const owned = new Set(["owneda:gold", "ownedb:silver"]);
+    const pool = buildBasicPool(emblems, owned, {
+      useOwned: true,
+      mixedGrades: true,
+      allowedGrades: goldOnly,
+    });
+
+    expect(pool).toHaveLength(1);
+    expect(pool[0].id).toBe("owneda");
+    expect(pool[0].grade).toBe("gold");
+  });
+
+  it("owned mode with all grades includes every owned variant", () => {
+    const owned = new Set(["owneda:gold", "ownedb:silver"]);
+    const pool = buildBasicPool(emblems, owned, {
+      useOwned: true,
+      mixedGrades: true,
+      allowedGrades: new Set(["gold", "silver", "bronze"]),
+    });
+
+    expect(pool).toHaveLength(2);
+    for (const c of pool) {
+      expect(owned.has(`${c.id}:${c.grade}`)).toBe(true);
+    }
+    expect(pool.some((c) => c.id === "unowned")).toBe(false);
+  });
+
+  it("empty owned set → empty pool (no fallback to full dataset)", () => {
+    expect(
+      buildBasicPool(emblems, new Set(), {
+        useOwned: true,
+        mixedGrades: true,
+        allowedGrades: goldOnly,
+      }),
+    ).toHaveLength(0);
+  });
+
+  it("mixedGrades=false → best owned grade among allowed grades", () => {
+    const owned = new Set(["owneda:bronze", "owneda:gold"]);
+    const mixed = buildBasicPool(emblems, owned, {
+      useOwned: true,
+      mixedGrades: true,
+      allowedGrades: new Set(["gold", "silver", "bronze"]),
+    });
+    const bestOnly = buildBasicPool(emblems, owned, {
+      useOwned: true,
+      mixedGrades: false,
+      allowedGrades: new Set(["gold", "silver", "bronze"]),
+    });
+
+    expect(mixed.filter((c) => c.id === "owneda")).toHaveLength(2);
+    expect(bestOnly.filter((c) => c.id === "owneda")).toHaveLength(1);
+    expect(bestOnly[0].grade).toBe("gold");
+  });
+
+  it("useOwned=false uses the full dataset at allowed grades", () => {
+    const owned = new Set(["owneda:gold"]);
+    const ownedPool = buildBasicPool(emblems, owned, {
+      useOwned: true,
+      mixedGrades: true,
+      allowedGrades: goldOnly,
+    });
+    const fullPool = buildBasicPool(emblems, owned, {
+      useOwned: false,
+      mixedGrades: true,
+      allowedGrades: goldOnly,
+    });
+
+    expect(ownedPool.length).toBeLessThan(fullPool.length);
+    expect(fullPool.length).toBe(3);
+  });
+
+  it("differs from generic buildPool owned path (no grade filter there)", () => {
+    const owned = new Set(["owneda:gold", "ownedb:silver"]);
+    const basic = buildBasicPool(emblems, owned, {
+      useOwned: true,
+      mixedGrades: true,
+      allowedGrades: goldOnly,
+    });
+    const advancedOwned = buildPool(
+      emblems,
+      { useOwned: true, mixedGrades: true, allowedGrades: goldOnly },
+      owned,
+    );
+
+    expect(basic).toHaveLength(1);
+    expect(advancedOwned).toHaveLength(2);
   });
 });
 
