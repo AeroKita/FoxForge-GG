@@ -57,7 +57,7 @@ Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respe
 
 `src/engine/` modules are pure TypeScript with Vitest coverage. `formulas.ts`, `emblems.ts`, `attackSpeed.ts`, `effects.ts`, and `derive.ts` must remain free of React/DOM imports. New combat mechanics extend the engine and data schema first; UI toggles and panels follow.
 
-During the mobile rebuild, these paths stay frozen: `src/engine/`, `src/data/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
+During the mobile rebuild, these paths stay frozen: `src/engine/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. Patch bundles under `src/data/` and `public/data/` are normally pipeline-generated; keep both copies in sync when making runtime-only exceptions (see Data Bundle Versioning). `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
 
 ### Single Derivation Path
 
@@ -86,8 +86,10 @@ Live stats: `deriveBuild(loadout, true, heldSlotGrades)` returns `{ pokemon, eff
 Each game patch is a self-contained JSON bundle (e.g. `patch-1.23.1.1.json`) plus optional sidecars (`attackSpeedBoosts.json`). Runtime can fetch updated bundles from GitHub Pages without rebuilding the app binary. Schema changes require zod updates in `loadBundle.ts` and corresponding tests.
 
 Each Pokémon may carry two build arrays:
-- `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`.
+- `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`. Array order is the tab display order; the first entry auto-applies when the user switches Pokémon (`RecommendPanel`).
 - `creativeBuilds` — **Creative** tab; hand-curated community builds (not emitted by `normalize.py`).
+
+Runtime-only `builds` reordering (both patch copies, object fields unchanged) is occasionally applied for display/default-build preferences; `normalize.py` overwrites it unless the order is expressed as a per-Pokémon `builds` overlay in `curated_builds.json`.
 
 Curated Recommended/Creative builds and build-label overrides live in `tools/community/curated_builds.json` and are merged by `normalize.py` (`apply_curated_builds`) after UNITE-DB normalization. **Do not hand-edit `emblemName` in patch JSON** — regeneration will clobber it. Instead:
 - `_emblemNameRemap` (top-level): remap raw UNITE-DB `emblemName` strings across all Recommended builds before per-Pokémon overrides. A string value replaces unconditionally; an object value selects by the Pokémon's `role` (`AllRounder`, `Defender`, etc.).
@@ -117,7 +119,7 @@ No router library — navigation is local React state.
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`). `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search auto-focuses on open). `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
@@ -237,7 +239,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |
-| Pickers / settings | `PickerModal`, `SettingsMenu` (both use `BottomSheet`) |
+| Pickers / settings | `PickerModal` (search auto-focuses on open), `SettingsMenu` (both use `BottomSheet`) |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
 | Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
 | State | `src/state/store.tsx`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts` |
