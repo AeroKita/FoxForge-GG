@@ -117,7 +117,7 @@ No router library — navigation is local React state.
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`). `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`). `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
@@ -233,7 +233,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | App shell | `src/App.tsx` |
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
 | Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced) |
-| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (no inline picker on Build) |
+| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (bottom sheet only; search does not auto-focus on open) |
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |

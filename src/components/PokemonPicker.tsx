@@ -32,7 +32,6 @@ export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
     <BottomSheet title="Choose Pokémon" onClose={onClose}>
       <div className="sticky top-0 z-10 -mx-4 border-b border-line bg-surface px-4 pb-3 pt-1">
         <input
-          autoFocus
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search Pokémon…"
