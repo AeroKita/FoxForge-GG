@@ -370,5 +370,29 @@
   },
   "scizor": {
     "recommendedTitles": ["Amplified Red Illusion Dance", "Bullet Dance", "Amplified Red Illusion Hit", "Bullet Hit"]
+  },
+  "mewtwoy": {
+    "builds": [
+      {
+        "name": "Items Only",
+        "emblemName": "Legendary Attack Speed",
+        "lane": "Path Damage",
+        "heldItemIds": ["mewtwonite-y", "muscle-band", "rapid-fire-scarf"],
+        "battleItemId": "x-attack",
+        "emblems": [
+          {"emblemId": "004-charmander", "grade": "gold"},
+          {"emblemId": "005-charmeleon", "grade": "gold"},
+          {"emblemId": "006-charizard", "grade": "gold"},
+          {"emblemId": "038-ninetales", "grade": "gold"},
+          {"emblemId": "244-entei", "grade": "gold"},
+          {"emblemId": "218-slugma", "grade": "gold"},
+          {"emblemId": "016-pidgey", "grade": "gold"},
+          {"emblemId": "242-blissey", "grade": "gold"},
+          {"emblemId": "145-zapdos", "grade": "gold"},
+          {"emblemId": "146-moltres", "grade": "gold"}
+        ],
+        "moves": ["Future Sight", "Teleport"]
+      }
+    ]
   }
 }

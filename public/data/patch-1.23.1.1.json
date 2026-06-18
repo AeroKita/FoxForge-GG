@@ -36568,7 +36568,11 @@
           ],
           "lane": "Path Damage",
           "emblemName": "Legendary Attack Speed",
-          "battleItemId": "x-attack"
+          "battleItemId": "x-attack",
+          "moves": [
+            "Future Sight",
+            "Teleport"
+          ]
         }
       ]
     },

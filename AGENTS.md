@@ -11,7 +11,7 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 ### Use Cases
 
 - Select a Pokémon and assemble a loadout (up to 10 emblems, 3 held items, trainer/battle item) with live effective-stat feedback.
-- Tune each held item's grade (1–40) — on a dedicated Held Items page or inline in the Builder — and pick each Pokémon's two final (upgraded) moves; both feed the live stats.
+- Tune each held item's grade (1–40) — on a dedicated Held Items page or inline in the Builder — and pick each Pokémon's two final (upgraded) moves; both feed the live stats. Unique Items (Mega Stones and Rusted Sword) have no grade stats or grade UI on either surface (`isUniqueHeldItem` in `gameData.ts`).
 - Visualize how a build scales from level 1–15, including attack-speed breakpoints and active combat boosts.
 - Browse curated community builds (UNITE-DB sourced), apply them in one click, or get emblem recommendations constrained by an owned-inventory model.
 - Save up to 20 loadouts locally, compare two builds side-by-side, and share builds via URL hash.
@@ -78,7 +78,7 @@ Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `mov
 
 - Current loadout auto-persists; saved loadouts capped at 20.
 - Owned emblems are keyed per grade (Bronze/Silver/Gold) independently.
-- Held item grades (1–40) are global per item ID, not stored in saved builds or share links.
+- Held item grades (1–40) are global per item ID, not stored in saved builds or share links. Unique held items (`isUniqueHeldItem`) skip grade storage and controls entirely.
 - Share links encode loadout state in the URL hash (`#b=`).
 - Theme, collapsible card open state, and Beginner/Expert mode persist locally.
 
