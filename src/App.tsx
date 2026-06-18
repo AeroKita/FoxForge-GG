@@ -72,14 +72,23 @@ function Workspace() {
   const appBarProps = useMemo(() => {
     if (tab === "build") {
       return {
-        leading: p ? (
-          <img
-            src={asset(p.imageAsset)}
-            alt={p.displayName}
-            className="h-10 w-10 shrink-0 rounded-full bg-black/10 object-cover ring-2 ring-[var(--color-appbar-border)]"
-          />
-        ) : (
-          <div className="h-10 w-10 shrink-0 rounded-full bg-black/10" />
+        leading: (
+          <button
+            type="button"
+            onClick={() => setPokePickerOpen(true)}
+            aria-label="Change Pokémon"
+            className="shrink-0 rounded-full"
+          >
+            {p ? (
+              <img
+                src={asset(p.iconAsset)}
+                alt={p.displayName}
+                className="h-10 w-10 rounded-full bg-black/10 object-cover ring-2 ring-[var(--color-appbar-border)]"
+              />
+            ) : (
+              <div className="h-10 w-10 rounded-full bg-black/10" />
+            )}
+          </button>
         ),
         title: p?.displayName ?? "Select Pokémon",
         subtitle: p ? (
