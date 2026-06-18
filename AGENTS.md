@@ -57,7 +57,7 @@ Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respe
 
 `src/engine/` modules are pure TypeScript with Vitest coverage. `formulas.ts`, `emblems.ts`, `attackSpeed.ts`, `effects.ts`, and `derive.ts` must remain free of React/DOM imports. New combat mechanics extend the engine and data schema first; UI toggles and panels follow.
 
-During the mobile rebuild, these paths stay frozen: `src/engine/`, `src/data/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`.
+During the mobile rebuild, these paths stay frozen: `src/engine/`, `src/data/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
 
 ### Single Derivation Path
 
@@ -103,19 +103,19 @@ Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `mov
 - Held item grades (1–40) are global per item ID, not stored in saved builds or share links. Unique held items (`isUniqueHeldItem`) skip grade storage and controls entirely.
 - Share links encode loadout state in the URL hash (`#b=`).
 - Theme preference (`themePref`), collapsible card open state, and Beginner/Expert mode persist locally (`unite-build-optimizer.theme.v1`, `unite-build-optimizer.mode.v1`).
+- Active tab (`build` | `compare` | `emblems` | `items`) persists locally (`unite-build-optimizer.tab.v1`) for fast-resume on reload.
 
 ### Current UI Shell (`src/App.tsx`)
 
 No router library — navigation is local React state.
 
-- **Header** — sticky gradient bar (`--color-header-a` / `--color-header-b`), Pokémon portrait + app name, header buttons for Emblems and Held Items, Beginner/Expert segmented control, Build/Compare segmented control (Compare disabled outside Expert), settings gear.
-- **Pages** — `app` (builder), `emblems` (`InventoryManager`), `heldItems` (`HeldItemsInventory`). A "← Builder" button returns from inventory pages.
-- **Builder layout** — `max-w-6xl` two-column grid on large screens: left column has `PokemonPicker`, `LoadoutEditor`, `MovesCard`, `LoadoutBar`; right column has `StatPanel`; `LevelGraph` below in Expert mode. Compare mode renders `CompareView`.
-- **Overlays** — `SettingsMenu` (centered modal from header gear), `PickerModal` (centered modal for held/trainer/emblem pickers), `HeldItemDetailModal` on the Held Items page.
-- **Footer** — legal disclaimer, copyright, and patch line in `App.tsx`.
-- **Data updates** — `unite-data-updated` window event shows a reload banner; Tauri runs a silent app-update check on launch when auto-update is enabled.
-
-Shell primitives exist under `src/components/shell/` (`AppBar`, `TabBar`, `BottomSheet`) but are **not wired into `App.tsx` yet**.
+- **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon portrait, name, role badge, and attack type (tappable — opens the Pokémon picker overlay). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Beginner/Expert segmented control and settings gear on all tabs.
+- **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Expert mode (4 tabs vs 3). Switching from Expert to Beginner while on Compare redirects to Build.
+- **Screens** — `src/components/screens/` wrappers (`BuildScreen`, `EmblemsScreen`, `ItemsScreen`, `CompareScreen`) are thin placeholders; feature components (`RecommendPanel`, `LoadoutEditor`, `InventoryManager`, etc.) exist but are not mounted by them.
+- **Layout** — single column, `max-w-2xl` centered. `<main>` padding clears the fixed app bar and tab bar (safe-area aware).
+- **Overlays** — `SettingsMenu` (centered modal from gear), Pokémon picker (`BottomSheet` stub in `App.tsx`, title "Choose Pokémon"). `PickerModal` and `HeldItemDetailModal` keep their existing centered-modal shells and are not reachable from the new tab screens.
+- **Footer** — legal disclaimer, copyright, and patch line are not rendered in `App.tsx` (strings remain in `src/ui/brand.ts`).
+- **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
 ### Semantic Theming
 
@@ -140,7 +140,7 @@ UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surf
 
 `SettingsMenu` currently exposes Light and Dark buttons only (no System option in the UI yet). When `themePref` is `system`, the active button reflects the resolved `theme`.
 
-**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), legacy header gradient (`--color-header-a/-b`, used by the current `App.tsx` header), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`). Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
+**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`). Legacy `--color-header-a/-b` remain defined but are unused by the new shell. Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
 
 Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token rationale: `docs/06-theme-plan.md`.
 
@@ -218,17 +218,18 @@ Semantic color and surface tokens are defined in `src/index.css` using Tailwind 
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
 
-Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts`.
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts`. `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive (bottom sheet on phones, centered card on `sm+`); the Pokémon picker stub in `App.tsx` is its only current caller.
 
 ## Key Components
 
 | Area | Path |
 | --- | --- |
-| App shell (current) | `src/App.tsx` |
-| Shell primitives (unused in app yet) | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
-| Builder | `RecommendPanel`, `PokemonPicker`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` |
-| Inventory | `InventoryManager`, `HeldItemsInventory` |
-| Compare | `CompareView` |
+| App shell | `src/App.tsx` |
+| Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
+| Tab screen wrappers | `src/components/screens/BuildScreen.tsx`, `EmblemsScreen.tsx`, `ItemsScreen.tsx`, `CompareScreen.tsx` |
+| Builder (not mounted in `BuildScreen`) | `RecommendPanel`, `PokemonPicker`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` |
+| Inventory (not mounted in tab screens) | `InventoryManager`, `HeldItemsInventory` |
+| Compare (not mounted in `CompareScreen`) | `CompareView` |
 | Pickers / settings | `PickerModal`, `SettingsMenu` |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
 | Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
