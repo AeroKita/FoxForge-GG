@@ -23,7 +23,7 @@ export function CompareView() {
 
   return (
     <CollapsibleCard title="Compare Builds" persistKey="compare">
-      <div className="mb-3 grid grid-cols-2 gap-2">
+      <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
         <BuildSelect label="A" value={aId} onChange={setAId} options={options} />
         <BuildSelect label="B" value={bId} onChange={setBId} options={options} />
       </div>
@@ -35,7 +35,7 @@ export function CompareView() {
       {!da.effective || !db.effective ? (
         <p className="text-sm text-faint">Both builds need a Pokémon selected.</p>
       ) : (
-        <div className="-mx-1 overflow-x-auto px-1">
+        <div className="-mx-1 min-w-0 overflow-x-auto px-1">
         <table className="w-full min-w-[20rem] text-sm">
           <thead>
             <tr className="text-left text-xs uppercase text-faint">
@@ -88,7 +88,7 @@ function BuildSelect({ label, value, onChange, options }: {
   return (
     <label className="flex flex-col gap-1 text-xs text-muted">
       <span>Build {label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="rounded-lg border border-line px-2 py-1.5 text-sm text-ink">
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="min-h-11 rounded-lg border border-line bg-surface px-2 py-2 text-sm text-ink">
         {options.map((o) => {
           const p = o.loadout.pokemonId ? pokemonById.get(o.loadout.pokemonId) : null;
           return <option key={o.id} value={o.id}>{o.name}{p ? ` — ${p.displayName}` : ""}</option>;

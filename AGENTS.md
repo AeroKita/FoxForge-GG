@@ -2,6 +2,8 @@
 
 Agent-oriented project context for **FoxForge GG** (`unite-build-optimizer`) — a Pokémon UNITE build optimizer with a pure calculation engine, versioned game data, and a React UI. Deeper dives live in `docs/`.
 
+The mobile-first UI is implemented on branch `mobile-first-rebuild` (not merged to `main`). Follow-on polish is tracked in `../plans/Rebuild/`. This document describes the codebase as it exists today.
+
 ## Product Context
 
 ### Target Audience
@@ -20,7 +22,7 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 ### Key Benefits
 
 - Accuracy-first stat engine that mirrors in-game stacking order, rounding, mitigation, RSB damage, and attack-speed frame logic.
-- Rich visual presentation (portraits, item/emblem icons) with Beginner vs Expert modes to balance simplicity and depth.
+- Rich visual presentation (portraits, item/emblem icons) with Basic vs Advanced modes to balance simplicity and depth.
 - Patchable game data via versioned JSON bundles—no code changes required for balance updates.
 - Offline-capable distribution options (PWA install, desktop installers with auto-update).
 
@@ -45,7 +47,7 @@ Pokémon UNITE players ranging from casual newcomers to competitive optimizers w
 
 FoxForge GG is a three-layer app: a **pure calculation engine**, a **versioned data layer**, and a **React UI** that never reimplements game math inline.
 
-User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
+User edits flow through `src/state/store.tsx` (reducer + context) into a `Loadout` model (`src/state/loadout.ts`, persisted in localStorage). Every stat display path calls `deriveBuild` / `deriveAtLevel` in `src/engine/derive.ts`, which is the single aggregation point: emblem flats and set bonuses → held items → active toggles → attack speed. UI components (`BuildSummaryBar`, `StatPanel`, `CompareView`, `LevelGraph`) consume `DerivedBuild` only—changing formulas happens in `src/engine/` without touching components.
 
 Game facts live in patch-keyed JSON (`src/data/patch-*.json`) loaded and validated by zod in `src/data/loadBundle.ts`, with lookup maps exposed via `src/data/gameData.ts`. Numeric data is refreshed by Python tooling under `tools/community/`—hand-editing bundle JSON is discouraged; curated builds and label overrides belong in `curated_builds.json` (see below). UNITE-DB ships blank move descriptions for many Pokémon; `tools/community/move_descriptions.json` (Serebii-sourced, via `scrape_serebii.py`) is merged by `normalize.py` to fill only empty move `description` fields—existing UNITE-DB text always wins. Blank passive descriptions are backfilled from the raw passive skill's `rsb.true_desc` in `_raw/pokemon.json` (local UNITE-DB mirror, not Serebii). The bundled baseline (`src/data/`) and the published runtime copy (`public/data/`) must stay byte-identical. Art mirrors under `public/assets/` and resolves portably via `src/ui/asset.ts` (supports relative `base: "./"` for Tauri, static hosts, and GitHub Pages sub-paths).
 
@@ -55,17 +57,39 @@ Recommendations (`src/engine/recommend.ts`) sit beside the engine but must respe
 
 `src/engine/` modules are pure TypeScript with Vitest coverage. `formulas.ts`, `emblems.ts`, `attackSpeed.ts`, `effects.ts`, and `derive.ts` must remain free of React/DOM imports. New combat mechanics extend the engine and data schema first; UI toggles and panels follow.
 
+During the mobile rebuild, these paths stay frozen: `src/engine/`, `tools/`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts`. Patch bundles under `src/data/` and `public/data/` are normally pipeline-generated; keep both copies in sync when making runtime-only exceptions (see Data Bundle Versioning). `src/state/store.tsx` has been edited for theme preference wiring only (`themePref`, `setThemePref`, OS listener); all other store behavior is unchanged.
+
 ### Single Derivation Path
 
 All effective-stat rendering goes through `deriveBuild`. Level-scaling graphs use `deriveAtLevel` rather than duplicating stacking logic. Violating this leads to StatPanel/CompareView drift.
+
+Formatting for display: `src/ui/format.ts` (`STAT_ROWS`, `formatStat`, `formatDelta`). Never reimplement stat math or formatting in components.
+
+### Integration Contract (`useStore`)
+
+`loadout`, `dispatch` — the in-progress build + reducer (`setPokemon`, `setLevel`, `setHeldItem`, `setBattleItem`, `addEmblem`, `removeEmblem`, `setEmblemGrade`, `toggleBoost`, `setMove`, `applyBuild`, `load`, `reset`).
+
+`saved`, `save`, `remove`, `loadSaved`, `saveError`, `shareUrl()` — saved loadouts + sharing.
+
+`owned`, `toggleOwned`, `bulkSetOwned` — emblem inventory.
+
+`mode` (`"beginner" | "expert"`), `setMode`, `expert` — complexity toggle (UI labels **Basic** / **Advanced**; stored values unchanged).
+
+`heldItemGrade(id)`, `setHeldItemGradeById(id, g)`, `heldSlotGrades`, `setHeldItemGradeForSlot(slot, g)` — held-item grades.
+
+`theme`, `themePref`, `setThemePref` — appearance (see Theming below).
+
+Live stats: `deriveBuild(loadout, true, heldSlotGrades)` returns `{ pokemon, effective, base, attackSpeed, oocMoveSpeed, availableBoosts, emblemLoadout, buffedStats }`.
 
 ### Data Bundle Versioning
 
 Each game patch is a self-contained JSON bundle (e.g. `patch-1.23.1.1.json`) plus optional sidecars (`attackSpeedBoosts.json`). Runtime can fetch updated bundles from GitHub Pages without rebuilding the app binary. Schema changes require zod updates in `loadBundle.ts` and corresponding tests.
 
 Each Pokémon may carry two build arrays:
-- `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`.
+- `builds` — **Recommended** tab; UNITE-DB builds emitted by `normalize.py`. Array order is the tab display order; the first entry auto-applies when the user switches Pokémon (`RecommendPanel`).
 - `creativeBuilds` — **Creative** tab; hand-curated community builds (not emitted by `normalize.py`).
+
+Runtime-only `builds` reordering (both patch copies, object fields unchanged) is occasionally applied for display/default-build preferences; `normalize.py` overwrites it unless the order is expressed as a per-Pokémon `builds` overlay in `curated_builds.json`.
 
 Curated Recommended/Creative builds and build-label overrides live in `tools/community/curated_builds.json` and are merged by `normalize.py` (`apply_curated_builds`) after UNITE-DB normalization. **Do not hand-edit `emblemName` in patch JSON** — regeneration will clobber it. Instead:
 - `_emblemNameRemap` (top-level): remap raw UNITE-DB `emblemName` strings across all Recommended builds before per-Pokémon overrides. A string value replaces unconditionally; an object value selects by the Pokémon's `role` (`AllRounder`, `Defender`, etc.).
@@ -80,11 +104,51 @@ Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `mov
 - Owned emblems are keyed per grade (Bronze/Silver/Gold) independently.
 - Held item grades (1–40) are global per item ID, not stored in saved builds or share links. Unique held items (`isUniqueHeldItem`) skip grade storage and controls entirely.
 - Share links encode loadout state in the URL hash (`#b=`).
-- Theme, collapsible card open state, and Beginner/Expert mode persist locally.
+- Theme preference (`themePref`) and Basic/Advanced mode (`beginner`/`expert` in storage) persist locally (`unite-build-optimizer.theme.v1`, `unite-build-optimizer.mode.v1`).
+- Collapsible card open state persists per section (`unite-build-optimizer.collapsed.{persistKey}`). First visit defaults: Builds, Held Items, and Effective Stats open; Moves, Save & Load, Combat Analytics, and Active Effects closed.
+- Active tab (`build` | `compare` | `emblems` | `items`) persists locally (`unite-build-optimizer.tab.v1`) for fast-resume on reload.
+
+### Current UI Shell (`src/App.tsx`)
+
+No router library — navigation is local React state.
+
+- **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon portrait, name, role badge, and attack type (tappable — opens the Pokémon picker overlay). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Single **Basic**/**Advanced** mode toggle (`ModeToggle` in `AppBar.tsx` — shows current mode, tap flips; color-coded via `--color-mode-*` tokens) and settings gear on all tabs.
+- **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Advanced mode (4 tabs vs 3). Switching from Advanced to Basic while on Compare redirects to Build.
+- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). Pokémon selection is not inline; the hero empty state and app-bar title tap open `PokemonPickerSheet`.
+- **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
+- **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
+- **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
+- **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search auto-focuses on open). `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
+- **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
 ### Semantic Theming
 
 UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surface`, `text-ink`, etc.), toggled via `data-theme` on the document root. Role/stat accent colors may stay literal; structural chrome must not hardcode light-only neutrals. Native form controls (`<select>`, `<option>`) need explicit `bg-surface text-ink` so dropdown popups stay legible in dark mode (`color-scheme: dark`).
+
+**Resolved themes:**
+
+| `theme` | Palette |
+| --- | --- |
+| `light` | Clean & minimal — neutral surfaces, calm indigo accent |
+| `dark` | Neon-graffiti brand — magenta→cyan accents, deep purple-black surfaces |
+
+**Preference API** (`src/state/store.tsx`):
+
+| Member | Type | Role |
+| --- | --- | --- |
+| `theme` | `"light" \| "dark"` | Resolved applied theme |
+| `themePref` | `"system" \| "light" \| "dark"` | Stored preference (default `"system"`) |
+| `setThemePref` | `(p: ThemePref) => void` | Sets preference and resolves `theme` |
+
+`system` follows `prefers-color-scheme`, defaulting to dark when the OS states no preference. A `matchMedia` listener updates `theme` live while `themePref === "system"`. Resolved theme sets `document.documentElement.dataset.theme` and the `theme-color` meta (`#110d1f` dark, `#ffffff` light). Explicit `light`/`dark` persist in localStorage; `system` removes the key.
+
+`SettingsMenu` → Appearance exposes a 3-way `System · Light · Dark` control bound to `themePref` / `setThemePref`.
+
+**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`), mode-toggle pill (`--color-mode-basic-*`, `--color-mode-advanced-*`). Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
+
+Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token rationale: `docs/06-theme-plan.md`.
 
 ### Dual Distribution Shell
 
@@ -156,8 +220,28 @@ python3 tools/community/scrape_serebii.py && python3 tools/community/normalize.p
 
 ### Design System
 
-Semantic color and surface tokens are defined in `src/index.css` using Tailwind v4 `@theme` blocks; light and dark themes override CSS variables under `[data-theme="dark"]`. Components should use generated utilities (`bg-surface`, `text-ink`, `border-line`, etc.) rather than raw palette classes for chrome.
-
-Branding constants and rename guidance: `src/ui/brand.ts`, `docs/08-branding.md`. Theme rationale and token plan: `docs/06-theme-plan.md`.
+Semantic color and surface tokens are defined in `src/index.css` using Tailwind v4 `@theme` blocks; dark overrides live under `[data-theme="dark"]`. Components should use generated utilities (`bg-surface`, `text-ink`, `border-line`, etc.) rather than raw palette classes for chrome.
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
+
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used inside `BottomSheet`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`.
+
+Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px-4 py-3` with `min-h-11` tap row; buttons, chips, tab items, the app-bar mode toggle, picker tiles, sliders, and emblem grade dots use ≥44px hit areas. Section collapse uses `CollapsibleCard` (`src/components/CollapsibleCard.tsx`) — open state is per `persistKey`, not a global default.
+
+## Key Components
+
+| Area | Path |
+| --- | --- |
+| App shell | `src/App.tsx` |
+| Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
+| Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced) |
+| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (bottom sheet only; search does not auto-focus on open) |
+| Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
+| Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
+| Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |
+| Pickers / settings | `PickerModal` (search auto-focuses on open), `SettingsMenu` (both use `BottomSheet`) |
+| Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
+| Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
+| State | `src/state/store.tsx`, `src/state/loadout.ts`, `src/state/heldItemGrades.ts` |
+| Engine | `src/engine/derive.ts` |
+| Data | `src/data/gameData.ts`, `src/data/loadBundle.ts` |

@@ -32,7 +32,7 @@ export function LoadoutEditor() {
   }));
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {/* Held items */}
       <Section title="Held Items">
         <div className="flex flex-col gap-3">
@@ -62,14 +62,16 @@ export function LoadoutEditor() {
                       <label className="text-xs font-medium text-muted">Grade</label>
                       <span className="rounded-md bg-grade-badge px-2 py-0.5 text-xs font-bold text-white">{grade}</span>
                     </div>
-                    <input
-                      type="range"
-                      min={1}
-                      max={40}
-                      value={grade}
-                      onChange={(e) => setHeldItemGradeForSlot(slot, Number(e.target.value))}
-                      className="w-full accent-grade-slider"
-                    />
+                    <div className="py-3">
+                      <input
+                        type="range"
+                        min={1}
+                        max={40}
+                        value={grade}
+                        onChange={(e) => setHeldItemGradeForSlot(slot, Number(e.target.value))}
+                        className="block w-full accent-grade-slider"
+                      />
+                    </div>
                     <p className="mt-1 font-mono text-[10px] text-faint">
                       {heldItemStatLines(statsAtGrade(item, grade)).map((l) => `${l.label} ${l.value}`).join(" · ") || "—"}
                     </p>
@@ -118,20 +120,25 @@ export function LoadoutEditor() {
                     </span>
                   </span>
                 </Tooltip>
-                <div className="mt-0.5 flex gap-1">
+                <div className="mt-0.5 flex gap-0.5">
                   {gradesForEmblem(emblem).map((g) => {
                     const on = pick.grade === g;
                     return (
                       <button key={g} type="button" title={g} aria-label={`${g} grade`} aria-pressed={on}
                         onClick={() => dispatch({ type: "setEmblemGrade", index: i, grade: g })}
-                        className={`h-4 w-4 rounded-full border border-black/20 transition
-                          ${on ? "ring-2 ring-ink ring-offset-1 ring-offset-surface" : "opacity-50 hover:opacity-100"}`}
-                        style={{ background: EMBLEM_GRADE_HEX[g] }}
-                      />
+                        className="flex h-11 w-11 items-center justify-center rounded-full transition"
+                      >
+                        <span
+                          className={`h-4 w-4 rounded-full border border-black/20 ${
+                            on ? "ring-2 ring-ink ring-offset-1 ring-offset-surface" : "opacity-50"
+                          }`}
+                          style={{ background: EMBLEM_GRADE_HEX[g] }}
+                        />
+                      </button>
                     );
                   })}
                 </div>
-                <button onClick={() => dispatch({ type: "removeEmblem", index: i })} className="text-[9px] text-neg hover:text-neg">remove</button>
+                <button onClick={() => dispatch({ type: "removeEmblem", index: i })} className="min-h-11 px-2 text-sm text-neg hover:text-neg">remove</button>
               </div>
             );
           })}

@@ -44,7 +44,7 @@ export function LevelGraph() {
         <button
           key={m.key}
           onClick={() => setMetricKey(m.key)}
-          className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+          className={`min-h-11 rounded-full px-3 text-sm font-medium transition ${
             m.key === metricKey ? "text-white" : "bg-raise text-muted hover:bg-raise"
           }`}
           style={m.key === metricKey ? { backgroundColor: m.color } : undefined}

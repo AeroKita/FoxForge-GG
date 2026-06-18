@@ -53,7 +53,7 @@ function ChoosableMoveSlot({ label, pokemon, slot }: { label: string; pokemon: P
                   type="button"
                   onClick={() => dispatch({ type: "setMove", slot, moveId: u.id })}
                   aria-pressed={isSel}
-                  className={`flex w-full items-center gap-2 rounded-lg border px-2 py-1.5 text-left transition ${
+                  className={`flex min-h-11 w-full items-center gap-2 rounded-lg border px-3 py-2.5 text-left transition ${
                     isSel ? "border-accent bg-accent-weak ring-1 ring-accent" : "border-line hover:bg-raise"
                   }`}
                 >
@@ -84,7 +84,7 @@ export function MovesCard() {
   const passive = pokemon.passiveAbility;
 
   return (
-    <CollapsibleCard title="Moves" persistKey="moves" tone="sky">
+    <CollapsibleCard title="Moves" persistKey="moves" tone="sky" defaultOpen={false}>
       <p className="mb-3 text-xs text-faint">
         {pokemon.displayName}'s kit — pick one upgrade per move; your picks set the final moves in the Builds card.
       </p>

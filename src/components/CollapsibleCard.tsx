@@ -50,7 +50,7 @@ export function CollapsibleCard({
   return (
     <section className={`rounded-2xl border shadow-sm ${t.card}`}>
       <header
-        className="flex cursor-pointer select-none items-center justify-between gap-2 px-4 py-3"
+        className="flex min-h-11 cursor-pointer select-none items-center justify-between gap-2 px-4 py-3"
         onClick={toggle}
       >
         <div className="flex items-center gap-2">

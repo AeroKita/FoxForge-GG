@@ -2,27 +2,30 @@ import { useState } from "react";
 import { bundle } from "../data/gameData";
 import { cachedPatchVersion, checkDataNow } from "../data/dataSource";
 import { isTauri, autoUpdateEnabled, setAutoUpdate, checkAppUpdate } from "../ui/runtime";
-import { useStore, type Theme } from "../state/store";
-import { APP_NAME, APP_OWNER } from "../ui/brand";
+import { useStore, type ThemePref } from "../state/store";
+import { APP_NAME, APP_OWNER, LEGAL_DISCLAIMER, copyrightLine } from "../ui/brand";
 import { APP_VERSION } from "../ui/version";
-import { useModalDismiss } from "../ui/useModalDismiss";
+import { BottomSheet } from "./shell/BottomSheet";
 
-const THEMES: Theme[] = ["light", "dark"];
+const THEME_PREFS: { id: ThemePref; label: string }[] = [
+  { id: "system", label: "System" },
+  { id: "light", label: "Light" },
+  { id: "dark", label: "Dark" },
+];
 
 /**
  * App settings, opened from the header gear. Houses appearance (theme) + all
  * update controls (game data on every platform; app auto-update on desktop).
- * Adding a setting = drop another <Section> below — the modal scrolls.
+ * Adding a setting = drop another <Section> below — the sheet scrolls.
  */
 export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { theme, setTheme } = useStore();
+  const { themePref, setThemePref } = useStore();
   const [auto, setAuto] = useState(autoUpdateEnabled());
   const [appMsg, setAppMsg] = useState("");
   const [dataMsg, setDataMsg] = useState("");
   const [dataUpdated, setDataUpdated] = useState(false);
   const activePatch = cachedPatchVersion() ?? bundle.patchVersion;
 
-  useModalDismiss(onClose, open);
   if (!open) return null;
 
   const toggleAuto = () => { const v = !auto; setAuto(v); setAutoUpdate(v); };
@@ -47,29 +50,24 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
-      <div
-        className="flex max-h-[80vh] w-full max-w-md flex-col gap-4 overflow-y-auto rounded-2xl bg-surface p-5 text-ink shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold">Settings</h2>
-          <button onClick={onClose} aria-label="Close settings" className="rounded-lg px-2 py-1 text-faint hover:bg-raise">✕</button>
-        </div>
-
+    <BottomSheet title="Settings" onClose={onClose}>
+      <div className="flex flex-col gap-4">
         <Section title="Appearance">
           <div className="flex items-center justify-between gap-2">
             <span className="text-sm font-medium">Theme</span>
             <div className="inline-flex gap-1 rounded-xl border border-line bg-raise p-1">
-              {THEMES.map((t) => (
+              {THEME_PREFS.map(({ id, label }) => (
                 <button
-                  key={t}
-                  onClick={() => setTheme(t)}
-                  className={`rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition ${
-                    theme === t ? "bg-surface text-accent-ink shadow" : "text-muted hover:text-ink"
+                  key={id}
+                  type="button"
+                  onClick={() => setThemePref(id)}
+                  className={`min-h-11 rounded-lg px-3 py-1.5 text-sm font-medium transition ${
+                    themePref === id
+                      ? "bg-surface text-accent-ink shadow"
+                      : "text-muted hover:text-ink"
                   }`}
                 >
-                  {t}
+                  {label}
                 </button>
               ))}
             </div>
@@ -82,12 +80,12 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
             <span className="text-sm font-medium">Game data</span>
             <span className="font-mono text-xs text-faint">patch {activePatch}</span>
           </div>
-          <button onClick={checkData} className="mt-1 rounded-lg border border-line px-3 py-1.5 text-xs font-medium hover:bg-raise">
+          <button type="button" onClick={checkData} className="mt-1 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise">
             Check for data update
           </button>
           {dataMsg && <p className="mt-1 text-xs text-muted">{dataMsg}</p>}
           {dataUpdated && (
-            <button onClick={() => location.reload()} className="mt-1 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-white hover:bg-accent-strong">
+            <button type="button" onClick={() => location.reload()} className="mt-1 min-h-11 rounded-lg bg-accent px-3 py-2.5 text-sm font-semibold text-white hover:bg-accent-strong">
               Reload to apply
             </button>
           )}
@@ -103,7 +101,7 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
                 <span className="text-sm font-medium">Auto-update the app</span>
                 <input type="checkbox" checked={auto} onChange={toggleAuto} className="h-4 w-4 accent-[var(--color-accent)]" />
               </label>
-              <button onClick={checkApp} className="mt-2 rounded-lg border border-line px-3 py-1.5 text-xs font-medium hover:bg-raise">
+              <button type="button" onClick={checkApp} className="mt-2 min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium hover:bg-raise">
                 Check for app updates
               </button>
               {appMsg && <p className="mt-1 text-xs text-muted">{appMsg}</p>}
@@ -125,8 +123,16 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
           <p className="text-sm font-medium">{APP_NAME}</p>
           <p className="mt-0.5 text-xs text-muted">Created by {APP_OWNER}</p>
         </Section>
+
+        <Section title="Legal">
+          <p className="text-xs text-faint">
+            Data from UNITE-DB · attack-speed model from community calculator · patch {activePatch}
+          </p>
+          <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-muted">{LEGAL_DISCLAIMER}</p>
+          <p className="mt-2 text-xs text-faint">{copyrightLine()}</p>
+        </Section>
       </div>
-    </div>
+    </BottomSheet>
   );
 }
 

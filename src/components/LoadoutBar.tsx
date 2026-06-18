@@ -55,17 +55,17 @@ export function LoadoutBar() {
   };
 
   return (
-    <CollapsibleCard title="Save & Load" persistKey="loadouts">
+    <CollapsibleCard title="Save & Load" persistKey="loadouts" defaultOpen={false}>
       <div className="mb-3 flex items-center gap-2">
         <input
           value={name} onChange={(e) => setName(e.target.value)}
           placeholder="Loadout name…"
-          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm outline-none focus:border-accent"
+          className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2 text-sm outline-none focus:border-accent"
         />
         <button
           onClick={handleSave}
           disabled={!loadout.pokemonId || saved.length >= MAX_SAVED_LOADOUTS}
-          className="rounded-lg bg-accent px-4 py-1.5 text-sm font-semibold text-white hover:bg-accent-strong disabled:opacity-40"
+          className="min-h-11 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-strong disabled:opacity-40"
         >
           Save
         </button>
@@ -75,13 +75,13 @@ export function LoadoutBar() {
         <button
           onClick={share}
           disabled={!loadout.pokemonId}
-          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink hover:bg-raise disabled:opacity-40"
+          className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2.5 text-sm font-medium text-ink hover:bg-raise disabled:opacity-40"
         >
           {copied ? "Link copied ✓" : "Share build"}
         </button>
         <button
           onClick={() => dispatch({ type: "reset" })}
-          className="rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-muted hover:bg-neg/10 hover:text-neg"
+          className="min-h-11 rounded-lg border border-line px-3 py-2.5 text-sm font-medium text-muted hover:bg-neg/10 hover:text-neg"
         >
           Clear
         </button>
@@ -91,14 +91,14 @@ export function LoadoutBar() {
           onClick={exportFile}
           disabled={!loadout.pokemonId}
           title="Download this loadout as a .json file to share"
-          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink hover:bg-raise disabled:opacity-40"
+          className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2.5 text-sm font-medium text-ink hover:bg-raise disabled:opacity-40"
         >
           ↓ Export
         </button>
         <button
           onClick={() => fileInputRef.current?.click()}
           title="Load a loadout from a .json file"
-          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm font-medium text-ink hover:bg-raise"
+          className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2.5 text-sm font-medium text-ink hover:bg-raise"
         >
           ↑ Import
         </button>
@@ -122,11 +122,11 @@ export function LoadoutBar() {
           {saved.map((s) => {
             const p = s.pokemonId ? pokemonById.get(s.pokemonId) : null;
             return (
-              <li key={s.id} className="flex items-center gap-2 rounded-lg border border-line-soft px-2 py-1">
+              <li key={s.id} className="flex min-h-11 items-center gap-2 rounded-lg border border-line-soft px-3 py-1">
                 {p && <img src={asset(p.iconAsset)} alt="" className="h-7 w-7 object-contain" />}
                 <span className="flex-1 truncate text-sm text-ink">{s.name}</span>
-                <button onClick={() => loadSaved(s)} className="rounded px-2 py-0.5 text-xs font-medium text-accent-ink hover:bg-accent-weak">Load</button>
-                <button onClick={() => remove(s.id)} className="rounded px-2 py-0.5 text-xs text-neg hover:bg-neg/10">Delete</button>
+                <button onClick={() => loadSaved(s)} className="min-h-11 min-w-11 rounded-lg px-2 text-sm font-medium text-accent-ink hover:bg-accent-weak">Load</button>
+                <button onClick={() => remove(s.id)} className="min-h-11 min-w-11 rounded-lg px-2 text-sm text-neg hover:bg-neg/10">Delete</button>
               </li>
             );
           })}
