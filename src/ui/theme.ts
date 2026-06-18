@@ -9,6 +9,18 @@ export const ROLE_COLOR: Record<Role, { bg: string; text: string; ring: string }
   Supporter: { bg: "bg-amber-100", text: "text-amber-700", ring: "ring-amber-300" },
 };
 
+// Solid role fill for the active "filter by role" chip in the Pokémon picker.
+// Hues match ROLE_COLOR's families (rose / violet / sky / emerald / amber) at a
+// saturated fill shade; pair with readableTextColor() so label text stays legible
+// on each fill in both light and dark mode.
+export const ROLE_FILTER_HEX: Record<Role, string> = {
+  Attacker: "#e11d48", // rose-600  — red
+  AllRounder: "#7c3aed", // violet-600 — purple
+  Speedster: "#0ea5e9", // sky-500   — blue
+  Defender: "#10b981", // emerald-500 — green
+  Supporter: "#f59e0b", // amber-500  — yellow
+};
+
 export const ROLE_LABEL: Record<Role, string> = {
   Attacker: "Attacker",
   AllRounder: "All-Rounder",

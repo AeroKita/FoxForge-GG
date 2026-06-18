@@ -112,20 +112,20 @@ Move descriptions use the overlay pattern above: `scrape_serebii.py` writes `mov
 
 No router library — navigation is local React state.
 
-- **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon portrait, name, role badge, and attack type (tappable — opens the Pokémon picker overlay). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Single **Basic**/**Advanced** mode toggle (`ModeToggle` in `AppBar.tsx` — shows current mode, tap flips; color-coded via `--color-mode-*` tokens) and settings gear on all tabs.
+- **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon cropped thumbnail (`iconAsset`, same crop as the picker grid), name, role badge, and attack type. Icon and name are separate tappable buttons — both open the Pokémon picker overlay (placeholder circle opens the picker when none is selected). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Single **Basic**/**Advanced** mode toggle (`ModeToggle` in `AppBar.tsx` — shows current mode, tap flips; color-coded via `--color-mode-*` tokens) and settings gear on all tabs.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Advanced mode (4 tabs vs 3). Switching from Advanced to Basic while on Compare redirects to Build.
-- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). Pokémon selection is not inline; the hero empty state and app-bar title tap open `PokemonPickerSheet`.
+- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
 - **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search auto-focuses on open). `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search auto-focuses on open). `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — `unite-data-updated` window event shows a reload banner inside `<main>`; Tauri runs a silent app-update check on launch when auto-update is enabled.
 
 ### Semantic Theming
 
-UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surface`, `text-ink`, etc.), toggled via `data-theme` on the document root. Role/stat accent colors may stay literal; structural chrome must not hardcode light-only neutrals. Native form controls (`<select>`, `<option>`) need explicit `bg-surface text-ink` so dropdown popups stay legible in dark mode (`color-scheme: dark`).
+UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surface`, `text-ink`, etc.), toggled via `data-theme` on the document root. Role/stat accent colors may stay literal; structural chrome must not hardcode light-only neutrals. Role badge classes (`ROLE_COLOR`) and solid filter-chip fills (`ROLE_FILTER_HEX`) live in `src/ui/theme.ts`; active picker role chips and emblem color chips pair those fills with `readableTextColor()` from `src/ui/colors.ts` for legible labels in light and dark mode. Native form controls (`<select>`, `<option>`) need explicit `bg-surface text-ink` so dropdown popups stay legible in dark mode (`color-scheme: dark`).
 
 **Resolved themes:**
 
@@ -235,7 +235,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | App shell | `src/App.tsx` |
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
 | Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced) |
-| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (bottom sheet only; search does not auto-focus on open) |
+| Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (bottom sheet; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open) |
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView` |

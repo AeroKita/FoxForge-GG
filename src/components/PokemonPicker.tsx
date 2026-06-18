@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { pokemonList } from "../data/gameData";
 import { asset } from "../ui/asset";
+import { readableTextColor } from "../ui/colors";
+import { ROLE_FILTER_HEX } from "../ui/theme";
 import { BottomSheet } from "./shell/BottomSheet";
 import type { Role } from "../types";
 
@@ -43,6 +45,7 @@ export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
               key={r}
               label={ROLE_LABEL[r] ?? r}
               active={role === r}
+              activeColor={r === "All" ? undefined : ROLE_FILTER_HEX[r]}
               onClick={() => setRole(r)}
             />
           ))}
@@ -90,18 +93,24 @@ function FilterChip({
   label,
   active,
   onClick,
+  activeColor,
 }: {
   label: string;
   active: boolean;
   onClick: () => void;
+  activeColor?: string;
 }) {
+  const style = active && activeColor
+    ? { background: activeColor, color: readableTextColor(activeColor) }
+    : undefined;
   return (
     <button
       type="button"
       onClick={onClick}
+      style={style}
       className={`shrink-0 rounded-full border px-3 py-2 text-sm font-medium capitalize min-h-11 ${
         active
-          ? "border-transparent bg-accent text-white"
+          ? activeColor ? "border-line" : "border-transparent bg-accent text-white"
           : "border-transparent bg-raise text-muted hover:bg-raise"
       }`}
     >
