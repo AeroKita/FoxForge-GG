@@ -144,7 +144,7 @@ UI surfaces use Tailwind v4 semantic tokens defined in `src/index.css` (`bg-surf
 
 `SettingsMenu` → Appearance exposes a 3-way `System · Light · Dark` control bound to `themePref` / `setThemePref`.
 
-**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`). Legacy `--color-header-a/-b` remain defined but are unused by the new shell. Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
+**Token families in `src/index.css`:** core surfaces (`--color-bg`, `--color-surface`, …), tone cards (`--color-rec-*`, `--color-as-*`, `--color-an-*`), picker tiles (`--color-mon-*`), grade controls (`--color-grade-*`), app-bar tokens (`--color-appbar-*`), tab-bar tokens (`--color-tab-*`). Safe-area helpers: `@utility pt-safe` / `pb-safe` via `env(safe-area-inset-*)`. Viewport meta includes `viewport-fit=cover` in `index.html`.
 
 Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token rationale: `docs/06-theme-plan.md`.
 
