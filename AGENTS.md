@@ -112,7 +112,9 @@ No router library — navigation is local React state.
 - **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon portrait, name, role badge, and attack type (tappable — opens the Pokémon picker overlay). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Beginner/Expert segmented control and settings gear on all tabs.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Expert mode (4 tabs vs 3). Switching from Expert to Beginner while on Compare redirects to Build.
 - **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Expert only). Pokémon selection is not inline; the hero empty state and app-bar title tap open `PokemonPickerSheet`.
-- **Other tab screens** — `EmblemsScreen`, `ItemsScreen`, and `CompareScreen` are placeholder wrappers; `InventoryManager`, `HeldItemsInventory`, and `CompareView` are not mounted from those screens.
+- **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
+- **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
+- **Compare screen** — `CompareScreen` renders `CompareView` (Expert only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered. `<main>` padding clears the fixed app bar and tab bar (safe-area aware).
 - **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear), `PokemonPickerSheet` (app-bar tap or hero empty state), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`). `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
@@ -229,7 +231,9 @@ Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (use
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
 | Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Expert) |
 | Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (no inline picker on Build) |
-| Tab placeholders | `EmblemsScreen`, `ItemsScreen`, `CompareScreen` — `InventoryManager`, `HeldItemsInventory`, `CompareView` not mounted |
+| Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
+| Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
+| Compare tab (Expert) | `src/components/screens/CompareScreen.tsx` → `CompareView` |
 | Pickers / settings | `PickerModal`, `SettingsMenu` (both use `BottomSheet`) |
 | Item detail | `src/ui/heldItemDetail.tsx` (`HeldItemDetailModal`) |
 | Tooltips | `src/components/Tooltip.tsx`, `src/components/tips.tsx` |
