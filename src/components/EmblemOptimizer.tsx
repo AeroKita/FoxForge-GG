@@ -41,7 +41,12 @@ import {
   BONUS_STAT_LABELS,
   type ColorBonusPreviewItem,
 } from "../engine/emblemSearch/colorBonusPreview";
-import { useEmblemSearch } from "../state/emblemSearch";
+import {
+  useEmblemSearch,
+  buildSearchSettingsKey,
+  getSessionSearchSettingsKey,
+  persistSessionSearchSettings,
+} from "../state/emblemSearch";
 import { priorityWeights } from "../engine/recommend";
 import {
   deriveBasicObjective,
@@ -50,8 +55,7 @@ import {
   basicObjectiveDescription,
   DEFAULT_ALLOWED_GRADES,
 } from "../engine/emblemSearch/basicObjective";
-import { buildPresetSearchOptions, resolveColorSearchMode } from "../engine/emblemSearch/searchPresets";
-import { colorTargetsFor } from "../engine/recommend";
+import { buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, resolveColorSearchMode, EXACT_FALLBACK_EFFORT, type BasicEffort } from "../engine/emblemSearch/searchPresets";
 import { deriveDefaultProtectedStats } from "../engine/emblemSearch/protectDefaults";
 import { recommendItemsForEmblemBuild } from "../engine/emblemSearch/heldItemSynergy";
 import type {
@@ -87,24 +91,11 @@ const EFFORT_LABELS = {
 
 type Effort = "quick" | "normal" | "thorough";
 
-/**
- * Beginner-only effort union. Layers an "exact" option on top of the shared
- * time-based efforts. "exact" runs the full exact color enumeration (optimal,
- * complete) and is only offered when the resolver says it's feasible; the
- * time-based options deliberately skip exact and run the heuristic instead.
- */
-type BasicEffort = "exact" | Effort;
-
 const BASIC_EFFORT_LABELS: Record<BasicEffort, string> = {
   exact: "Exact (optimal)",
   ...EFFORT_LABELS,
 } as const;
 
-/** Effort used as the heuristic fallback when "exact" is selected but turns out infeasible at runtime. */
-const EXACT_FALLBACK_EFFORT: Effort = "normal";
-
-type OptimizerMode = "beginner" | "expert";
-/** "off" = no color control; "exact" = hard per-color constraints; "weighted" = color-bonus incentive only. */
 type ColorMode = "off" | "exact" | "weighted";
 
 const POSITIVE_COLORS: EmblemColor[] = ["brown", "green", "blue", "purple", "white", "red", "yellow", "black"];
@@ -295,9 +286,8 @@ function ResultCards({
               )}
             </div>
             <p className="text-xs text-faint">
-              Applies to your current loadout without leaving this page. Once applied, a
-              confirmation appears with a link to view it in the Builder. Held items apply
-              separately below.
+              Applies to your current loadout without leaving this page. Switch to the Build
+              tab anytime to review your loadout. Held items apply separately below.
             </p>
           </div>
         </div>
@@ -418,11 +408,8 @@ function ColorCountField({
 // ---------------------------------------------------------------------------
 
 export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) => void } = {}) {
-  const { loadout, dispatch, owned, heldSlotGrades } = useStore();
+  const { loadout, dispatch, owned, heldSlotGrades, expert, setMode: setViewMode } = useStore();
   const pokemon = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) ?? null : null;
-
-  // ---- Top-level mode ----
-  const [optimizerMode, setOptimizerMode] = useState<OptimizerMode>("beginner");
 
   // ---- Pool state (Beginner vs Expert pool source are independent) ----
   const [basicUseOwned, setBasicUseOwned] = useState(true);
@@ -505,12 +492,15 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // meta color targets are enforceable AND within the exact-enumeration cap.
   const basicExactFeasible = basicColorResolution?.willRunExact ?? false;
 
-  // The Beginner effort actually in effect. "exact" is only meaningful when
-  // feasible; if the user left it on "exact" but exact isn't possible for this
-  // Pokémon/pool, fall back to a sensible heuristic effort so the indicator and
-  // the search agree (and the hidden "exact" radio doesn't leave nothing checked).
-  const resolvedBasicEffort: BasicEffort =
-    basicEffort === "exact" && !basicExactFeasible ? EXACT_FALLBACK_EFFORT : basicEffort;
+  // The Beginner effort actually in effect — shared resolver keeps UI + search aligned.
+  const resolvedBasicEffort = resolveBasicEffort(basicEffort, basicExactFeasible);
+
+  // Keep stored effort in sync when exact becomes unavailable (pool/settings change).
+  useEffect(() => {
+    if (basicEffort === "exact" && !basicExactFeasible) {
+      setBasicEffort(EXACT_FALLBACK_EFFORT);
+    }
+  }, [basicEffort, basicExactFeasible]);
 
   // Will the Beginner search actually run exact enumeration? Only when exact is
   // both feasible AND chosen. Drives the ⚡/~ indicator so it tracks the real path.
@@ -614,7 +604,101 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   }), [mode, priorities, targetValues, targetActive, floorValues, floorActive, colorConstraints, colorMode, colorBonuses, pokemonAwareScoring, pokemon, pokemonContext, exactCap]);
 
   // ---- Search engine ----
-  const { state: searchState, run, cancel } = useEmblemSearch();
+  const { state: searchState, run, cancel, clearResult } = useEmblemSearch();
+
+  const searchSettingsKey = useMemo(
+    () => buildSearchSettingsKey({
+      pokemonId: loadout.pokemonId,
+      optimizeLevel,
+      basicUseOwned,
+      useOwned,
+      mixedGrades,
+      allowedGrades: [...allowedGrades].sort(),
+      basicEffort: resolvedBasicEffort,
+      effort,
+      colorBonuses,
+      pokemonAwareScoring,
+      exactCap,
+      mode,
+      customWeights,
+      targetValues,
+      targetActive,
+      floorValues,
+      floorActive,
+      colorMode,
+      activeColors: [...activeColors].sort(),
+      colorCounts,
+      ownedKeys: [...owned].sort(),
+    }),
+    [
+      loadout.pokemonId,
+      optimizeLevel,
+      basicUseOwned,
+      useOwned,
+      mixedGrades,
+      allowedGrades,
+      resolvedBasicEffort,
+      effort,
+      colorBonuses,
+      pokemonAwareScoring,
+      exactCap,
+      mode,
+      customWeights,
+      targetValues,
+      targetActive,
+      floorValues,
+      floorActive,
+      colorMode,
+      activeColors,
+      colorCounts,
+      owned,
+    ],
+  );
+
+  // Persist the settings fingerprint whenever a search completes so remount can
+  // restore the baseline without treating default re-init as a user change.
+  useEffect(() => {
+    if (searchState.status === "done" && searchState.result) {
+      persistSessionSearchSettings(searchSettingsKey);
+    }
+  }, [searchState.status, searchState.result, searchSettingsKey]);
+
+  // Clear stale cached results when Pokémon or search inputs change.
+  // Basic/Advanced toggle alone does not clear (sync may rewrite settings).
+  // First mount/remount establishes baseline only — never clears on that pass.
+  const prevSearchSettingsKeyRef = useRef<string | null>(null);
+  const prevPokemonIdRef = useRef(loadout.pokemonId);
+  const prevExpertRef = useRef(expert);
+
+  useEffect(() => {
+    if (searchState.status === "running") return;
+
+    const pokemonChanged = prevPokemonIdRef.current !== loadout.pokemonId;
+    const expertChanged = prevExpertRef.current !== expert;
+    prevPokemonIdRef.current = loadout.pokemonId;
+    prevExpertRef.current = expert;
+
+    if (pokemonChanged) {
+      clearResult();
+      prevSearchSettingsKeyRef.current = searchSettingsKey;
+      return;
+    }
+
+    if (expertChanged) {
+      prevSearchSettingsKeyRef.current = searchSettingsKey;
+      return;
+    }
+
+    if (prevSearchSettingsKeyRef.current === null) {
+      prevSearchSettingsKeyRef.current = getSessionSearchSettingsKey() ?? searchSettingsKey;
+      return;
+    }
+
+    if (prevSearchSettingsKeyRef.current !== searchSettingsKey) {
+      clearResult();
+      prevSearchSettingsKeyRef.current = searchSettingsKey;
+    }
+  }, [searchSettingsKey, loadout.pokemonId, expert, searchState.status, clearResult]);
 
   const resultPicks = useMemo(
     () => emblemPicksFromResult(searchState.result),
@@ -693,27 +777,16 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     applyAllToLoadout(resultPicks ?? [], itemIds);
   }, [applyAllToLoadout, resultPicks]);
 
-  const handleOpenBuilder = useCallback(() => {
-    onNavigate?.("app");
-  }, [onNavigate]);
+  const applyAdvancedColorDefaults = useCallback((targetPool: typeof pool) => {
+    const defaults = deriveAdvancedColorUiDefaults(pokemon, targetPool, allEmblems);
+    setColorMode(defaults.colorMode);
+    setActiveColors(new Set(defaults.activeColors));
+    setColorCounts(
+      Object.fromEntries(POSITIVE_COLORS.map((c) => [c, defaults.colorCounts.get(c) ?? 0])) as Record<EmblemColor, number>,
+    );
+  }, [pokemon, allEmblems]);
 
-  // Sync Expert controls from Beginner defaults (called when switching Beginner→Expert
-  // via the segmented control, the "switch to Expert" buttons, or ↺ Reset).
-  // Expert defaults: full dataset pool + exact meta colors + protect defaults.
-  const syncAdvancedFromBasic = useCallback(() => {
-    const level = loadout.level ?? 15;
-    const grades = new Set(DEFAULT_ALLOWED_GRADES);
-    setUseOwned(false);          // Expert defaults to the full 258-emblem dataset
-    setMixedGrades(true);
-    setAllowedGrades(grades);
-    setMode("maximize");
-    setColorBonuses(true);
-    setPokemonAwareScoring(true);
-    setCustomWeights({});
-    setOptimizeLevel(level);
-    setExactCap(DEFAULT_EXACT_CAP);
-
-    // --- Protect defaults (always derived from the selected Pokémon) ---
+  const applyAdvancedProtectDefaults = useCallback((level: number) => {
     if (pokemon) {
       const floors = deriveDefaultProtectedStats(pokemon, pokemonList, level);
       const newFloorActive: Record<string, boolean> = {};
@@ -728,35 +801,63 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       setFloorActive({});
       setFloorValues({});
     }
+  }, [pokemon]);
 
-    // --- Color defaults ---
-    if (pokemon) {
-      const byId = new Map(allEmblems.map((e) => [e.id, e]));
-      const targets = colorTargetsFor(pokemon, byId);
-      if (targets.size > 0) {
-        const fullPool = buildPool(allEmblems, { useOwned: false, mixedGrades: true, allowedGrades: grades }, owned);
-        // Same feasibility logic Beginner uses, via the shared resolver, so the
-        // exact-vs-weighted decision can never drift between the two modes.
-        const resolution = resolveColorSearchMode(fullPool, targets, SLOTS);
-        setActiveColors(new Set(targets.keys()));
-        setColorCounts(
-          Object.fromEntries(POSITIVE_COLORS.map((c) => [c, targets.get(c) ?? 0])) as Record<EmblemColor, number>,
-        );
-        setColorMode(resolution.mode);
-        return;
-      }
+  // Pokémon-specific Advanced defaults without resetting pool/effort customizations.
+  const syncAdvancedFromPokemon = useCallback(() => {
+    setCustomWeights({});
+    applyAdvancedProtectDefaults(optimizeLevel);
+    applyAdvancedColorDefaults(pool);
+  }, [optimizeLevel, pool, applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
+
+  // Sync Expert controls from Beginner defaults (called when switching Basic→Advanced
+  // via the global mode toggle, the "switch to Advanced" links, or ↺ Reset).
+  // Expert defaults: full dataset pool + exact meta colors + protect defaults.
+  const syncAdvancedFromBasic = useCallback(() => {
+    const level = loadout.level ?? 15;
+    const grades = new Set(DEFAULT_ALLOWED_GRADES);
+    setUseOwned(false);          // Expert defaults to the full 258-emblem dataset
+    setMixedGrades(true);
+    setAllowedGrades(grades);
+    setMode("maximize");
+    setColorBonuses(true);
+    setPokemonAwareScoring(true);
+    setCustomWeights({});
+    setOptimizeLevel(level);
+    setExactCap(DEFAULT_EXACT_CAP);
+
+    applyAdvancedProtectDefaults(level);
+
+    const fullPool = buildPool(allEmblems, { useOwned: false, mixedGrades: true, allowedGrades: grades }, owned);
+    applyAdvancedColorDefaults(fullPool);
+  }, [loadout.level, allEmblems, owned, applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
+
+  // Sync Advanced defaults when entering Advanced or when the Pokémon changes in Advanced.
+  // prevExpert starts false so a page that loads already in Advanced mode is treated as
+  // "just entered" on first mount and populates defaults for the already-selected Pokémon.
+  // Safe because OptimizeScreen stays mounted (hidden) across tab switches — no remount —
+  // and the optimizer's settings are not persisted, so there is nothing to clobber.
+  const prevExpert = useRef(false);
+  const prevPokemonIdForExpert = useRef(loadout.pokemonId);
+  useEffect(() => {
+    const expertJustEnabled = expert && !prevExpert.current;
+    prevExpert.current = expert;
+
+    if (!expert || !pokemon) {
+      prevPokemonIdForExpert.current = loadout.pokemonId;
+      return;
     }
-    // No Pokémon or no meta targets → clear color state
-    setColorMode("off");
-    setActiveColors(new Set());
-    setColorCounts(Object.fromEntries(POSITIVE_COLORS.map((c) => [c, 0])) as Record<EmblemColor, number>);
-  }, [loadout.level, pokemon, allEmblems, owned]);
 
+    if (expertJustEnabled) {
+      syncAdvancedFromBasic();
+      prevPokemonIdForExpert.current = loadout.pokemonId;
+      return;
+    }
 
-  const handleModeSwitch = useCallback((next: OptimizerMode) => {
-    if (next === "expert" && optimizerMode === "beginner") syncAdvancedFromBasic();
-    setOptimizerMode(next);
-  }, [optimizerMode, syncAdvancedFromBasic]);
+    const pokemonChanged = prevPokemonIdForExpert.current !== loadout.pokemonId;
+    prevPokemonIdForExpert.current = loadout.pokemonId;
+    if (pokemonChanged) syncAdvancedFromPokemon();
+  }, [expert, loadout.pokemonId, pokemon, syncAdvancedFromBasic, syncAdvancedFromPokemon]);
 
   // Beginner search — builds the Expert-equivalent SearchOptions (meta color
   // targets enforced as hard constraints when feasible on the ACTUAL Beginner
@@ -781,10 +882,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       pokemonList,
       forceHeuristic,
     });
-    // When exact is selected, the heuristic budget is only used if exact turns
-    // out infeasible at runtime — pass a reasonable fallback. Otherwise use the
-    // user's chosen time-based effort.
-    const heuristicEffort: Effort = runExact ? EXACT_FALLBACK_EFFORT : resolvedBasicEffort;
+    const heuristicEffort: Effort = runExact ? EXACT_FALLBACK_EFFORT : (resolvedBasicEffort as Effort);
     await run(basicPool, options, setBonuses, heuristicEffort);
   }, [pokemon, basicObjective, basicPool, basicColorResolution, optimizeLevel, resolvedBasicEffort, run]);
 
@@ -857,31 +955,19 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
   // ---- Render ----
   return (
-    <div className="flex flex-col gap-4">
-      {/* Mode toggle header */}
-      <div className="flex items-center justify-between gap-3">
-        <div>
-          <h2 className="text-base font-bold text-ink">⚡ Emblem Optimizer</h2>
-          <p className="text-xs text-muted">
-            {optimizerMode === "beginner"
-              ? basicUseOwned
-                ? "One-click build optimised for your Pokémon from your owned collection."
-                : "One-click build optimised for your Pokémon from the full emblem dataset."
-              : "Full control over pool, objectives, and scoring."}
-          </p>
-        </div>
-        <Segmented<OptimizerMode>
-          value={optimizerMode}
-          options={["beginner", "expert"]}
-          onChange={handleModeSwitch}
-          labels={{ beginner: "Beginner", expert: "Expert" }}
-        />
-      </div>
+    <div className="flex flex-col gap-3">
+      <p className="text-xs text-muted">
+        {!expert
+          ? basicUseOwned
+            ? "One-click build optimised for your Pokémon from your owned collection."
+            : "One-click build optimised for your Pokémon from the full emblem dataset."
+          : "Full control over pool, objectives, and scoring."}
+      </p>
 
       {/* ================================================================== */}
-      {/* BEGINNER MODE                                                       */}
+      {/* BASIC MODE (global Basic/Advanced toggle)                           */}
       {/* ================================================================== */}
-      {optimizerMode === "beginner" && (
+      {!expert && (
         <>
           {/* Auto-objective summary card */}
           {pokemon ? (
@@ -965,7 +1051,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             </div>
           ) : (
             <div className="rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-muted shadow-sm">
-              Select a Pokémon in the Builder first to enable Beginner optimization.
+              Select a Pokémon on the Build tab first to enable Basic optimization.
             </div>
           )}
 
@@ -1002,10 +1088,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               <p className="mt-1 text-xs text-muted">
                 Enable more grades above, or{" "}
                 <button
-                  onClick={() => handleModeSwitch("expert")}
+                  onClick={() => setViewMode("expert")}
                   className="font-medium text-accent-ink underline"
                 >
-                  switch to Expert
+                  switch to Advanced
                 </button>{" "}
                 for finer pool control.
               </p>
@@ -1036,7 +1122,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                   >
                     <input
                       type="radio"
-                      checked={resolvedBasicEffort === e}
+                      checked={basicEffort === e}
                       onChange={() => setBasicEffort(e)}
                       className="accent-accent"
                     />
@@ -1170,10 +1256,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 <>
                   enabling more grades or{" "}
                   <button
-                    onClick={() => handleModeSwitch("expert")}
+                    onClick={() => setViewMode("expert")}
                     className="font-medium text-accent-ink underline"
                   >
-                    switching to Expert
+                    switching to Advanced
                   </button>
                 </>
               )}
@@ -1184,9 +1270,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       )}
 
       {/* ================================================================== */}
-      {/* EXPERT MODE                                                         */}
+      {/* ADVANCED MODE (global Basic/Advanced toggle)                        */}
       {/* ================================================================== */}
-      {optimizerMode === "expert" && (
+      {expert && (
         <>
           {/* Reset to Beginner defaults */}
           <div className="flex items-center justify-between">
@@ -1314,13 +1400,20 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           {/* Mode & Effort */}
           <CollapsibleCard title="Mode & Effort" persistKey="optimizer-mode">
             <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-4">
-                {(["maximize", "target"] as SearchMode[]).map((m) => (
-                  <label key={m} className="flex cursor-pointer items-center gap-2 text-sm">
-                    <input type="radio" checked={mode === m} onChange={() => setMode(m)} className="accent-accent" />
-                    <span className="capitalize">{m}</span>
-                  </label>
-                ))}
+              <div className="flex flex-col gap-1.5">
+                <div className="flex flex-wrap gap-4">
+                  {(["maximize", "target"] as SearchMode[]).map((m) => (
+                    <label key={m} className="flex cursor-pointer items-center gap-2 text-sm">
+                      <input type="radio" checked={mode === m} onChange={() => setMode(m)} className="accent-accent" />
+                      <span className="capitalize">{m}</span>
+                    </label>
+                  ))}
+                </div>
+                <p className="text-xs text-muted">
+                  {mode === "maximize"
+                    ? "Finds the build that scores highest on your priority stats (role-weighted or custom weights). Adjust Stat Priorities below."
+                    : "Finds a build that hits the stat values you set, penalizing any shortfall. Enable stats and enter targets in Stat Targets below."}
+                </p>
               </div>
               <div className="flex flex-wrap gap-3">
                 {(Object.entries(EFFORT_LABELS) as [Effort, string][]).map(([e, label]) => (
@@ -1756,25 +1849,16 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
         <SearchProgressOverlay progress={searchState.progress} eta={searchState.eta} onCancel={cancel} />
       )}
 
-      {/* Apply confirmation toast — inline feedback since the Builder isn't visible here */}
+      {/* Apply confirmation toast */}
       {toast && (
         <div
           role="status"
           aria-live="polite"
-          className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4"
+          className="fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-50 flex justify-center px-4"
         >
-          <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-pos/40 bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-lg">
+          <div className="flex items-center gap-3 rounded-xl border border-pos/40 bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-lg">
             <span className="text-pos">✓</span>
             <span>{toast}</span>
-            {onNavigate && (
-              <button
-                type="button"
-                onClick={handleOpenBuilder}
-                className="ml-1 rounded-lg border border-line px-2 py-1 text-xs font-semibold text-accent-ink hover:bg-white/10"
-              >
-                View in Builder →
-              </button>
-            )}
           </div>
         </div>
       )}

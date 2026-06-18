@@ -4,8 +4,7 @@
 //
 // With no argument it reads the committed source (tools/app-icon.png). Pass a
 // path to adopt a new master — it's normalized to a 1024×1024 RGBA PNG and
-// written to tools/app-icon.png. Afterwards, regenerate the desktop (Tauri)
-// icon set with:  npx tauri icon tools/app-icon.png
+// written to tools/app-icon.png. This generates the web/PWA icons only.
 import sharp from "sharp";
 import { mkdirSync } from "node:fs";
 

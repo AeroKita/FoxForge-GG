@@ -7,11 +7,18 @@
  * (e.g. in test environments, old browsers, or Tauri strict CSP).
  */
 
-import { useCallback, useRef, useState } from "react";
-import type { EmblemCandidate, SearchOptions, SearchProgress, SearchResult } from "../engine/emblemSearch/types";
-import type { EmblemSetBonus } from "../types";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type {
+  EmblemCandidate,
+  SearchMode,
+  SearchOptions,
+  SearchProgress,
+  SearchResult,
+} from "../engine/emblemSearch/types";
+import type { EmblemColor, EmblemGrade, EmblemSetBonus } from "../types";
 import { runSearch } from "../engine/emblemSearch/orchestrator";
 import { computeSearchEta } from "../ui/formatEta";
+import { SearchWorkerController } from "./searchWorkerController";
 
 export type SearchStatus = "idle" | "running" | "done" | "error" | "cancelled";
 
@@ -34,6 +41,39 @@ export interface UseEmblemSearchReturn {
   ) => Promise<void>;
   cancel: () => void;
   reset: () => void;
+  /** Clear a cached/stale result without cancelling an in-progress search. */
+  clearResult: () => void;
+}
+
+/** Serializable snapshot of optimizer controls that affect search output. */
+export interface EmblemSearchSettingsSnapshot {
+  pokemonId: string | null;
+  optimizeLevel: number;
+  basicUseOwned: boolean;
+  useOwned: boolean;
+  mixedGrades: boolean;
+  allowedGrades: EmblemGrade[];
+  basicEffort: string;
+  effort: string;
+  colorBonuses: boolean;
+  pokemonAwareScoring: boolean;
+  exactCap: number;
+  mode: SearchMode;
+  customWeights: Record<string, number>;
+  targetValues: Record<string, string>;
+  targetActive: Record<string, boolean>;
+  floorValues: Record<string, string>;
+  floorActive: Record<string, boolean>;
+  colorMode: string;
+  activeColors: EmblemColor[];
+  colorCounts: Record<string, number>;
+  /** Owned emblem keys (`id:grade`) when pool is restricted to owned emblems. */
+  ownedKeys: string[];
+}
+
+/** Stable key for comparing search-relevant settings (excludes Basic/Advanced toggle). */
+export function buildSearchSettingsKey(snapshot: EmblemSearchSettingsSnapshot): string {
+  return JSON.stringify(snapshot);
 }
 
 const INITIAL: EmblemSearchState = {
@@ -43,6 +83,83 @@ const INITIAL: EmblemSearchState = {
   result: null,
   errorMsg: null,
 };
+
+/** Last completed search result — survives Optimize tab unmount/remount. */
+interface EmblemSearchSession {
+  state: EmblemSearchState;
+  /** Settings fingerprint that produced `state` (see buildSearchSettingsKey). */
+  settingsKey: string | null;
+}
+
+let sessionCache: EmblemSearchSession | null = null;
+
+function readSessionCache(): EmblemSearchState | null {
+  const cached = sessionCache?.state;
+  if (cached?.status === "done" && cached.result) return cached;
+  return null;
+}
+
+/** Settings key stored alongside the last cached result, if any. */
+export function getSessionSearchSettingsKey(): string | null {
+  return sessionCache?.settingsKey ?? null;
+}
+
+function persistSessionCache(state: EmblemSearchState): void {
+  if (state.status === "done" && state.result) {
+    sessionCache = { state, settingsKey: sessionCache?.settingsKey ?? null };
+  } else if (state.status === "idle" && !state.result) {
+    sessionCache = null;
+  }
+}
+
+/** Record the settings fingerprint for the current cached result. */
+export function persistSessionSearchSettings(settingsKey: string): void {
+  if (sessionCache?.state.status === "done" && sessionCache.state.result) {
+    sessionCache = { ...sessionCache, settingsKey };
+  }
+}
+
+/**
+ * Tracks which search invocation is current. Stale async completions (e.g. after
+ * cancel + immediate re-run) must not overwrite state or apply the wrong effort.
+ */
+export class SearchRunCoordinator {
+  private generation = 0;
+
+  /** Start a new run; invalidates any in-flight run. Returns token for this run. */
+  begin(): number {
+    return ++this.generation;
+  }
+
+  /** Invalidate the current run (user cancelled). */
+  cancel(): void {
+    this.generation++;
+  }
+
+  isCurrent(token: number): boolean {
+    return token === this.generation;
+  }
+}
+
+/** Test helper — reset module-level session cache between cases. */
+export function resetEmblemSearchSession(): void {
+  sessionCache = null;
+}
+
+/** Test helper — seed session cache as if a search had completed. */
+export function seedEmblemSearchSession(
+  state: EmblemSearchState,
+  settingsKey: string | null = null,
+): void {
+  if (state.status === "done" && state.result) {
+    sessionCache = { state, settingsKey };
+  }
+}
+
+/** Test helper — read cached search state. */
+export function getEmblemSearchSessionState(): EmblemSearchState | null {
+  return readSessionCache();
+}
 
 // ---------------------------------------------------------------------------
 // Worker helpers
@@ -60,11 +177,6 @@ function tryCreateWorker(): Worker | null {
   }
 }
 
-let jobSerial = 0;
-function newJobId() {
-  return `job-${++jobSerial}`;
-}
-
 // ---------------------------------------------------------------------------
 // Hook
 // ---------------------------------------------------------------------------
@@ -76,34 +188,74 @@ function newJobId() {
  * main-thread execution (same orchestrator) when the Worker cannot be created.
  */
 export function useEmblemSearch(): UseEmblemSearchReturn {
-  const [state, setState] = useState<EmblemSearchState>(INITIAL);
+  const [state, setState] = useState<EmblemSearchState>(() => readSessionCache() ?? INITIAL);
   const abortRef = useRef(false);
   const runningRef = useRef(false);
-  const workerRef = useRef<Worker | null>(null);
-  const currentJobRef = useRef<string | null>(null);
+  const runCoordinatorRef = useRef(new SearchRunCoordinator());
+  const workerControllerRef = useRef<SearchWorkerController | null>(null);
 
   // ETA tracking — reset when a new search begins.
   const searchStartTimeRef = useRef<number>(0);
   const etaSmoothedRef = useRef<number | null>(null);
 
-  const cancel = useCallback(() => {
-    abortRef.current = true;
-    runningRef.current = false;
-    if (workerRef.current && currentJobRef.current) {
-      workerRef.current.postMessage({ type: "cancel", id: currentJobRef.current });
+  function getWorkerController(): SearchWorkerController {
+    if (!workerControllerRef.current) {
+      workerControllerRef.current = new SearchWorkerController(tryCreateWorker);
     }
-    setState((s) =>
-      s.status === "running" ? { ...s, status: "cancelled", eta: null } : s,
-    );
+    return workerControllerRef.current;
+  }
+
+  /**
+   * Forcibly tear down the worker. Posting a "cancel" message is NOT enough:
+   * the worker thread runs the search as a long synchronous compute loop
+   * (heuristic budget loop / single-threaded exact enumeration) that only
+   * yields microtasks, never draining the macrotask queue — so a queued
+   * `cancel` (and the next `run`) is never processed until the old search
+   * finishes (effectively "Starting…" forever on a long search).
+   *
+   * terminate() is issued from the main thread and kills the worker thread
+   * immediately regardless of its synchronous state. It also tears down any
+   * nested shard workers spawned by exactParallel (Chromium terminates a
+   * worker's owned child workers when the parent is terminated), so no
+   * orphaned shard workers keep grinding. The next run() lazily spawns a
+   * fresh worker.
+   */
+  const terminateWorker = useCallback(() => {
+    workerControllerRef.current?.terminate();
   }, []);
 
-  const reset = useCallback(() => {
+  const cancel = useCallback(() => {
+    runCoordinatorRef.current.cancel();
     abortRef.current = true;
     runningRef.current = false;
-    if (workerRef.current && currentJobRef.current) {
-      workerRef.current.postMessage({ type: "cancel", id: currentJobRef.current });
-    }
+    terminateWorker();
+    setState((s) =>
+      s.status === "running"
+        ? { status: "idle", progress: null, eta: null, result: s.result, errorMsg: null }
+        : s,
+    );
+  }, [terminateWorker]);
+
+  const reset = useCallback(() => {
+    runCoordinatorRef.current.cancel();
+    abortRef.current = true;
+    runningRef.current = false;
+    terminateWorker();
+    sessionCache = null;
     setState(INITIAL);
+  }, [terminateWorker]);
+
+  // Tear down the worker (and any nested shard workers) when the hook unmounts
+  // so a backgrounded long search doesn't leak a grinding worker thread.
+  useEffect(() => () => { terminateWorker(); }, [terminateWorker]);
+
+  const clearResult = useCallback(() => {
+    if (runningRef.current) return;
+    sessionCache = null;
+    setState((s) => {
+      if (!s.result && s.status === "idle") return s;
+      return { status: "idle", progress: null, eta: null, result: null, errorMsg: null };
+    });
   }, []);
 
   /** Run in a Worker; rejects if Worker fails. */
@@ -112,51 +264,20 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
     options: SearchOptions,
     setBonuses: EmblemSetBonus[],
     effort: "quick" | "normal" | "thorough",
+    runToken: number,
   ): Promise<SearchResult | null> {
-    return new Promise((resolve, reject) => {
-      // Reuse or create worker
-      if (!workerRef.current) {
-        const w = tryCreateWorker();
-        if (!w) { reject(new Error("Worker unavailable")); return; }
-        workerRef.current = w;
-      }
-      const worker = workerRef.current;
-      const id = newJobId();
-      currentJobRef.current = id;
-
-      const handler = (ev: MessageEvent) => {
-        const msg = ev.data;
-        if (msg.id !== id) return;
-
-        if (msg.type === "progress") {
-          const eta = computeSearchEta(msg.pct, searchStartTimeRef.current, etaSmoothedRef);
-          setState((s) =>
-            s.status === "running"
-              ? { ...s, progress: { pct: msg.pct, label: msg.label, candidates: msg.candidates }, eta }
-              : s,
-          );
-        } else if (msg.type === "done") {
-          worker.removeEventListener("message", handler);
-          worker.removeEventListener("error", errHandler);
-          resolve(msg.result);
-        } else if (msg.type === "error") {
-          worker.removeEventListener("message", handler);
-          worker.removeEventListener("error", errHandler);
-          reject(new Error(msg.message));
-        }
-      };
-
-      const errHandler = (ev: ErrorEvent) => {
-        worker.removeEventListener("message", handler);
-        worker.removeEventListener("error", errHandler);
-        reject(new Error(ev.message ?? "Worker error"));
-      };
-
-      worker.addEventListener("message", handler);
-      worker.addEventListener("error", errHandler);
-
-      worker.postMessage({ type: "run", id, pool, options, setBonuses, effort });
-    });
+    return getWorkerController().run(
+      { pool, options, setBonuses, effort },
+      (progress) => {
+        if (!runCoordinatorRef.current.isCurrent(runToken)) return;
+        const eta = computeSearchEta(progress.pct, searchStartTimeRef.current, etaSmoothedRef);
+        setState((s) =>
+          s.status === "running"
+            ? { ...s, progress: { pct: progress.pct, label: progress.label, candidates: progress.candidates }, eta }
+            : s,
+        );
+      },
+    );
   }
 
   /** Run on main thread (fallback). */
@@ -165,6 +286,7 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
     options: SearchOptions,
     setBonuses: EmblemSetBonus[],
     effort: "quick" | "normal" | "thorough",
+    runToken: number,
   ): Promise<SearchResult | null> {
     return runSearch(
       {
@@ -173,13 +295,14 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
         setBonuses,
         effort,
         onProgress: (p) => {
+          if (!runCoordinatorRef.current.isCurrent(runToken)) return;
           const eta = computeSearchEta(p.pct, searchStartTimeRef.current, etaSmoothedRef);
           setState((s) =>
             s.status === "running" ? { ...s, progress: p, eta } : s,
           );
         },
       },
-      () => abortRef.current,
+      () => !runCoordinatorRef.current.isCurrent(runToken) || abortRef.current,
     );
   }
 
@@ -191,40 +314,51 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
       effort: "quick" | "normal" | "thorough",
     ) => {
       if (runningRef.current) return;
+
+      const runToken = runCoordinatorRef.current.begin();
       abortRef.current = false;
+
       runningRef.current = true;
 
       // Reset ETA tracking for this new search.
       searchStartTimeRef.current = Date.now();
       etaSmoothedRef.current = null;
 
+      sessionCache = null;
       setState({ status: "running", progress: { pct: 0, label: "Starting…" }, eta: null, result: null, errorMsg: null });
 
       try {
         // Prefer Worker; fall back to main thread
         let result: SearchResult | null;
         try {
-          result = await runInWorker(pool, options, setBonuses, effort);
+          result = await runInWorker(pool, options, setBonuses, effort, runToken);
         } catch {
           // Worker failed (unsupported env, Tauri CSP, test) → main thread
-          result = await runOnMainThread(pool, options, setBonuses, effort);
+          result = await runOnMainThread(pool, options, setBonuses, effort, runToken);
         }
+
+        if (!runCoordinatorRef.current.isCurrent(runToken)) return;
 
         if (abortRef.current) {
           setState((s) => ({ ...s, status: "cancelled", eta: null }));
           return;
         }
 
-        setState({
-          status: "done",
-          progress: result
-            ? { pct: 100, label: `Done · ${result.candidates.toLocaleString()} candidates · ${(result.totalMs / 1000).toFixed(1)}s` }
-            : { pct: 100, label: "No result found" },
-          eta: null,
-          result,
-          errorMsg: null,
+        setState(() => {
+          const next: EmblemSearchState = {
+            status: "done",
+            progress: result
+              ? { pct: 100, label: `Done · ${result.candidates.toLocaleString()} candidates · ${(result.totalMs / 1000).toFixed(1)}s` }
+              : { pct: 100, label: "No result found" },
+            eta: null,
+            result,
+            errorMsg: null,
+          };
+          persistSessionCache(next);
+          return next;
         });
       } catch (err) {
+        if (!runCoordinatorRef.current.isCurrent(runToken)) return;
         setState({
           status: "error",
           progress: null,
@@ -233,11 +367,13 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
           errorMsg: err instanceof Error ? err.message : String(err),
         });
       } finally {
-        runningRef.current = false;
+        if (runCoordinatorRef.current.isCurrent(runToken)) {
+          runningRef.current = false;
+        }
       }
     },
     [],
   );
 
-  return { state, run, cancel, reset };
+  return { state, run, cancel, reset, clearResult };
 }

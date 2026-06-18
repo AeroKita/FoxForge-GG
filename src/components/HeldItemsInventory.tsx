@@ -1,35 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { heldItems, isUniqueHeldItem, ITEM_GRADE_MAX } from "../data/gameData";
-import { parseGradeInput } from "../state/heldItemGrades";
 import { asset } from "../ui/asset";
 import { HeldItemDetailModal } from "../ui/heldItemDetail";
+import { GradeField } from "./GradeField";
 import type { HeldItem } from "../types";
-
-function GradeField({ value, onCommit, label }:
-  { value: number; onCommit: (g: number) => void; label: string }) {
-  const [draft, setDraft] = useState(String(value));
-  const [invalid, setInvalid] = useState(false);
-
-  useEffect(() => { setDraft(String(value)); setInvalid(false); }, [value]);
-
-  const onChange = (raw: string) => {
-    const res = parseGradeInput(raw);
-    setDraft(res.digits);
-    setInvalid(!res.valid);
-    if (res.valid && res.value !== null) onCommit(res.value);
-  };
-
-  return (
-    <input
-      type="text" inputMode="numeric" value={draft}
-      onChange={(e) => onChange(e.target.value)}
-      aria-label={`${label} grade`}
-      className={`w-9 rounded px-1 py-px text-center text-[9px] font-bold text-white outline-none
-        ${invalid ? "bg-neg" : "bg-grade-badge"}`}
-    />
-  );
-}
 
 function ItemTile({
   item,
@@ -47,13 +22,13 @@ function ItemTile({
   showGradeControls: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex min-w-0 flex-col gap-1.5">
       <button
         type="button"
         onClick={onSelect}
         aria-pressed={selected}
         aria-label={item.displayName}
-        className={`group relative aspect-square rounded-lg border-2 p-0.5 transition
+        className={`group relative aspect-square min-h-11 rounded-lg border-2 p-0.5 transition
           ${selected
             ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
             : "border-transparent bg-mon-bg hover:border-mon-hover"}`}
@@ -75,15 +50,17 @@ function ItemTile({
             <span className="text-[9px] font-medium text-muted">Grade</span>
             <GradeField value={grade} label={item.displayName} onCommit={onGradeChange} />
           </div>
-          <input
-            type="range"
-            min={1}
-            max={ITEM_GRADE_MAX}
-            value={grade}
-            onChange={(e) => onGradeChange(Number(e.target.value))}
-            aria-label={`${item.displayName} grade`}
-            className="w-full accent-grade-slider"
-          />
+          <div className="py-3">
+            <input
+              type="range"
+              min={1}
+              max={ITEM_GRADE_MAX}
+              value={grade}
+              onChange={(e) => onGradeChange(Number(e.target.value))}
+              aria-label={`${item.displayName} grade`}
+              className="block w-full accent-grade-slider"
+            />
+          </div>
         </div>
       )}
     </div>
@@ -113,9 +90,8 @@ export function HeldItemsInventory() {
   const detailGrade = detailItem ? heldItemGrade(detailItem.id) : 40;
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-4 shadow-sm sm:p-5">
+    <div className="rounded-2xl border border-line bg-surface p-3 shadow-sm">
       <div className="mb-3">
-        <h2 className="text-lg font-bold text-ink">Held Items</h2>
         <p className="text-xs text-muted">
           Set each item&apos;s grade (1–{ITEM_GRADE_MAX}). Grades apply everywhere that item appears in your builds.
         </p>
@@ -125,10 +101,10 @@ export function HeldItemsInventory() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search held items…"
-        className="mb-3 w-full rounded-lg border border-line px-3 py-1.5 text-sm outline-none focus:border-accent"
+        className="mb-3 min-h-11 w-full rounded-lg border border-line px-3 py-2 text-sm outline-none focus:border-accent"
       />
 
-      <div className="grid max-h-[65vh] grid-cols-4 gap-3 overflow-y-auto sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
+      <div className="grid max-h-[65vh] grid-cols-3 gap-3 overflow-y-auto sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
         {gradedItems.map((item) => {
           const grade = heldItemGrade(item.id);
           const selected = detailItem?.id === item.id;
@@ -150,7 +126,7 @@ export function HeldItemsInventory() {
         <div className="mt-4">
           <h3 className="mb-1 text-sm font-semibold text-ink">Unique Items</h3>
           <p className="mb-2 text-xs text-muted">Mega Stones &amp; Rusted Sword have no grade or level.</p>
-          <div className="grid grid-cols-4 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
             {uniqueItems.map((item) => {
               const selected = detailItem?.id === item.id;
               return (

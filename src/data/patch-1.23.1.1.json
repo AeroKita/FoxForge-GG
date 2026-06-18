@@ -30303,65 +30303,6 @@
       },
       "builds": [
         {
-          "name": "Power-Up Rush",
-          "heldItemIds": [
-            "attack-weight",
-            "weakness-policy",
-            "razor-claw"
-          ],
-          "emblems": [
-            {
-              "emblemId": "250-ho-oh",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "022-fearow",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "128-tauros",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "130-gyarados",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "018-pidgeot",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "142-aerodactyl",
-              "grade": "bronze"
-            },
-            {
-              "emblemId": "031-nidoqueen",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "057-primeape",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "068-machamp",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "105-marowak",
-              "grade": "gold"
-            }
-          ],
-          "lane": "Path Damage",
-          "emblemName": "Punch Rush",
-          "heldItemOptional": "accel-bracer",
-          "battleItemId": "eject-button",
-          "battleItemOptional": "full-heal",
-          "moves": [
-            "Power-Up Punch",
-            "Bone Rush"
-          ]
-        },
-        {
           "name": "Extreme Rush",
           "heldItemIds": [
             "attack-weight",
@@ -30481,6 +30422,65 @@
           "name": "Power-Up Rush",
           "heldItemIds": [
             "attack-weight",
+            "weakness-policy",
+            "razor-claw"
+          ],
+          "emblems": [
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "128-tauros",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "130-gyarados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "031-nidoqueen",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            }
+          ],
+          "lane": "Path Damage",
+          "emblemName": "Punch Rush",
+          "heldItemOptional": "accel-bracer",
+          "battleItemId": "eject-button",
+          "battleItemOptional": "full-heal",
+          "moves": [
+            "Power-Up Punch",
+            "Bone Rush"
+          ]
+        },
+        {
+          "name": "Power-Up Rush",
+          "heldItemIds": [
+            "attack-weight",
             "accel-bracer",
             "energy-amplifier"
           ],
@@ -30535,7 +30535,7 @@
             "Bone Rush"
           ]
         }
-      ],
+],
       "hasMegaEvolution": true,
       "megaStats": [
         {

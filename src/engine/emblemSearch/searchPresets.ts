@@ -16,6 +16,7 @@
  */
 
 import type { Emblem, EmblemColor, Pokemon } from "../../types";
+import { colorTargetsFor } from "../recommend";
 import { colorGroupSizes } from "./exactColor";
 import { countConstrainedBuilds } from "./pool";
 import { DEFAULT_EXACT_CAP, shouldRunExact } from "./orchestrator";
@@ -24,6 +25,24 @@ import type { EmblemCandidate, SearchOptions } from "./types";
 
 /** UNITE emblem loadouts are always 10 slots. */
 const SLOTS = 10;
+
+/** Beginner search effort — exact enumeration or a time-budgeted heuristic. */
+export type BasicEffort = "exact" | "quick" | "normal" | "thorough";
+
+/** Heuristic effort used when "exact" is selected but infeasible on the current pool. */
+export const EXACT_FALLBACK_EFFORT = "normal" as const;
+
+/**
+ * Map the user's Beginner effort choice to the effort the search will actually use.
+ * "exact" is only honored when exact enumeration is feasible; otherwise fall back
+ * so UI state, settings fingerprint, and run() stay aligned.
+ */
+export function resolveBasicEffort(
+  basicEffort: BasicEffort,
+  exactFeasible: boolean,
+): BasicEffort {
+  return basicEffort === "exact" && !exactFeasible ? EXACT_FALLBACK_EFFORT : basicEffort;
+}
 
 /** Color control mode the resolver chose for a given pool + targets. */
 export type ColorSearchMode = "exact" | "weighted";
@@ -104,6 +123,44 @@ export function resolveColorSearchMode(
     colorConstraints: new Map(targets),
     constrainedBuildCount,
     willRunExact: shouldRunExact(constrainedBuildCount, DEFAULT_EXACT_CAP),
+  };
+}
+
+/** Advanced Exact-color UI defaults derived from a Pokémon + pool. */
+export interface AdvancedColorUiDefaults {
+  colorMode: "off" | ColorSearchMode;
+  activeColors: EmblemColor[];
+  colorCounts: Map<EmblemColor, number>;
+}
+
+/**
+ * Derive the Advanced-mode color UI state (mode, checked colors, counts) from a
+ * Pokémon's meta targets and the pool the search will actually run on.
+ *
+ * Powers `syncAdvancedFromBasic` / Pokémon-change sync in EmblemOptimizer.
+ */
+export function deriveAdvancedColorUiDefaults(
+  pokemon: Pokemon | null,
+  pool: EmblemCandidate[],
+  emblems: Emblem[],
+): AdvancedColorUiDefaults {
+  const cleared = (): AdvancedColorUiDefaults => ({
+    colorMode: "off",
+    activeColors: [],
+    colorCounts: new Map(),
+  });
+
+  if (!pokemon) return cleared();
+
+  const byId = new Map(emblems.map((e) => [e.id, e]));
+  const targets = colorTargetsFor(pokemon, byId);
+  if (targets.size === 0) return cleared();
+
+  const resolution = resolveColorSearchMode(pool, targets, SLOTS);
+  return {
+    colorMode: resolution.mode,
+    activeColors: [...targets.keys()],
+    colorCounts: new Map(targets),
   };
 }
 

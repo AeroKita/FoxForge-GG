@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { emblems as allEmblems } from "../data/gameData";
 import { asset } from "../ui/asset";
-import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS, EMBLEM_GRADE_HEX } from "../ui/colors";
+import { EMBLEM_COLOR_HEX, ALL_EMBLEM_COLORS, EMBLEM_GRADE_HEX, readableTextColor } from "../ui/colors";
 import { statLines } from "../ui/format";
 import { emblemsForGrade } from "../ui/emblems";
 import { ownedKey } from "../state/loadout";
@@ -42,16 +42,16 @@ export function InventoryManager() {
   const shownIds = shown.map((e) => e.id);
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-4 shadow-sm sm:p-5">
+    <div className="rounded-2xl border border-line bg-surface p-3 shadow-sm">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-bold text-ink">
-            Emblem Inventory
+          <h2 className="flex items-center gap-2 text-base font-bold text-ink">
+            Inventory
             <button
               onClick={() => setGuideOpen(true)}
               aria-label="Emblem color sets guide"
               title="What do the colors do?"
-              className="flex h-5 w-5 items-center justify-center rounded-full border border-line text-xs font-bold text-muted hover:bg-raise hover:text-ink"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-sm font-bold text-muted hover:bg-raise hover:text-ink"
             >
               ?
             </button>
@@ -66,55 +66,68 @@ export function InventoryManager() {
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <div className="flex gap-1 rounded-lg bg-raise p-0.5">
-          {GRADES.map((g) => (
-            <button
-              key={g}
-              onClick={() => setGrade(g)}
-              className={`rounded-md px-3 py-1 text-xs font-semibold capitalize transition ${
-                grade === g ? "bg-surface shadow-sm" : "text-muted hover:text-ink"
-              }`}
-              style={grade === g ? { color: EMBLEM_GRADE_HEX[g] } : undefined}
-            >
-              {g}
-            </button>
-          ))}
-        </div>
+      <div className="mb-3 flex flex-col gap-2">
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search…"
-          className="flex-1 rounded-lg border border-line px-3 py-1.5 text-sm outline-none focus:border-accent"
+          className="min-h-11 w-full rounded-lg border border-line px-3 py-2 text-sm outline-none focus:border-accent"
         />
-        <select
-          value={color}
-          onChange={(e) => setColor(e.target.value as EmblemColor | "all")}
-          className="rounded-lg border border-line px-2 py-1.5 text-sm capitalize"
-        >
-          <option value="all">All colors</option>
-          {ALL_EMBLEM_COLORS.map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-        <button onClick={() => bulkSetOwned(shownIds, grade, true)} className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-700">
-          Own all shown
-        </button>
-        <button onClick={() => bulkSetOwned(shownIds, grade, false)} className="rounded-lg border border-line px-3 py-1.5 text-xs font-medium text-muted hover:bg-raise">
-          Clear shown
-        </button>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex gap-1 rounded-lg bg-raise p-0.5">
+            {GRADES.map((g) => (
+              <button
+                key={g}
+                onClick={() => setGrade(g)}
+                className={`min-h-11 rounded-md px-3 py-2 text-xs font-semibold capitalize transition ${
+                  grade === g ? "bg-surface shadow-sm" : "text-muted hover:text-ink"
+                }`}
+                style={grade === g ? { color: EMBLEM_GRADE_HEX[g] } : undefined}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
+          <div className="-mx-1 flex min-w-0 flex-1 gap-1 overflow-x-auto px-1 pb-0.5">
+            <ColorFilterChip label="All" active={color === "all"} onClick={() => setColor("all")} />
+            {ALL_EMBLEM_COLORS.map((c) => (
+              <ColorFilterChip
+                key={c}
+                label={c}
+                active={color === c}
+                activeColor={EMBLEM_COLOR_HEX[c]}
+                onClick={() => setColor(c)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            onClick={() => bulkSetOwned(shownIds, grade, true)}
+            className="min-h-11 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
+          >
+            Own all shown
+          </button>
+          <button
+            onClick={() => bulkSetOwned(shownIds, grade, false)}
+            className="min-h-11 rounded-lg border border-line px-3 py-2 text-sm font-medium text-muted hover:bg-raise"
+          >
+            Clear shown
+          </button>
+        </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid max-h-[60vh] grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3 lg:grid-cols-4">
+      <div className="grid max-h-[60vh] grid-cols-1 gap-2 overflow-y-auto sm:grid-cols-2 md:grid-cols-3">
         {shown.map((e) => {
           const isOwned = owned.has(ownedKey(e.id, grade));
-          // Inventory always shows exact decimals (never rounds).
           const stats = statLines(e.statsByGrade[grade === "platinum" ? "gold" : grade], true);
           return (
             <button
               key={e.id}
               onClick={() => toggleOwned(e.id, grade)}
-              className={`relative flex items-center gap-2 rounded-xl border p-2 text-left transition ${
+              className={`relative flex min-h-11 items-center gap-2 rounded-xl border p-2 text-left transition ${
                 isOwned ? "border-as-border bg-as-bg" : "border-line hover:border-line"
               }`}
             >
@@ -140,5 +153,35 @@ export function InventoryManager() {
       <p className="mt-2 text-xs text-faint">{shown.length} shown</p>
       <EmblemSetGuide open={guideOpen} onClose={() => setGuideOpen(false)} />
     </div>
+  );
+}
+
+function ColorFilterChip({
+  label,
+  active,
+  onClick,
+  activeColor,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  activeColor?: string;
+}) {
+  const style = active && activeColor
+    ? { background: activeColor, color: readableTextColor(activeColor) }
+    : undefined;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={style}
+      className={`shrink-0 rounded-full border px-3 py-2 text-xs font-medium capitalize ${
+        active
+          ? activeColor ? "border-line" : "border-transparent bg-accent text-white"
+          : "border-transparent bg-raise text-muted hover:bg-raise"
+      } min-h-11`}
+    >
+      {label}
+    </button>
   );
 }

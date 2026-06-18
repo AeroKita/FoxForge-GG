@@ -61,8 +61,8 @@ Run this when a new patch drops (or when UNITE-DB publishes patch changes).
    mechanic the patch touched (attack-speed buffs, RSB, new move interactions). If
    a value disagrees with UNITE-DB, prefer the in-game readout, then reconcile and
    note the source in the commit message.
-7. **Release.** Bump `package.json` + `src-tauri/tauri.conf.json`, tag, and push
-   (see `docs/07-distribution.md`). Verify `latest.json` assets after CI.
+7. **Release.** Bump `"version"` in `package.json` if the displayed version should
+   change, then push to `main` (Pages redeploys; data publishes via `data.yml`).
 
 ## Data-integrity guards already in place
 

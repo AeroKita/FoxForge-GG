@@ -18,8 +18,12 @@
 import { describe, it, expect } from "vitest";
 import { makeEmblem } from "../../__tests__/fixtures";
 import { buildCandidatePool } from "../adapt";
-import { resolveColorSearchMode, buildPresetSearchOptions } from "../searchPresets";
+import { resolveColorSearchMode, buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, EXACT_FALLBACK_EFFORT } from "../searchPresets";
 import { DEFAULT_EXACT_CAP, runSearch } from "../orchestrator";
+import { emblems, pokemonById } from "../../../data/gameData";
+import { buildPool } from "../pool";
+import { DEFAULT_ALLOWED_GRADES } from "../basicObjective";
+import { colorTargetsFor } from "../../recommend";
 import type { Emblem, EmblemColor, Pokemon } from "../../../types";
 
 // ---------------------------------------------------------------------------
@@ -365,5 +369,56 @@ describe("preset → runSearch integration", () => {
     expect(result!.exact).toBe(false);
     expect(result!.phase).toBe("heuristic");
     expect(result!.picks).toHaveLength(SLOTS);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// deriveAdvancedColorUiDefaults — Advanced Exact-color UI sync
+// ---------------------------------------------------------------------------
+
+describe("deriveAdvancedColorUiDefaults", () => {
+  const emblemById = new Map(emblems.map((e) => [e.id, e]));
+  const fullPool = buildPool(
+    emblems,
+    { useOwned: false, mixedGrades: true, allowedGrades: new Set(DEFAULT_ALLOWED_GRADES) },
+    new Set(),
+  );
+
+  for (const id of ["pikachu", "snorlax", "umbreon"] as const) {
+    it(`[PRE-UI] ${id} fills curated/meta color targets on full pool`, () => {
+      const pokemon = pokemonById.get(id)!;
+      const targets = colorTargetsFor(pokemon, emblemById);
+      const defaults = deriveAdvancedColorUiDefaults(pokemon, fullPool, emblems);
+
+      expect(targets.size).toBeGreaterThan(0);
+      expect(defaults.colorMode).toBe("exact");
+      expect(defaults.activeColors).toEqual([...targets.keys()]);
+      for (const [color, count] of targets) {
+        expect(defaults.colorCounts.get(color)).toBe(count);
+      }
+    });
+  }
+
+  it("[PRE-UI-4] null Pokémon clears color UI defaults", () => {
+    const defaults = deriveAdvancedColorUiDefaults(null, fullPool, emblems);
+    expect(defaults.colorMode).toBe("off");
+    expect(defaults.activeColors).toHaveLength(0);
+    expect(defaults.colorCounts.size).toBe(0);
+  });
+});
+
+describe("resolveBasicEffort", () => {
+  it("honors exact when feasible", () => {
+    expect(resolveBasicEffort("exact", true)).toBe("exact");
+  });
+
+  it("falls back when exact is selected but infeasible", () => {
+    expect(resolveBasicEffort("exact", false)).toBe(EXACT_FALLBACK_EFFORT);
+  });
+
+  it("passes through time-based efforts unchanged", () => {
+    expect(resolveBasicEffort("quick", true)).toBe("quick");
+    expect(resolveBasicEffort("quick", false)).toBe("quick");
+    expect(resolveBasicEffort("thorough", false)).toBe("thorough");
   });
 });

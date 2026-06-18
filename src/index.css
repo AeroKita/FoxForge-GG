@@ -7,49 +7,64 @@
    these --color-* names and references them via var(), so runtime overrides
    re-theme instantly. */
 @theme {
-  --color-bg: #eef1f5;
+  /* Light = "Clean & minimal": neutral surfaces, one calm indigo accent. */
+  --color-bg: #f5f6f8;
   --color-surface: #ffffff;
-  --color-raise: #f1f3f7;
-  --color-line: #e5e7eb;
-  --color-line-soft: #eef1f5;
-  --color-ink: #171717;
-  --color-muted: #5b6472;
-  --color-faint: #9aa2b1;
+  --color-raise: #eef0f3;
+  --color-line: #e6e8ec;
+  --color-line-soft: #f0f1f4;
+  --color-ink: #1a1d23;
+  --color-muted: #6b7280;
+  --color-faint: #9aa1ad;
 
-  --color-accent: #4f46e5;
-  --color-accent-strong: #4338ca;
-  --color-accent-weak: #eef2ff;
-  --color-accent-ink: #4338ca;
+  --color-accent: #4f5bd5;
+  --color-accent-strong: #3f49b8;
+  --color-accent-weak: #eef0fb;
+  --color-accent-ink: #3f49b8;
 
-  --color-pos: #059669;
-  --color-neg: #e11d48;
+  --color-pos: #0f9d6b;
+  --color-neg: #e0415f;
 
-  /* tone cards: recommend (indigo), attack-speed (amber), analytics (sky) */
-  --color-rec-bg: #eef2ff;
-  --color-rec-border: #c7d2fe;
-  --color-rec-ink: #4338ca;
-  --color-as-bg: #fffbeb;
-  --color-as-border: #fde68a;
-  --color-as-ink: #b45309;
-  --color-an-bg: #f0f9ff;
-  --color-an-border: #bae6fd;
-  --color-an-ink: #0369a1;
+  /* tone cards stay functional (meaning-bearing), just softened for minimal */
+  --color-rec-bg: #eef0fb;
+  --color-rec-border: #d8dcf6;
+  --color-rec-ink: #3f49b8;
+  --color-as-bg: #fff7e8;
+  --color-as-border: #f5dca0;
+  --color-as-ink: #9a6207;
+  --color-an-bg: #eef6fd;
+  --color-an-border: #cfe4f7;
+  --color-an-ink: #1f6aa6;
 
-  --color-header-a: #4f46e5;
-  --color-header-b: #7c3aed;
-  --color-tip-bg: #171717;
+  /* App bar: flat surface in light (dark text); neon gradient only in dark. */
+  --color-appbar-from: #ffffff;
+  --color-appbar-to: #ffffff;
+  --color-appbar-ink: #1a1d23;
+  --color-appbar-sub: #6b7280;
+  --color-appbar-border: #e6e8ec;
+
+  /* Tab bar */
+  --color-tab-bg: #ffffff;
+  --color-tab-ink: #9aa1ad;
+  --color-tab-active: #4f5bd5;
+
+  /* Mode toggle pill — Basic (calm neutral) vs Advanced (accent), per theme. */
+  --color-mode-basic-bg: #e9ebf1;
+  --color-mode-basic-ink: #5b6472;
+  --color-mode-advanced-bg: #4f5bd5;
+  --color-mode-advanced-ink: #ffffff;
+
+  --color-tip-bg: #1a1d23;
   --color-tip-ink: #ffffff;
 
-  /* Pokémon picker tiles: persistent UNITE-purple background, orange hover edge,
-     vivid purple selection ring (swapped in dark — orange bg, purple hover). */
-  --color-mon-bg: #ddd4f7;
-  --color-mon-hover: #f97316;
-  --color-mon-sel-bg: #c9bcf2;
-  --color-mon-sel-ring: #6d28d9;
+  /* Picker tiles: neutral in light, accent on hover/select. */
+  --color-mon-bg: #eef0f3;
+  --color-mon-hover: #4f5bd5;
+  --color-mon-sel-bg: #e3e6f7;
+  --color-mon-sel-ring: #4f5bd5;
 
-  /* Held-item grade badge + grade/level slider. Light = current indigo (unchanged). */
-  --color-grade-badge: #4f46e5;
-  --color-grade-slider: #4f46e5;
+  --color-grade-badge: #4f5bd5;
+  --color-grade-slider: #4f5bd5;
 }
 
 /* manual class-based dark variant (for any dark: utilities) */
@@ -84,8 +99,6 @@
   --color-an-border: #0e7490;
   --color-an-ink: #67e8f9;
 
-  --color-header-a: #d6006e;
-  --color-header-b: #0891b2;
   --color-tip-bg: #251f40;
   --color-tip-ink: #f4f0ff;
 
@@ -100,6 +113,21 @@
      slider uses the vivid theme orange (visible against the dark surface). */
   --color-grade-badge: #5a3a15;
   --color-grade-slider: #f59e0b;
+
+  --color-appbar-from: #d6006e;
+  --color-appbar-to: #0891b2;
+  --color-appbar-ink: #ffffff;
+  --color-appbar-sub: #f4d4e6;
+  --color-appbar-border: #382f57;
+
+  --color-tab-bg: #1b1630;
+  --color-tab-ink: #7d72a8;
+  --color-tab-active: #67e8f9;
+
+  --color-mode-basic-bg: rgba(255, 255, 255, 0.18);
+  --color-mode-basic-ink: #ffffff;
+  --color-mode-advanced-bg: #22d3ee;
+  --color-mode-advanced-ink: #06283d;
 }
 
 /* ------------------------------------------------------------- base polish --
@@ -129,6 +157,17 @@ body {
   border-radius: 0.375rem;
 }
 
+/* iOS Safari zooms into any text field whose font-size is < 16px on focus and
+   never zooms back out. Force 16px on text-entry controls so focus never
+   triggers it — while leaving pinch-zoom enabled (unlike maximum-scale=1).
+   The :not([type=...]) chain is deliberate: it raises this selector's
+   specificity above Tailwind's .text-sm utility so the 16px actually wins. */
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  font-size: 16px;
+}
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-surface);
@@ -147,3 +186,7 @@ body {
   border-radius: 9999px;
 }
 *::-webkit-scrollbar-thumb:hover { background: var(--color-faint); }
+
+/* Safe-area padding helpers for the fixed app bar + tab bar (iOS notch/home bar). */
+@utility pt-safe { padding-top: env(safe-area-inset-top); }
+@utility pb-safe { padding-bottom: env(safe-area-inset-bottom); }

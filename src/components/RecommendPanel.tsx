@@ -177,7 +177,7 @@ export function RecommendPanel() {
           <button
             key={t}
             onClick={() => selectTab(t)}
-            className={`flex-1 rounded-lg px-2 py-1.5 text-xs font-semibold transition sm:text-sm ${
+            className={`flex min-h-11 flex-1 items-center justify-center rounded-lg px-2 text-sm font-semibold transition ${
               tab === t ? "bg-surface text-ink shadow-sm" : "text-muted hover:text-ink"
             }`}
           >
@@ -192,7 +192,7 @@ export function RecommendPanel() {
           onClick={() => go(-1)}
           disabled={builds.length < 2}
           aria-label="Previous build"
-          className="rounded-lg border border-line px-2.5 py-1 text-sm text-ink hover:bg-raise disabled:opacity-30"
+          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg border border-line text-lg text-ink hover:bg-raise disabled:opacity-30"
         >
           ‹
         </button>
@@ -211,7 +211,7 @@ export function RecommendPanel() {
           onClick={() => go(1)}
           disabled={builds.length < 2}
           aria-label="Next build"
-          className="rounded-lg border border-line px-2.5 py-1 text-sm text-ink hover:bg-raise disabled:opacity-30"
+          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg border border-line text-lg text-ink hover:bg-raise disabled:opacity-30"
         >
           ›
         </button>

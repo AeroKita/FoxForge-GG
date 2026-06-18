@@ -14,6 +14,7 @@ import { searchByRecipes } from "./recipeSearch";
 import { searchColorExact, EXACT_PARALLEL_MIN } from "./exactColor";
 import { searchColorExactParallel } from "./exactParallel";
 import { runHeuristic } from "./heuristic";
+import { runHeuristicParallel } from "./heuristicParallel";
 import { candidatesToEmblemSlots } from "./pokemonScore";
 import { countConstrainedBuilds, formatBuildCount } from "./pool";
 
@@ -177,17 +178,31 @@ export async function runSearch(
   const heuristicLo = willRunExact ? 55 : 5;
   report(heuristicLo, "Heuristic search…");
 
-  const hResult = await runHeuristic(
+  const heuristicProgress = async (pct: number, label: string, cands: number) => {
+    candidates = cands;
+    report(heuristicLo + (pct / 100) * (95 - heuristicLo), label);
+  };
+
+  // Prefer parallel restarts (one full heuristic per shard worker, merge best).
+  // Falls back to single-threaded when workers are unavailable / it bails.
+  let hResult = await runHeuristicParallel(
     pool,
     options,
     setBonuses,
     effort,
-    async (pct, label, cands) => {
-      candidates = cands;
-      report(heuristicLo + (pct / 100) * (95 - heuristicLo), label);
-    },
+    heuristicProgress,
     shouldAbort,
   );
+  if (!hResult) {
+    hResult = await runHeuristic(
+      pool,
+      options,
+      setBonuses,
+      effort,
+      heuristicProgress,
+      shouldAbort,
+    );
+  }
 
   if (hResult.loadout.length === slots) {
     candidates = hResult.candidates;

@@ -26,18 +26,20 @@ export function StatPanel() {
     : effective.attack;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {/* Level slider */}
       <div className="rounded-2xl border border-line bg-surface p-4 shadow-sm">
         <div className="mb-2 flex items-center justify-between">
           <label className="text-sm font-medium text-ink">Level</label>
           <span className="rounded-md bg-grade-badge px-2 py-0.5 text-sm font-bold text-white">{loadout.level}</span>
         </div>
-        <input
-          type="range" min={1} max={15} value={loadout.level}
-          onChange={(e) => dispatch({ type: "setLevel", level: Number(e.target.value) })}
-          className="w-full accent-grade-slider"
-        />
+        <div className="py-3">
+          <input
+            type="range" min={1} max={15} value={loadout.level}
+            onChange={(e) => dispatch({ type: "setLevel", level: Number(e.target.value) })}
+            className="block w-full accent-grade-slider"
+          />
+        </div>
       </div>
 
       {/* Effective stats */}
@@ -86,7 +88,7 @@ export function StatPanel() {
 
       {/* Combat analytics (Expert) */}
       {expert && (
-      <CollapsibleCard title="Combat Analytics" persistKey="analytics" tone="sky">
+      <CollapsibleCard title="Combat Analytics" persistKey="analytics" tone="sky" defaultOpen={false}>
         <div className="grid grid-cols-3 gap-2 text-center">
           <Metric tone="sky" label="Physical eHP" value={Math.round(effectiveHp(effective.hp, effective.defense)).toLocaleString()} />
           <Metric tone="sky" label="Special eHP" value={Math.round(effectiveHp(effective.hp, effective.spDefense)).toLocaleString()} />
@@ -100,7 +102,7 @@ export function StatPanel() {
 
       {/* Active effect toggles (Expert) */}
       {expert && (
-      <CollapsibleCard title="Active Effects" persistKey="effects">
+      <CollapsibleCard title="Active Effects" persistKey="effects" defaultOpen={false}>
         <p className="mb-3 text-xs text-faint">Off by default. Toggle to preview in-combat attack-speed states.</p>
         {availableBoosts.length === 0 ? (
           <p className="text-sm text-faint">No toggleable effects for this loadout.</p>
@@ -116,7 +118,7 @@ export function StatPanel() {
                     disabled={!avail}
                     onClick={() => dispatch({ type: "toggleBoost", id: b.id })}
                     title={b.note ?? ""}
-                    className={`flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition
+                    className={`flex min-h-11 w-full items-center justify-between rounded-lg border px-3 py-2.5 text-left text-sm transition
                       ${on ? "border-accent bg-accent-weak" : "border-line bg-surface hover:border-line"}
                       ${!avail ? "cursor-not-allowed opacity-40" : ""}`}
                   >
