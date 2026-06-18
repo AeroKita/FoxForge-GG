@@ -10,8 +10,8 @@
  *    Grade checkboxes (full dataset) control which grades are in play; grades
  *    are always mixed (the optimal behavior). The binary mixed-grades toggle
  *    lives only in Expert mode.
- *    Held-item suggestions = owned items only
- *    (items the user has explicitly graded; falls back to all if none set).
+ *    Held-item suggestions consider the full held-item set (same as Expert);
+ *    held-item grades still drive stat math but no longer gate suggestions.
  *    Shows results: emblem icons, active set bonuses, effective-stat delta,
  *    recommended held items, and Apply buttons.
  *
@@ -46,7 +46,6 @@ import { priorityWeights } from "../engine/recommend";
 import {
   deriveBasicObjective,
   buildBasicPool,
-  resolveOwnedHeldItems,
   topPriorityLabels,
   basicObjectiveDescription,
   DEFAULT_ALLOWED_GRADES,
@@ -418,7 +417,7 @@ function ColorCountField({
 // ---------------------------------------------------------------------------
 
 export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) => void } = {}) {
-  const { loadout, dispatch, owned, heldSlotGrades, ownedHeldItemIds } = useStore();
+  const { loadout, dispatch, owned, heldSlotGrades } = useStore();
   const pokemon = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) ?? null : null;
 
   // ---- Top-level mode ----
@@ -832,22 +831,18 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   }, [searchState.result, pokemon, optimizeLevel, loadout.heldItemIds, heldSlotGrades]);
 
   // ---- Held items synergy ----
-  // In Beginner mode: restrict to owned held items (graceful fallback to all)
-  const ownedItems = useMemo(
-    () => resolveOwnedHeldItems(allHeldItems, ownedHeldItemIds),
-    [ownedHeldItemIds],
-  );
-
+  // Both modes consider the full held-item set as candidates. Held-item grades
+  // still drive stat math elsewhere (heldSlotGrades / gradeForHeldItem); they no
+  // longer gate which items the optimizer may suggest.
   const heldItemSynergy = useMemo(() => {
     const result = searchState.result;
     if (!result || !pokemon || !result.picks.length) return null;
-    const itemPool = optimizerMode === "beginner" ? ownedItems : allHeldItems;
     try {
-      return recommendItemsForEmblemBuild(pokemon, optimizeLevel, result.picks, setBonuses, itemPool, 30);
+      return recommendItemsForEmblemBuild(pokemon, optimizeLevel, result.picks, setBonuses, allHeldItems, 30);
     } catch {
       return null;
     }
-  }, [searchState.result, pokemon, optimizeLevel, optimizerMode, ownedItems]);
+  }, [searchState.result, pokemon, optimizeLevel]);
 
   // ---- Beginner mode info ----
   const basicPriorityLabels = useMemo(
@@ -926,9 +921,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                     <p className="text-faint">
                       {[...allowedGrades].sort().join("/")} grades · ~{formatBuildCount(basicBuildCount)} builds
                     </p>
-                  )}
-                  {ownedHeldItemIds.length > 0 && (
-                    <p>{ownedItems.length} owned items</p>
                   )}
                 </div>
               </div>

@@ -128,32 +128,6 @@ export function basicSearchOptions(
 }
 
 // ---------------------------------------------------------------------------
-// Owned held items
-// ---------------------------------------------------------------------------
-
-/**
- * Resolve the held items available for Basic-mode recommendations.
- *
- * In Basic mode, recommendations are restricted to items the user owns
- * (i.e. has explicitly graded on the Held Items page). If the user hasn't
- * graded any items yet (`ownedIds` is empty), all items are eligible —
- * graceful fallback so Basic works out of the box.
- *
- * @param allItems    Full held-item list from gameData.
- * @param ownedIds    IDs of explicitly-graded items from `store.ownedHeldItemIds`.
- */
-export function resolveOwnedHeldItems(
-  allItems: HeldItem[],
-  ownedIds: string[],
-): HeldItem[] {
-  if (ownedIds.length === 0) return allItems;
-  const ownedSet = new Set(ownedIds);
-  const owned = allItems.filter((i) => ownedSet.has(i.id));
-  // If no grades were set for eligible items, fall back to all
-  return owned.length > 0 ? owned : allItems;
-}
-
-// ---------------------------------------------------------------------------
 // Human-readable description
 // ---------------------------------------------------------------------------
 

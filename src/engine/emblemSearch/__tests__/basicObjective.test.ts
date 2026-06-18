@@ -6,9 +6,7 @@
  *  2. Special attacker → spAttack-dominant priorities, green in color targets
  *  3. Defender         → hp + defense priorities, white in color targets
  *  4. basicSearchOptions builds valid SearchOptions for maximize mode with pokemon-aware scoring
- *  5. resolveOwnedHeldItems: empty ownedIds → returns all items (fallback)
- *  6. resolveOwnedHeldItems: non-empty ownedIds → filters to owned subset
- *  7. topPriorityLabels: returns top-N labels in descending weight order
+ *  5. topPriorityLabels: returns top-N labels in descending weight order
  */
 
 import { describe, it, expect } from "vitest";
@@ -17,10 +15,9 @@ import {
   basicSearchOptions,
   buildBasicPool,
   BASIC_POOL_DEFAULTS,
-  resolveOwnedHeldItems,
   topPriorityLabels,
 } from "../basicObjective";
-import type { EmblemColor, HeldItem, Pokemon } from "../../../types";
+import type { EmblemColor, Pokemon } from "../../../types";
 import { makeEmblem } from "../../__tests__/fixtures";
 import { buildPool } from "../pool";
 
@@ -52,17 +49,6 @@ function makePokemon(
     baseStatsByLevel: Array.from({ length: 15 }, () => ({ ...makeStats() })),
     moves: [],
     passiveAbility: { id: "p", name: "", description: "", effects: [] },
-  };
-}
-
-function makeItem(id: string, stats: Partial<typeof makeStats>): HeldItem {
-  return {
-    id,
-    displayName: id,
-    iconAsset: "",
-    description: "",
-    statsByGrade: { 30: stats },
-    conditionalEffects: [],
   };
 }
 
@@ -323,43 +309,6 @@ describe("buildBasicPool", () => {
     expect(basic.map((c) => `${c.id}:${c.grade}`).sort()).toEqual(
       advancedOwned.map((c) => `${c.id}:${c.grade}`).sort(),
     );
-  });
-});
-
-// ---------------------------------------------------------------------------
-// Test: resolveOwnedHeldItems
-// ---------------------------------------------------------------------------
-
-describe("resolveOwnedHeldItems", () => {
-  const items = [
-    makeItem("muscle-band", { attack: 18 }),
-    makeItem("wise-glasses", { spAttack: 24 }),
-    makeItem("rocky-helmet", { defense: 20, hp: 200 }),
-  ];
-
-  it("empty ownedIds → returns all items (fallback for new users)", () => {
-    const result = resolveOwnedHeldItems(items, []);
-    expect(result).toHaveLength(items.length);
-  });
-
-  it("non-empty ownedIds → filters to only owned items", () => {
-    const result = resolveOwnedHeldItems(items, ["muscle-band", "wise-glasses"]);
-    expect(result).toHaveLength(2);
-    expect(result.map((i) => i.id)).toContain("muscle-band");
-    expect(result.map((i) => i.id)).toContain("wise-glasses");
-    expect(result.map((i) => i.id)).not.toContain("rocky-helmet");
-  });
-
-  it("ownedIds with no matches → falls back to all items", () => {
-    const result = resolveOwnedHeldItems(items, ["nonexistent-item"]);
-    // No graded items match → fallback to all
-    expect(result).toHaveLength(items.length);
-  });
-
-  it("partial match → returns only matching owned items", () => {
-    const result = resolveOwnedHeldItems(items, ["rocky-helmet"]);
-    expect(result).toHaveLength(1);
-    expect(result[0].id).toBe("rocky-helmet");
   });
 });
 
