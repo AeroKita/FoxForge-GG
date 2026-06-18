@@ -1412,7 +1412,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 this stat" — e.g. prevents pink emblems from eroding HP if HP is protected.
                 {pokemon && Object.keys(floorActive).some((k) => floorActive[k]) && (
                   <span className="ml-1 text-accent-ink">
-                    Auto-filled for {pokemon.displayName} — adjust freely.
+                    Auto-filled from stats and role for {pokemon.displayName} — adjust freely.
                   </span>
                 )}
               </p>

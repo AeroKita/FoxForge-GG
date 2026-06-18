@@ -1,17 +1,25 @@
 /**
  * Derive per-Pokémon default "protect" stat floors from base-stat population
- * statistics.
+ * statistics plus lightweight role-aware fallbacks.
  *
  * A protect floor tells the search engine: "penalise builds where the total
  * flat emblem contribution to this stat falls below the floor". Floor = 0
  * means "don't let emblems net-reduce this stat" — the right conservative
  * default, matching uniteemblemfinder's default-0 protect semantics.
  *
- * Derivation is PURELY data-driven — no per-Pokémon handcoded tables:
+ * Hybrid derivation (population z-scores + role rules):
  *
- *   For each candidate stat, compute the population z-score across all
- *   Pokémon at the same level. A stat with z > Z_THRESHOLD is "above average
- *   for this Pokémon" → a defining trait worth protecting.
+ *   1. Primary: top stats with z > Z_THRESHOLD, up to MAX_PROTECT, floor = 0.
+ *   2. Offense fallback (Attacker / Speedster / AllRounder): if the primary
+ *      offense stat (from attackType, or attack vs spAttack for hybrid) has
+ *      z > Z_OFFENSE_FALLBACK, ensure it is protected when slots remain.
+ *   3. Glass HP exclusion (Attacker / Speedster): never add HP via role
+ *      rules unless HP z > Z_THRESHOLD (same bar as the primary pass).
+ *   4. Defender bulk boost: if hp or defense has z > Z_DEFENDER_BULK, ensure
+ *      the higher-z bulk stat is protected when slots remain.
+ *
+ * Role rules only fill gaps after the primary z > Z_THRESHOLD pass and never
+ * exceed MAX_PROTECT.
  *
  * This updates automatically when new UNITE-DB data is loaded: as Pokémon are
  * added, the population mean/std shifts and protect picks adjust accordingly.
@@ -30,7 +38,7 @@
  *  - Max protected stats: up to MAX_PROTECT (2) to keep defaults conservative.
  */
 
-import type { Pokemon } from "../../types";
+import type { Pokemon, Role, StatBlock } from "../../types";
 import type { StatFloors } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -61,10 +69,49 @@ const NORM: Record<ProtectStat, number> = {
 };
 
 /** z-score threshold: protect stats that are this many std-devs above average. */
-const Z_THRESHOLD = 0.4;
+export const Z_THRESHOLD = 0.4;
+
+/** Lower bar for role offense fallback on offensive roles. */
+export const Z_OFFENSE_FALLBACK = 0.25;
+
+/** Lower bar for Defender bulk-stat fallback (hp or defense). */
+export const Z_DEFENDER_BULK = 0.3;
 
 /** Maximum number of stats to protect by default. Keeps defaults conservative. */
-const MAX_PROTECT = 2;
+export const MAX_PROTECT = 2;
+
+/** Roles that benefit from primary-offense protect fallback. */
+const OFFENSIVE_ROLES: ReadonlySet<Role> = new Set([
+  "Attacker",
+  "Speedster",
+  "AllRounder",
+]);
+
+/** Roles that should not receive HP via sub-threshold role rules. */
+const GLASS_ROLES: ReadonlySet<Role> = new Set(["Attacker", "Speedster"]);
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Primary offense stat from attackType (hybrid uses whichever base stat is higher). */
+function primaryOffenseStat(pokemon: Pokemon, bs: StatBlock): "attack" | "spAttack" {
+  if (pokemon.attackType === "special") return "spAttack";
+  if (pokemon.attackType === "physical") return "attack";
+  return (bs.attack ?? 0) >= (bs.spAttack ?? 0) ? "attack" : "spAttack";
+}
+
+/** Whether a stat may be added via a role rule (glass roles block sub-threshold HP). */
+function canAddViaRoleRule(
+  pokemon: Pokemon,
+  stat: ProtectStat,
+  zByStat: ReadonlyMap<ProtectStat, number>,
+): boolean {
+  if (stat === "hp" && GLASS_ROLES.has(pokemon.role)) {
+    return (zByStat.get("hp") ?? 0) > Z_THRESHOLD;
+  }
+  return true;
+}
 
 // ---------------------------------------------------------------------------
 // Core derivation
@@ -72,7 +119,7 @@ const MAX_PROTECT = 2;
 
 /**
  * Derive which stats are worth protecting for a given Pokémon, based on how
- * its base stats compare to the full population distribution.
+ * its base stats compare to the full population distribution plus role rules.
  *
  * Returns a `StatFloors` object mapping each "defining" stat → floor of 0.
  * Returns `{}` if the Pokémon has no base stat data or the population is empty.
@@ -118,14 +165,48 @@ export function deriveDefaultProtectedStats(
     return { stat, z: (thisNorm - mean) / std };
   }).sort((a, b) => b.z - a.z);
 
-  // Select the top-N candidate stats that are above the z-score threshold.
-  const floors: StatFloors = {};
-  let count = 0;
+  const zByStat = new Map<ProtectStat, number>(
+    zScores.map(({ stat, z }) => [stat, z]),
+  );
+  const protectedStats = new Set<ProtectStat>();
+
+  // Phase 1: primary z-score picks (z > Z_THRESHOLD), highest first.
   for (const { stat, z } of zScores) {
-    if (count >= MAX_PROTECT) break;
-    if (z <= Z_THRESHOLD) break; // sorted descending — no point checking rest
+    if (protectedStats.size >= MAX_PROTECT) break;
+    if (z <= Z_THRESHOLD) break;
+    protectedStats.add(stat);
+  }
+
+  // Phase 2: role rules fill remaining slots (priority after primary picks).
+  if (protectedStats.size < MAX_PROTECT && OFFENSIVE_ROLES.has(pokemon.role)) {
+    const offenseStat = primaryOffenseStat(pokemon, bs);
+    const offenseZ = zByStat.get(offenseStat) ?? 0;
+    if (
+      offenseZ > Z_OFFENSE_FALLBACK &&
+      !protectedStats.has(offenseStat) &&
+      canAddViaRoleRule(pokemon, offenseStat, zByStat)
+    ) {
+      protectedStats.add(offenseStat);
+    }
+  }
+
+  if (protectedStats.size < MAX_PROTECT && pokemon.role === "Defender") {
+    const hpZ = zByStat.get("hp") ?? 0;
+    const defZ = zByStat.get("defense") ?? 0;
+    if (hpZ > Z_DEFENDER_BULK || defZ > Z_DEFENDER_BULK) {
+      const bulkStat: ProtectStat = hpZ >= defZ ? "hp" : "defense";
+      if (
+        !protectedStats.has(bulkStat) &&
+        canAddViaRoleRule(pokemon, bulkStat, zByStat)
+      ) {
+        protectedStats.add(bulkStat);
+      }
+    }
+  }
+
+  const floors: StatFloors = {};
+  for (const stat of protectedStats) {
     floors[stat] = 0;
-    count++;
   }
   return floors;
 }

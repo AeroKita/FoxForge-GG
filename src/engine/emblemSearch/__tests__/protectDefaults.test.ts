@@ -21,6 +21,8 @@ import { deriveBasicObjective, basicSearchOptions } from "../basicObjective";
 import { evaluateLoadout } from "../evaluate";
 import { makeEmblem } from "../../__tests__/fixtures";
 import { buildCandidatePool } from "../adapt";
+import { loadBundle } from "../../../data/loadBundle";
+import rawPatch from "../../../data/patch-1.23.1.1.json";
 import type { Pokemon, StatBlock } from "../../../types";
 
 // ---------------------------------------------------------------------------
@@ -39,12 +41,13 @@ function makeStats(overrides: Partial<StatBlock> = {}): StatBlock {
 function makePokemon(
   id: string,
   statsAt15: Partial<StatBlock> = {},
+  overrides: Partial<Pick<Pokemon, "role" | "attackType">> = {},
 ): Pokemon {
   return {
     id,
     displayName: id,
-    role: "Attacker",
-    attackType: "physical",
+    role: overrides.role ?? "Attacker",
+    attackType: overrides.attackType ?? "physical",
     difficulty: 1,
     imageAsset: "",
     iconAsset: "",
@@ -127,6 +130,68 @@ describe("deriveDefaultProtectedStats", () => {
     const floors = deriveDefaultProtectedStats(average, pop, 15);
     // Average stat = same as everyone else → z-score = 0 → below Z_THRESHOLD
     expect(Object.keys(floors).length).toBe(0);
+  });
+
+  it("[PROT-8b] offense fallback protects primary attack below z-threshold", () => {
+    // Moderate attack (z between 0.25 and 0.4) on an offensive role → attack protected
+    const lucarioLike = makePokemon(
+      "lucario-like",
+      { ...BASELINE, attack: 320, spAttack: 80 },
+      { role: "AllRounder", attackType: "physical" },
+    );
+    const pop = [...POP_BASE, lucarioLike];
+    const floors = deriveDefaultProtectedStats(lucarioLike, pop, 15);
+    expect(Object.keys(floors)).toEqual(["attack"]);
+  });
+
+  it("[PROT-8c] glass Attacker with standout spAttack does not protect average HP", () => {
+    const glass = makePokemon(
+      "glass",
+      { ...BASELINE, spAttack: 400 },
+      { role: "Attacker", attackType: "special" },
+    );
+    const pop = [...POP_BASE, glass];
+    const floors = deriveDefaultProtectedStats(glass, pop, 15);
+    expect(Object.keys(floors)).toEqual(["spAttack"]);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Live roster: hybrid role rules on real UNITE-DB stats
+// ---------------------------------------------------------------------------
+
+describe("deriveDefaultProtectedStats — live roster cases", () => {
+  const bundle = loadBundle(rawPatch);
+  const pop = bundle.pokemon;
+
+  function floorsFor(id: string) {
+    const pokemon = pop.find((p) => p.id === id)!;
+    return deriveDefaultProtectedStats(pokemon, pop, 15);
+  }
+
+  it("[PROT-14] Skeledirge: spAttack only, not hp", () => {
+    const floors = floorsFor("skeledirge");
+    expect(Object.keys(floors)).toEqual(["spAttack"]);
+  });
+
+  it("[PROT-15] Lucario: attack protected via offense fallback", () => {
+    const floors = floorsFor("lucario");
+    expect(Object.keys(floors)).toEqual(["attack"]);
+  });
+
+  it("[PROT-16] Snorlax: hp + defense (unchanged bulk tank)", () => {
+    const floors = floorsFor("snorlax");
+    expect(Object.keys(floors).sort()).toEqual(["defense", "hp"]);
+  });
+
+  it("[PROT-17] Pikachu: spAttack only, not hp", () => {
+    const floors = floorsFor("pikachu");
+    expect(Object.keys(floors)).toEqual(["spAttack"]);
+  });
+
+  it("[PROT-18] Charizard: attack protected (z > 0.4 primary pick)", () => {
+    const floors = floorsFor("charizard");
+    expect(Object.keys(floors)).toEqual(["attack"]);
   });
 });
 
