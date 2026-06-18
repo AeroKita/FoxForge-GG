@@ -296,8 +296,8 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
                 if not (m.get("description") or "").strip():
                     m["description"] = over.get(_norm_move_name(m["name"]), m.get("description", ""))
         passive_desc = (passive or {}).get("description", "") or ""
-        if over and not passive_desc.strip():
-            passive_desc = over.get(_norm_move_name(passive.get("name", "") if passive else ""), passive_desc)
+        if passive and not passive_desc.strip():
+            passive_desc = ((passive.get("rsb") or {}).get("true_desc") or "").strip()
         out.append({
             "id": pid,
             "displayName": p.get("display_name", name),
