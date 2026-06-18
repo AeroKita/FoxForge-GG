@@ -100,9 +100,22 @@ function loadMode(): ViewMode {
 }
 
 export type Theme = "light" | "dark";
+export type ThemePref = "system" | "light" | "dark";
 const THEME_KEY = "unite-build-optimizer.theme.v1";
-function loadTheme(): Theme {
-  try { const t = localStorage.getItem(THEME_KEY); return t === "dark" || t === "neo" ? "dark" : "light"; } catch { return "light"; }
+
+function loadThemePref(): ThemePref {
+  try { const t = localStorage.getItem(THEME_KEY); return t === "light" || t === "dark" ? t : "system"; }
+  catch { return "system"; }
+}
+
+const prefersLight = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: light)").matches;
+
+/** Resolve a preference to an applied theme. System → OS, defaulting to dark. */
+function resolveTheme(pref: ThemePref): Theme {
+  if (pref === "light") return "light";
+  if (pref === "dark") return "dark";
+  return prefersLight() ? "light" : "dark"; // system: dark unless OS explicitly prefers light
 }
 
 interface Store {
@@ -120,8 +133,9 @@ interface Store {
   mode: ViewMode;
   setMode: (m: ViewMode) => void;
   expert: boolean; // convenience: mode === "expert"
-  theme: Theme;
-  setTheme: (t: Theme) => void;
+  theme: Theme;        // resolved, for any theme-conditional rendering
+  themePref: ThemePref;
+  setThemePref: (p: ThemePref) => void;
   /** Global per-item held grade (default 40). Synced with Builder sliders. */
   heldItemGrade: (itemId: string) => number;
   setHeldItemGradeById: (itemId: string, grade: number) => void;
@@ -145,7 +159,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [owned, setOwned] = useState<Set<string>>(() => loadOwnedEmblems());
   const [heldGradeMemory, setHeldGradeMemory] = useState<Record<string, number>>(() => loadHeldItemGradeMemory());
   const [mode, setModeState] = useState<ViewMode>(() => loadMode());
-  const [theme, setThemeState] = useState<Theme>(() => loadTheme());
+  const [themePref, setThemePrefState] = useState<ThemePref>(() => loadThemePref());
+  const [theme, setThemeState] = useState<Theme>(() => resolveTheme(loadThemePref()));
 
   const heldSlotGrades = useMemo(
     () => resolveSlotGrades(loadout, heldGradeMemory),
@@ -170,8 +185,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // Persist the in-progress build across reloads.
   useEffect(() => { saveCurrent(loadout); }, [loadout]);
 
-  // Apply the theme to <html data-theme>; CSS variables cascade from there.
-  useEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
+  // Apply the resolved theme to <html data-theme>; CSS variables cascade from there.
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#110d1f" : "#ffffff");
+  }, [theme]);
+
+  // While following the system, react to OS light/dark changes live.
+  useEffect(() => {
+    if (themePref !== "system") return;
+    const mql = window.matchMedia("(prefers-color-scheme: light)");
+    const onChange = () => setThemeState(resolveTheme("system"));
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, [themePref]);
 
   const store = useMemo<Store>(() => ({
     loadout,
@@ -210,12 +238,18 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     expert: mode === "expert",
     setMode: (m) => { setModeState(m); try { localStorage.setItem(MODE_KEY, m); } catch { /* quota */ } },
     theme,
-    setTheme: (t) => { setThemeState(t); try { localStorage.setItem(THEME_KEY, t); } catch { /* quota */ } },
+    themePref,
+    setThemePref: (p) => {
+      setThemePrefState(p);
+      setThemeState(resolveTheme(p));
+      try { p === "system" ? localStorage.removeItem(THEME_KEY) : localStorage.setItem(THEME_KEY, p); }
+      catch { /* quota */ }
+    },
     heldItemGrade: (itemId) => gradeForHeldItem(heldGradeMemory, itemId),
     setHeldItemGradeById,
     heldSlotGrades,
     setHeldItemGradeForSlot,
-  }), [loadout, saved, saveError, owned, mode, theme, heldGradeMemory, heldSlotGrades]);
+  }), [loadout, saved, saveError, owned, mode, theme, themePref, heldGradeMemory, heldSlotGrades]);
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
 }

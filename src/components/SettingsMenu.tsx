@@ -2,12 +2,12 @@ import { useState } from "react";
 import { bundle } from "../data/gameData";
 import { cachedPatchVersion, checkDataNow } from "../data/dataSource";
 import { isTauri, autoUpdateEnabled, setAutoUpdate, checkAppUpdate } from "../ui/runtime";
-import { useStore, type Theme } from "../state/store";
+import { useStore, type ThemePref } from "../state/store";
 import { APP_NAME, APP_OWNER } from "../ui/brand";
 import { APP_VERSION } from "../ui/version";
 import { useModalDismiss } from "../ui/useModalDismiss";
 
-const THEMES: Theme[] = ["light", "dark"];
+const THEME_PREFS: ThemePref[] = ["light", "dark"];
 
 /**
  * App settings, opened from the header gear. Houses appearance (theme) + all
@@ -15,7 +15,7 @@ const THEMES: Theme[] = ["light", "dark"];
  * Adding a setting = drop another <Section> below — the modal scrolls.
  */
 export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { theme, setTheme } = useStore();
+  const { theme, themePref, setThemePref } = useStore();
   const [auto, setAuto] = useState(autoUpdateEnabled());
   const [appMsg, setAppMsg] = useState("");
   const [dataMsg, setDataMsg] = useState("");
@@ -61,12 +61,14 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
           <div className="flex items-center justify-between gap-2">
             <span className="text-sm font-medium">Theme</span>
             <div className="inline-flex gap-1 rounded-xl border border-line bg-raise p-1">
-              {THEMES.map((t) => (
+              {THEME_PREFS.map((t) => (
                 <button
                   key={t}
-                  onClick={() => setTheme(t)}
+                  onClick={() => setThemePref(t)}
                   className={`rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition ${
-                    theme === t ? "bg-surface text-accent-ink shadow" : "text-muted hover:text-ink"
+                    themePref === t || (themePref === "system" && theme === t)
+                      ? "bg-surface text-accent-ink shadow"
+                      : "text-muted hover:text-ink"
                   }`}
                 >
                   {t}
