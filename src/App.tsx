@@ -101,7 +101,6 @@ function Workspace() {
               {ROLE_LABEL[p.role]}
             </span>
             <span className="capitalize">{p.attackType}</span>
-            {tab === "optimize" && <span className="text-faint">· Optimize</span>}
           </span>
         ) : undefined,
         onTitleTap: () => setPokePickerOpen(true),
