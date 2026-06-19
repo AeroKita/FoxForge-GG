@@ -1154,12 +1154,12 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 />
                 <p className="text-xs text-muted">
                   {!basicExactColorFeasible
-                    ? "This pool can't hit the exact meta colors, so colors are steered toward the meta. Quality controls how hard the search works."
+                    ? "This pool can't hit the exact meta emblem colors, so emblem colors are steered toward the meta. Quality controls how hard the search works."
                     : basicWillRunExactSearch
-                      ? "Exact colors are matched automatically, and Exact runs an exhaustive search for the guaranteed-best build."
+                      ? "Exact emblem colors are matched automatically, and Exact runs an exhaustive search for the guaranteed-best build."
                       : basicExactEnumFeasible
-                        ? "Exact colors are matched automatically at any quality. Pick Exact for an exhaustive search, or Fast/Balanced/Thorough for quicker results."
-                        : "Exact colors are matched automatically at any quality. This pool is too large for an exhaustive search, so just pick how hard the search works."}
+                        ? "Exact emblem colors are matched automatically at any quality. Pick Exact for an exhaustive search, or Fast/Balanced/Thorough for quicker results."
+                        : "Exact emblem colors are matched automatically at any quality. This pool is too large for an exhaustive search, so just pick how hard the search works."}
                 </p>
               </div>
 
