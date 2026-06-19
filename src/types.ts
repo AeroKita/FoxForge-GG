@@ -136,6 +136,8 @@ export interface Move {
   description: string;
   /** UNITE-DB detailed effect text (Advanced mode). Falls back to `description` when absent. */
   descriptionAdvanced?: string;
+  /** Self-hosted animated WebP of the move (Tooltip visual). Absent → fall back to the icon. */
+  gifAsset?: string;
   cooldownSeconds: number;
   damageInstances: DamageInstance[]; // a move may deal damage multiple times
   effects: MoveEffect[]; // CC, shields, heals, buffs
@@ -151,6 +153,8 @@ export interface Ability {
   description: string;
   /** UNITE-DB detailed effect text (Advanced mode). Falls back to `description` when absent. */
   descriptionAdvanced?: string;
+  /** Self-hosted animated WebP of the move (Tooltip visual). Absent → fall back to the icon. */
+  gifAsset?: string;
   effects: MoveEffect[];
   iconAsset?: string; // skills/<Pokemon>/<Passive>.png
 }

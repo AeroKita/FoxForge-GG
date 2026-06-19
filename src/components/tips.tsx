@@ -3,6 +3,7 @@
 import { ITEM_GRADE_DEFAULT } from "../data/gameData";
 import { heldItemStatLines, statLines } from "../ui/format";
 import type { BattleItem, Emblem, EmblemGrade, HeldItem, Move, StatBlock } from "../types";
+import { MoveMedia } from "./MoveMedia";
 
 export function statsAtGrade(item: HeldItem, grade: number): Partial<StatBlock> {
   const g = item.statsByGrade as Record<string | number, Partial<StatBlock>>;
@@ -29,6 +30,7 @@ export function moveTip(move: Move, advanced: boolean) {
         <span className="ml-1 text-faint">· {move.cooldownSeconds}s CD</span>
       )}
       {desc && <span className="mt-0.5 block text-faint">{desc}</span>}
+      <MoveMedia gifAsset={move.gifAsset} iconAsset={move.iconAsset} name={move.name} />
     </span>
   );
 }

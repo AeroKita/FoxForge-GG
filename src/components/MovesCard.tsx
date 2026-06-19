@@ -4,6 +4,7 @@ import { baseMove, upgradeOptions, resolveFinalMove, type FinalSlot } from "../e
 import { CollapsibleCard } from "./CollapsibleCard";
 import { Tooltip } from "./Tooltip";
 import { MoveIcon } from "./MoveIcon";
+import { MoveMedia } from "./MoveMedia";
 import { moveTip, pickDescription } from "./tips";
 import type { Move, Pokemon } from "../types";
 
@@ -126,6 +127,11 @@ export function MovesCard() {
               <span>
                 <span className="font-semibold">{passive.name}</span>
                 {passiveDesc && <span className="mt-0.5 block text-faint">{passiveDesc}</span>}
+                <MoveMedia
+                  gifAsset={passive.gifAsset}
+                  iconAsset={passive.iconAsset}
+                  name={passive.name}
+                />
               </span>
             }
           >

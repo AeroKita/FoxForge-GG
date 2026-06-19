@@ -89,7 +89,7 @@ export function Tooltip({
             role="dialog"
             aria-modal="true"
           >
-            <div className="text-sm leading-snug text-ink">{content}</div>
+            <div className="whitespace-pre-line text-sm leading-snug text-ink">{content}</div>
           </div>
         </div>
       )}

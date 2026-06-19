@@ -143,4 +143,67 @@ describe("community data bundle", () => {
     const build = skeledirge.builds!.find((b) => b.name === "Singing Special Attacker")!;
     expect(build.emblemName).toBe("Singing Special Attacker");
   });
+
+  describe("upgrade-line paragraph formatting", () => {
+    it("Pikachu Thunderbolt has a blank line before the upgrade bonus", () => {
+      const pikachu = bundle.pokemon.find((p) => p.id === "pikachu")!;
+      const thunderbolt = pikachu.moves.find((m) => m.id === "thunderbolt")!;
+      expect(thunderbolt.description).toContain("\n\nUpgrade (Level 13):");
+    });
+
+    it("every Upgrade (Level marker is preceded by a blank line", () => {
+      const upgradePattern = /Upgrade \(Level/g;
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          for (const text of [m.description, m.descriptionAdvanced]) {
+            if (!text) continue;
+            let match: RegExpExecArray | null;
+            while ((match = upgradePattern.exec(text)) !== null) {
+              const idx = match.index;
+              if (idx > 0) {
+                expect(text.slice(idx - 2, idx), `${p.id}/${m.name}`).toBe("\n\n");
+              }
+            }
+          }
+        }
+        const pa = p.passiveAbility;
+        for (const text of [pa.description, pa.descriptionAdvanced]) {
+          if (!text) continue;
+          let match: RegExpExecArray | null;
+          while ((match = upgradePattern.exec(text)) !== null) {
+            const idx = match.index;
+            if (idx > 0) {
+              expect(text.slice(idx - 2, idx), `${p.id}/passive`).toBe("\n\n");
+            }
+          }
+        }
+      }
+    });
+  });
+
+  describe("move GIF assets", () => {
+    it("every gifAsset is a local skills WebP path", () => {
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          if (!m.gifAsset) continue;
+          expect(m.gifAsset, `${p.id}/${m.name}`).toMatch(/^\/assets\/skills\//);
+          expect(m.gifAsset, `${p.id}/${m.name}`).toMatch(/\.webp$/);
+        }
+        if (p.passiveAbility.gifAsset) {
+          expect(p.passiveAbility.gifAsset, `${p.id}/passive`).toMatch(/^\/assets\/skills\//);
+          expect(p.passiveAbility.gifAsset, `${p.id}/passive`).toMatch(/\.webp$/);
+        }
+      }
+    });
+
+    it("Garchomp has no gifAsset but keeps iconAsset on moves (fallback)", () => {
+      const garchomp = bundle.pokemon.find((p) => p.id === "garchomp")!;
+      for (const m of garchomp.moves) {
+        if (m.slot === "basicAttack") continue;
+        expect(m.gifAsset).toBeUndefined();
+        expect(m.iconAsset).toMatch(/^\/assets\/skills\//);
+      }
+      expect(garchomp.passiveAbility.gifAsset).toBeUndefined();
+    });
+  });
 });

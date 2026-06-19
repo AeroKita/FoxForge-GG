@@ -166,6 +166,16 @@ def advanced_desc(rsb: dict, upgrade_level=None) -> str:
     return "\n\n".join(parts)
 
 
+def paragraphize_upgrade(text: str) -> str:
+    """Ensure an 'Upgrade (Level N):' / 'Upgrade:' bonus starts its own paragraph
+    (a blank line before it), regardless of how the source delimited it. Idempotent."""
+    if not text:
+        return text
+    def repl(m):
+        return ("" if m.start() == 0 else "\n\n") + m.group(1)
+    return re.sub(r"\s*(Upgrade(?:\s*\([^)]*\))?:)", repl, text)
+
+
 def plus(s: str) -> str:
     """Space -> '+' for CDN art names (skills/<Pokemon>/<Move>.png)."""
     return (s or "").replace(" ", "+")
@@ -183,7 +193,7 @@ def build_move(skill: dict, slot: str, folder: str) -> dict:
         "id": slugify(name or slot),
         "name": name,
         "slot": slot,
-        "description": skill.get("description", "") or "",
+        "description": paragraphize_upgrade(skill.get("description", "") or ""),
         "cooldownSeconds": num(skill.get("cd")),
         "damageInstances": damage_instances(rsb),
         "effects": [],
@@ -196,7 +206,7 @@ def build_move(skill: dict, slot: str, folder: str) -> dict:
         move["iconAsset"] = skill_icon(folder, name)
     adv = advanced_desc(rsb, skill.get("level2"))
     if adv:
-        move["descriptionAdvanced"] = adv
+        move["descriptionAdvanced"] = paragraphize_upgrade(adv)
     return move
 
 
@@ -211,6 +221,7 @@ def build_upgrade_move(up: dict, slot: str, folder: str) -> dict:
         lvl = str(up.get("level2") or "").strip()
         prefix = f"Upgrade (Level {lvl}): " if lvl else "Upgrade: "
         basic = (basic.rstrip() + "\n\n" + prefix + d2) if basic.strip() else (prefix + d2)
+    basic = paragraphize_upgrade(basic)
     move = {
         "id": slugify(name or slot),
         "name": name,
@@ -233,8 +244,13 @@ def build_upgrade_move(up: dict, slot: str, folder: str) -> dict:
             pass
     adv = advanced_desc(rsb, up.get("level2"))
     if adv:
-        move["descriptionAdvanced"] = adv
+        move["descriptionAdvanced"] = paragraphize_upgrade(adv)
     return move
+
+
+def _norm_gif_key(name: str) -> str:
+    """Match fetch_gifs.py manifest keys (lowercase, drop ', -→space, drop .)."""
+    return name.lower().replace("'", "").replace("-", " ").replace(".", "").strip()
 
 
 def slugify(s: str) -> str:
@@ -299,10 +315,13 @@ def _norm_move_name(name: str) -> str:
     return n.lower().replace("'", "").strip()
 
 
-def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | None = None) -> list:
+def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | None = None,
+                  gifs: dict | None = None) -> list:
     stats_by_name = {p["name"]: p for p in stats_rows}
     if descs is None:
         descs = load_move_descriptions()
+    if gifs is None:
+        gifs = load_move_gifs()
     out = []
     for p in pokemon_rows:
         name = p["name"]
@@ -334,10 +353,28 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
             for m in moves:
                 if not (m.get("description") or "").strip():
                     m["description"] = over.get(_norm_move_name(m["name"]), m.get("description", ""))
-        passive_desc = (passive or {}).get("description", "") or ""
+        passive_desc = paragraphize_upgrade((passive or {}).get("description", "") or "")
         if passive and not passive_desc.strip():
-            passive_desc = ((passive.get("rsb") or {}).get("true_desc") or "").strip()
-        passive_adv = advanced_desc((passive or {}).get("rsb")) if passive else ""
+            passive_desc = paragraphize_upgrade(
+                ((passive.get("rsb") or {}).get("true_desc") or "").strip())
+        passive_adv = paragraphize_upgrade(advanced_desc((passive or {}).get("rsb"))) if passive else ""
+        pokemon_gifs = gifs.get(pid, {})
+        for m in moves:
+            gif_path = pokemon_gifs.get(_norm_gif_key(m["name"]))
+            if gif_path:
+                m["gifAsset"] = gif_path
+        passive_ability = {
+            "id": slugify(passive["name"]) if passive else f"{slugify(name)}-passive",
+            "name": passive.get("name", "Passive") if passive else "Passive",
+            "description": passive_desc,
+            "effects": [],
+            **({"descriptionAdvanced": passive_adv} if passive_adv else {}),
+            **({"iconAsset": skill_icon(name, passive["name"])} if passive and passive.get("name") else {}),
+        }
+        if passive and passive.get("name"):
+            gif_path = pokemon_gifs.get(_norm_gif_key(passive["name"]))
+            if gif_path:
+                passive_ability["gifAsset"] = gif_path
         out.append({
             "id": pid,
             "displayName": p.get("display_name", name),
@@ -349,14 +386,7 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
             "evolutions": [{"level": 1, "formName": p.get("display_name", name)}],
             "baseStatsByLevel": [stat_block(r) for r in srow["level"][:15]],
             "moves": moves,
-            "passiveAbility": {
-                "id": slugify(passive["name"]) if passive else f"{slugify(name)}-passive",
-                "name": passive.get("name", "Passive") if passive else "Passive",
-                "description": passive_desc,
-                "effects": [],
-                **({"descriptionAdvanced": passive_adv} if passive_adv else {}),
-                **({"iconAsset": skill_icon(name, passive["name"])} if passive and passive.get("name") else {}),
-            },
+            "passiveAbility": passive_ability,
             **({"builds": builds} if builds else {}),
             **({"excludeStats": exclude} if isinstance(exclude, list) and exclude else {}),
             **({"hasMegaEvolution": True,
@@ -369,7 +399,15 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
 
 CURATED = HERE / "curated_builds.json"
 MOVE_DESCRIPTIONS = HERE / "move_descriptions.json"
+MOVE_GIFS = HERE / "move_gifs.json"
 VALID_GRADES = {"bronze", "silver", "gold", "platinum"}
+
+
+def load_move_gifs() -> dict:
+    """pokemon id -> normalized move name -> /assets/...webp. Empty if absent."""
+    if not MOVE_GIFS.exists():
+        return {}
+    return json.loads(MOVE_GIFS.read_text()).get("gifs", {})
 
 
 def load_move_descriptions() -> dict:

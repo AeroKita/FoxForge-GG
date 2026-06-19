@@ -17,6 +17,7 @@
     "data:post-normalize": "python3 tools/community/normalize.py && npm run generate:presets",
     "validate:art": "python3 tools/community/validate_art.py",
     "fetch:art": "python3 tools/community/fetch_art.py",
+    "fetch:gifs": "python3 tools/community/fetch_gifs.py",
     "build:pages": "VITE_BASE=/FoxForge-GG/ npm run build",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",

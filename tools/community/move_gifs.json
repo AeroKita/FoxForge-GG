@@ -1,0 +1,98 @@
+{
+  "_source": "pokemonunite.fandom.com",
+  "_width": 180,
+  "gifs": {
+    "absol": {
+      "night slash": "/assets/skills/Absol/Night+Slash.webp",
+      "psycho cut": "/assets/skills/Absol/Psycho+Cut.webp",
+      "sucker punch": "/assets/skills/Absol/Sucker+Punch.webp"
+    },
+    "comfey": {
+      "grass knot": "/assets/skills/Comfey/Grass+Knot.webp"
+    },
+    "decidueye": {
+      "razor leaf": "/assets/skills/Decidueye/Razor+Leaf.webp",
+      "spirit shackle": "/assets/skills/Decidueye/Spirit+Shackle.webp",
+      "leaf storm": "/assets/skills/Decidueye/Leaf+Storm.webp",
+      "shadow sneak": "/assets/skills/Decidueye/Shadow+Sneak.webp"
+    },
+    "dragonite": {
+      "twister": "/assets/skills/Dragonite/Twister.webp",
+      "dragon dance": "/assets/skills/Dragonite/Dragon+Dance.webp",
+      "extreme speed": "/assets/skills/Dragonite/Extreme+Speed.webp",
+      "dragon breath": "/assets/skills/Dragonite/Dragon+Breath.webp",
+      "hyper beam": "/assets/skills/Dragonite/Hyper+Beam.webp",
+      "outrage": "/assets/skills/Dragonite/Outrage.webp",
+      "draco impact": "/assets/skills/Dragonite/Draco+Impact.webp"
+    },
+    "eldegoss": {
+      "leafage": "/assets/skills/Eldegoss/Leafage.webp",
+      "pollen puff": "/assets/skills/Eldegoss/Pollen+Puff.webp",
+      "leaf tornado": "/assets/skills/Eldegoss/Leaf+Tornado.webp",
+      "synthesis": "/assets/skills/Eldegoss/Synthesis.webp",
+      "cotton guard": "/assets/skills/Eldegoss/Cotton+Guard.webp",
+      "cotton spore": "/assets/skills/Eldegoss/Cotton+Spore.webp",
+      "cotton cloud crash": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.webp"
+    },
+    "gengar": {
+      "will o wisp": "/assets/skills/Gengar/Will-o-Wisp.webp",
+      "shadow ball": "/assets/skills/Gengar/Shadow+Ball.webp",
+      "sludge bomb": "/assets/skills/Gengar/Sludge+Bomb.webp",
+      "lick": "/assets/skills/Gengar/Lick.webp",
+      "dream eater": "/assets/skills/Gengar/Dream+Eater.webp",
+      "hex": "/assets/skills/Gengar/Hex.webp",
+      "phantom ambush": "/assets/skills/Gengar/Phantom+Ambush.webp"
+    },
+    "lucario": {
+      "meteor mash": "/assets/skills/Lucario/Meteor+Mash.webp",
+      "bone rush": "/assets/skills/Lucario/Bone+Rush.webp",
+      "close combat": "/assets/skills/Lucario/Close+Combat.webp"
+    },
+    "mega-lucario": {
+      "meteor mash": "/assets/skills/Mega-Lucario/Meteor+Mash.webp",
+      "close combat": "/assets/skills/Mega-Lucario/Close+Combat.webp"
+    },
+    "mr-mime": {
+      "fake out": "/assets/skills/Mr.Mime/Fake+Out.webp",
+      "confusion": "/assets/skills/Mr.Mime/Confusion.webp",
+      "psychic": "/assets/skills/Mr.Mime/Psychic.webp",
+      "light screen": "/assets/skills/Mr.Mime/Light+Screen.webp",
+      "barrier": "/assets/skills/Mr.Mime/Barrier.webp",
+      "power swap": "/assets/skills/Mr.Mime/Power+Swap.webp"
+    },
+    "pikachu": {
+      "thunder shock": "/assets/skills/Pikachu/Thunder+Shock.webp",
+      "electro ball": "/assets/skills/Pikachu/Electro+Ball.webp",
+      "thunder": "/assets/skills/Pikachu/Thunder.webp",
+      "electroweb": "/assets/skills/Pikachu/Electroweb.webp",
+      "volt tackle": "/assets/skills/Pikachu/Volt+Tackle.webp",
+      "thunderbolt": "/assets/skills/Pikachu/Thunderbolt.webp",
+      "thunderstorm": "/assets/skills/Pikachu/Thunderstorm.webp"
+    },
+    "slowbro": {
+      "water gun": "/assets/skills/Slowbro/Water+Gun.webp",
+      "scald": "/assets/skills/Slowbro/Scald.webp",
+      "surf": "/assets/skills/Slowbro/Surf.webp",
+      "slack off": "/assets/skills/Slowbro/Slack+Off.webp",
+      "amnesia": "/assets/skills/Slowbro/Amnesia.webp",
+      "telekinesis": "/assets/skills/Slowbro/Telekinesis.webp",
+      "slowbeam": "/assets/skills/Slowbro/Slowbeam.webp"
+    },
+    "talonflame": {
+      "flame charge": "/assets/skills/Talonflame/Flame+Charge.webp",
+      "aerial ace": "/assets/skills/Talonflame/Aerial+Ace.webp",
+      "acrobatics": "/assets/skills/Talonflame/Acrobatics.webp",
+      "fly": "/assets/skills/Talonflame/Fly.webp",
+      "brave bird": "/assets/skills/Talonflame/Brave+Bird.webp"
+    },
+    "venusaur": {
+      "seed bomb": "/assets/skills/Venusaur/Seed+Bomb.webp",
+      "sludge bomb": "/assets/skills/Venusaur/Sludge+Bomb.webp",
+      "giga drain": "/assets/skills/Venusaur/Giga+Drain.webp",
+      "razor leaf": "/assets/skills/Venusaur/Razor+Leaf.webp",
+      "solar beam": "/assets/skills/Venusaur/Solar+Beam.webp",
+      "petal dance": "/assets/skills/Venusaur/Petal+Dance.webp",
+      "verdant anger": "/assets/skills/Venusaur/Verdant+Anger.webp"
+    }
+  }
+}
