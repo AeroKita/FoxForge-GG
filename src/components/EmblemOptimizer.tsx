@@ -57,7 +57,12 @@ import {
 } from "../engine/emblemSearch/basicObjective";
 import { buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, resolveColorSearchMode, EXACT_FALLBACK_EFFORT, type BasicEffort } from "../engine/emblemSearch/searchPresets";
 import { deriveProtectFloors } from "../engine/emblemSearch/protectDefaults";
-import { presetPriorities, presetProtectFloors, resolveEmblemPreset } from "../engine/emblemSearch/optimizerPresets";
+import {
+  presetPriorities,
+  presetProtectFloors,
+  resolveEmblemPreset,
+  type ResolvedEmblemPreset,
+} from "../engine/emblemSearch/optimizerPresets";
 import { predictFlatStatRanges, type FlatStatPrediction } from "../engine/emblemSearch/predictStats";
 import type {
   PokemonScoringContext,
@@ -124,6 +129,13 @@ const STAT_LABELS: Partial<Record<string, string>> = {
   spDefense: "Sp. Defense", critRate: "Crit Rate", cdr: "CDR",
   attackSpeed: "Atk Speed", moveSpeed: "Move Speed",
 };
+
+/** Advanced UI copy for where preset defaults came from (community, curated, or role). */
+function presetAutofillIntro(displayName: string, resolved: ResolvedEmblemPreset | null): string {
+  if (!resolved) return `Auto-filled from role defaults for ${displayName}`;
+  if (resolved.source === "manual") return `Auto-filled from curated preset for ${displayName}`;
+  return `Auto-filled from community builds for ${displayName}`;
+}
 
 /** Shared label column for stat rows — fits longest name ("Sp. Defense") without old w-24 gap. */
 const STAT_ROW_GRID =
@@ -588,14 +600,18 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   }, [basicEffort, basicExactFeasible]);
 
   // ---- Expert weights + context ----
-  // Advanced "Stat Priorities" defaults come from the per-Pokémon preset when one
-  // exists (engine-scale weights, same scale as priorityWeights), so the Advanced
-  // sliders match the Basic preset search; otherwise the role-generic weights.
+  // Advanced defaults (priorities, floors, colors) use the per-Pokémon preset when
+  // one exists; otherwise the role-generic derivation. Source is surfaced in UI copy.
+  const emblemPresetResolution = useMemo(
+    () => (pokemon ? resolveEmblemPreset(pokemon) : null),
+    [pokemon],
+  );
   const defaultWeights = useMemo(() => {
     if (!pokemon) return {};
-    const resolved = resolveEmblemPreset(pokemon);
-    return resolved ? presetPriorities(resolved.preset) : priorityWeights(pokemon);
-  }, [pokemon]);
+    return emblemPresetResolution
+      ? presetPriorities(emblemPresetResolution.preset)
+      : priorityWeights(pokemon);
+  }, [pokemon, emblemPresetResolution]);
   const priorities = useMemo(() => ({ ...defaultWeights, ...customWeights }), [defaultWeights, customWeights]);
 
   // Predicted flat emblem-stat totals per prioritized stat, shown inline beside
@@ -1515,6 +1531,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               {/* Count inputs — shown in both Exact and Weighted (preview in Weighted) */}
               {colorMode !== "off" && (
                 <>
+                  {pokemon && (
+                    <p className="text-xs text-faint">
+                      {presetAutofillIntro(pokemon.displayName, emblemPresetResolution)} when you reset or change Pokémon.
+                    </p>
+                  )}
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {POSITIVE_COLORS.map((col) => (
                       <label
@@ -1660,7 +1681,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               <div className="flex flex-col gap-2">
                 <p className="text-xs text-faint">
                   {pokemon
-                    ? `Auto-filled from ${pokemon.displayName}'s role. Adjust sliders to reprioritize — predicted flat stats update below each one.`
+                    ? `${presetAutofillIntro(pokemon.displayName, emblemPresetResolution)}. Adjust sliders to reprioritize — predicted flat stats update below each one.`
                     : "Select a Pokémon to auto-populate weights."}
                 </p>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -1744,7 +1765,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             <div className="flex flex-col gap-2">
               <p className="text-xs text-faint">
                 {pokemon && Object.keys(floorActive).some((k) => floorActive[k])
-                  ? `Auto-filled for ${pokemon.displayName}. Tries to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss.`
+                  ? `${presetAutofillIntro(pokemon.displayName, emblemPresetResolution)}. Tries to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss.`
                   : "Tries to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss."}
               </p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
