@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useModalDismiss } from "../../ui/useModalDismiss";
+import { useSwipeToDismiss } from "../../ui/useSwipeToDismiss";
 
 interface BottomSheetProps {
   title: string;
@@ -17,6 +18,7 @@ interface BottomSheetProps {
  */
 export function BottomSheet({ title, onClose, children, footer, fillHeight }: BottomSheetProps) {
   useModalDismiss(onClose);
+  const { offsetY, dragging, handleProps } = useSwipeToDismiss(onClose);
 
   return (
     <div
@@ -28,18 +30,24 @@ export function BottomSheet({ title, onClose, children, footer, fillHeight }: Bo
         className={`flex w-full flex-col rounded-t-2xl bg-surface pb-safe shadow-xl sm:max-w-2xl sm:rounded-2xl ${
           fillHeight ? "h-[88vh] sm:h-[80vh]" : "max-h-[88vh] sm:max-h-[80vh]"
         }`}
+        style={{
+          transform: offsetY ? `translateY(${offsetY}px)` : undefined,
+          transition: dragging ? "none" : "transform 0.2s ease-out",
+        }}
       >
-        <div className="mx-auto mt-2 h-1.5 w-9 rounded-full bg-line sm:hidden" />
-        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-line px-4 py-3">
-          <h2 className="min-w-0 truncate text-lg font-bold text-ink">{title}</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-faint hover:bg-raise"
-          >
-            ✕
-          </button>
+        <div {...handleProps} className="shrink-0 cursor-grab touch-none active:cursor-grabbing">
+          <div className="mx-auto mt-2 h-1.5 w-9 rounded-full bg-line sm:hidden" />
+          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-line px-4 py-3">
+            <h2 className="min-w-0 truncate text-lg font-bold text-ink">{title}</h2>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg text-faint hover:bg-raise"
+            >
+              ✕
+            </button>
+          </div>
         </div>
         <div className="flex-1 overflow-y-auto px-4 pb-4">{children}</div>
         {footer && (
