@@ -54,16 +54,28 @@ export function mapMultiRunProgress(
   };
 }
 
-/** Append completed runs to history; returns index 0 (Result 1) when entries were added. */
+/**
+ * Append completed runs to history; returns the index the UI should show.
+ * Single-entry append jumps to the newest build; multi-entry batch does not.
+ */
 export function appendSearchHistoryEntries(
   history: SearchHistoryEntry[],
   entries: SearchHistoryEntry[],
+  currentHistoryIndex: number = -1,
 ): { history: SearchHistoryEntry[]; historyIndex: number } {
   if (entries.length === 0) {
     return { history, historyIndex: -1 };
   }
   const next = [...history, ...entries];
-  return { history: next, historyIndex: 0 };
+  if (entries.length === 1) {
+    return { history: next, historyIndex: next.length - 1 };
+  }
+  const firstOfBatch = history.length;
+  const historyIndex =
+    currentHistoryIndex >= 0 && currentHistoryIndex < next.length
+      ? currentHistoryIndex
+      : firstOfBatch;
+  return { history: next, historyIndex };
 }
 
 /** One completed search kept in session-scoped result history. */
@@ -519,6 +531,7 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
             const { history, historyIndex: appendedIndex } = appendSearchHistoryEntries(
               s.history,
               batchEntries,
+              s.historyIndex,
             );
             const historyIndex =
               appendedIndex >= 0 ? appendedIndex : s.historyIndex >= 0 ? s.historyIndex : 0;
@@ -543,6 +556,7 @@ export function useEmblemSearch(): UseEmblemSearchReturn {
           const { history, historyIndex: appendedIndex } = appendSearchHistoryEntries(
             s.history,
             batchEntries,
+            s.historyIndex,
           );
           const historyIndex =
             appendedIndex >= 0 ? appendedIndex : s.historyIndex >= 0 ? s.historyIndex : 0;

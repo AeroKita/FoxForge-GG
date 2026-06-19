@@ -122,17 +122,44 @@ describe("multi-result helpers", () => {
     expect(mapped.pct).toBeLessThan(40);
   });
 
-  it("appendSearchHistoryEntries stacks multiple results", () => {
+  it("appendSearchHistoryEntries jumps to newest for a single entry", () => {
     const key = buildSearchSettingsKey(BASE);
     const first = { ...MOCK_RESULT, score: 1 };
     const second = { ...MOCK_RESULT, score: 2 };
-    const { history, historyIndex } = appendSearchHistoryEntries(
-      [{ result: first, settingsKey: key }],
-      [{ result: second, settingsKey: key }],
-    );
-    expect(history).toHaveLength(2);
-    expect(historyIndex).toBe(0);
-    expect(history[0]?.result.score).toBe(1);
+
+    const initial = appendSearchHistoryEntries([], [{ result: first, settingsKey: key }]);
+    expect(initial.history).toHaveLength(1);
+    expect(initial.historyIndex).toBe(0);
+    expect(initial.history[0]?.result.score).toBe(1);
+
+    const sequential = appendSearchHistoryEntries(initial.history, [
+      { result: second, settingsKey: key },
+    ]);
+    expect(sequential.history).toHaveLength(2);
+    expect(sequential.historyIndex).toBe(1);
+    expect(sequential.history[sequential.historyIndex]?.result.score).toBe(2);
+  });
+
+  it("appendSearchHistoryEntries does not jump on multi-entry batch", () => {
+    const key = buildSearchSettingsKey(BASE);
+    const prior = [
+      { result: { ...MOCK_RESULT, score: 1 }, settingsKey: key },
+      { result: { ...MOCK_RESULT, score: 2 }, settingsKey: key },
+    ];
+    const batchEntries = [
+      { result: { ...MOCK_RESULT, score: 3 }, settingsKey: key },
+      { result: { ...MOCK_RESULT, score: 4 }, settingsKey: key },
+    ];
+
+    const fresh = appendSearchHistoryEntries([], batchEntries);
+    expect(fresh.history).toHaveLength(2);
+    expect(fresh.historyIndex).toBe(0);
+    expect(fresh.history[fresh.historyIndex]?.result.score).toBe(3);
+
+    const preserved = appendSearchHistoryEntries(prior, batchEntries, 1);
+    expect(preserved.history).toHaveLength(4);
+    expect(preserved.historyIndex).toBe(1);
+    expect(preserved.history[preserved.historyIndex]?.result.score).toBe(2);
   });
 });
 
