@@ -113,7 +113,7 @@ No router library — navigation is local React state.
 
 - **App bar** — fixed top bar (`AppBar` from `src/components/shell/`), gradient from `--color-appbar-*` tokens, `pt-safe`. On the Build tab: selected Pokémon cropped thumbnail (`iconAsset`, same crop as the picker grid), name, role badge, and attack type. Icon and name are separate tappable buttons — both open the Pokémon picker overlay (placeholder circle opens the picker when none is selected). On other tabs: static screen title ("Emblems", "Held Items", "Compare"). Single **Basic**/**Advanced** mode toggle (`ModeToggle` in `AppBar.tsx` — shows current mode, tap flips; color-coded via `--color-mode-*` tokens) and settings gear on all tabs.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Advanced mode (4 tabs vs 3). Switching from Advanced to Basic while on Compare redirects to Build.
-- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
+- **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, and `LevelGraph` (Advanced only; lazy-loaded via `React.lazy` + `Suspense` in `BuildScreen.tsx` so recharts is not in the initial bundle). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
 - **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField`, grade instructions with a tap-for-detail hint, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
@@ -151,7 +151,7 @@ Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token r
 
 ### Web distribution & build
 
-FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). CI deploys via [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on push to `main`; game-data refresh runs daily at 09:00 UTC (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml): scrape/normalize, mirror new art (`fetch_art.py`), validate (`verifyPatch.ts`, `npm test`, `validate:art`), publish to `public/data/`, and open or update a PR on `data/auto-refresh` with a semantic changelog from `tools/community/diff_bundle.py` (new entities flagged for curation). When that PR already exists, a follow-up `@AeroKita` comment re-notifies on each update — it never commits directly to `main`.
+FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint, format check, typecheck, tests, and accuracy gates on every push and pull request. [`.github/workflows/pages.yml`](.github/workflows/pages.yml) redeploys to GitHub Pages on push to `main` (after the same accuracy gates, then `build:pages`). Game-data refresh runs daily at 09:00 UTC (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml): scrape/normalize, mirror new art (`fetch_art.py`), validate (`verifyPatch.ts`, `npm test`, `validate:art`), publish to `public/data/`, and open or update a PR on `data/auto-refresh` with a semantic changelog from `tools/community/diff_bundle.py` (new entities flagged for curation). When that PR already exists, a follow-up `@AeroKita` comment re-notifies on each update — it never commits directly to `main`.
 
 Two independent update channels: **app code** (PWA service worker picks up a new deploy on reload) and **game data** (`src/data/dataSource.ts` fetches `data/manifest.json` from Pages, caches to localStorage, and `gameData.ts` applies it on the next load via `activeRaw()`; see `docs/07-distribution.md`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—distribution concerns live in config, not business logic.
 
@@ -179,8 +179,10 @@ Clone, `npm install`, and you're ready to develop.
 | TypeScript | Type-checking (`tsc --noEmit`) | `tsconfig.json` |
 | Tailwind CSS v4 | Semantic token styling via `@tailwindcss/vite` | `src/index.css`, `vite.config.ts` |
 | vite-plugin-pwa | PWA manifest + Workbox caching (non-Pages builds) | `vite.config.ts` |
+| oxlint | Lint (React hooks, correctness category); CI fails on errors | `.oxlintrc.json` |
+| oxfmt | Format TS/TSX (Prettier-compatible); data JSON bundles are excluded | `.oxfmtrc.json` |
 
-Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`.
+Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`, `npm run lint`, `npm run lint:fix`, `npm run format`, `npm run format:check`.
 
 Version is sourced from `package.json`.
 
@@ -190,6 +192,8 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 
 | Command | Purpose |
 | --- | --- |
+| `npm run lint` | oxlint — errors fail CI; `react/exhaustive-deps` is warn-only |
+| `npm run format:check` | oxfmt `--check` on `src/**/*.{ts,tsx}` and `vite.config.ts` |
 | `npm test` | Engine, bundle, dataSource, attack-speed, share, and state unit tests |
 | `npm run validate` | Known-values gate from `docs/03-Calculation-Engine.md` |
 | `npx tsx src/data/verifyPatch.ts` | End-to-end validation of the live UNITE-DB bundle |
@@ -197,7 +201,13 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 | `python3 -m unittest tools/community/test_diff_bundle.py` | Semantic bundle-diff changelog unit tests (`diff_bundle.py`) |
 | `npm run typecheck` | `tsc --noEmit` |
 
-Game data refresh (not part of routine CI for app logic):
+Every push and PR runs the full gate via `.github/workflows/ci.yml` (lint through `validate:art`, in that order). Local pre-push equivalent:
+
+```bash
+npm run lint && npm run format:check && npm run typecheck && npm test && npm run validate && npx tsx src/data/verifyPatch.ts
+```
+
+Game data refresh (separate `data.yml` workflow):
 
 ```bash
 cd tools/community && source ../extract/.venv/bin/activate
@@ -237,7 +247,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | --- | --- |
 | App shell | `src/App.tsx` |
 | Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
-| Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced) |
+| Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LoadoutBar`, `LevelGraph` (Advanced; lazy-loaded) |
 | Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (`BottomSheet fillHeight`; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open) |
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
