@@ -1730,8 +1730,8 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             <div className="flex flex-col gap-2">
               <p className="text-xs text-faint">
                 {pokemon && Object.keys(floorActive).some((k) => floorActive[k])
-                  ? `Auto-filled for ${pokemon.displayName}. Try to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss.`
-                  : "Try to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss."}
+                  ? `Auto-filled for ${pokemon.displayName}. Tries to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss.`
+                  : "Tries to avoid builds where stats fall below these values. 0 means emblems shouldn't reduce that stat overall; -5 allows up to 5 points of loss."}
               </p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {PROTECT_STATS.map(([stat, label]) => (
