@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { deriveDefaultProtectedStats, deriveMobilityFloor, deriveProtectFloors } from "../protectDefaults";
+import { deriveDefaultProtectedStats, deriveDefenseSoftFloor, deriveMobilityFloor, deriveProtectFloors, DEFENSE_SOFT_FLOOR } from "../protectDefaults";
 import { deriveBasicObjective, basicSearchOptions } from "../basicObjective";
 import { evaluateLoadout, sumStats } from "../evaluate";
 import { makeEmblem } from "../../__tests__/fixtures";
@@ -237,6 +237,78 @@ describe("deriveMobilityFloor", () => {
 });
 
 // ---------------------------------------------------------------------------
+// deriveDefenseSoftFloor (role-based def/spDef guard)
+// ---------------------------------------------------------------------------
+
+describe("deriveDefenseSoftFloor", () => {
+  it("[DEF-1] glass roles get −5 def/spDef floors (weight 0)", () => {
+    for (const role of ["Attacker", "Speedster"] as const) {
+      const poke = makePokemon(`g-${role}`, BASELINE, { role });
+      expect(deriveDefenseSoftFloor(poke)).toEqual({
+        defense: DEFENSE_SOFT_FLOOR,
+        spDefense: DEFENSE_SOFT_FLOOR,
+      });
+    }
+  });
+
+  it("[DEF-2] AllRounder gets soft floors (def/spDef weight = 1)", () => {
+    const poke = makePokemon("ar", BASELINE, { role: "AllRounder" });
+    expect(deriveDefenseSoftFloor(poke)).toEqual({
+      defense: DEFENSE_SOFT_FLOOR,
+      spDefense: DEFENSE_SOFT_FLOOR,
+    });
+  });
+
+  it("[DEF-3] Defender gets no soft floors (bulk weighted)", () => {
+    const poke = makePokemon("tank", BASELINE, { role: "Defender" });
+    expect(deriveDefenseSoftFloor(poke)).toEqual({});
+  });
+
+  it("[DEF-4] does not interfere with z-score defining-stat picks", () => {
+    const attacker = makePokemon("att-def", { ...BASELINE, attack: 500 });
+    const pop = [...POP_BASE, attacker];
+    expect(deriveDefaultProtectedStats(attacker, pop, 15)).toEqual({ attack: 0 });
+  });
+
+  it("[DEF-5] soft floor penalises deep negatives; allows tax at or above floor", () => {
+    const setBonuses: import("../../../types").EmblemSetBonus[] = [];
+    const deepNegative = buildCandidatePool(
+      [makeEmblem("glass", ["green"], { spAttack: 3, defense: -15, spDefense: -15 })],
+      {},
+    );
+    const metaTaxAtFloor = buildCandidatePool(
+      [makeEmblem("meta", ["green"], { spAttack: 3, defense: -3, spDefense: -5 })],
+      {},
+    );
+    const metaTaxBelowFloor = buildCandidatePool(
+      [makeEmblem("meta8", ["green"], { spAttack: 3, defense: -5, spDefense: -8 })],
+      {},
+    );
+    const opts = {
+      mode: "maximize" as const,
+      priorities: { spAttack: 4 },
+      targets: {}, targetActive: {},
+      protected: {},
+      colorConstraints: null, colorBonuses: false,
+      slots: 10,
+    };
+    const softFloor = { defense: DEFENSE_SOFT_FLOOR, spDefense: DEFENSE_SOFT_FLOOR };
+
+    const deepNoGuard = evaluateLoadout(deepNegative, opts, setBonuses);
+    const deepWithGuard = evaluateLoadout(deepNegative, { ...opts, protected: softFloor }, setBonuses);
+    expect(deepWithGuard.score).toBeLessThan(deepNoGuard.score);
+
+    const metaAtFloorNoGuard = evaluateLoadout(metaTaxAtFloor, opts, setBonuses);
+    const metaAtFloorWithGuard = evaluateLoadout(metaTaxAtFloor, { ...opts, protected: softFloor }, setBonuses);
+    expect(metaAtFloorWithGuard.score).toBeCloseTo(metaAtFloorNoGuard.score);
+
+    const metaBelowNoGuard = evaluateLoadout(metaTaxBelowFloor, opts, setBonuses);
+    const metaBelowWithGuard = evaluateLoadout(metaTaxBelowFloor, { ...opts, protected: softFloor }, setBonuses);
+    expect(metaBelowWithGuard.score).toBeLessThan(metaBelowNoGuard.score);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Live roster: hybrid role rules on real UNITE-DB stats
 // ---------------------------------------------------------------------------
 
@@ -279,6 +351,8 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
     const obj = deriveBasicObjective(lucario, 15, bundle.emblems, pop);
     expect(obj.protectedFloors.moveSpeed).toBe(0);
     expect(obj.protectedFloors.attack).toBe(0);
+    expect(obj.protectedFloors.defense).toBe(DEFENSE_SOFT_FLOOR);
+    expect(obj.protectedFloors.spDefense).toBe(DEFENSE_SOFT_FLOOR);
   });
 
   it("[PROT-20] Dragapult search keeps moveSpeed ≥ 0 with mobility floor", async () => {
@@ -294,6 +368,7 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
       pool,
       emblems: bundle.emblems,
       pokemonList: pop,
+      forceHeuristic: true,
     });
     expect(options.protected.moveSpeed).toBe(0);
 
@@ -310,12 +385,58 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
       pool,
       options: withoutMobility,
       setBonuses: bundle.setBonuses,
-      effort: "normal",
+      effort: "quick",
     });
     const unguardedTotals = sumStats(
       unguarded!.picks.map((slot) => emblemToCandidate(slot.emblem, slot.grade!)),
     );
     expect(unguardedTotals.moveSpeed ?? 0).toBeLessThanOrEqual(totals.moveSpeed ?? 0);
+  }, 60_000);
+
+  it("[PROT-21] Gengar search keeps def/spDef above soft floor", async () => {
+    const gengar = pop.find((p) => p.id === "gengar")!;
+    const pool = buildPool(
+      bundle.emblems,
+      { useOwned: false, mixedGrades: true, allowedGrades: new Set(["gold", "silver", "bronze"]) },
+      new Set(),
+    );
+    const { options } = buildPresetSearchOptions({
+      pokemon: gengar,
+      level: 15,
+      pool,
+      emblems: bundle.emblems,
+      pokemonList: pop,
+      forceHeuristic: true,
+    });
+    expect(options.protected.defense).toBe(DEFENSE_SOFT_FLOOR);
+    expect(options.protected.spDefense).toBe(DEFENSE_SOFT_FLOOR);
+
+    const result = await runSearch({ pool, options, setBonuses: bundle.setBonuses, effort: "quick" });
+    expect(result).not.toBeNull();
+    const totals = sumStats(
+      result!.picks.map((slot) => emblemToCandidate(slot.emblem, slot.grade!)),
+    );
+    expect(totals.defense ?? 0).toBeGreaterThanOrEqual(DEFENSE_SOFT_FLOOR);
+    expect(totals.spDefense ?? 0).toBeGreaterThanOrEqual(DEFENSE_SOFT_FLOOR);
+
+    const withoutDefenseGuard = {
+      ...options,
+      protected: {
+        attack: options.protected.attack,
+        moveSpeed: options.protected.moveSpeed,
+      },
+    };
+    const unguarded = await runSearch({
+      pool,
+      options: withoutDefenseGuard,
+      setBonuses: bundle.setBonuses,
+      effort: "quick",
+    });
+    const unguardedTotals = sumStats(
+      unguarded!.picks.map((slot) => emblemToCandidate(slot.emblem, slot.grade!)),
+    );
+    expect(unguardedTotals.defense ?? 0).toBeLessThanOrEqual(totals.defense ?? 0);
+    expect(unguardedTotals.spDefense ?? 0).toBeLessThanOrEqual(totals.spDefense ?? 0);
   }, 60_000);
 });
 
@@ -389,6 +510,8 @@ describe("deriveProtectFloors", () => {
     const floors = deriveProtectFloors(lucarioLike, pop, 15);
     expect(floors.attack).toBe(0);
     expect(floors.moveSpeed).toBe(0);
+    expect(floors.defense).toBe(DEFENSE_SOFT_FLOOR);
+    expect(floors.spDefense).toBe(DEFENSE_SOFT_FLOOR);
   });
 
   it("[PROT-15] empty roster → no floors (backward-compatible)", () => {

@@ -39,6 +39,7 @@
  */
 
 import type { Pokemon, Role, StatBlock } from "../../types";
+import { priorityWeights } from "../recommend";
 import type { StatFloors } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -79,6 +80,23 @@ export const Z_DEFENDER_BULK = 0.3;
 
 /** Maximum number of stats to protect by default. Keeps defaults conservative. */
 export const MAX_PROTECT = 2;
+
+/**
+ * Lenient protect floor for defense / spDefense on glass or low-bulk roles.
+ *
+ * Meta builds commonly carry a small net-negative def/spDef tax (−3 to −8) from
+ * offensive emblems; floor = 0 over-penalises that. A soft floor of −5 blocks
+ * the −15 to −25 stacks the optimizer otherwise picks when def/spDef weight is 0
+ * (Attacker / Speedster) or very low. Meta builds at −8 spDef incur a small
+ * penalty vs unguarded search but remain feasible when cleaner emblems exist.
+ */
+export const DEFENSE_SOFT_FLOOR = -5;
+
+/**
+ * Apply {@link DEFENSE_SOFT_FLOOR} when role-based priority weight for a bulk
+ * stat is at or below this threshold (AllRounder def/spDef = 1 included).
+ */
+export const DEFENSE_SOFT_FLOOR_WEIGHT_THRESHOLD = 1;
 
 /** Roles that benefit from primary-offense protect fallback. */
 const OFFENSIVE_ROLES: ReadonlySet<Role> = new Set([
@@ -248,11 +266,37 @@ export function deriveMobilityFloor(pokemon: Pokemon): StatFloors {
 }
 
 /**
- * Combined protect floors for search and Advanced UI defaults: population
- * z-score defining-stat picks plus the role-based move-speed guard.
+ * Derive lenient defense / spDefense protect floors for roles that do not
+ * weight bulk stats in {@link priorityWeights}.
  *
- * Requires a roster of at least 2 Pokémon for any floors (including mobility);
- * with an empty roster returns `{}` for backward compatibility.
+ * Returns `{ defense: DEFENSE_SOFT_FLOOR, spDefense: DEFENSE_SOFT_FLOOR }`
+ * (or a subset) when each stat's priority weight is at or below
+ * {@link DEFENSE_SOFT_FLOOR_WEIGHT_THRESHOLD}. Defender / Supporter bulk
+ * weighting is high enough that no soft floor is applied.
+ *
+ * Kept separate from {@link deriveDefaultProtectedStats} because it is a
+ * role-based kit guard (like mobility), not a population z-score pick, and is
+ * not subject to the MAX_PROTECT cap. Z-score picks at floor = 0 still win
+ * when merged in {@link deriveProtectFloors}.
+ */
+export function deriveDefenseSoftFloor(pokemon: Pokemon): StatFloors {
+  const weights = priorityWeights(pokemon);
+  const floors: StatFloors = {};
+  for (const stat of ["defense", "spDefense"] as const) {
+    if ((weights[stat] ?? 0) <= DEFENSE_SOFT_FLOOR_WEIGHT_THRESHOLD) {
+      floors[stat] = DEFENSE_SOFT_FLOOR;
+    }
+  }
+  return floors;
+}
+
+/**
+ * Combined protect floors for search and Advanced UI defaults: population
+ * z-score defining-stat picks plus role-based mobility and defense guards.
+ *
+ * Requires a roster of at least 2 Pokémon for role guards (mobility +
+ * defense soft floor); with an empty roster returns only z-score floors
+ * (typically `{}`) for backward compatibility.
  */
 export function deriveProtectFloors(
   pokemon: Pokemon,
@@ -260,7 +304,12 @@ export function deriveProtectFloors(
   level = 15,
 ): StatFloors {
   const baseFloors = deriveDefaultProtectedStats(pokemon, allPokemon, level);
-  return allPokemon.length >= 2
-    ? { ...baseFloors, ...deriveMobilityFloor(pokemon) }
-    : baseFloors;
+  if (allPokemon.length < 2) return baseFloors;
+
+  // Z-score picks (floor 0) override softer defense floors when both apply.
+  return {
+    ...deriveDefenseSoftFloor(pokemon),
+    ...deriveMobilityFloor(pokemon),
+    ...baseFloors,
+  };
 }
