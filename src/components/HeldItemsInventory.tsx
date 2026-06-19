@@ -49,7 +49,7 @@ function ItemTile({
           onPointerDown={(e) => e.stopPropagation()}
         >
           <div className="mb-0.5 flex items-center justify-between">
-            <span className="text-[9px] font-medium text-muted">Grade</span>
+            <span className="text-sm font-medium text-muted">Grade</span>
             <GradeField value={grade} label={item.displayName} onCommit={onGradeChange} />
           </div>
           <div className="py-3">

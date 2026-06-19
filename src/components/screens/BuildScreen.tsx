@@ -24,12 +24,12 @@ export function BuildScreen({ onOpenPokePicker }: BuildScreenProps) {
       <LoadoutEditor />
       <MovesCard />
       <StatPanel />
-      <LoadoutBar />
       {expert && (
         <Suspense fallback={null}>
           <LevelGraph />
         </Suspense>
       )}
+      <LoadoutBar />
     </div>
   );
 }

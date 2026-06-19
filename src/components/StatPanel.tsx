@@ -112,12 +112,7 @@ export function StatPanel() {
 
       {/* Attack speed (Expert) */}
       {expert && (
-        <CollapsibleCard
-          title="Attack Speed"
-          persistKey="attackspeed"
-          tone="amber"
-          defaultOpen={false}
-        >
+        <CollapsibleCard title="Attack Speed" persistKey="attackspeed" tone="amber">
           <div className="grid grid-cols-3 gap-2 text-center">
             <Metric label="AS Stat" value={`${attackSpeed.asPoints.toFixed(1)}%`} />
             <Metric label="Frames / atk" value={String(attackSpeed.frames)} />
@@ -128,12 +123,7 @@ export function StatPanel() {
 
       {/* Combat analytics (Expert) */}
       {expert && (
-        <CollapsibleCard
-          title="Combat Analytics"
-          persistKey="analytics"
-          tone="sky"
-          defaultOpen={false}
-        >
+        <CollapsibleCard title="Combat Analytics" persistKey="analytics" tone="sky">
           <div className="grid grid-cols-3 gap-2 text-center">
             <Metric
               tone="sky"
@@ -160,7 +150,7 @@ export function StatPanel() {
 
       {/* Active effect toggles (Expert) */}
       {expert && (
-        <CollapsibleCard title="Active Effects" persistKey="effects" defaultOpen={false}>
+        <CollapsibleCard title="Active Effects" persistKey="effects">
           <p className="mb-3 text-xs text-faint">
             Off by default. Toggle to preview in-combat attack-speed states.
           </p>

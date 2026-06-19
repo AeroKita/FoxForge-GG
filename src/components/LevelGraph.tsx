@@ -69,12 +69,7 @@ export function LevelGraph() {
   );
 
   return (
-    <CollapsibleCard
-      title="Level Scaling · Lv 1–15"
-      persistKey="levelgraph"
-      right={metricPills}
-      defaultOpen={false}
-    >
+    <CollapsibleCard title="Level Scaling · Lv 1–15" persistKey="levelgraph" right={metricPills}>
       <ResponsiveContainer width="100%" height={260}>
         <LineChart data={data} margin={{ top: 8, right: 16, bottom: 4, left: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="var(--color-line)" />
