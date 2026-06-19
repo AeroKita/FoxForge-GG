@@ -115,10 +115,10 @@ No router library — navigation is local React state.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Emblems · Items; Compare appears only in Advanced mode (4 tabs vs 3). Switching from Advanced to Basic while on Compare redirects to Build.
 - **Build screen** — `BuildScreen` composes `BuildSummaryBar` (sticky glance hero pinned under the app bar), `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LevelGraph` (Advanced only; lazy-loaded via `React.lazy` + `Suspense` in `BuildScreen.tsx` so recharts is not in the initial bundle), then `LoadoutBar` (Save & Load). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the hero empty state and app-bar icon or title tap open `PokemonPickerSheet`.
 - **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
-- **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField`, grade instructions with a tap-for-detail hint, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
+- **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField` with a `text-sm` "Grade" label, grade instructions with a tap-for-detail hint, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only; build A/B selects stack on phones; stat table scrolls horizontally inside its wrapper).
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum — the Build glance hero (`BuildSummaryBar`) is the primary oversized readout.
-- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). Callers: `SettingsMenu` (gear; Appearance theme picker, Updates with read-only patch version and app version/PWA-install copy, About, Legal with data-source attribution and disclaimer), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
+- **Overlays** — `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay (bottom sheet on phones, centered card on `sm+`). On mobile (`max-width: 639px`), drag the grabber or header down to dismiss (`useSwipeToDismiss` + pure threshold logic in `src/ui/swipeDismiss.ts`); the scrollable body does not participate in the gesture; desktop modals stay undraggable. Callers: `SettingsMenu` (gear; Appearance theme picker, Updates with read-only patch version and app version/PWA-install copy, About, Legal with data-source attribution and disclaimer), `PokemonPickerSheet` (app-bar icon or title tap, or hero empty state; search does not auto-focus on open so the grid is browsable without the on-screen keyboard), and `PickerModal` (held/trainer/emblem pickers from `LoadoutEditor`; search does not auto-focus on open so the list is browsable without the on-screen keyboard). Picker callers pass `fillHeight` so the panel stays at fixed `88vh`/`80vh` while search filters results in place; `SettingsMenu` omits it and keeps content-fit sizing. `HeldItemDetailModal` keeps its existing centered-modal shell.
 - **Footer** — legal disclaimer, copyright, and patch line live in Settings → Legal (sourced from `src/ui/brand.ts`); they are not rendered in `App.tsx`.
 - **Data updates** — startup `refreshDataInBackground` in `gameData.ts` dispatches `unite-data-updated` only when a strictly newer remote bundle was cached; `App.tsx` shows a reload banner inside `<main>`.
 
@@ -194,7 +194,7 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 | --- | --- |
 | `npm run lint` | oxlint — errors fail CI; `react/exhaustive-deps` is warn-only |
 | `npm run format:check` | oxfmt `--check` on `src/**/*.{ts,tsx}` and `vite.config.ts` |
-| `npm test` | Engine, bundle, dataSource (`activeRaw` + `checkDataNow`), attack-speed, share, and state unit tests |
+| `npm test` | Engine, bundle, dataSource (`activeRaw` + `checkDataNow`), attack-speed, share, state, and UI pure-logic unit tests (e.g. `src/ui/__tests__/swipeDismiss.test.ts`) |
 | `npm run validate` | Known-values gate from `docs/03-Calculation-Engine.md` |
 | `npx tsx src/data/verifyPatch.ts` | End-to-end validation of the live UNITE-DB bundle |
 | `npm run validate:art` | Validates mirrored images under `public/assets/` are real files (not corrupt/HTML) |
@@ -235,7 +235,7 @@ Semantic color and surface tokens are defined in `src/index.css` using Tailwind 
 
 Stat role colors (positive/negative, recommend/attack-speed/analytics tone cards) are intentional literals layered on top of semantic surfaces.
 
-Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used by `BottomSheet`, `HeldItemDetailModal`, and the touch long-press pinned popup in `Tooltip.tsx`). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`. Pickers pass optional `fillHeight` for a constant panel height during live filtering; Settings stays content-fit.
+Shared modal behavior (`Escape` + scroll lock): `src/ui/useModalDismiss.ts` (used by `BottomSheet`, `HeldItemDetailModal`, and the touch long-press pinned popup in `Tooltip.tsx`). Mobile swipe-to-dismiss: `src/ui/useSwipeToDismiss.ts` (DOM wiring) and `src/ui/swipeDismiss.ts` (pure dismiss thresholds, unit-tested). `BottomSheet` (`src/components/shell/BottomSheet.tsx`) is the shared responsive overlay primitive; callers are `SettingsMenu`, `PokemonPickerSheet`, and `PickerModal`. Pickers pass optional `fillHeight` for a constant panel height during live filtering; Settings stays content-fit.
 
 `Tooltip.tsx` wraps emblems, moves, trainer items, and held items: CSS hover tooltip on mouse; touch/pen long-press (~500 ms) opens the same content in a dismissible centered popup (backdrop tap, Escape). Movement cancels the press; the trailing tap is suppressed so long-press does not trigger underlying controls.
 
@@ -246,7 +246,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | Area | Path |
 | --- | --- |
 | App shell | `src/App.tsx` |
-| Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` |
+| Shell primitives | `src/components/shell/AppBar.tsx`, `TabBar.tsx`, `BottomSheet.tsx` (mobile swipe-to-dismiss via `src/ui/useSwipeToDismiss.ts`) |
 | Build tab | `src/components/screens/BuildScreen.tsx` — `BuildSummaryBar`, `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LevelGraph` (Advanced; lazy-loaded), `LoadoutBar` |
 | Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (`BottomSheet fillHeight`; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open) |
 | Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
