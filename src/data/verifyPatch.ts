@@ -16,7 +16,8 @@ let fail = 0;
 function check(label: string, got: unknown, want: unknown) {
   const ok = got === want;
   console.log(`${ok ? "PASS" : "FAIL"}  ${label}${ok ? "" : `  got ${got}, want ${want}`}`);
-  ok ? pass++ : fail++;
+  if (ok) pass++;
+  else fail++;
 }
 
 const bundle = loadBundle(raw);

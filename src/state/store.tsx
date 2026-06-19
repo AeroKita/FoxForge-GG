@@ -276,7 +276,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setOwned((prev) => {
           const next = new Set(prev);
           const key = ownedKey(emblemId, grade);
-          next.has(key) ? next.delete(key) : next.add(key);
+          if (next.has(key)) next.delete(key);
+          else next.add(key);
           saveOwnedEmblems(next);
           return next;
         }),
@@ -285,7 +286,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           const next = new Set(prev);
           for (const id of emblemIds) {
             const key = ownedKey(id, grade);
-            own ? next.add(key) : next.delete(key);
+            if (own) next.add(key);
+            else next.delete(key);
           }
           saveOwnedEmblems(next);
           return next;
@@ -307,7 +309,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setThemePrefState(p);
         setThemeState(resolveTheme(p));
         try {
-          p === "system" ? localStorage.removeItem(THEME_KEY) : localStorage.setItem(THEME_KEY, p);
+          if (p === "system") localStorage.removeItem(THEME_KEY);
+          else localStorage.setItem(THEME_KEY, p);
         } catch {
           /* quota */
         }
