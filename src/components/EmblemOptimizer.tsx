@@ -342,35 +342,57 @@ function ResultCards({
           </div>
         )}
 
-        {/* Apply actions — emblems and held items in one footer */}
-        <div className="flex flex-col gap-2 border-t border-line-soft pt-4">
-          <div className="flex flex-wrap items-center gap-2">
+        {/* Apply actions — grouped so the primary action is isolated from partial applies */}
+        <div className="flex flex-col gap-4 border-t border-line-soft pt-4">
+          {hasItems ? (
+            <div className="flex flex-col gap-4">
+              <button
+                type="button"
+                onClick={() => onApplyAll(itemIds)}
+                className="flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-accent/90 active:scale-[0.98]"
+              >
+                {applied.emblems && applied.items
+                  ? "Applied ✓ — Re-apply All"
+                  : "Apply All"}
+              </button>
+
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-3 sm:hidden" aria-hidden>
+                  <div className="h-px flex-1 bg-line-soft" />
+                  <span className="shrink-0 text-[11px] font-medium uppercase tracking-wide text-faint">
+                    Or separately
+                  </span>
+                  <div className="h-px flex-1 bg-line-soft" />
+                </div>
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
+                  <button
+                    type="button"
+                    onClick={onApplyEmblems}
+                    className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-line bg-white/5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-white/15 active:scale-[0.98] sm:flex-1"
+                  >
+                    <span aria-hidden className="text-base leading-none opacity-70">⬡</span>
+                    {applied.emblems ? "Applied ✓ — Re-apply Emblems" : "Apply Emblems"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onApplyItems(itemIds)}
+                    className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-line bg-white/5 px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-white/15 active:scale-[0.98] sm:flex-1"
+                  >
+                    <span aria-hidden className="text-base leading-none opacity-70">◻</span>
+                    {applied.items ? "Applied ✓ — Re-apply Items" : "Apply Held Items"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
             <button
               type="button"
               onClick={onApplyEmblems}
-              className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 active:scale-95"
+              className="flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-accent/90 active:scale-[0.98] sm:w-auto"
             >
               {applied.emblems ? "Applied ✓ — Re-apply Emblems" : "Apply Emblems"}
             </button>
-            {hasItems && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => onApplyItems(itemIds)}
-                  className="rounded-xl border border-line bg-white/10 px-4 py-2 text-sm font-semibold text-ink hover:bg-white/20 active:scale-95"
-                >
-                  {applied.items ? "Applied ✓ — Re-apply Items" : "Apply Held Items"}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onApplyAll(itemIds)}
-                  className="rounded-xl border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent-ink hover:bg-accent/20 active:scale-95"
-                >
-                  {applied.emblems && applied.items ? "Applied ✓ — Re-apply All" : "Apply All"}
-                </button>
-              </>
-            )}
-          </div>
+          )}
           <p className="text-xs text-faint">
             Applies to your current loadout without leaving this page. Switch to the Build tab
             anytime to review.
