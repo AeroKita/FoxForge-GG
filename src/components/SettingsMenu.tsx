@@ -53,10 +53,6 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
             <span className="text-sm font-medium">Game data</span>
             <span className="font-mono text-xs text-faint">patch {activePatch}</span>
           </div>
-          <p className="text-xs text-faint">
-            Data: UNITE-DB · Serebii — fan project, not affiliated with Nintendo/TPC.
-          </p>
-
           {/* App version — web/PWA only */}
           <div className="mt-3 border-t border-line-soft pt-3">
             <div className="flex items-center justify-between gap-2">
@@ -77,7 +73,8 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
 
         <Section title="Legal">
           <p className="text-xs text-faint">
-            Data from UNITE-DB · attack-speed model from community calculator · patch {activePatch}
+            Data from UNITE-DB · Serebii · attack-speed model from community calculator · patch{" "}
+            {activePatch}
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-muted">
             {LEGAL_DISCLAIMER}

@@ -30,7 +30,7 @@ RAW = HERE / "_raw"
 OUT = HERE.parent.parent / "src" / "data" / "patch-current.json"
 CDN = "https://d275t8dp8rxb42.cloudfront.net"
 ASSETS = "/assets"  # local mirror under public/assets (see fetch_art.py)
-PATCH_VERSION = os.environ.get("PATCH_VERSION") or "1.23.1.1"
+PATCH_VERSION = os.environ.get("PATCH_VERSION") or "1.23.2.5"
 
 # ---- helpers ---------------------------------------------------------------
 
