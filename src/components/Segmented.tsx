@@ -13,6 +13,7 @@ export function Segmented<T extends string>({
   disabled = false,
   title,
   variant = "surface",
+  fluid = false,
 }: {
   value: T;
   options: readonly T[];
@@ -22,6 +23,12 @@ export function Segmented<T extends string>({
   disabled?: boolean;
   title?: string;
   variant?: "surface" | "header";
+  /**
+   * When true the control fills its container and the options share the width
+   * equally. Use on mobile to keep option buttons on a single row (no wrap /
+   * horizontal overflow).
+   */
+  fluid?: boolean;
 }) {
   const backdrop =
     variant === "header"
@@ -41,7 +48,7 @@ export function Segmented<T extends string>({
   return (
     <div
       title={title}
-      className={`flex gap-1 rounded-xl p-1 ${backdrop} ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
+      className={`flex gap-1 rounded-xl p-1 ${backdrop} ${fluid ? "w-full" : ""} ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
     >
       {options.map((o) => (
         <button
@@ -49,9 +56,9 @@ export function Segmented<T extends string>({
           type="button"
           disabled={disabled}
           onClick={() => onChange(o)}
-          className={`rounded-lg px-3 py-1.5 text-sm font-medium capitalize transition ${
-            value === o ? active : inactive
-          } ${disabled ? "pointer-events-none" : ""}`}
+          className={`min-w-0 truncate rounded-lg px-3 py-1.5 text-center text-sm font-medium capitalize transition ${
+            fluid ? "flex-1" : ""
+          } ${value === o ? active : inactive} ${disabled ? "pointer-events-none" : ""}`}
         >
           {labels?.[o] ?? o}
         </button>

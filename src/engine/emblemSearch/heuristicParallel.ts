@@ -105,7 +105,7 @@ export async function runHeuristicParallel(
       const avgPct = shardPct.reduce((a, b) => a + b, 0) / n;
       onProgress?.(
         Math.min(99, avgPct),
-        `Heuristic · ${sum.toLocaleString()} candidates (${n} workers)`,
+        `Smart search · ${n} workers`,
         sum,
       );
     };
@@ -146,11 +146,7 @@ export async function runHeuristicParallel(
               // in-flight updates at 99) so the bar visibly completes before
               // the orchestrator returns and the overlay closes.
               const sum = shardEval.reduce((a, b) => a + b, 0);
-              onProgress?.(
-                100,
-                `Heuristic · ${sum.toLocaleString()} candidates (${n} workers)`,
-                sum,
-              );
+              onProgress?.(100, `Smart search · ${n} workers`, sum);
               finalize();
             } else {
               emitProgress();

@@ -25,15 +25,16 @@ export function SearchProgressOverlay({ progress, eta, onCancel }: Props) {
             style={{ width: `${pct}%` }}
           />
         </div>
-        <div className="flex items-center justify-between text-xs text-muted">
-          <span className="truncate">{progress.label}</span>
-          <span className="ml-2 shrink-0 font-mono">{pct.toFixed(0)}%</span>
+        <div className="flex items-start justify-between gap-2 text-xs text-muted">
+          <span className="min-w-0 break-words">{progress.label}</span>
+          <span className="shrink-0 font-mono">{pct.toFixed(0)}%</span>
         </div>
-        {/* Reserve a fixed-height row so the layout doesn't jump as ETA appears */}
-        <div className="mt-1 h-4 text-xs tabular-nums text-faint">
+        {/* Reserve a min-height row so the layout doesn't jump as ETA appears,
+            and let the metrics wrap to a second line instead of truncating. */}
+        <div className="mt-1 flex min-h-4 flex-wrap gap-x-2 text-xs tabular-nums text-faint">
           {eta != null && <span>{eta}</span>}
           {progress.candidates != null && (
-            <span className="ml-2">{progress.candidates.toLocaleString()} evaluated</span>
+            <span>{progress.candidates.toLocaleString()} evaluated</span>
           )}
         </div>
         <button

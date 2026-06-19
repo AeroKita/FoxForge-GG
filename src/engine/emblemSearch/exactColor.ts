@@ -418,14 +418,14 @@ export async function searchColorExact(
     onProgress
       ? async (ev) => {
           const pct = 3 + Math.min(96, (ev / Math.max(1, totalCombos)) * 96);
-          await onProgress(pct, `Exact · ${fmtN(ev)} / ${fmtN(totalCombos)} builds`, ev);
+          await onProgress(pct, "Exact search…", ev);
         }
       : undefined,
     shouldAbort,
   );
 
   if (result && onProgress) {
-    await onProgress(99, `Exact · done · ${fmtN(result.evaluated)} evaluated`, result.evaluated);
+    await onProgress(99, "Exact search…", result.evaluated);
   }
   return result;
 }
@@ -480,13 +480,6 @@ function binomBig(n: number, k: number): bigint {
 
 // Keep BigInt version available for pool.ts countConstrainedBuilds if needed
 export { binomBig };
-
-function fmtN(n: number): string {
-  if (n >= 1e9) return (n / 1e9).toFixed(1) + "B";
-  if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
-  if (n >= 1e4) return Math.round(n / 1000) + "k";
-  return String(n);
-}
 
 // ---------------------------------------------------------------------------
 // Pool-facing helpers (used by UI)

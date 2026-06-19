@@ -51,12 +51,12 @@ import { priorityWeights } from "../engine/recommend";
 import {
   deriveBasicObjective,
   buildBasicPool,
-  topPriorityLabels,
-  basicObjectiveDescription,
   DEFAULT_ALLOWED_GRADES,
 } from "../engine/emblemSearch/basicObjective";
 import { buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, resolveColorSearchMode, EXACT_FALLBACK_EFFORT, type BasicEffort } from "../engine/emblemSearch/searchPresets";
 import { deriveDefaultProtectedStats } from "../engine/emblemSearch/protectDefaults";
+import { isSearchResultStale } from "../engine/emblemSearch/staleResult";
+import { predictFlatStatRanges, type FlatStatPrediction } from "../engine/emblemSearch/predictStats";
 import { recommendItemsForEmblemBuild } from "../engine/emblemSearch/heldItemSynergy";
 import type {
   PokemonScoringContext,
@@ -83,18 +83,22 @@ import { asset } from "../ui/asset";
 
 const SLOTS = 10;
 
-const EFFORT_LABELS = {
-  quick: "Quick (~1.5s)",
-  normal: "Normal (~8s)",
-  thorough: "Thorough (~25s)",
-} as const;
+// The engine's role-derived priority weights span ~0–6 (e.g. Defender HP = 6).
+// The Advanced slider presents a clean 0–1 "importance" scale instead; this is
+// the divisor mapping engine weight ↔ slider value (slider 1.0 = engine weight
+// WEIGHT_UI_MAX). Purely a display transform — the scoring engine is untouched.
+const WEIGHT_UI_MAX = 5;
+
+// Friendly labels for the internal search-phase tag (avoids surfacing the word
+// "heuristic", which testers found confusing).
+const PHASE_LABEL: Record<string, string> = {
+  recipe: "exact match",
+  exact: "exact search",
+  heuristic: "smart search",
+  none: "search",
+};
 
 type Effort = "quick" | "normal" | "thorough";
-
-const BASIC_EFFORT_LABELS: Record<BasicEffort, string> = {
-  exact: "Exact (optimal)",
-  ...EFFORT_LABELS,
-} as const;
 
 type ColorMode = "off" | "exact" | "weighted";
 
@@ -168,6 +172,8 @@ interface ResultPanelProps {
   pokemon: ReturnType<typeof pokemonById.get> | null;
   optimizeLevel: number;
   pokemonAwareScoring: boolean;
+  /** True when settings changed since this result was produced (kept, but stale). */
+  isStale?: boolean;
   applied: AppliedState;
   onApplyEmblems: () => void;
   onApplyItems: (ids: string[]) => void;
@@ -187,6 +193,7 @@ function ResultCards({
   pokemon,
   optimizeLevel,
   pokemonAwareScoring,
+  isStale,
   applied,
   onApplyEmblems,
   onApplyItems,
@@ -198,6 +205,14 @@ function ResultCards({
     <>
       <CollapsibleCard title="Result" persistKey="optimizer-results" tone="indigo">
         <div className="flex flex-col gap-4">
+          {/* Stale banner — settings changed since this build was found */}
+          {isStale && (
+            <div className="flex items-center gap-2 rounded-lg border border-accent/40 bg-accent-weak px-3 py-2 text-xs text-accent-ink">
+              <span aria-hidden>⚠</span>
+              <span>Settings changed since this build — re-run the search to refresh. You can still apply it.</span>
+            </div>
+          )}
+
           {/* Emblem icons row */}
           <div className="flex flex-wrap gap-1.5">
             {picks.map((p, i) => (
@@ -463,8 +478,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     () => buildBasicPool(allEmblems, owned, basicPoolConfig),
     [owned, basicUseOwned, allowedGrades],
   );
-  const basicBuildCount = useMemo(() => approximateBuildCount(basicPool, SLOTS), [basicPool]);
-  const basicPoolDistinctNames = useMemo(() => distinctPokemonCount(basicPool), [basicPool]);
 
   // ---- Auto-derived Beginner objective ----
   // Pass pokemonList so protect floors are derived from population statistics.
@@ -502,16 +515,31 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     }
   }, [basicEffort, basicExactFeasible]);
 
-  // Will the Beginner search actually run exact enumeration? Only when exact is
-  // both feasible AND chosen. Drives the ⚡/~ indicator so it tracks the real path.
-  const basicWillRunExact = resolvedBasicEffort === "exact";
-
   // ---- Expert weights + context ----
   const defaultWeights = useMemo(
     () => (pokemon ? priorityWeights(pokemon) : {}),
     [pokemon],
   );
   const priorities = useMemo(() => ({ ...defaultWeights, ...customWeights }), [defaultWeights, customWeights]);
+
+  // Predicted flat emblem-stat totals per prioritized stat, shown inline beside
+  // the Advanced priority sliders so the user sees what each weight produces.
+  // Honors the active color shell (any non-off mode) so the estimate reflects the
+  // constrained outcome the search will produce, not an unconstrained one.
+  const flatStatPredictionByStat = useMemo(() => {
+    const m = new Map<keyof StatBlock, FlatStatPrediction>();
+    if (mode !== "maximize") return m;
+    let targets: Map<EmblemColor, number> | undefined;
+    if (colorMode !== "off" && activeColors.size > 0) {
+      targets = new Map<EmblemColor, number>();
+      for (const col of activeColors) {
+        const n = colorCounts[col] ?? 0;
+        if (n > 0) targets.set(col, n);
+      }
+    }
+    for (const p of predictFlatStatRanges(pool, priorities, 20, targets)) m.set(p.stat, p);
+    return m;
+  }, [mode, pool, priorities, colorMode, activeColors, colorCounts]);
 
   const pokemonContext = useMemo((): PokemonScoringContext | undefined => {
     if (!pokemon || !pokemonAwareScoring) return undefined;
@@ -655,50 +683,44 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     ],
   );
 
-  // Persist the settings fingerprint whenever a search completes so remount can
-  // restore the baseline without treating default re-init as a user change.
+  // Fingerprint of the settings that produced the currently displayed result.
+  // Initialised from the session cache so a result restored on remount is not
+  // immediately flagged stale. Set synchronously when a search is launched (see
+  // the search handlers) so the "done" render already has the right key and a
+  // fresh result never flashes as stale.
+  const resultSettingsKeyRef = useRef<string | null>(getSessionSearchSettingsKey());
+
+  // Persist the fingerprint whenever a search completes so a remount can restore
+  // the baseline without treating default re-init as a user change. Intentionally
+  // does NOT depend on searchSettingsKey: editing settings must not overwrite the
+  // result's frozen fingerprint (that drift is what marks the result stale).
   useEffect(() => {
-    if (searchState.status === "done" && searchState.result) {
-      persistSessionSearchSettings(searchSettingsKey);
+    if (searchState.status === "done" && searchState.result && resultSettingsKeyRef.current) {
+      persistSessionSearchSettings(resultSettingsKeyRef.current);
     }
-  }, [searchState.status, searchState.result, searchSettingsKey]);
+  }, [searchState.status, searchState.result]);
 
-  // Clear stale cached results when Pokémon or search inputs change.
-  // Basic/Advanced toggle alone does not clear (sync may rewrite settings).
-  // First mount/remount establishes baseline only — never clears on that pass.
-  const prevSearchSettingsKeyRef = useRef<string | null>(null);
+  // Changing the selected Pokémon clears the result outright: a build for a
+  // different Pokémon makes the effective-stat deltas and held-item synergy
+  // misleading. Editing any OTHER setting keeps the result visible but stale
+  // (see isResultStale below) rather than wiping it.
   const prevPokemonIdRef = useRef(loadout.pokemonId);
-  const prevExpertRef = useRef(expert);
-
   useEffect(() => {
     if (searchState.status === "running") return;
-
-    const pokemonChanged = prevPokemonIdRef.current !== loadout.pokemonId;
-    const expertChanged = prevExpertRef.current !== expert;
-    prevPokemonIdRef.current = loadout.pokemonId;
-    prevExpertRef.current = expert;
-
-    if (pokemonChanged) {
+    if (prevPokemonIdRef.current !== loadout.pokemonId) {
+      prevPokemonIdRef.current = loadout.pokemonId;
       clearResult();
-      prevSearchSettingsKeyRef.current = searchSettingsKey;
-      return;
+      resultSettingsKeyRef.current = null;
     }
+  }, [loadout.pokemonId, searchState.status, clearResult]);
 
-    if (expertChanged) {
-      prevSearchSettingsKeyRef.current = searchSettingsKey;
-      return;
-    }
-
-    if (prevSearchSettingsKeyRef.current === null) {
-      prevSearchSettingsKeyRef.current = getSessionSearchSettingsKey() ?? searchSettingsKey;
-      return;
-    }
-
-    if (prevSearchSettingsKeyRef.current !== searchSettingsKey) {
-      clearResult();
-      prevSearchSettingsKeyRef.current = searchSettingsKey;
-    }
-  }, [searchSettingsKey, loadout.pokemonId, expert, searchState.status, clearResult]);
+  // A shown result is stale when the live settings no longer match the settings
+  // that produced it. searchSettingsKey is state-derived, so edits re-render and
+  // recompute this; resultSettingsKeyRef is frozen at search launch.
+  const isResultStale =
+    searchState.status === "done" &&
+    !!searchState.result &&
+    isSearchResultStale(resultSettingsKeyRef.current, searchSettingsKey);
 
   const resultPicks = useMemo(
     () => emblemPicksFromResult(searchState.result),
@@ -883,14 +905,18 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       forceHeuristic,
     });
     const heuristicEffort: Effort = runExact ? EXACT_FALLBACK_EFFORT : (resolvedBasicEffort as Effort);
+    // Freeze the fingerprint this result will be tied to (drives stale detection).
+    resultSettingsKeyRef.current = searchSettingsKey;
     await run(basicPool, options, setBonuses, heuristicEffort);
-  }, [pokemon, basicObjective, basicPool, basicColorResolution, optimizeLevel, resolvedBasicEffort, run]);
+  }, [pokemon, basicObjective, basicPool, basicColorResolution, optimizeLevel, resolvedBasicEffort, run, searchSettingsKey]);
 
   // Expert search (Expert tab only — pool source toggle applies here, not in Beginner)
   const handleAdvancedSearch = useCallback(async () => {
     if (pool.length < SLOTS) return;
+    // Freeze the fingerprint this result will be tied to (drives stale detection).
+    resultSettingsKeyRef.current = searchSettingsKey;
     await run(pool, advancedSearchOptions, setBonuses, effort);
-  }, [pool, advancedSearchOptions, effort, run]);
+  }, [pool, advancedSearchOptions, effort, run, searchSettingsKey]);
 
   // Apply suggested held items to loadout — see handleApplyItems / applyHeldItemsToLoadout above.
 
@@ -947,10 +973,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   }, [searchState.result, pokemon, optimizeLevel]);
 
   // ---- Beginner mode info ----
-  const basicPriorityLabels = useMemo(
-    () => (basicObjective ? topPriorityLabels(basicObjective.priorities) : []),
-    [basicObjective],
-  );
   const basicNotEnoughEmblems = basicPool.length < SLOTS;
 
   // ---- Render ----
@@ -962,89 +984,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       {/* ================================================================== */}
       {!expert && (
         <>
-          {/* Auto-objective summary card */}
-          {pokemon ? (
-            <div className="rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={asset(pokemon.imageAsset)}
-                    alt={pokemon.displayName}
-                    className="h-10 w-10 rounded-full bg-white/10 object-cover ring-1 ring-line"
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-ink">
-                      {pokemon.displayName}
-                      <span className="ml-2 text-xs font-normal text-muted">
-                        {basicObjectiveDescription(pokemon)} · Lv.{optimizeLevel}
-                      </span>
-                    </p>
-                    {basicPriorityLabels.length > 0 && (
-                      <div className="mt-0.5 flex flex-wrap gap-1">
-                        {basicPriorityLabels.map((l) => (
-                          <span key={l} className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-medium text-accent-ink">
-                            {l}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="text-right text-xs text-muted">
-                  <p>
-                    {basicPool.length.toLocaleString()} emblem candidate{basicPool.length !== 1 ? "s" : ""}
-                    {" · "}{basicPoolDistinctNames} Pokémon
-                  </p>
-                  {basicPool.length > basicPoolDistinctNames && basicUseOwned && (
-                    <p className="text-faint">
-                      Mixed grades · ~{formatBuildCount(basicBuildCount)} builds
-                    </p>
-                  )}
-                  {basicPool.length > basicPoolDistinctNames && !basicUseOwned && (
-                    <p className="text-faint">
-                      {[...allowedGrades].sort().join("/")} grades · ~{formatBuildCount(basicBuildCount)} builds
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Color targets row */}
-              {basicObjective && basicObjective.colorTargets.size > 0 && (
-                <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-line pt-2">
-                  <span className="text-xs text-faint">
-                    {basicColorResolution?.mode === "weighted"
-                      ? "Target colors (soft):"
-                      : "Target colors (enforced):"}
-                  </span>
-                  {[...basicObjective.colorTargets.entries()].map(([col, n]) => (
-                    <span key={col} className="flex items-center gap-1 rounded-full border border-line px-2 py-0.5 text-xs">
-                      <ColorDot color={col as EmblemColor} />
-                      <span className="capitalize">{col}</span>
-                      <span className="font-mono text-muted">×{n}</span>
-                    </span>
-                  ))}
-                  {basicColorResolution && (
-                    <span
-                      className={`ml-auto text-[11px] font-medium ${basicWillRunExact ? "text-pos" : "text-faint"}`}
-                      title={
-                        basicWillRunExact
-                          ? "Color targets are feasible on this pool — the exact search exhaustively enumerates every matching build (guaranteed optimum)."
-                          : basicColorResolution.mode === "exact" && !basicColorResolution.willRunExact
-                            ? "Color targets are enforced as hard constraints, but the matching build count exceeds the exact-enumeration cap — the search uses a heuristic that still respects those constraints."
-                            : basicExactFeasible
-                              ? "Exact is available for this pool, but a time-based effort is selected — the search uses a heuristic guided by the color-bonus incentive. Pick \"Exact\" to enforce the targets."
-                              : "Color targets can't be enforced exactly on this pool — the search uses a heuristic guided by the color-bonus incentive."
-                      }
-                    >
-                      {basicWillRunExact ? "⚡ Exact search" : "~ Heuristic search"}
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-          ) : (
+          {!pokemon && (
             <div className="rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-muted shadow-sm">
-              Select a Pokémon on the Build tab first to enable Basic optimization.
+              Tap the Pokémon icon at the top to choose who to optimize.
             </div>
           )}
 
@@ -1091,103 +1033,75 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             </div>
           )}
 
-          {/* Effort selector (subtle, but accessible).
-              When exact is feasible an extra "Exact" option is offered — it runs
-              the full, complete enumeration (guaranteed optimum). The time-based
-              options deliberately skip exact and run the heuristic at that budget,
-              letting the user trade optimality for speed. When exact isn't
-              feasible the "Exact" option is hidden and only the time-based
-              efforts show (heuristic, as before). */}
+          {/* Settings — level, emblem pool, and search quality */}
           {pokemon && (
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs text-muted">Search effort:</span>
-              {(Object.entries(BASIC_EFFORT_LABELS) as [BasicEffort, string][])
-                .filter(([e]) => e !== "exact" || basicExactFeasible)
-                .map(([e, label]) => (
-                  <label
-                    key={e}
-                    className="flex cursor-pointer items-center gap-1.5 text-xs"
-                    title={
-                      e === "exact"
-                        ? "Exhaustively enumerates every build matching the meta color targets — guaranteed optimal & complete."
-                        : "Time-budgeted heuristic — skips the exact search (faster, near-optimal)."
-                    }
-                  >
-                    <input
-                      type="radio"
-                      checked={basicEffort === e}
-                      onChange={() => setBasicEffort(e)}
-                      className="accent-accent"
-                    />
-                    <span className={e === "exact" ? "font-semibold text-pos" : ""}>
-                      {e === "exact" ? `⚡ ${label}` : label}
-                    </span>
-                  </label>
-                ))}
-            </div>
-          )}
-
-          {/* Level control */}
-          {pokemon && (
-            <div className="flex items-center gap-3">
-              <span className="shrink-0 text-xs text-muted">Optimize for level</span>
-              <input
-                type="range"
-                min={1} max={15} step={1}
-                value={optimizeLevel}
-                onChange={(e) => setOptimizeLevel(parseInt(e.target.value))}
-                className="flex-1 accent-accent"
-              />
-              <span className="w-6 shrink-0 text-right font-mono text-sm font-semibold text-ink">
-                {optimizeLevel}
-              </span>
-            </div>
-          )}
-
-          {/* Pool source + grades */}
-          {pokemon && (
-            <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
-              <p className="text-xs font-medium text-muted">Search pool</p>
-              <div className="flex flex-wrap gap-3">
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    checked={basicUseOwned}
-                    onChange={() => setBasicUseOwned(true)}
-                    className="accent-accent"
-                  />
-                  <span>Owned emblems only</span>
-                </label>
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
-                  <input
-                    type="radio"
-                    checked={!basicUseOwned}
-                    onChange={() => setBasicUseOwned(false)}
-                    className="accent-accent"
-                  />
-                  <span>Full dataset (all 258)</span>
-                </label>
+            <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
+              {/* Level */}
+              <div className="flex items-center gap-3">
+                <span className="w-16 shrink-0 text-xs font-medium text-muted">Level</span>
+                <input
+                  type="range"
+                  min={1} max={15} step={1}
+                  value={optimizeLevel}
+                  onChange={(e) => setOptimizeLevel(parseInt(e.target.value))}
+                  className="flex-1 accent-accent"
+                />
+                <span className="w-6 shrink-0 text-right font-mono text-sm font-semibold text-ink">
+                  {optimizeLevel}
+                </span>
               </div>
-              {!basicUseOwned && (
-                <div className="flex flex-wrap gap-3 text-sm">
-                  <span className="text-muted">Grades:</span>
-                  {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => (
-                    <label key={g} className="flex cursor-pointer items-center gap-1.5 capitalize">
-                      <input
-                        type="checkbox"
-                        checked={allowedGrades.has(g)}
-                        onChange={(e) => {
-                          const next = new Set(allowedGrades);
-                          e.target.checked ? next.add(g) : next.delete(g);
-                          if (next.size > 0) setAllowedGrades(next);
-                        }}
-                        className="accent-accent"
-                      />
-                      {g}
-                    </label>
-                  ))}
-                </div>
-              )}
+
+              {/* Emblem pool */}
+              <div className="flex flex-col gap-2">
+                <span className="text-xs font-medium text-muted">Emblems to use</span>
+                <Segmented<"owned" | "all">
+                  fluid
+                  value={basicUseOwned ? "owned" : "all"}
+                  options={["owned", "all"]}
+                  labels={{ owned: "My emblems", all: "All emblems" }}
+                  onChange={(v) => setBasicUseOwned(v === "owned")}
+                />
+                {!basicUseOwned && (
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <span className="text-muted">Grades:</span>
+                    {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => {
+                      const on = allowedGrades.has(g);
+                      return (
+                        <button
+                          key={g}
+                          type="button"
+                          onClick={() => {
+                            const next = new Set(allowedGrades);
+                            on ? next.delete(g) : next.add(g);
+                            if (next.size > 0) setAllowedGrades(next);
+                          }}
+                          className={`rounded-full px-3 py-1 font-medium capitalize transition ${
+                            on
+                              ? "bg-accent text-white"
+                              : "bg-raise text-muted hover:text-ink"
+                          }`}
+                        >
+                          {g}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Search quality */}
+              <div className="flex flex-col gap-2">
+                <span className="text-xs font-medium text-muted">Search quality</span>
+                <Segmented<BasicEffort>
+                  fluid
+                  value={basicEffort}
+                  options={(["exact", "quick", "normal", "thorough"] as BasicEffort[]).filter(
+                    (e) => e !== "exact" || basicExactFeasible,
+                  )}
+                  labels={{ exact: "Best", quick: "Fast", normal: "Balanced", thorough: "Thorough" }}
+                  onChange={setBasicEffort}
+                />
+              </div>
             </div>
           )}
 
@@ -1201,7 +1115,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             </button>
             {searchState.status === "done" && searchState.result && (
               <span className="text-xs text-muted">
-                {searchState.result.candidates.toLocaleString()} candidates · {(searchState.result.totalMs / 1000).toFixed(1)}s
+                Done in {(searchState.result.totalMs / 1000).toFixed(1)}s
               </span>
             )}
             {searchState.status === "error" && (
@@ -1219,6 +1133,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               pokemon={pokemon}
               optimizeLevel={optimizeLevel}
               pokemonAwareScoring
+              isStale={isResultStale}
               applied={applied}
               onApplyEmblems={handleApplyEmblems}
               onApplyItems={handleApplyItems}
@@ -1267,43 +1182,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       {/* ================================================================== */}
       {expert && (
         <>
-          {/* Pokémon being optimized */}
-          {pokemon ? (
-            <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
-              <div className="flex items-center gap-3">
-                <img
-                  src={asset(pokemon.imageAsset)}
-                  alt={pokemon.displayName}
-                  className="h-10 w-10 rounded-full bg-white/10 object-cover ring-1 ring-line"
-                />
-                <div>
-                  <p className="text-sm font-semibold text-ink">
-                    {pokemon.displayName}
-                    <span className="ml-2 text-xs font-normal text-muted">
-                      {basicObjectiveDescription(pokemon)} · Lv.{optimizeLevel}
-                    </span>
-                  </p>
-                  <p className="mt-0.5 text-xs text-muted">Custom search — adjust any setting below.</p>
-                </div>
-              </div>
-              <button
-                onClick={syncAdvancedFromBasic}
-                className="text-xs font-medium text-accent-ink underline hover:opacity-80"
-              >
-                ↺ Reset to auto defaults
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center justify-between rounded-2xl border border-line bg-surface px-4 py-3 shadow-sm">
-              <p className="text-xs text-muted">
-                Select a Pokémon to optimize, then adjust any setting below.
-              </p>
-              <button
-                onClick={syncAdvancedFromBasic}
-                className="text-xs font-medium text-accent-ink underline hover:opacity-80"
-              >
-                ↺ Reset to auto defaults
-              </button>
+          {/* Pokémon identity lives in the always-visible app bar; the reset
+              action sits next to the Search button below for an easy tap target. */}
+          {!pokemon && (
+            <div className="rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-muted shadow-sm">
+              Tap the Pokémon icon at the top to choose who to optimize.
             </div>
           )}
 
@@ -1318,16 +1201,13 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             }
           >
             <div className="flex flex-col gap-3">
-              <div className="flex flex-wrap gap-3">
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
-                  <input type="radio" checked={useOwned} onChange={() => setUseOwned(true)} className="accent-accent" />
-                  <span>Owned emblems only</span>
-                </label>
-                <label className="flex cursor-pointer items-center gap-2 text-sm">
-                  <input type="radio" checked={!useOwned} onChange={() => setUseOwned(false)} className="accent-accent" />
-                  <span>Full dataset (all 258)</span>
-                </label>
-              </div>
+              <Segmented<"owned" | "all">
+                fluid
+                value={useOwned ? "owned" : "all"}
+                options={["owned", "all"]}
+                labels={{ owned: "Owned only", all: "Full dataset" }}
+                onChange={(v) => setUseOwned(v === "owned")}
+              />
               {useOwned && (
                 <label className="flex cursor-pointer items-center gap-2 text-sm">
                   <input
@@ -1345,75 +1225,82 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 </label>
               )}
               {!useOwned && (
-                <div className="flex flex-wrap gap-3 text-sm">
+                <div className="flex flex-wrap items-center gap-2 text-xs">
                   <span className="text-muted">Grades:</span>
-                  {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => (
-                    <label key={g} className="flex cursor-pointer items-center gap-1.5 capitalize">
-                      <input
-                        type="checkbox"
-                        checked={allowedGrades.has(g)}
-                        onChange={(e) => {
+                  {(["gold", "silver", "bronze"] as EmblemGrade[]).map((g) => {
+                    const on = allowedGrades.has(g);
+                    return (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => {
                           const next = new Set(allowedGrades);
-                          e.target.checked ? next.add(g) : next.delete(g);
+                          on ? next.delete(g) : next.add(g);
                           if (next.size > 0) setAllowedGrades(next);
                         }}
-                        className="accent-accent"
-                      />
-                      {g}
-                    </label>
-                  ))}
+                        className={`rounded-full px-3 py-1 font-medium capitalize transition ${
+                          on ? "bg-accent text-white" : "bg-raise text-muted hover:text-ink"
+                        }`}
+                      >
+                        {g}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
-              {/* Search-space display + exact/heuristic indicator */}
-              <div className="flex flex-col gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs text-muted">
-                <div className="flex items-center gap-2">
-                  <span>Search space:</span>
-                  {colorMode === "exact" && colorConstraints && colorConstraintValid ? (
-                    constrainedBuildCount === null ? (
-                      <>
-                        <span className="font-mono font-semibold text-ink">many</span>
-                        <span>builds matching color targets (too many to count)</span>
-                      </>
-                    ) : constrainedBuildCount === 0n ? (
-                      <>
-                        <span className="font-mono font-semibold text-neg">0</span>
-                        <span>builds match — pool cannot satisfy these exact counts</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="font-mono font-semibold text-ink">{formatBuildCount(constrainedBuildCount)}</span>
-                        <span>builds match color targets</span>
-                        <span className="text-faint">(of {formatBuildCount(buildCount)} total)</span>
-                      </>
-                    )
-                  ) : (
-                    <>
-                      <span className="font-mono font-semibold text-ink">{formatBuildCount(buildCount)}</span>
-                      <span>combinations</span>
-                    </>
-                  )}
-                </div>
-                {/* Grade-reactive candidate count — changes when allowedGrades /
-                    mixedGrades changes, giving immediate feedback that grade
-                    selection affects the pool the optimizer uses. The combination
-                    count above (C(n,10)) is grade-independent (it counts distinct
-                    Pokémon name-sets); this line shows the grade dimension. */}
-                <div className="text-[11px] text-faint">
-                  {candidateCount.toLocaleString()} emblem candidates
-                  {" · "}{poolDistinctNames} Pokémon
-                  {candidateCount > poolDistinctNames
-                    ? ` × ${(candidateCount / poolDistinctNames).toFixed(1)} grades avg`
-                    : " (1 grade)"}
-                </div>
-                {/* Exact vs heuristic indicator — only shown when exact color mode is active */}
-                {colorMode === "exact" && colorConstraints && colorConstraintValid && constrainedBuildCount !== null && constrainedBuildCount > 0n && (
-                  <div className={`flex items-center gap-1 text-[11px] font-medium ${willRunExact ? "text-pos" : "text-faint"}`}>
-                    {willRunExact
-                      ? `⚡ Exact search (${formatBuildCount(constrainedBuildCount)} ≤ cap ${formatBuildCount(BigInt(exactCap))})`
-                      : `~ Heuristic search (${formatBuildCount(constrainedBuildCount)} > cap ${formatBuildCount(BigInt(exactCap))})`}
+              {/* Search-space summary — label/value rows so each wraps as a unit
+                  on mobile instead of breaking mid-phrase. */}
+              {(() => {
+                const colorExact = colorMode === "exact" && colorConstraints && colorConstraintValid;
+                const matchesZero = colorExact && constrainedBuildCount === 0n;
+                return (
+                  <div className="flex flex-col gap-2 rounded-lg bg-white/10 px-3 py-2.5 text-xs">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="shrink-0 text-muted">{colorExact ? "Color-valid builds" : "Possible builds"}</span>
+                      <span className={`min-w-0 text-right font-mono font-semibold ${matchesZero ? "text-neg" : "text-ink"}`}>
+                        {colorExact
+                          ? constrainedBuildCount === null
+                            ? "many"
+                            : constrainedBuildCount === 0n
+                              ? "none match"
+                              : <>{formatBuildCount(constrainedBuildCount)} <span className="font-sans font-normal text-faint">of {formatBuildCount(buildCount)}</span></>
+                          : formatBuildCount(buildCount)}
+                      </span>
+                    </div>
+
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="shrink-0 text-muted">Emblem pool</span>
+                      <span className="min-w-0 text-right text-faint">
+                        {candidateCount.toLocaleString()} emblems · {poolDistinctNames} Pokémon
+                      </span>
+                    </div>
+
+                    {colorExact && constrainedBuildCount !== null && constrainedBuildCount > 0n && (
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="shrink-0 text-muted">Method</span>
+                        <span
+                          className={`shrink-0 rounded-full bg-raise px-2 py-0.5 text-[11px] font-semibold ${
+                            willRunExact ? "text-pos" : "text-accent-ink"
+                          }`}
+                          title={
+                            willRunExact
+                              ? `Checks all ${formatBuildCount(constrainedBuildCount)} color-valid builds — guaranteed best`
+                              : `${formatBuildCount(constrainedBuildCount)} builds exceeds the cap of ${formatBuildCount(BigInt(exactCap))} — finds a near-best build`
+                          }
+                        >
+                          {willRunExact ? "⚡ Exact · best" : "≈ Smart · near-best"}
+                        </span>
+                      </div>
+                    )}
+
+                    {matchesZero && (
+                      <p className="text-[10px] text-neg">
+                        No combination hits these exact color counts — adjust the color targets below.
+                      </p>
+                    )}
                   </div>
-                )}
-              </div>
+                );
+              })()}
             </div>
           </CollapsibleCard>
 
@@ -1421,27 +1308,29 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           <CollapsibleCard title="Mode & Effort" persistKey="optimizer-mode">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col gap-1.5">
-                <div className="flex flex-wrap gap-4">
-                  {(["maximize", "target"] as SearchMode[]).map((m) => (
-                    <label key={m} className="flex cursor-pointer items-center gap-2 text-sm">
-                      <input type="radio" checked={mode === m} onChange={() => setMode(m)} className="accent-accent" />
-                      <span className="capitalize">{m}</span>
-                    </label>
-                  ))}
-                </div>
+                <span className="text-xs font-medium text-muted">Objective</span>
+                <Segmented<SearchMode>
+                  fluid
+                  value={mode}
+                  options={["maximize", "target"]}
+                  labels={{ maximize: "Maximize", target: "Target" }}
+                  onChange={setMode}
+                />
                 <p className="text-xs text-muted">
                   {mode === "maximize"
                     ? "Finds the build that scores highest on your priority stats (role-weighted or custom weights). Adjust Stat Priorities below."
                     : "Finds a build that hits the stat values you set, penalizing any shortfall. Enable stats and enter targets in Stat Targets below."}
                 </p>
               </div>
-              <div className="flex flex-wrap gap-3">
-                {(Object.entries(EFFORT_LABELS) as [Effort, string][]).map(([e, label]) => (
-                  <label key={e} className="flex cursor-pointer items-center gap-2 text-sm">
-                    <input type="radio" checked={effort === e} onChange={() => setEffort(e)} className="accent-accent" />
-                    <span>{label}</span>
-                  </label>
-                ))}
+              <div className="flex flex-col gap-1.5">
+                <span className="text-xs font-medium text-muted">Effort</span>
+                <Segmented<Effort>
+                  fluid
+                  value={effort}
+                  options={["quick", "normal", "thorough"]}
+                  labels={{ quick: "Quick", normal: "Normal", thorough: "Thorough" }}
+                  onChange={setEffort}
+                />
               </div>
 
               {/* Level control */}
@@ -1488,10 +1377,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               )}
 
               {/* Exact search cap — only relevant when color mode is "exact" */}
+              {colorMode === "exact" && (
               <div className="flex flex-col gap-1">
                 <div className="flex items-center justify-between">
                   <label className="text-xs text-muted" htmlFor="adv-exact-cap">
-                    Max permutations before heuristics
+                    Max builds to check before switching to smart search
                   </label>
                   {exactCap !== DEFAULT_EXACT_CAP && (
                     <button
@@ -1521,16 +1411,16 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                     className="w-40 rounded bg-surface px-2 py-1 font-mono text-xs text-ink ring-1 ring-line focus:outline-none focus:ring-accent"
                   />
                   <span className="text-[10px] text-faint">
-                    {exactCap.toLocaleString()} — {colorMode === "exact" && willRunExact ? "⚡ exact" : colorMode === "exact" ? "~ heuristic" : "n/a"}
+                    {exactCap.toLocaleString()} — {colorMode === "exact" && willRunExact ? "⚡ exact" : colorMode === "exact" ? "≈ smart search" : "n/a"}
                   </span>
                 </div>
                 <p className="text-[10px] text-faint">
-                  When color mode is Exact and the matching build count is ≤ this cap,
-                  the search exhaustively evaluates every valid combination (guaranteed
-                  optimum). Above the cap, the heuristic runs instead.
-                  Default: {DEFAULT_EXACT_CAP.toLocaleString()}.
+                  When the matching build count is ≤ this cap, the search checks every
+                  valid combination (guaranteed best). Above it, a faster smart search
+                  finds a near-best build. Default: {DEFAULT_EXACT_CAP.toLocaleString()}.
                 </p>
               </div>
+              )}
             </div>
           </CollapsibleCard>
 
@@ -1541,6 +1431,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               <div className="flex flex-col gap-1">
                 <span className="text-xs text-faint">Color control mode</span>
                 <Segmented<ColorMode>
+                  fluid
                   value={colorMode}
                   options={["off", "weighted", "exact"]}
                   onChange={setColorMode}
@@ -1562,7 +1453,12 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                 <>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     {POSITIVE_COLORS.map((col) => (
-                      <label key={col} className="flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-white/5 p-2 text-xs">
+                      <label
+                        key={col}
+                        className={`flex min-h-12 cursor-pointer items-center gap-2 rounded-lg border bg-white/5 p-2 text-xs transition ${
+                          activeColors.has(col) ? "border-accent/60 bg-accent-weak" : "border-line"
+                        }`}
+                      >
                         <input
                           type="checkbox"
                           checked={activeColors.has(col)}
@@ -1575,14 +1471,16 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                         />
                         <ColorDot color={col} />
                         <span className="flex-1 capitalize">{col}</span>
-                        {activeColors.has(col) && (
+                        {/* Always reserve the count field's space so chips keep a
+                            consistent size whether or not the color is selected. */}
+                        <div className={`shrink-0 ${activeColors.has(col) ? "" : "invisible"}`} aria-hidden={!activeColors.has(col)}>
                           <ColorCountField
                             label={col}
                             value={colorCounts[col] ?? 0}
                             max={Math.min(SLOTS, colorCapacities.get(col) ?? SLOTS)}
                             onCommit={(n) => setColorCounts((prev) => ({ ...prev, [col]: n }))}
                           />
-                        )}
+                        </div>
                       </label>
                     ))}
                   </div>
@@ -1675,7 +1573,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
                             </span>{" "}
                             {willRunExact
                               ? <span className="text-pos">⚡ exact search</span>
-                              : <span className="text-muted">~ heuristic (above cap)</span>}
+                              : <span className="text-muted">≈ smart search (above cap)</span>}
                           </>
                       }
                     </div>
@@ -1698,28 +1596,45 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               <div className="flex flex-col gap-2">
                 <p className="text-xs text-faint">
                   {pokemon
-                    ? `Auto-generated from ${pokemon.displayName}'s role. Adjust to change priorities.`
+                    ? `Auto-generated from ${pokemon.displayName}'s role. Drag a slider to change priorities — the predicted flat emblem stats update below each one.`
                     : "Select a Pokémon to auto-populate weights."}
                 </p>
-                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {Object.entries(STAT_LABELS).map(([stat, label]) => {
                     const w = priorities[stat as keyof typeof priorities] ?? 0;
+                    const uiValue = Math.min(1, w / WEIGHT_UI_MAX);
+                    const pred = flatStatPredictionByStat.get(stat as keyof StatBlock);
                     return (
-                      <div key={stat} className="flex items-center gap-2 text-xs">
-                        <span className="w-24 text-muted">{label}</span>
-                        <input
-                          type="range" min={0} max={5} step={0.5}
-                          value={w}
-                          onChange={(e) =>
-                            setCustomWeights((prev) => ({ ...prev, [stat]: parseFloat(e.target.value) }))
-                          }
-                          className="flex-1 accent-accent"
-                        />
-                        <span className="w-8 text-right font-mono text-ink">{w.toFixed(1)}</span>
+                      <div key={stat} className="flex flex-col gap-0.5">
+                        <div className="flex items-center gap-2 text-xs">
+                          <span className="w-24 text-muted">{label}</span>
+                          <input
+                            type="range" min={0} max={1} step={0.1}
+                            value={uiValue}
+                            onChange={(e) =>
+                              setCustomWeights((prev) => ({
+                                ...prev,
+                                [stat]: parseFloat(e.target.value) * WEIGHT_UI_MAX,
+                              }))
+                            }
+                            className="flex-1 accent-accent"
+                          />
+                          <span className="w-8 text-right font-mono text-ink">{uiValue.toFixed(1)}</span>
+                        </div>
+                        <span className="pl-[6.5rem] text-[10px] text-faint">
+                          {stat === "cdr"
+                            ? "from the black set bonus, not flat emblems"
+                            : pred
+                              ? `≈ ${fmtDelta(stat as keyof StatBlock, pred.predicted)} flat from emblems`
+                              : "no priority"}
+                        </span>
                       </div>
                     );
                   })}
                 </div>
+                <p className="text-[10px] text-faint">
+                  Estimated flat emblem stats your current priorities are likely to produce on this pool.
+                </p>
                 <button
                   onClick={() => setCustomWeights({})}
                   className="self-start text-xs text-muted underline hover:text-ink"
@@ -1812,7 +1727,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             </div>
           </CollapsibleCard>
 
-          {/* Search button */}
+          {/* Search + reset actions */}
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={handleAdvancedSearch}
@@ -1820,6 +1735,13 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               className="rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {searchState.status === "running" ? "Searching…" : "Search"}
+            </button>
+            <button
+              onClick={syncAdvancedFromBasic}
+              disabled={!pokemon || searchState.status === "running"}
+              className="rounded-xl border border-line px-4 py-2.5 text-sm font-medium text-accent-ink hover:bg-accent-weak active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              ↺ Reset to auto defaults
             </button>
             {pool.length < SLOTS && (
               <span className="text-xs text-neg">
@@ -1831,7 +1753,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             )}
             {searchState.status === "done" && searchState.result && (
               <span className="text-xs text-muted">
-                Found via <strong>{searchState.result.phase}</strong> · {searchState.result.candidates.toLocaleString()} candidates · {(searchState.result.totalMs / 1000).toFixed(1)}s
+                Found via <strong>{PHASE_LABEL[searchState.result.phase] ?? searchState.result.phase}</strong> · {searchState.result.candidates.toLocaleString()} candidates · {(searchState.result.totalMs / 1000).toFixed(1)}s
               </span>
             )}
             {searchState.status === "error" && (
@@ -1849,6 +1771,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
               pokemon={pokemon}
               optimizeLevel={optimizeLevel}
               pokemonAwareScoring={pokemonAwareScoring}
+              isStale={isResultStale}
               applied={applied}
               onApplyEmblems={handleApplyEmblems}
               onApplyItems={handleApplyItems}

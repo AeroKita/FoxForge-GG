@@ -42,13 +42,6 @@ function shardCount(total: number): number {
   return Math.min(MAX_SHARDS, Math.max(MIN_SHARDS, cores), maxSensible);
 }
 
-function fmtN(n: number): string {
-  if (n >= 1e9) return (n / 1e9).toFixed(1) + "B";
-  if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
-  if (n >= 1e4) return Math.round(n / 1000) + "k";
-  return String(n);
-}
-
 /**
  * Run exact color search in parallel across multiple shard workers.
  *
@@ -144,11 +137,7 @@ export async function searchColorExactParallel(
     const emitProgress = () => {
       const sum = Math.min(totalCombos, shardEval.reduce((a, b) => a + b, 0));
       const pct = 3 + Math.min(96, (sum / Math.max(1, totalCombos)) * 96);
-      onProgress?.(
-        pct,
-        `Exact · ${fmtN(sum)} / ${fmtN(totalCombos)} builds (${n} workers)`,
-        sum,
-      );
+      onProgress?.(pct, `Exact · ${n} workers`, sum);
     };
 
     // Periodically check the external abort signal

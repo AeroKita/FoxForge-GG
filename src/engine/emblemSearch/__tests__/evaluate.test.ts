@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { emblems, setBonuses } from "../../../data/gameData";
+import { emblems, setBonuses, pokemonList } from "../../../data/gameData";
 import { buildCandidatePool } from "../adapt";
 import {
   evaluateLoadout,
@@ -8,7 +8,7 @@ import {
   colorsMatchTargets,
   SCORE_EPS,
 } from "../evaluate";
-import type { SearchOptions } from "../types";
+import type { PokemonScoringContext, SearchOptions } from "../types";
 
 function makeMaximizeOpts(): SearchOptions {
   return {
@@ -125,6 +125,50 @@ describe("evaluate — maximize scoring", () => {
     const ev = evaluateLoadout(distinct.slice(0, 10), opts, setBonuses);
     expect(ev.valid).toBe(true);
     expect(ev.score).toBeLessThan(0);
+  });
+});
+
+describe("evaluate — survivability set-bonus floor", () => {
+  it("values a white (HP) set bonus in pokemon mode even with zero hp priority", () => {
+    // White-only emblems so the only set bonus reached is white → HP. With no hp
+    // priority weight, the bonus is only scored via SURVIVAL_SET_BONUS_FLOOR, so
+    // turning colorBonuses on must raise the score vs off.
+    const whiteOnly = emblems.filter((e) => e.colors.length === 1 && e.colors[0] === "white");
+    const pool = buildCandidatePool(whiteOnly, { grades: ["gold"] });
+    const seen = new Set<string>();
+    const distinct = pool.filter((c) => {
+      if (seen.has(c.pokemonName)) return false;
+      seen.add(c.pokemonName);
+      return true;
+    });
+    if (distinct.length < 10) return; // not enough unique white emblems → skip
+    const loadout = distinct.slice(0, 10);
+
+    const baseStats = pokemonList[0].baseStatsByLevel[14];
+    const pokemonContext: PokemonScoringContext = {
+      pokemonId: pokemonList[0].id,
+      level: 15,
+      baseStats,
+    };
+    const base: SearchOptions = {
+      mode: "maximize",
+      priorities: { attack: 3 }, // deliberately NO hp weight
+      targets: {},
+      targetActive: {},
+      protected: {},
+      colorConstraints: null,
+      colorBonuses: false,
+      scoringMode: "pokemon",
+      pokemonContext,
+      slots: 10,
+    };
+
+    const withoutBonus = evaluateLoadout(loadout, base, setBonuses).score;
+    const withBonus = evaluateLoadout(loadout, { ...base, colorBonuses: true }, setBonuses).score;
+
+    // Flat-stat scoring is identical; the only delta is the white HP set bonus,
+    // which is now valued despite hp having no priority weight.
+    expect(withBonus).toBeGreaterThan(withoutBonus);
   });
 });
 

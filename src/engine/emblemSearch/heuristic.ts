@@ -403,11 +403,7 @@ export async function runHeuristic(
     if (onProgress) {
       const elapsed = Date.now() - t0;
       const pct = Math.min(99, (elapsed / budgetMs) * 100);
-      await onProgress(
-        pct,
-        `Heuristic · ${counter.n.toLocaleString()} candidates · ${(elapsed / 1000).toFixed(0)}s / ${Math.round(budgetMs / 1000)}s`,
-        counter.n,
-      );
+      await onProgress(pct, "Smart search…", counter.n);
     }
   }
 
@@ -415,12 +411,7 @@ export async function runHeuristic(
   // capped at 99 so it never claims "done" early). Skipped on abort so a
   // cancelled search doesn't flash a full bar.
   if (onProgress && !(shouldAbort?.())) {
-    const elapsed = Date.now() - t0;
-    await onProgress(
-      100,
-      `Heuristic · ${counter.n.toLocaleString()} candidates · ${(elapsed / 1000).toFixed(0)}s / ${Math.round(budgetMs / 1000)}s`,
-      counter.n,
-    );
+    await onProgress(100, "Smart search…", counter.n);
   }
 
   return { loadout: globalBest.loadout, ev: globalBest.ev, candidates: counter.n, tries };

@@ -176,7 +176,7 @@ export async function runSearch(
   // Runs when exact was gated off (no color constraints / count null/0 / above
   // cap) OR when exact returned null (shouldn't happen normally).
   const heuristicLo = willRunExact ? 55 : 5;
-  report(heuristicLo, "Heuristic search…");
+  report(heuristicLo, "Smart search…");
 
   const heuristicProgress = async (pct: number, label: string, cands: number) => {
     candidates = cands;

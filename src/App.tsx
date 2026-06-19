@@ -70,7 +70,9 @@ function Workspace() {
   const role = p ? ROLE_COLOR[p.role] : null;
 
   const appBarProps = useMemo(() => {
-    if (tab === "build") {
+    // Build and Optimize both pin the selected Pokémon to the top-left of the
+    // fixed app bar so it stays visible while scrolling the search controls.
+    if (tab === "build" || tab === "optimize") {
       return {
         leading: (
           <button
@@ -99,6 +101,7 @@ function Workspace() {
               {ROLE_LABEL[p.role]}
             </span>
             <span className="capitalize">{p.attackType}</span>
+            {tab === "optimize" && <span className="text-faint">· Optimize</span>}
           </span>
         ) : undefined,
         onTitleTap: () => setPokePickerOpen(true),

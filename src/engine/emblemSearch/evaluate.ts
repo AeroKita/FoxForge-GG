@@ -108,6 +108,20 @@ export function colorBonusIncentive(
  *
  * Precomputes from the static baseStats vector — no per-candidate allocations.
  */
+/**
+ * Baseline value for survivability set bonuses (HP %, Defense %, Sp.Def %) so
+ * the defensive half of a meta color shell is rewarded even when the role gives
+ * the stat no explicit priority weight (e.g. white/HP on a pure Attacker). The
+ * actual priority weight wins when higher; offensive bonuses get no such floor
+ * so off-role offense colors are not over-valued. Negative-threshold utility
+ * colors (pink/navy/gray) never reach here — their bestPct stays 0.
+ */
+const SURVIVAL_SET_BONUS_FLOOR: Partial<Record<keyof StatBlock, number>> = {
+  hp: 0.5,
+  defense: 0.4,
+  spDefense: 0.4,
+};
+
 function pokemonAwareColorBonus(
   counts: Map<EmblemColor, number>,
   setBonuses: EmblemSetBonus[],
@@ -123,7 +137,7 @@ function pokemonAwareColorBonus(
     }
     if (bestPct === 0) continue;
     const stat = def.stat as keyof StatBlock;
-    const weight = weights[stat] ?? 0;
+    const weight = Math.max(weights[stat] ?? 0, SURVIVAL_SET_BONUS_FLOOR[stat] ?? 0);
     if (weight <= 0) continue;
     const base = ctx.baseStats[stat] ?? 0;
     const norm = STAT_NORM[stat] ?? 1;
