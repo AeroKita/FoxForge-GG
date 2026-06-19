@@ -501,7 +501,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // automatically when it isn't — see resolvedBasicEffort below).
   const [basicEffort, setBasicEffort] = useState<BasicEffort>("exact");
   const [colorBonuses, setColorBonuses] = useState(true);
-  const [optimizeLevel, setOptimizeLevel] = useState<number>(loadout.level ?? 15);
+  const [optimizeLevel, setOptimizeLevel] = useState<number>(15);
   const [pokemonAwareScoring, setPokemonAwareScoring] = useState(true);
   const [customWeights, setCustomWeights] = useState<Record<string, number>>({});
   const [colorMode, setColorMode] = useState<ColorMode>("off");
@@ -802,10 +802,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
   const applyEmblemsToLoadout = useCallback((emblems: EmblemPick[]) => {
     if (!emblems.length) return;
-    dispatch({ type: "applyBuild", level: optimizeLevel, emblems });
+    dispatch({ type: "applyBuild", emblems });
     setApplied({ emblems: true });
     showToast(`Applied ${emblems.length} emblem${emblems.length !== 1 ? "s" : ""} to your loadout.`);
-  }, [dispatch, optimizeLevel, showToast]);
+  }, [dispatch, showToast]);
 
   const handleApplyEmblems = useCallback(() => {
     applyEmblemsToLoadout(resultPicks ?? []);
@@ -848,7 +848,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // via the global mode toggle, the "switch to Advanced" links, or ↺ Reset).
   // Expert defaults: owned inventory pool + exact meta colors + protect defaults.
   const syncAdvancedFromBasic = useCallback(() => {
-    const level = loadout.level ?? 15;
     const grades = new Set(DEFAULT_ALLOWED_GRADES);
     setUseOwned(BASIC_POOL_DEFAULTS.useOwned);
     setMixedGrades(true);
@@ -857,10 +856,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     setColorBonuses(true);
     setPokemonAwareScoring(true);
     setCustomWeights({});
-    setOptimizeLevel(level);
     setExactCap(DEFAULT_EXACT_CAP);
 
-    applyAdvancedProtectDefaults(level);
+    applyAdvancedProtectDefaults(optimizeLevel);
 
     const defaultPool = buildPool(
       allEmblems,
@@ -868,7 +866,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       owned,
     );
     applyAdvancedColorDefaults(defaultPool);
-  }, [loadout.level, allEmblems, owned, applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
+  }, [optimizeLevel, allEmblems, owned, applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
 
   // Sync Advanced defaults when entering Advanced or when the Pokémon changes in Advanced.
   // prevExpert starts false so a page that loads already in Advanced mode is treated as
