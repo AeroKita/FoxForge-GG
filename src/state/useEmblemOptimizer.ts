@@ -184,7 +184,15 @@ export function useEmblemOptimizer(): {
       m.set(p.stat, p);
     }
     return m;
-  }, [mode, pool, priorities, colorMode, activeColors, colorCounts, floorActive]);
+  }, [
+    mode,
+    pool,
+    priorities,
+    colorMode,
+    activeColors,
+    colorCounts,
+    floorActive,
+  ]);
 
   const pokemonContext = useMemo((): PokemonScoringContext | undefined => {
     if (!pokemon || !pokemonAwareScoring) return undefined;
@@ -589,6 +597,7 @@ export function useEmblemOptimizer(): {
     historyCount,
     historyIndex,
     goHistory,
+    clearResult,
     handleApplyEmblems,
     applied,
     optimizeLevel,
