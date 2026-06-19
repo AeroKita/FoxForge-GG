@@ -429,18 +429,22 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
     );
     expect(totals.moveSpeed ?? 0).toBeGreaterThanOrEqual(0);
 
-    // Without the mobility guard the engine may stack −moveSpeed HP emblems.
-    const withoutMobility = { ...options, protected: { attack: options.protected.attack } };
-    const unguarded = await runSearch({
-      pool,
-      options: withoutMobility,
-      setBonuses: bundle.setBonuses,
-      effort: "quick",
-    });
-    const unguardedTotals = sumStats(
-      unguarded!.picks.map((slot) => emblemToCandidate(slot.emblem, slot.grade!)),
+    // Deterministic: the mobility floor penalises −moveSpeed stacks. A second
+    // heuristic search without the guard is not a reliable comparator — both
+    // runs often land on different local optima with moveSpeed ≥ 0 and equal
+    // attack, so unguarded moveSpeed can exceed guarded even though the floor
+    // is working (floor = 0 blocks net-negative, not "maximise moveSpeed").
+    const negMoveSpeed = pool.filter((c) => (c.stats.moveSpeed ?? 0) < 0);
+    expect(negMoveSpeed.length).toBeGreaterThanOrEqual(10);
+    const taxLoadout = negMoveSpeed.slice(0, 10);
+    const taxEv = evaluateLoadout(taxLoadout, options, bundle.setBonuses);
+    const taxEvNoMobility = evaluateLoadout(
+      taxLoadout,
+      { ...options, protected: { attack: options.protected.attack } },
+      bundle.setBonuses,
     );
-    expect(unguardedTotals.moveSpeed ?? 0).toBeLessThanOrEqual(totals.moveSpeed ?? 0);
+    expect(taxEv.totals.moveSpeed ?? 0).toBeLessThan(0);
+    expect(taxEv.score).toBeLessThan(taxEvNoMobility.score);
   }, 60_000);
 
   it("[PROT-21] Gengar search keeps def/spDef above soft floor", async () => {
