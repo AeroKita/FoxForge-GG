@@ -16,7 +16,8 @@
  *  EXPERT
  *    Full custom controls: pool source, mode (maximize/target), effort, level,
  *    Pokémon-aware scoring toggle, color constraints, stat priorities/targets.
- *    Pre-filled from the Beginner auto-derived values when switching from Beginner.
+ *    Pool defaults to owned emblems only (same as Beginner); user can toggle to
+ *    the full dataset. Pre-filled from Beginner auto-derived values when switching.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -53,6 +54,7 @@ import { priorityWeights } from "../engine/recommend";
 import {
   deriveBasicObjective,
   buildBasicPool,
+  BASIC_POOL_DEFAULTS,
   DEFAULT_ALLOWED_GRADES,
 } from "../engine/emblemSearch/basicObjective";
 import { buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, resolveColorSearchMode, EXACT_FALLBACK_EFFORT, type BasicEffort } from "../engine/emblemSearch/searchPresets";
@@ -499,8 +501,8 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   const pokemon = loadout.pokemonId ? pokemonById.get(loadout.pokemonId) ?? null : null;
 
   // ---- Pool state (Beginner vs Expert pool source are independent) ----
-  const [basicUseOwned, setBasicUseOwned] = useState(true);
-  const [useOwned, setUseOwned] = useState(false);
+  const [basicUseOwned, setBasicUseOwned] = useState(BASIC_POOL_DEFAULTS.useOwned);
+  const [useOwned, setUseOwned] = useState(BASIC_POOL_DEFAULTS.useOwned);
   const [mixedGrades, setMixedGrades] = useState(true);
   const [allowedGrades, setAllowedGrades] = useState<Set<EmblemGrade>>(
     () => new Set(DEFAULT_ALLOWED_GRADES),
@@ -551,6 +553,10 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
     () => buildBasicPool(allEmblems, owned, basicPoolConfig),
     [owned, basicUseOwned, allowedGrades],
   );
+
+  // Pool size guards — need SLOTS emblem entries for a full build.
+  const basicNotEnoughEmblems = basicPool.length < SLOTS;
+  const advancedNotEnoughEmblems = pool.length < SLOTS;
 
   // ---- Auto-derived Beginner objective ----
   // Pass pokemonList so protect floors are derived from population statistics.
@@ -878,11 +884,11 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
   // Sync Expert controls from Beginner defaults (called when switching Basic→Advanced
   // via the global mode toggle, the "switch to Advanced" links, or ↺ Reset).
-  // Expert defaults: full dataset pool + exact meta colors + protect defaults.
+  // Expert defaults: owned inventory pool + exact meta colors + protect defaults.
   const syncAdvancedFromBasic = useCallback(() => {
     const level = loadout.level ?? 15;
     const grades = new Set(DEFAULT_ALLOWED_GRADES);
-    setUseOwned(false);          // Expert defaults to the full 258-emblem dataset
+    setUseOwned(BASIC_POOL_DEFAULTS.useOwned);
     setMixedGrades(true);
     setAllowedGrades(grades);
     setMode("maximize");
@@ -894,8 +900,12 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
     applyAdvancedProtectDefaults(level);
 
-    const fullPool = buildPool(allEmblems, { useOwned: false, mixedGrades: true, allowedGrades: grades }, owned);
-    applyAdvancedColorDefaults(fullPool);
+    const defaultPool = buildPool(
+      allEmblems,
+      { useOwned: BASIC_POOL_DEFAULTS.useOwned, mixedGrades: true, allowedGrades: grades },
+      owned,
+    );
+    applyAdvancedColorDefaults(defaultPool);
   }, [loadout.level, allEmblems, owned, applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
 
   // Sync Advanced defaults when entering Advanced or when the Pokémon changes in Advanced.
@@ -954,9 +964,9 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
   // Expert search (Expert tab only — pool source toggle applies here, not in Beginner)
   const handleAdvancedSearch = useCallback(async () => {
-    if (pool.length < SLOTS) return;
+    if (advancedNotEnoughEmblems) return;
     await run(pool, advancedSearchOptions, setBonuses, effort, searchSettingsKey, effectiveResultCount);
-  }, [pool, advancedSearchOptions, effort, run, searchSettingsKey, effectiveResultCount]);
+  }, [advancedNotEnoughEmblems, pool, advancedSearchOptions, effort, run, searchSettingsKey, effectiveResultCount]);
 
   const hasResult = (searchState.status === "done" || searchState.status === "cancelled")
     && !!resultPicks?.length;
@@ -998,9 +1008,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
       return null;
     }
   }, [searchState.result, pokemon, optimizeLevel, loadout.heldItemIds, heldSlotGrades]);
-
-  // ---- Beginner mode info ----
-  const basicNotEnoughEmblems = basicPool.length < SLOTS;
 
   // ---- Render ----
   return (
@@ -1220,6 +1227,42 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           {!pokemon && (
             <div className="rounded-2xl border border-line bg-surface px-4 py-3 text-sm text-muted shadow-sm">
               Tap the Pokémon icon at the top to choose who to optimize.
+            </div>
+          )}
+
+          {/* Not enough emblems in pool */}
+          {pokemon && advancedNotEnoughEmblems && useOwned && (
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm">
+              <p className="font-medium text-amber-700 dark:text-amber-300">
+                You own only {pool.length} emblem{pool.length !== 1 ? "s" : ""} — need {SLOTS} for a full build.
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                Mark more emblems as owned on the{" "}
+                <button
+                  onClick={() => onNavigate?.("emblems")}
+                  className="font-medium text-accent-ink underline"
+                >
+                  ★ Emblems
+                </button>{" "}
+                page, or{" "}
+                <button
+                  onClick={() => setUseOwned(false)}
+                  className="font-medium text-accent-ink underline"
+                >
+                  switch to the full dataset
+                </button>
+                .
+              </p>
+            </div>
+          )}
+          {pokemon && advancedNotEnoughEmblems && !useOwned && (
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm">
+              <p className="font-medium text-amber-700 dark:text-amber-300">
+                Only {pool.length} emblem candidate{pool.length !== 1 ? "s" : ""} in pool — need {SLOTS} for a full build.
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                Enable more grades above.
+              </p>
             </div>
           )}
 
@@ -1770,7 +1813,7 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={handleAdvancedSearch}
-              disabled={pool.length < SLOTS || (colorMode === "exact" && !colorConstraintValid) || searchState.status === "running"}
+              disabled={!pokemon || advancedNotEnoughEmblems || (colorMode === "exact" && !colorConstraintValid) || searchState.status === "running"}
               className="rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent/90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {searchState.status === "running" ? "Searching…" : "Search"}
@@ -1782,11 +1825,6 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
             >
               ↺ Reset to defaults
             </button>
-            {pool.length < SLOTS && (
-              <span className="text-xs text-neg">
-                Need ≥{SLOTS} emblems in pool (have {pool.length})
-              </span>
-            )}
             {colorMode === "exact" && !colorConstraintValid && (
               <span className="text-xs text-neg">Invalid color constraints</span>
             )}
