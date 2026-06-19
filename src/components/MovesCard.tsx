@@ -8,7 +8,15 @@ import { moveTip, pickDescription } from "./tips";
 import type { Move, Pokemon } from "../types";
 
 /** A read-only move row (base skill, Unite move) — icon + name + tooltip. */
-function MoveRow({ move, dimLabel, advanced }: { move: Move; dimLabel?: string; advanced: boolean }) {
+function MoveRow({
+  move,
+  dimLabel,
+  advanced,
+}: {
+  move: Move;
+  dimLabel?: string;
+  advanced: boolean;
+}) {
   return (
     <Tooltip content={moveTip(move, advanced)}>
       <span className="flex items-center gap-2">
@@ -117,9 +125,7 @@ export function MovesCard() {
             content={
               <span>
                 <span className="font-semibold">{passive.name}</span>
-                {passiveDesc && (
-                  <span className="mt-0.5 block text-faint">{passiveDesc}</span>
-                )}
+                {passiveDesc && <span className="mt-0.5 block text-faint">{passiveDesc}</span>}
               </span>
             }
           >
