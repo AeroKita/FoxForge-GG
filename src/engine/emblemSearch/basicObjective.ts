@@ -7,11 +7,12 @@
  * Advanced mode, which is pre-filled from these auto-derived values.
  */
 
-import type { Emblem, EmblemColor, EmblemGrade, HeldItem, Pokemon } from "../../types";
+import type { Emblem, EmblemColor, EmblemGrade, EmblemOptimizerPreset, HeldItem, Pokemon } from "../../types";
 import { colorTargetsFor, priorityWeights, scoreHeldItem, coreItemsFor } from "../recommend";
 import { buildPool } from "./pool";
 import type { EmblemCandidate, PokemonScoringContext, PoolConfig, SearchOptions, StatFloors, StatWeights } from "./types";
 import { deriveProtectFloors } from "./protectDefaults";
+import { presetColorTargets, presetPriorities, presetProtectFloors } from "./optimizerPresets";
 
 /** Default grade filter: bronze, silver, and gold all enabled. */
 export const DEFAULT_ALLOWED_GRADES: ReadonlySet<EmblemGrade> = new Set<EmblemGrade>([
@@ -68,27 +69,46 @@ export interface BasicObjective {
 /**
  * Derive the Basic-mode search objective for a given Pokémon at a given level.
  *
+ * When a `preset` is supplied (the per-Pokémon community/curated preset resolved
+ * by {@link resolveEmblemPreset}), its priorities, color shell and protect
+ * floors are used instead of the role-generic derivation — the latter remains
+ * the fallback when no preset is passed (preset null/omitted). Preset floors are
+ * merged with the role-based mobility and defense soft-floor guards so those are
+ * never weakened (see {@link presetProtectFloors}).
+ *
  * @param pokemon     The selected Pokémon.
  * @param level       The level to optimize for (1–15).
  * @param emblems     Full emblem list (needed to resolve curated build color counts).
  * @param allPokemon  Full Pokémon roster, used for population-relative protect
  *                    floor derivation. Pass [] (default) to skip protect defaults.
+ * @param preset      Resolved per-Pokémon preset, or null/omitted for generic.
  */
 export function deriveBasicObjective(
   pokemon: Pokemon,
   level: number,
   emblems: Emblem[],
   allPokemon: Pokemon[] = [],
+  preset: EmblemOptimizerPreset | null = null,
 ): BasicObjective {
-  const priorities = priorityWeights(pokemon);
-  const byId = new Map(emblems.map((e) => [e.id, e]));
-  const colorTargets = colorTargetsFor(pokemon, byId);
   const baseStats = pokemon.baseStatsByLevel[Math.max(0, level - 1)] ?? pokemon.baseStatsByLevel[0];
   const pokemonContext: PokemonScoringContext = {
     pokemonId: pokemon.id,
     level,
     baseStats,
   };
+
+  if (preset) {
+    return {
+      priorities: presetPriorities(preset),
+      colorTargets: presetColorTargets(preset),
+      pokemonContext,
+      protectedFloors: presetProtectFloors(pokemon, preset),
+    };
+  }
+
+  const priorities = priorityWeights(pokemon);
+  const byId = new Map(emblems.map((e) => [e.id, e]));
+  const colorTargets = colorTargetsFor(pokemon, byId);
   const protectedFloors = deriveProtectFloors(pokemon, allPokemon, level);
   return { priorities, colorTargets, pokemonContext, protectedFloors };
 }

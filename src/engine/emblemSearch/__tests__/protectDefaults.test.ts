@@ -23,7 +23,6 @@ import { makeEmblem } from "../../__tests__/fixtures";
 import { buildCandidatePool, emblemToCandidate } from "../adapt";
 import { buildPool } from "../pool";
 import { runSearch } from "../orchestrator";
-import { buildPresetSearchOptions } from "../searchPresets";
 import { loadBundle } from "../../../data/loadBundle";
 import rawPatch from "../../../data/patch-current.json";
 import type { Pokemon, StatBlock } from "../../../types";
@@ -370,14 +369,10 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
       { useOwned: false, mixedGrades: true, allowedGrades: new Set(["gold", "silver", "bronze"]) },
       new Set(),
     );
-    const { options } = buildPresetSearchOptions({
-      pokemon: dragapult,
-      level: 15,
-      pool,
-      emblems: bundle.emblems,
-      pokemonList: pop,
-      forceHeuristic: true,
-    });
+    // Generic objective (no preset) — this case validates the role-based
+    // mobility floor mechanism specifically.
+    const objective = deriveBasicObjective(dragapult, 15, bundle.emblems, pop);
+    const options = basicSearchOptions(objective);
     expect(options.protected.moveSpeed).toBe(0);
 
     const result = await runSearch({ pool, options, setBonuses: bundle.setBonuses, effort: "quick" });
@@ -408,14 +403,10 @@ describe("deriveDefaultProtectedStats — live roster cases", () => {
       { useOwned: false, mixedGrades: true, allowedGrades: new Set(["gold", "silver", "bronze"]) },
       new Set(),
     );
-    const { options } = buildPresetSearchOptions({
-      pokemon: gengar,
-      level: 15,
-      pool,
-      emblems: bundle.emblems,
-      pokemonList: pop,
-      forceHeuristic: true,
-    });
+    // Generic objective (no preset) — this case validates the role-based
+    // defense soft-floor mechanism specifically.
+    const objective = deriveBasicObjective(gengar, 15, bundle.emblems, pop);
+    const options = basicSearchOptions(objective);
     expect(options.protected.defense).toBe(DEFENSE_SOFT_FLOOR);
     expect(options.protected.spDefense).toBe(DEFENSE_SOFT_FLOOR);
 

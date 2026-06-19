@@ -57,6 +57,7 @@ import {
 } from "../engine/emblemSearch/basicObjective";
 import { buildPresetSearchOptions, deriveAdvancedColorUiDefaults, resolveBasicEffort, resolveColorSearchMode, EXACT_FALLBACK_EFFORT, type BasicEffort } from "../engine/emblemSearch/searchPresets";
 import { deriveProtectFloors } from "../engine/emblemSearch/protectDefaults";
+import { presetPriorities, presetProtectFloors, resolveEmblemPreset } from "../engine/emblemSearch/optimizerPresets";
 import { predictFlatStatRanges, type FlatStatPrediction } from "../engine/emblemSearch/predictStats";
 import type {
   PokemonScoringContext,
@@ -551,7 +552,13 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   // for stable references.
   const basicObjective = useMemo(() => {
     if (!pokemon) return null;
-    return deriveBasicObjective(pokemon, optimizeLevel, allEmblems, pokemonList);
+    return deriveBasicObjective(
+      pokemon,
+      optimizeLevel,
+      allEmblems,
+      pokemonList,
+      resolveEmblemPreset(pokemon)?.preset ?? null,
+    );
   }, [pokemon, optimizeLevel]);
 
   // Resolve exact-vs-heuristic for Beginner on the ACTUAL Beginner pool, using
@@ -581,10 +588,14 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
   }, [basicEffort, basicExactFeasible]);
 
   // ---- Expert weights + context ----
-  const defaultWeights = useMemo(
-    () => (pokemon ? priorityWeights(pokemon) : {}),
-    [pokemon],
-  );
+  // Advanced "Stat Priorities" defaults come from the per-Pokémon preset when one
+  // exists (engine-scale weights, same scale as priorityWeights), so the Advanced
+  // sliders match the Basic preset search; otherwise the role-generic weights.
+  const defaultWeights = useMemo(() => {
+    if (!pokemon) return {};
+    const resolved = resolveEmblemPreset(pokemon);
+    return resolved ? presetPriorities(resolved.preset) : priorityWeights(pokemon);
+  }, [pokemon]);
   const priorities = useMemo(() => ({ ...defaultWeights, ...customWeights }), [defaultWeights, customWeights]);
 
   // Predicted flat emblem-stat totals per prioritized stat, shown inline beside
@@ -822,7 +833,12 @@ export function EmblemOptimizer({ onNavigate }: { onNavigate?: (page: string) =>
 
   const applyAdvancedProtectDefaults = useCallback((level: number) => {
     if (pokemon) {
-      const floors = deriveProtectFloors(pokemon, pokemonList, level);
+      // Preset floors (merged with mobility/defense guards) when a preset exists,
+      // else the population-relative generic floors — keeps Advanced ↔ Basic aligned.
+      const resolved = resolveEmblemPreset(pokemon);
+      const floors = resolved
+        ? presetProtectFloors(pokemon, resolved.preset)
+        : deriveProtectFloors(pokemon, pokemonList, level);
       const newFloorActive: Record<string, boolean> = {};
       const newFloorValues: Record<string, string> = {};
       for (const stat of Object.keys(floors)) {

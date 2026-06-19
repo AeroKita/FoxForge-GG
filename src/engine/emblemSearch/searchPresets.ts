@@ -21,6 +21,7 @@ import { colorGroupSizes } from "./exactColor";
 import { countConstrainedBuilds } from "./pool";
 import { DEFAULT_EXACT_CAP, shouldRunExact } from "./orchestrator";
 import { deriveBasicObjective, type BasicObjective } from "./basicObjective";
+import { presetColorTargets, resolveEmblemPreset } from "./optimizerPresets";
 import type { EmblemCandidate, SearchOptions } from "./types";
 
 /** UNITE emblem loadouts are always 10 slots. */
@@ -152,8 +153,11 @@ export function deriveAdvancedColorUiDefaults(
 
   if (!pokemon) return cleared();
 
+  // Prefer the per-Pokémon preset color shell (keeps Advanced color defaults in
+  // lock-step with the Basic preset search); fall back to the generic meta.
+  const resolved = resolveEmblemPreset(pokemon);
   const byId = new Map(emblems.map((e) => [e.id, e]));
-  const targets = colorTargetsFor(pokemon, byId);
+  const targets = resolved ? presetColorTargets(resolved.preset) : colorTargetsFor(pokemon, byId);
   if (targets.size === 0) return cleared();
 
   const resolution = resolveColorSearchMode(pool, targets, SLOTS);
@@ -203,7 +207,8 @@ export interface PresetSearchBuild {
  */
 export function buildPresetSearchOptions(params: BuildPresetParams): PresetSearchBuild {
   const { pokemon, level, pool, emblems, pokemonList = [], forceHeuristic = false } = params;
-  const objective = deriveBasicObjective(pokemon, level, emblems, pokemonList);
+  const resolved = resolveEmblemPreset(pokemon);
+  const objective = deriveBasicObjective(pokemon, level, emblems, pokemonList, resolved?.preset ?? null);
   const targets = objective.colorTargets as Map<EmblemColor, number>;
   const resolution = resolveColorSearchMode(pool, targets, SLOTS);
 

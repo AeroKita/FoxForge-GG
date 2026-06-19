@@ -24,6 +24,7 @@ import { emblems, pokemonById } from "../../../data/gameData";
 import { buildPool } from "../pool";
 import { DEFAULT_ALLOWED_GRADES } from "../basicObjective";
 import { colorTargetsFor } from "../../recommend";
+import { presetColorTargets, resolveEmblemPreset } from "../optimizerPresets";
 import type { Emblem, EmblemColor, Pokemon } from "../../../types";
 
 // ---------------------------------------------------------------------------
@@ -385,9 +386,14 @@ describe("deriveAdvancedColorUiDefaults", () => {
   );
 
   for (const id of ["pikachu", "snorlax", "umbreon"] as const) {
-    it(`[PRE-UI] ${id} fills curated/meta color targets on full pool`, () => {
+    it(`[PRE-UI] ${id} fills resolved (preset or meta) color targets on full pool`, () => {
       const pokemon = pokemonById.get(id)!;
-      const targets = colorTargetsFor(pokemon, emblemById);
+      // Advanced color defaults now prefer the per-Pokémon preset shell, falling
+      // back to the generic meta when no preset exists.
+      const resolved = resolveEmblemPreset(pokemon);
+      const targets = resolved
+        ? presetColorTargets(resolved.preset)
+        : colorTargetsFor(pokemon, emblemById);
       const defaults = deriveAdvancedColorUiDefaults(pokemon, fullPool, emblems);
 
       expect(targets.size).toBeGreaterThan(0);
