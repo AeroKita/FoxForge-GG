@@ -130,11 +130,11 @@ const STAT_LABELS: Partial<Record<string, string>> = {
   attackSpeed: "Atk Speed", moveSpeed: "Move Speed",
 };
 
-/** Advanced UI copy for where preset defaults came from (community, curated, or role). */
+/** Advanced UI copy for where preset defaults came from (Recommended builds, curated, or role). */
 function presetAutofillIntro(displayName: string, resolved: ResolvedEmblemPreset | null): string {
   if (!resolved) return `Auto-filled from role defaults for ${displayName}`;
   if (resolved.source === "manual") return `Auto-filled from curated preset for ${displayName}`;
-  return `Auto-filled from community builds for ${displayName}`;
+  return `Auto-filled from Recommended builds for ${displayName}`;
 }
 
 /** Shared label column for stat rows — fits longest name ("Sp. Defense") without old w-24 gap. */
