@@ -1,6 +1,7 @@
 // App state: the in-progress loadout (reducer) + saved loadouts (localStorage).
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -235,20 +236,23 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     [loadout, heldGradeMemory],
   );
 
-  const setHeldItemGradeById = (itemId: string, grade: number) => {
+  const setHeldItemGradeById = useCallback((itemId: string, grade: number) => {
     const g = clampHeldGrade(grade);
     setHeldGradeMemory((prev) => {
       const next = { ...prev, [itemId]: g };
       saveHeldItemGradeMemory(next);
       return next;
     });
-  };
+  }, []);
 
   // Set the grade for whatever item occupies a Builder slot (no-op for an empty slot).
-  const setHeldItemGradeForSlot = (slot: number, grade: number) => {
-    const id = loadout.heldItemIds[slot];
-    if (id) setHeldItemGradeById(id, grade);
-  };
+  const setHeldItemGradeForSlot = useCallback(
+    (slot: number, grade: number) => {
+      const id = loadout.heldItemIds[slot];
+      if (id) setHeldItemGradeById(id, grade);
+    },
+    [loadout.heldItemIds, setHeldItemGradeById],
+  );
 
   // Persist the in-progress build across reloads.
   useEffect(() => {
@@ -337,7 +341,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setHeldItemGradeForSlot,
       ownedHeldItemIds: Object.keys(heldGradeMemory),
     }),
-    [loadout, saved, saveError, owned, mode, theme, themePref, heldGradeMemory, heldSlotGrades],
+    [
+      loadout,
+      saved,
+      saveError,
+      owned,
+      mode,
+      theme,
+      themePref,
+      heldGradeMemory,
+      heldSlotGrades,
+      setHeldItemGradeById,
+      setHeldItemGradeForSlot,
+    ],
   );
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
