@@ -111,8 +111,8 @@ export interface SearchOptions {
   /**
    * Maximum number of color-feasible builds to enumerate in the exact
    * color-constrained search before falling back to the heuristic.
-   * Measured against countConstrainedBuilds (same metric as uniteemblemfinder's
-   * COLOR_EXACT_CAP). Defaults to 1_000_000_000 when omitted.
+   * Measured against countExactEnumerationSpace (Pokémon-name combos that
+   * exactColor enumerates). Defaults to 1_000_000_000 when omitted.
    * Only relevant when colorConstraints is non-null.
    */
   exactCap?: number;

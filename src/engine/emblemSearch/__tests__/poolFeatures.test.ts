@@ -27,11 +27,14 @@ import { makeEmblem } from "../../__tests__/fixtures";
 import { buildCandidatePool } from "../adapt";
 import {
   countConstrainedBuilds,
+  countExactEnumerationSpace,
+  matchingBuildDisplayCount,
   approximateBuildCount,
   distinctPokemonCount,
   buildPool,
 } from "../pool";
 import { emblems as allEmblems } from "../../../data/gameData";
+import { DEFAULT_EXACT_CAP, shouldRunExact } from "../orchestrator";
 import type { EmblemCandidate } from "../types";
 import type { Emblem } from "../../../types";
 
@@ -137,6 +140,53 @@ describe("countConstrainedBuilds — no constraint", () => {
   it("returns null when constraints map is empty (no target set)", () => {
     const pool = singles(15, "brown");
     expect(countConstrainedBuilds(pool, new Map())).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// exact enumeration space vs grade-aware display count
+// ---------------------------------------------------------------------------
+
+describe("countExactEnumerationSpace vs countConstrainedBuilds", () => {
+  it("[ENUM-1] single-grade pool: both counts match", () => {
+    const pool = [...singles(15, "brown", "B"), ...singles(10, "green", "G")];
+    const targets = new Map<string, number>([["brown", 4]]);
+    expect(countExactEnumerationSpace(pool, targets as never)).toBe(
+      countConstrainedBuilds(pool, targets as never),
+    );
+  });
+
+  it("[ENUM-2] mixed-grade pool: grade-aware count exceeds cap while enum space does not", () => {
+    const emblems: Emblem[] = Array.from({ length: 30 }, (_, i) =>
+      makeEmblem(`Mon${i}`, ["brown"] as never, { attack: 1 }),
+    );
+    const ownedKeys = new Set<string>();
+    for (let i = 0; i < 30; i++) {
+      for (const g of ["gold", "silver", "bronze"]) ownedKeys.add(`mon${i}:${g}`);
+    }
+    const pool = buildCandidatePool(emblems, { ownedKeys, mixedGrades: true });
+    const targets = new Map<string, number>([["brown", 10]]);
+
+    const display = countConstrainedBuilds(pool, targets as never);
+    const enumSpace = countExactEnumerationSpace(pool, targets as never);
+
+    expect(enumSpace).not.toBeNull();
+    expect(display).not.toBeNull();
+    expect(display! > enumSpace!).toBe(true);
+    expect(enumSpace! <= BigInt(DEFAULT_EXACT_CAP)).toBe(true);
+    expect(display! > BigInt(DEFAULT_EXACT_CAP)).toBe(true);
+    expect(shouldRunExact(display, DEFAULT_EXACT_CAP)).toBe(false);
+    expect(shouldRunExact(enumSpace, DEFAULT_EXACT_CAP)).toBe(true);
+  });
+});
+
+describe("matchingBuildDisplayCount", () => {
+  it("[ENUM-3] prefers exact enumeration count for UI numerator", () => {
+    expect(matchingBuildDisplayCount(30_205_280n, 777_400_000_000n)).toBe(30_205_280n);
+  });
+
+  it("[ENUM-4] falls back to constrained count when enum space is null", () => {
+    expect(matchingBuildDisplayCount(null, 42n)).toBe(42n);
   });
 });
 

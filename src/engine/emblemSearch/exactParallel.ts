@@ -45,7 +45,7 @@ function shardCount(total: number): number {
 /**
  * Run exact color search in parallel across multiple shard workers.
  *
- * @param constrainedCount - Pre-computed total from countConstrainedBuilds
+ * @param constrainedCount - Pre-computed total from countExactEnumerationSpace
  *   (the caller already verified it is ≤ exactCap and ≥ 0).
  * @returns The best result across all shards, or null if parallel isn't
  *   available / fails (orchestrator falls back to single-threaded).

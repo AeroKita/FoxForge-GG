@@ -82,6 +82,7 @@ export function AdvancedOptimizer({
     colorConstraints,
     colorConstraintValid,
     constrainedBuildCount,
+    exactEnumerationCount,
     willRunExact,
     colorCapacities,
     totalColorConstrained,
@@ -151,6 +152,7 @@ export function AdvancedOptimizer({
         colorConstraints={colorConstraints}
         colorConstraintValid={colorConstraintValid}
         constrainedBuildCount={constrainedBuildCount}
+        exactEnumerationCount={exactEnumerationCount}
         willRunExact={willRunExact}
       />
 
@@ -186,6 +188,7 @@ export function AdvancedOptimizer({
         colorConstraintValid={colorConstraintValid}
         totalColorConstrained={totalColorConstrained}
         constrainedBuildCount={constrainedBuildCount}
+        exactEnumerationCount={exactEnumerationCount}
         willRunExact={willRunExact}
         buildCount={buildCount}
         colorBonusPreviews={colorBonusPreviews}

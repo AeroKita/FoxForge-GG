@@ -103,37 +103,27 @@ export function formatBuildCount(n: bigint): string {
 // Constrained build count (dual-color-aware DP)
 // ---------------------------------------------------------------------------
 
-/**
- * Count distinct 10-Pokémon builds from the pool whose per-color counts
- * exactly satisfy every entry in colorConstraints (unconstrained colors are
- * free). Dual-color emblems are handled correctly: a Pokémon whose emblem has
- * two colors contributes +1 to both of the checked colors it carries.
- *
- * Algorithm: groups distinct Pokémon by their "color-type vector" (which
- * constrained colors they carry), then runs a BigInt DP over the groups.
- * Mirrors countColorTargetBuilds in uniteemblemfinder.github.io/src/app.js
- * (clean-room TypeScript port; no code copied verbatim).
- *
- * Returns:
- *  - a BigInt with the exact count, when feasible and computable.
- *  - 0n when the constraints cannot be met by any build from the pool.
- *  - null when the DP state space would exceed MAX_DP_STATES (too large to
- *    count quickly; caller should display "too many to count").
- */
-export function countConstrainedBuilds(
-  pool: EmblemCandidate[],
-  colorConstraints: Map<EmblemColor, number>,
-  slots = 10,
-): bigint | null {
-  const checked = [...colorConstraints.keys()];
-  if (!checked.length) return null;
+type ColorGroup = { vec: number[]; variantCounts: number[] };
 
-  const targetVec = checked.map((col) => colorConstraints.get(col)!);
-  const sum = targetVec.reduce((a, b) => a + b, 0);
-  if (sum > 2 * slots) return 0n;
-  if (targetVec.some((t) => t > slots)) return 0n;
+/** Ways to pick x Pokémon from a group (x = 0..count). */
+function groupPickWays(variantCounts: number[], gradeAware: boolean): bigint[] {
+  const count = variantCounts.length;
+  const pickWays = Array.from({ length: count + 1 }, () => 0n);
+  if (gradeAware) {
+    pickWays[0] = 1n;
+    for (const v of variantCounts) {
+      const w = BigInt(v);
+      for (let x = count; x >= 1; x--) {
+        pickWays[x] += pickWays[x - 1] * w;
+      }
+    }
+  } else {
+    for (let x = 0; x <= count; x++) pickWays[x] = binomialBig(count, x);
+  }
+  return pickWays;
+}
 
-  // Distinct Pokémon → colors + grade-variant count (colors are grade-independent)
+function buildColorGroups(pool: EmblemCandidate[], checked: EmblemColor[]): ColorGroup[] {
   const byName = new Map<string, { colors: EmblemColor[]; variants: number }>();
   for (const c of pool) {
     const entry = byName.get(c.pokemonName);
@@ -144,10 +134,7 @@ export function countConstrainedBuilds(
     }
   }
 
-  // Group Pokémon by their color-type vector over the checked colors.
-  // e.g. a Pokémon with colors=[green,black] and checked=[green,black]
-  // gets vec=[1,1]; one with colors=[green] gets vec=[1,0].
-  const groupMap = new Map<string, { vec: number[]; variantCounts: number[] }>();
+  const groupMap = new Map<string, ColorGroup>();
   for (const { colors, variants } of byName.values()) {
     const vec = checked.map((col) => (colors.includes(col) ? 1 : 0));
     const key = vec.join(",");
@@ -155,24 +142,32 @@ export function countConstrainedBuilds(
     g.variantCounts.push(variants);
     groupMap.set(key, g);
   }
-  const groups = [...groupMap.values()];
+  return [...groupMap.values()];
+}
 
-  // DP state: "slotsUsed|count0,count1,..." → number of ways (BigInt).
+function countConstrainedBuildsInternal(
+  pool: EmblemCandidate[],
+  colorConstraints: Map<EmblemColor, number>,
+  slots: number,
+  gradeAware: boolean,
+): bigint | null {
+  const checked = [...colorConstraints.keys()];
+  if (!checked.length) return null;
+
+  const targetVec = checked.map((col) => colorConstraints.get(col)!);
+  const sum = targetVec.reduce((a, b) => a + b, 0);
+  if (sum > 2 * slots) return 0n;
+  if (targetVec.some((t) => t > slots)) return 0n;
+
+  const groups = buildColorGroups(pool, checked);
+
   const initKey = "0|" + targetVec.map(() => 0).join(",");
   let dp = new Map<string, bigint>([[initKey, 1n]]);
   const MAX_DP_STATES = 300_000;
 
   for (const { vec, variantCounts } of groups) {
     const count = variantCounts.length;
-    // e_x(variantCounts): ways to pick x Pokémon with grade assignments
-    const pickWays = Array.from({ length: count + 1 }, () => 0n);
-    pickWays[0] = 1n;
-    for (const v of variantCounts) {
-      const w = BigInt(v);
-      for (let x = count; x >= 1; x--) {
-        pickWays[x] += pickWays[x - 1] * w;
-      }
-    }
+    const pickWays = groupPickWays(variantCounts, gradeAware);
 
     const ndp = new Map<string, bigint>();
     for (const [key, ways] of dp) {
@@ -207,4 +202,45 @@ export function countConstrainedBuilds(
   }
 
   return dp.get(slots + "|" + targetVec.join(",")) ?? 0n;
+}
+
+/**
+ * Count distinct 10-Pokémon loadouts (including grade choice per slot) whose
+ * per-color counts satisfy colorConstraints. Used for UI "search space" display.
+ *
+ * Returns 0n when infeasible, null when the DP state space exceeds MAX_DP_STATES.
+ */
+export function countConstrainedBuilds(
+  pool: EmblemCandidate[],
+  colorConstraints: Map<EmblemColor, number>,
+  slots = 10,
+): bigint | null {
+  return countConstrainedBuildsInternal(pool, colorConstraints, slots, true);
+}
+
+/**
+ * Count Pokémon-name combinations satisfying color constraints — the space
+ * enumerated by exactColor (k-vector × C(n_g,k) per group, one grade via
+ * bestVariantForMode). Does NOT multiply by grade variants.
+ *
+ * Use for exact gating (shouldRunExact) and parallel shard coordination.
+ */
+export function countExactEnumerationSpace(
+  pool: EmblemCandidate[],
+  colorConstraints: Map<EmblemColor, number>,
+  slots = 10,
+): bigint | null {
+  return countConstrainedBuildsInternal(pool, colorConstraints, slots, false);
+}
+
+/**
+ * Numerator for "Matching builds" in exact color mode — Pokémon-name combos
+ * enumerated by exactColor (matches progress bar). Falls back to grade-aware
+ * count when enumeration space could not be computed.
+ */
+export function matchingBuildDisplayCount(
+  exactEnumerationCount: bigint | null,
+  constrainedBuildCount: bigint | null,
+): bigint | null {
+  return exactEnumerationCount ?? constrainedBuildCount;
 }

@@ -1,4 +1,4 @@
-import { formatBuildCount } from "../../../engine/emblemSearch/pool";
+import { formatBuildCount, matchingBuildDisplayCount } from "../../../engine/emblemSearch/pool";
 import type { EmblemCandidate } from "../../../engine/emblemSearch/types";
 import type { EmblemColor, EmblemGrade } from "../../../types";
 import { CollapsibleCard } from "../../CollapsibleCard";
@@ -20,6 +20,7 @@ export interface SearchPoolCardProps {
   colorConstraints: Map<EmblemColor, number> | null;
   colorConstraintValid: boolean;
   constrainedBuildCount: bigint | null;
+  exactEnumerationCount: bigint | null;
   willRunExact: boolean;
 }
 
@@ -38,6 +39,7 @@ export function SearchPoolCard({
   colorConstraints,
   colorConstraintValid,
   constrainedBuildCount,
+  exactEnumerationCount,
   willRunExact,
 }: SearchPoolCardProps) {
   return (
@@ -101,7 +103,10 @@ export function SearchPoolCard({
         )}
         {(() => {
           const colorExact = colorMode === "exact" && colorConstraints && colorConstraintValid;
-          const matchesZero = colorExact && constrainedBuildCount === 0n;
+          const matchingBuildCount = colorExact
+            ? matchingBuildDisplayCount(exactEnumerationCount, constrainedBuildCount)
+            : constrainedBuildCount;
+          const matchesZero = colorExact && matchingBuildCount === 0n;
           return (
             <div className="flex flex-col gap-2 rounded-lg bg-white/10 px-3 py-2.5 text-xs">
               <div className="flex items-baseline justify-between gap-3">
@@ -112,13 +117,13 @@ export function SearchPoolCard({
                   className={`min-w-0 text-right font-mono font-semibold ${matchesZero ? "text-neg" : "text-ink"}`}
                 >
                   {colorExact ? (
-                    constrainedBuildCount === null ? (
+                    matchingBuildCount === null ? (
                       "Many"
-                    ) : constrainedBuildCount === 0n ? (
+                    ) : matchingBuildCount === 0n ? (
                       "None match"
                     ) : (
                       <>
-                        {formatBuildCount(constrainedBuildCount)}{" "}
+                        {formatBuildCount(matchingBuildCount)}{" "}
                         <span className="font-sans font-normal text-faint">
                           of {formatBuildCount(buildCount)}
                         </span>
@@ -137,7 +142,7 @@ export function SearchPoolCard({
                 </span>
               </div>
 
-              {colorExact && constrainedBuildCount !== null && constrainedBuildCount > 0n && (
+              {colorExact && matchingBuildCount !== null && matchingBuildCount > 0n && (
                 <div className="flex items-center justify-between gap-3">
                   <span className="shrink-0 text-muted">Method</span>
                   <span
@@ -146,8 +151,8 @@ export function SearchPoolCard({
                     }`}
                     title={
                       willRunExact
-                        ? `Checks all ${formatBuildCount(constrainedBuildCount)} matching builds — guaranteed best`
-                        : `${formatBuildCount(constrainedBuildCount)} builds exceeds the cap — Smart search finds a strong result`
+                        ? `Checks all ${formatBuildCount(matchingBuildCount)} Pokémon combinations — guaranteed best`
+                        : `${formatBuildCount(matchingBuildCount)} combinations exceeds the cap — Smart search finds a strong result`
                     }
                   >
                     {willRunExact ? "⚡ Exact" : "Smart search"}

@@ -14,7 +14,8 @@
  *  4. searchColorExact — thin wrapper: builds groups + k-vectors, calls
  *     searchColorExactSlice over the full range.
  *
- * Total enumerated = sum_kVec prod_g C(n_g, k[g]) = countConstrainedBuilds.
+ * Total enumerated = sum_kVec prod_g C(n_g, k[g]) = countExactEnumerationSpace.
+ * Grade variants are resolved per combo via bestVariantForMode, not enumerated.
  * No pool-size gate — bounded by constrained count vs exactCap.
  *
  * Provenance: clean-room TypeScript port of uniteemblemfinder.github.io (AGPL).

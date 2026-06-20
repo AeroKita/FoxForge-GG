@@ -171,6 +171,7 @@ export interface OptimizerAdvancedProps {
   colorConstraints: Map<EmblemColor, number> | null;
   colorConstraintValid: boolean;
   constrainedBuildCount: bigint | null;
+  exactEnumerationCount: bigint | null;
   willRunExact: boolean;
   colorCapacities: Map<EmblemColor, number>;
   totalColorConstrained: number;

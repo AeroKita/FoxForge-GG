@@ -12,6 +12,7 @@ import {
   buildPool,
   approximateBuildCount,
   countConstrainedBuilds,
+  countExactEnumerationSpace,
   distinctPokemonCount,
 } from "../engine/emblemSearch/pool";
 import { colorGroupSizes } from "../engine/emblemSearch/exactColor";
@@ -222,10 +223,15 @@ export function useEmblemOptimizer(): {
     return countConstrainedBuilds(pool, colorConstraints, SLOTS);
   }, [pool, colorConstraints, colorConstraintValid]);
 
+  const exactEnumerationCount = useMemo(() => {
+    if (!colorConstraints || !colorConstraintValid) return null;
+    return countExactEnumerationSpace(pool, colorConstraints, SLOTS);
+  }, [pool, colorConstraints, colorConstraintValid]);
+
   const willRunExact = useMemo(() => {
     if (colorMode !== "exact" || !colorConstraints || !colorConstraintValid) return false;
-    return shouldRunExact(constrainedBuildCount, exactCap);
-  }, [colorMode, colorConstraints, colorConstraintValid, constrainedBuildCount, exactCap]);
+    return shouldRunExact(exactEnumerationCount, exactCap);
+  }, [colorMode, colorConstraints, colorConstraintValid, exactEnumerationCount, exactCap]);
 
   const searchWillRunExact = expert ? willRunExact : basicWillRunExactSearch;
   const effectiveResultCount = searchWillRunExact ? 1 : resultCount;
@@ -396,6 +402,22 @@ export function useEmblemOptimizer(): {
       );
     },
     [pokemon],
+  );
+
+  /** Switch owned/full pool; on full dataset, re-derive color UI (exact when feasible). */
+  const handleSetUseOwned = useCallback(
+    (nextUseOwned: boolean) => {
+      setUseOwned(nextUseOwned);
+      if (!nextUseOwned) {
+        const fullPool = buildPool(
+          allEmblems,
+          { useOwned: false, mixedGrades, allowedGrades },
+          owned,
+        );
+        applyAdvancedColorDefaults(fullPool);
+      }
+    },
+    [mixedGrades, allowedGrades, owned, applyAdvancedColorDefaults],
   );
 
   const applyAdvancedProtectDefaults = useCallback(
@@ -620,7 +642,7 @@ export function useEmblemOptimizer(): {
   const advanced: OptimizerAdvancedProps = {
     pool,
     useOwned,
-    setUseOwned,
+    setUseOwned: handleSetUseOwned,
     mixedGrades,
     setMixedGrades,
     mode,
@@ -656,6 +678,7 @@ export function useEmblemOptimizer(): {
     colorConstraints,
     colorConstraintValid,
     constrainedBuildCount,
+    exactEnumerationCount,
     willRunExact,
     colorCapacities,
     totalColorConstrained,
