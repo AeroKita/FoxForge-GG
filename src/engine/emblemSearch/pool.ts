@@ -30,17 +30,45 @@ export function buildPool(
 }
 
 /**
- * Approximate the number of valid 10-slot loadouts (distinct Pokémon, order-
- * independent) that can be built from this pool. Used for the live "search
- * space" display in the UI.
+ * Count valid k-slot loadouts: pick k distinct Pokémon, one grade variant each.
  *
- * Returns a BigInt: C(distinctPokemon, 10) if pool has grades=1/Pokémon,
- * otherwise an upper bound (exact multi-grade enumeration is deferred to v2).
+ * For Pokémon i with v_i grade variants in the pool, the count is
+ *   e_k(v_1, …, v_n) = Σ_{|S|=k} Π_{i∈S} v_i
+ * computed in O(n·k) via DP (no enumeration of individual loadouts).
+ */
+function countDistinctLoadouts(variantCounts: number[], slots: number): bigint {
+  if (variantCounts.length < slots) return 0n;
+  if (variantCounts.every((v) => v === 1)) return binomialBig(variantCounts.length, slots);
+
+  const ways = Array.from({ length: slots + 1 }, () => 0n);
+  ways[0] = 1n;
+  for (const v of variantCounts) {
+    const w = BigInt(v);
+    for (let k = slots; k >= 1; k--) {
+      ways[k] += ways[k - 1] * w;
+    }
+  }
+  return ways[slots];
+}
+
+/** Distinct Pokémon names → number of grade variants present in the pool. */
+function variantCountsByPokemon(pool: EmblemCandidate[]): number[] {
+  const counts = new Map<string, number>();
+  for (const c of pool) {
+    counts.set(c.pokemonName, (counts.get(c.pokemonName) ?? 0) + 1);
+  }
+  return [...counts.values()];
+}
+
+/**
+ * Number of valid 10-slot loadouts (distinct Pokémon, order-independent) from
+ * this pool. Each slot picks one grade variant for a distinct Pokémon name.
+ *
+ * Single-grade pools: C(distinctPokemon, 10). Multi-grade pools: full
+ * combinatorial count including grade choice per slot.
  */
 export function approximateBuildCount(pool: EmblemCandidate[], slots = 10): bigint {
-  const n = distinctPokemonCount(pool);
-  if (n < slots) return 0n;
-  return binomialBig(n, slots);
+  return countDistinctLoadouts(variantCountsByPokemon(pool), slots);
 }
 
 function binomialBig(n: number, k: number): bigint {
@@ -105,21 +133,26 @@ export function countConstrainedBuilds(
   if (sum > 2 * slots) return 0n;
   if (targetVec.some((t) => t > slots)) return 0n;
 
-  // Collect distinct Pokémon names → their color arrays (grade-independent)
-  const byName = new Map<string, EmblemColor[]>();
+  // Distinct Pokémon → colors + grade-variant count (colors are grade-independent)
+  const byName = new Map<string, { colors: EmblemColor[]; variants: number }>();
   for (const c of pool) {
-    if (!byName.has(c.pokemonName)) byName.set(c.pokemonName, c.colors);
+    const entry = byName.get(c.pokemonName);
+    if (!entry) {
+      byName.set(c.pokemonName, { colors: c.colors, variants: 1 });
+    } else {
+      entry.variants++;
+    }
   }
 
   // Group Pokémon by their color-type vector over the checked colors.
   // e.g. a Pokémon with colors=[green,black] and checked=[green,black]
   // gets vec=[1,1]; one with colors=[green] gets vec=[1,0].
-  const groupMap = new Map<string, { vec: number[]; count: number }>();
-  for (const colors of byName.values()) {
+  const groupMap = new Map<string, { vec: number[]; variantCounts: number[] }>();
+  for (const { colors, variants } of byName.values()) {
     const vec = checked.map((col) => (colors.includes(col) ? 1 : 0));
     const key = vec.join(",");
-    const g = groupMap.get(key) ?? { vec, count: 0 };
-    g.count++;
+    const g = groupMap.get(key) ?? { vec, variantCounts: [] };
+    g.variantCounts.push(variants);
     groupMap.set(key, g);
   }
   const groups = [...groupMap.values()];
@@ -129,10 +162,17 @@ export function countConstrainedBuilds(
   let dp = new Map<string, bigint>([[initKey, 1n]]);
   const MAX_DP_STATES = 300_000;
 
-  for (const { vec, count } of groups) {
-    // Precompute binomial coefficients C(count, 0..count)
-    const binos: bigint[] = [];
-    for (let x = 0; x <= count; x++) binos.push(binomialBig(count, x));
+  for (const { vec, variantCounts } of groups) {
+    const count = variantCounts.length;
+    // e_x(variantCounts): ways to pick x Pokémon with grade assignments
+    const pickWays = Array.from({ length: count + 1 }, () => 0n);
+    pickWays[0] = 1n;
+    for (const v of variantCounts) {
+      const w = BigInt(v);
+      for (let x = count; x >= 1; x--) {
+        pickWays[x] += pickWays[x - 1] * w;
+      }
+    }
 
     const ndp = new Map<string, bigint>();
     for (const [key, ways] of dp) {
@@ -159,7 +199,7 @@ export function countConstrainedBuilds(
         if (!ok) break;
 
         const nk = ns + "|" + nc.join(",");
-        ndp.set(nk, (ndp.get(nk) ?? 0n) + ways * binos[x]);
+        ndp.set(nk, (ndp.get(nk) ?? 0n) + ways * pickWays[x]);
       }
     }
     if (ndp.size > MAX_DP_STATES) return null;

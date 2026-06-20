@@ -313,21 +313,43 @@ describe("formatBuildCount", () => {
 });
 
 // ---------------------------------------------------------------------------
-// Grade-reactive pool / candidate count
+// Grade-reactive pool / build count
 //
-// Root cause of the "grade changes don't affect displayed pool size" bug:
-//   approximateBuildCount = C(distinct_names, 10) — grade-independent.
-//   pool.length           = total grade-variant entries — grade-dependent.
-//
-// The fix exposes pool.length as the "emblem candidates" figure. These tests
-// confirm the invariants the UI relies on:
+// approximateBuildCount counts distinct 10-Pokémon loadouts with one grade
+// variant per slot. Single-grade pools → C(258,10); multi-grade pools use
+// the full combinatorial count (elementary symmetric polynomial over variants).
 //
 //  [GRADE-1] Full dataset, gold-only  → pool.length = 258 (1 variant / Pokémon).
 //  [GRADE-2] Full dataset, all grades → pool.length > 258 (multi-grade variants).
-//  [GRADE-3] approximateBuildCount is grade-INDEPENDENT (C(258,10) in both cases).
+//  [GRADE-3] approximateBuildCount grows with grade variants (all > gold-only).
 //  [GRADE-4] distinctPokemonCount is grade-INDEPENDENT.
 //  [GRADE-5] Mixed-grades vs best-grade-only changes candidate count, not name count.
 // ---------------------------------------------------------------------------
+
+describe("approximateBuildCount — grade-aware combinatorics", () => {
+  it("single variant per Pokémon → C(n,10)", () => {
+    const pool = singles(15, "brown");
+    expect(approximateBuildCount(pool, 10)).toBe(3003n); // C(15,10)
+  });
+
+  it("multi-grade variants multiply within chosen Pokémon", () => {
+    const em = makeEmblem("Pika", ["yellow"] as never, { attack: 2 });
+    const em2 = makeEmblem("Raichu", ["yellow"] as never, { attack: 1 });
+    const threeGrade = buildCandidatePool([em], {
+      ownedKeys: new Set(["pika:gold", "pika:silver", "pika:bronze"]),
+      mixedGrades: true,
+    });
+    // 1 Pokémon with 3 grades → only 3 one-slot builds; for 1 slot:
+    expect(approximateBuildCount(threeGrade, 1)).toBe(3n);
+
+    const mixed = buildCandidatePool([em, em2], {
+      ownedKeys: new Set(["pika:gold", "pika:silver", "raichu:gold", "raichu:silver"]),
+      mixedGrades: true,
+    });
+    // Pick 2 Pokémon: pika(2 grades) × raichu(2 grades) = 4 grade assignments
+    expect(approximateBuildCount(mixed, 2)).toBe(4n);
+  });
+});
 
 describe("grade-reactive pool candidate count", () => {
   const noOwned = new Set<string>();
@@ -350,7 +372,7 @@ describe("grade-reactive pool candidate count", () => {
     expect(pool.length).toBeGreaterThan(258);
   });
 
-  it("[GRADE-3] approximateBuildCount is grade-INDEPENDENT (same C(258,10))", () => {
+  it("[GRADE-3] approximateBuildCount is grade-DEPENDENT (all grades > gold-only)", () => {
     const goldPool = buildPool(
       allEmblems,
       { useOwned: false, mixedGrades: true, allowedGrades: new Set(["gold"]) },
@@ -361,8 +383,11 @@ describe("grade-reactive pool candidate count", () => {
       { useOwned: false, mixedGrades: true, allowedGrades: new Set(["gold", "silver", "bronze"]) },
       noOwned,
     );
-    // Both return C(258, 10) because distinctPokemonCount is grade-independent
-    expect(approximateBuildCount(goldPool)).toBe(approximateBuildCount(allPool));
+    const goldCount = approximateBuildCount(goldPool);
+    const allCount = approximateBuildCount(allPool);
+    // Gold-only: C(258, 10)
+    expect(goldCount).toBeGreaterThan(1_000_000_000_000n);
+    expect(allCount).toBeGreaterThan(goldCount);
   });
 
   it("[GRADE-4] distinctPokemonCount is grade-INDEPENDENT", () => {
