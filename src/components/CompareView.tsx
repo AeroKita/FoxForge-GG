@@ -1,34 +1,112 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
-import { pokemonById } from "../data/gameData";
+import { pokemonById, pokemonList, ITEM_GRADE_DEFAULT } from "../data/gameData";
 import { deriveBuild } from "../engine/derive";
-import { toLoadout, type Loadout } from "../state/loadout";
+import { type Loadout, type SavedLoadout } from "../state/loadout";
+import {
+  presetBuilds,
+  hasCreative,
+  selectionToLoadout,
+  type SideSelection,
+  type CompareSource,
+} from "../state/compareBuilds";
 import { STAT_ROWS, formatStat, formatDelta } from "../ui/format";
+import { asset } from "../ui/asset";
 import { CollapsibleCard } from "./CollapsibleCard";
+import { Segmented } from "./Segmented";
+import { PokemonPickerSheet } from "./PokemonPicker";
 
-// Compare two builds on one Pokémon: pick A and B from "current" + saved.
+function initialSelection(side: "A" | "B", currentPokemonId: string | null): SideSelection {
+  if (side === "A") {
+    if (currentPokemonId) {
+      return { source: "current", pokemonId: currentPokemonId, variant: 0, savedId: null };
+    }
+    return {
+      source: "recommended",
+      pokemonId: pokemonList[0]?.id ?? null,
+      variant: 0,
+      savedId: null,
+    };
+  }
+  return {
+    source: "recommended",
+    pokemonId: currentPokemonId ?? pokemonList[0]?.id ?? null,
+    variant: 0,
+    savedId: null,
+  };
+}
+
+function changeSource(
+  sel: SideSelection,
+  next: CompareSource,
+  saved: SavedLoadout[],
+): SideSelection {
+  if (next === "saved")
+    return { ...sel, source: next, savedId: sel.savedId ?? saved[0]?.id ?? null };
+  return { ...sel, source: next, variant: 0 };
+}
+
+function clampSelectionForPokemon(sel: SideSelection): SideSelection {
+  if (sel.source === "creative" && !hasCreative(pokemonById.get(sel.pokemonId ?? "") ?? null)) {
+    return { ...sel, source: "recommended" };
+  }
+  return sel;
+}
+
+// Compare two builds: pick A and B from presets, current, or saved.
 export function CompareView() {
-  const { loadout, saved, heldSlotGrades } = useStore();
-  const options = useMemo(
-    () => [
-      { id: "__current__", name: "Current build", loadout },
-      ...saved.map((s) => ({ id: s.id, name: s.name, loadout: toLoadout(s) })),
-    ],
-    [loadout, saved],
-  );
-  const [aId, setAId] = useState("__current__");
-  const [bId, setBId] = useState(saved[0]?.id ?? "__current__");
+  const { loadout, saved, heldItemGrade } = useStore();
+  const [a, setA] = useState<SideSelection>(() => initialSelection("A", loadout.pokemonId));
+  const [b, setB] = useState<SideSelection>(() => initialSelection("B", loadout.pokemonId));
+  const [pickerSide, setPickerSide] = useState<"A" | "B" | null>(null);
 
-  const a = options.find((o) => o.id === aId)?.loadout ?? loadout;
-  const b = options.find((o) => o.id === bId)?.loadout ?? loadout;
-  const da = useMemo(() => deriveBuild(a, true, heldSlotGrades), [a, heldSlotGrades]);
-  const db = useMemo(() => deriveBuild(b, true, heldSlotGrades), [b, heldSlotGrades]);
+  const la = selectionToLoadout(a, loadout, saved);
+  const lb = selectionToLoadout(b, loadout, saved);
+
+  const da = useMemo(
+    () =>
+      deriveBuild(
+        la,
+        true,
+        [0, 1, 2].map((i) => {
+          const id = la.heldItemIds[i];
+          return id ? heldItemGrade(id) : ITEM_GRADE_DEFAULT;
+        }) as [number, number, number],
+      ),
+    [la, heldItemGrade],
+  );
+  const db = useMemo(
+    () =>
+      deriveBuild(
+        lb,
+        true,
+        [0, 1, 2].map((i) => {
+          const id = lb.heldItemIds[i];
+          return id ? heldItemGrade(id) : ITEM_GRADE_DEFAULT;
+        }) as [number, number, number],
+      ),
+    [lb, heldItemGrade],
+  );
 
   return (
     <CollapsibleCard title="Compare Builds" persistKey="compare">
       <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-        <BuildSelect label="A" value={aId} onChange={setAId} options={options} />
-        <BuildSelect label="B" value={bId} onChange={setBId} options={options} />
+        <SidePicker
+          label="A"
+          selection={a}
+          onChange={setA}
+          saved={saved}
+          current={loadout}
+          onOpenPicker={() => setPickerSide("A")}
+        />
+        <SidePicker
+          label="B"
+          selection={b}
+          onChange={setB}
+          saved={saved}
+          current={loadout}
+          onOpenPicker={() => setPickerSide("B")}
+        />
       </div>
       {da.pokemon && db.pokemon && da.pokemon.id !== db.pokemon.id && (
         <p className="mb-2 rounded-lg bg-as-bg px-3 py-1.5 text-xs text-as-ink">
@@ -86,39 +164,154 @@ export function CompareView() {
           </table>
         </div>
       )}
+      {pickerSide && (
+        <PokemonPickerSheet
+          title={`Build ${pickerSide} — choose Pokémon`}
+          selectedId={(pickerSide === "A" ? a : b).pokemonId}
+          onSelect={(id) => {
+            const setter = pickerSide === "A" ? setA : setB;
+            setter((s) => clampSelectionForPokemon({ ...s, pokemonId: id, variant: 0 }));
+          }}
+          onClose={() => setPickerSide(null)}
+        />
+      )}
     </CollapsibleCard>
   );
 }
 
-function BuildSelect({
+function SidePicker({
   label,
-  value,
+  selection,
   onChange,
-  options,
+  saved,
+  current,
+  onOpenPicker,
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: { id: string; name: string; loadout: Loadout }[];
+  label: "A" | "B";
+  selection: SideSelection;
+  onChange: (s: SideSelection) => void;
+  saved: SavedLoadout[];
+  current: Loadout;
+  onOpenPicker: () => void;
 }) {
+  const pokemon = selection.pokemonId ? (pokemonById.get(selection.pokemonId) ?? null) : null;
+
+  const sourceOptions: CompareSource[] = ["recommended"];
+  if (hasCreative(pokemon)) sourceOptions.push("creative");
+  sourceOptions.push("current");
+  if (saved.length > 0) sourceOptions.push("saved");
+
+  const sourceLabels: Partial<Record<CompareSource, string>> = {
+    recommended: "Recommended",
+    creative: "Creative",
+    current: "Current",
+    saved: "Saved",
+  };
+
+  const builds =
+    selection.source === "recommended" || selection.source === "creative"
+      ? presetBuilds(pokemon, selection.source)
+      : [];
+  const build = builds[Math.min(Math.max(selection.variant, 0), Math.max(builds.length - 1, 0))];
+
+  const go = (delta: number) => {
+    if (builds.length < 2) return;
+    const next = (selection.variant + delta + builds.length) % builds.length;
+    onChange({ ...selection, variant: next });
+  };
+
   return (
-    <label className="flex flex-col gap-1 text-xs text-muted">
-      <span>Build {label}</span>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="min-h-11 rounded-lg border border-line bg-surface px-2 py-2 text-sm text-ink"
-      >
-        {options.map((o) => {
-          const p = o.loadout.pokemonId ? pokemonById.get(o.loadout.pokemonId) : null;
-          return (
-            <option key={o.id} value={o.id}>
-              {o.name}
-              {p ? ` — ${p.displayName}` : ""}
-            </option>
-          );
-        })}
-      </select>
-    </label>
+    <div className="flex flex-col gap-2">
+      <span className="text-xs text-muted">Build {label}</span>
+      <Segmented
+        fluid
+        value={selection.source}
+        options={sourceOptions}
+        labels={sourceLabels}
+        onChange={(next) => onChange(changeSource(selection, next, saved))}
+      />
+      {(selection.source === "recommended" || selection.source === "creative") && (
+        <>
+          <button
+            type="button"
+            onClick={onOpenPicker}
+            className="flex min-h-11 items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink hover:bg-raise"
+          >
+            {pokemon ? (
+              <>
+                <img
+                  src={asset(pokemon.iconAsset)}
+                  alt=""
+                  className="h-8 w-8 rounded-full object-contain"
+                />
+                <span className="truncate font-medium">{pokemon.displayName}</span>
+              </>
+            ) : (
+              <span className="text-muted">Choose Pokémon…</span>
+            )}
+          </button>
+          {builds.length === 0 ? (
+            <p className="text-sm text-faint">
+              No {selection.source === "recommended" ? "Recommended" : "Creative"} builds yet.
+            </p>
+          ) : (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => go(-1)}
+                disabled={builds.length < 2}
+                aria-label="Previous build"
+                className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg border border-line text-lg text-ink hover:bg-raise disabled:opacity-30"
+              >
+                ‹
+              </button>
+              <p className="min-w-0 flex-1 truncate text-center text-xs text-muted">
+                {build ? (
+                  <>
+                    <span className="font-semibold text-ink">{build.emblemName ?? build.name}</span>
+                    {build.lane ? ` · ${build.lane}` : ""}
+                    {builds.length > 1 ? ` · ${selection.variant + 1}/${builds.length}` : ""}
+                  </>
+                ) : (
+                  "—"
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={() => go(1)}
+                disabled={builds.length < 2}
+                aria-label="Next build"
+                className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg border border-line text-lg text-ink hover:bg-raise disabled:opacity-30"
+              >
+                ›
+              </button>
+            </div>
+          )}
+        </>
+      )}
+      {selection.source === "current" && (
+        <p className="min-h-11 rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink">
+          <span className="text-muted">Your current working build — </span>
+          {pokemonById.get(current.pokemonId ?? "")?.displayName ?? "No Pokémon selected"}
+        </p>
+      )}
+      {selection.source === "saved" && (
+        <select
+          value={selection.savedId ?? ""}
+          onChange={(e) => onChange({ ...selection, savedId: e.target.value })}
+          className="min-h-11 rounded-lg border border-line bg-surface px-2 py-2 text-sm text-ink"
+        >
+          {saved.map((s) => {
+            const p = pokemonById.get(s.pokemonId ?? "");
+            return (
+              <option key={s.id} value={s.id}>
+                {s.name}
+                {p ? ` — ${p.displayName}` : ""}
+              </option>
+            );
+          })}
+        </select>
+      )}
+    </div>
   );
 }

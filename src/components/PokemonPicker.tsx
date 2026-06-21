@@ -19,11 +19,24 @@ const ROLE_LABEL: Record<string, string> = { AllRounder: "All-Rounder" };
 
 interface PokemonPickerSheetProps {
   onClose: () => void;
+  /** Controlled selection. Omit to bind to the store's current loadout. */
+  selectedId?: string | null;
+  /** Called with the chosen Pokémon id. Omit to dispatch setPokemon (default). */
+  onSelect?: (pokemonId: string) => void;
+  /** Sheet heading. Defaults to "Choose Pokémon". */
+  title?: string;
 }
 
 /** Pokémon search + role filter in a bottom sheet; replaces the inline Build card. */
-export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
+export function PokemonPickerSheet({
+  onClose,
+  selectedId,
+  onSelect,
+  title,
+}: PokemonPickerSheetProps) {
   const { loadout, dispatch } = useStore();
+  const activeId = selectedId !== undefined ? selectedId : loadout.pokemonId;
+  const choose = onSelect ?? ((id: string) => dispatch({ type: "setPokemon", pokemonId: id }));
   const [query, setQuery] = useState("");
   const [role, setRole] = useState<Role | "All">("All");
 
@@ -38,7 +51,7 @@ export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
   );
 
   return (
-    <BottomSheet title="Choose Pokémon" onClose={onClose} fillHeight>
+    <BottomSheet title={title ?? "Choose Pokémon"} onClose={onClose} fillHeight>
       <div className="sticky top-0 z-10 -mx-4 border-b border-line bg-surface px-4 pb-3 pt-1">
         <input
           value={query}
@@ -60,13 +73,13 @@ export function PokemonPickerSheet({ onClose }: PokemonPickerSheetProps) {
       </div>
       <div className="mt-3 grid grid-cols-4 gap-2">
         {filtered.map((p) => {
-          const selected = p.id === loadout.pokemonId;
+          const selected = p.id === activeId;
           return (
             <button
               key={p.id}
               type="button"
               onClick={() => {
-                dispatch({ type: "setPokemon", pokemonId: p.id });
+                choose(p.id);
                 onClose();
               }}
               title={p.displayName}
