@@ -217,7 +217,7 @@ export interface AdvancedColorUiDefaults {
  * Derive the Advanced-mode color UI state (mode, checked colors, counts) from a
  * Pokémon's meta targets and the pool the search will actually run on.
  *
- * Powers `syncAdvancedFromBasic` / Pokémon-change sync in EmblemOptimizer.
+ * Powers first-time Expert sync, Pokémon-change sync, and Reset to defaults in Advanced mode.
  */
 export function deriveAdvancedColorUiDefaults(
   pokemon: Pokemon | null,
