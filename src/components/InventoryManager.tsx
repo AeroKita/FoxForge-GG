@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useStore } from "../state/store";
 import { emblems as allEmblems } from "../data/gameData";
 import { asset } from "../ui/asset";
@@ -10,7 +10,7 @@ import {
 } from "../ui/colors";
 import { statLines } from "../ui/format";
 import { emblemsForGrade } from "../ui/emblems";
-import { ownedKey } from "../state/loadout";
+import { ownedKey, ownedEmblemsToFileJSON, parseOwnedEmblemsFile } from "../state/loadout";
 import { emblemIconForGrade } from "../ui/emblemIcon";
 import { EmblemSetGuide } from "./EmblemSetGuide";
 import type { EmblemColor, EmblemGrade } from "../types";
@@ -22,11 +22,15 @@ const GRADES: EmblemGrade[] = ["bronze", "silver", "gold"];
  * Search, filter by color, bulk own/clear the current view, and see live counts.
  */
 export function InventoryManager() {
-  const { owned, toggleOwned, bulkSetOwned } = useStore();
+  const { owned, toggleOwned, bulkSetOwned, replaceOwned } = useStore();
   const [grade, setGrade] = useState<EmblemGrade>("gold");
   const [query, setQuery] = useState("");
   const [color, setColor] = useState<EmblemColor | "all">("all");
   const [guideOpen, setGuideOpen] = useState(false);
+  const [importMsg, setImportMsg] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const validEmblemIds = useMemo(() => new Set(allEmblems.map((e) => e.id)), []);
 
   const gradeEmblems = useMemo(() => emblemsForGrade(allEmblems, grade), [grade]);
 
@@ -45,6 +49,36 @@ export function InventoryManager() {
     [owned, grade, gradeEmblems],
   );
   const shownIds = shown.map((e) => e.id);
+
+  const exportInventory = () => {
+    const blob = new Blob([ownedEmblemsToFileJSON(owned)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "foxforge-owned-emblems.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const importInventory = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-importing the same file
+    if (!file) return;
+    try {
+      const next = parseOwnedEmblemsFile(await file.text(), validEmblemIds);
+      if (!next) {
+        setImportMsg("Not a valid emblem inventory file.");
+        return;
+      }
+      replaceOwned(next);
+      setImportMsg(`Imported ${next.size} owned emblem${next.size === 1 ? "" : "s"} ✓`);
+      setTimeout(() => setImportMsg(null), 2500);
+    } catch {
+      setImportMsg("Couldn't read that file.");
+    }
+  };
 
   return (
     <div className="rounded-2xl border border-line bg-surface p-3 shadow-sm">
@@ -75,6 +109,34 @@ export function InventoryManager() {
             / {gradeEmblems.length} {grade} owned
           </span>
         </div>
+      </div>
+
+      <div className="mb-3 flex flex-col gap-2">
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={exportInventory}
+            className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2.5 text-sm font-medium text-ink hover:bg-raise"
+          >
+            ↓ Export JSON
+          </button>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="min-h-11 flex-1 rounded-lg border border-line px-3 py-2.5 text-sm font-medium text-ink hover:bg-raise"
+          >
+            ↑ Import JSON
+          </button>
+        </div>
+        <p className="text-xs text-muted">Back up or restore your full collection (all grades)</p>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json,.json"
+          onChange={importInventory}
+          className="hidden"
+        />
+        {importMsg && <p className="text-xs text-muted">{importMsg}</p>}
       </div>
 
       <div className="mb-3 flex flex-col gap-2">

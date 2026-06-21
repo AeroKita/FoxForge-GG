@@ -73,7 +73,7 @@ Formatting for display: `src/ui/format.ts` (`STAT_ROWS`, `formatStat`, `formatDe
 
 `saved`, `save`, `remove`, `loadSaved`, `saveError`, `shareUrl()` — saved loadouts + sharing.
 
-`owned`, `toggleOwned`, `bulkSetOwned` — emblem inventory.
+`owned`, `toggleOwned`, `bulkSetOwned`, `replaceOwned` — emblem inventory (`replaceOwned` replaces the full set on file import).
 
 `mode` (`"beginner" | "expert"`), `setMode`, `expert` — global Basic/Advanced mode (UI labels **Basic** / **Advanced**; stored values unchanged). Drives optimizer depth, Compare tab visibility, emblem stat precision, and move/passive tooltip description tier (`pickDescription` in `tips.tsx`).
 
@@ -109,7 +109,7 @@ Move Basic descriptions: `normalize.py` emits skill `description` / upgrade `des
 ### State and Persistence
 
 - Current loadout auto-persists; saved loadouts capped at 20.
-- Owned emblems are keyed per grade (Bronze/Silver/Gold) independently.
+- Owned emblems are keyed per grade (Bronze/Silver/Gold in the Inventory UI; platinum is valid in storage and on file import) independently, persisted in localStorage (`unite-build-optimizer.ownedEmblems.v2` as a flat array of `emblemId:grade` strings). `InventoryManager` can export/import the full collection as `foxforge-owned-emblems.json` via `ownedEmblemsToFileJSON` / `parseOwnedEmblemsFile` in `src/state/loadout.ts` (import is a full replace through `replaceOwned`, not a merge; unknown emblem IDs from older patches are dropped when `validEmblemIds` is supplied).
 - Held item grades (1–40) are global per item ID, not stored in saved builds or share links. Unique held items (`isUniqueHeldItem`) skip grade storage and controls entirely.
 - Share links encode loadout state in the URL hash (`#b=`).
 - Theme preference (`themePref`) and Basic/Advanced mode (`beginner`/`expert` in storage) persist locally (`unite-build-optimizer.theme.v1`, `unite-build-optimizer.mode.v1`).
@@ -126,7 +126,7 @@ No router library — navigation is local React state.
 - **Tab bar** — fixed bottom navigation (`TabBar`): Build · Optimize · Emblems · Items; Compare appears only in Advanced mode (5 tabs vs 4). Switching from Advanced to Basic while on Compare redirects to Build.
 - **Build screen** — `BuildScreen` composes `RecommendPanel`, `LoadoutEditor`, `MovesCard`, `StatPanel`, `LevelGraph` (Advanced only; lazy-loaded via `React.lazy` + `Suspense` in `BuildScreen.tsx` so recharts is not in the initial bundle), then `LoadoutBar` (Save & Load). `StatPanel` Effective Stats includes an out-of-combat move speed line below the grid (delta vs in-combat Move Speed when yellow set bonus and/or Float Stone apply). `LoadoutEditor` held-item slots use shared `GradeField` plus a grade slider (unique items skip both). Pokémon selection is not inline; the app-bar icon or title tap open `PokemonPickerSheet`.
 - **Optimize screen** — `OptimizeScreen` → `EmblemOptimizer` (thin container: picks `BasicOptimizer` or `AdvancedOptimizer` from the global Basic/Advanced toggle; state in `useEmblemOptimizer`, presentational UI under `src/components/optimizer/`). Basic: one-tap search with auto-derived objectives plus **Owned only** / **Full dataset** toggle. Advanced: **Search Pool** (`SearchPoolCard` — owned/full, mixed grades, grade chips on full dataset, live build counts), **Mode & Effort** (`ModeEffortCard` — maximize/target, effort, adjustable `exactCap`), stat priorities, color constraints. `App.tsx` keeps the Optimize subtree mounted in a `hidden` wrapper when another tab is active so in-flight search and result history survive tab switches. Search runs off-thread when Workers are available (`src/workers/emblemSearch.worker.ts` plus shard workers); `SearchProgressOverlay` shows progress and ETA. The **Results** card (`ResultCards`) lists emblem picks and `EmblemSetSummary`, then a Build-tab-style **Effective stats** grid (emblem-only; deltas vs no emblems) with a level preview slider, OOC move speed line, and set-bonus labels. Apply writes emblem picks into the shared loadout via `dispatch({ type: "applyBuild", emblems })`; a link can jump to the Emblems tab for inventory edits.
-- **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid).
+- **Emblems screen** — `EmblemsScreen` renders `InventoryManager` (per-grade ownership, search, horizontal color chip filters, responsive emblem grid). A **Backup** row between the header and search exports/imports the full owned collection (all grades) as JSON (`↓ Export JSON` / `↑ Import JSON`, mirroring `LoadoutBar` file patterns).
 - **Items screen** — `ItemsScreen` renders `HeldItemsInventory` (global held-item grades via shared `GradeField` with a `text-sm` "Grade" label, grade instructions with a tap-for-detail hint, 3-column tile grid on phones, `HeldItemDetailModal` on icon tap).
 - **Compare screen** — `CompareScreen` renders `CompareView` (Advanced only). Each side picks a source — Recommended, Creative (when that Pokémon has complete builds), Current, or Saved (when any exist) — then a Pokémon chip + variant cycler for presets, or a static current-build row / saved-loadout `<select>`. Side A defaults to the working build when a Pokémon is selected; side B to a Recommended preset for the same Pokémon. Selection resolves through `src/state/compareBuilds.ts` into loadouts for `deriveBuild`. A controlled `PokemonPickerSheet` opens per side without mutating the working build. Two-column side pickers stack on phones; the stat table scrolls horizontally inside its wrapper.
 - **Layout** — single column, `max-w-2xl` centered, `gap-3` between sections. `<main>` padding clears the fixed app bar and tab bar (safe-area aware). Interactive controls target ≥44px hit areas (`min-h-11`); tappable labels use `text-sm` minimum.
@@ -169,7 +169,7 @@ Two independent update channels: **app code** (PWA service worker picks up a new
 
 ### Documentation Authority
 
-Human-oriented deep dives live in `docs/` (architecture, calculation engine, data sourcing, distribution, branding). When behavior is ambiguous, those docs and engine validation tests are the source of truth—not comments in components.
+Human-oriented deep dives live in `docs/` (architecture, calculation engine, data sourcing, distribution, branding). [`CONTRIBUTING.md`](CONTRIBUTING.md) is the step-by-step guide for human contributors (setup, TDD workflow, `npm run verify`, PR checklist). GitHub auto-fills [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) on new PRs (conventional-commit title, UI screenshots, test notes). When behavior is ambiguous, those docs and engine validation tests are the source of truth—not comments in components.
 
 ## Tech Stack & Tooling
 
@@ -177,7 +177,7 @@ TypeScript/React SPA with a pure calculation engine and community-sourced game d
 
 ### Environment Setup
 
-- **Node.js 24+** (matches CI in `.github/workflows/`).
+- **Node.js 24+** (pinned in `.node-version`; matches CI in `.github/workflows/`).
 - **npm** for JS dependencies and scripts (`package.json`).
 - **Python 3** with a venv under `tools/extract/.venv` for community data refresh scripts (`tools/community/`).
 
@@ -207,7 +207,7 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 | --- | --- |
 | `npm run lint` | oxlint — errors fail CI; `react/exhaustive-deps` is warn-only |
 | `npm run format:check` | oxfmt `--check` on `src/**/*.{ts,tsx}` and `vite.config.ts` |
-| `npm test` | Engine (including `derive.test.ts` for out-of-combat move speed, `src/engine/__tests__/moves.test.ts` for move-selection helpers including `uniteMoves`), emblem search (including `gradeEnumeration`, `exactCap`, `poolFeatures`, `searchPresets`, `emblemLoadoutImpact`), bundle (including Basic/Advanced move description fields, Unite-move `upgradeLevel` and activation-note cleanup, and move `videoAsset`/`gifAsset` paths in `patchBundle.test.ts`), dataSource (`activeRaw` + `checkDataNow`), attack-speed, share, state (including `src/state/__tests__/compareBuilds.test.ts` for compare preset resolution), and UI pure-logic unit tests (e.g. `src/components/__tests__/tips.test.ts` for `pickDescription`, `src/ui/__tests__/swipeDismiss.test.ts`) |
+| `npm test` | Engine (including `derive.test.ts` for out-of-combat move speed, `src/engine/__tests__/moves.test.ts` for move-selection helpers including `uniteMoves`), emblem search (including `gradeEnumeration`, `exactCap`, `poolFeatures`, `searchPresets`, `emblemLoadoutImpact`), bundle (including Basic/Advanced move description fields, Unite-move `upgradeLevel` and activation-note cleanup, and move `videoAsset`/`gifAsset` paths in `patchBundle.test.ts`), dataSource (`activeRaw` + `checkDataNow`), attack-speed, share, state (including `src/state/__tests__/loadout.test.ts` for loadout share/file round-trips and owned-emblem inventory file export/import, and `src/state/__tests__/compareBuilds.test.ts` for compare preset resolution), and UI pure-logic unit tests (e.g. `src/components/__tests__/tips.test.ts` for `pickDescription`, `src/ui/__tests__/swipeDismiss.test.ts`) |
 | `npm run validate` | Known-values gate from `docs/03-Calculation-Engine.md` |
 | `npx tsx src/data/verifyPatch.ts` | End-to-end zod validation of the bundle (prints roster count; known-value gates) |
 | `npm run validate:art` | Validates mirrored image assets under `public/assets/` are real PNG/JPEG/WebP (not corrupt/HTML); `.mp4`/`.webm` move preview clips are skipped |
@@ -271,7 +271,7 @@ Mobile layout conventions: column spacing `gap-3`; `CollapsibleCard` headers `px
 | Emblem search state | `src/state/emblemSearch.ts` (`useEmblemSearch`), `src/state/searchWorkerController.ts` |
 | Archived UI | `archive/BuildSummaryBar.tsx` — removed Build tab glance hero (2026-06-19); outside `src/`, not compiled; restore notes in the file header and `archive/README.md` |
 | Pokémon picker | `PokemonPickerSheet` in `src/components/PokemonPicker.tsx` (`BottomSheet fillHeight`; role filter chips color-coded when active via `ROLE_FILTER_HEX`; search does not auto-focus on open). Optional controlled `selectedId` / `onSelect` / `title` for Compare side-picking; omit to bind to the store via `setPokemon` (Build/Optimize app bar). |
-| Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` |
+| Emblems tab | `src/components/screens/EmblemsScreen.tsx` → `InventoryManager` (per-grade grid + JSON backup import/export) |
 | Items tab | `src/components/screens/ItemsScreen.tsx` → `HeldItemsInventory` (`HeldItemDetailModal`) |
 | Compare tab (Advanced) | `src/components/screens/CompareScreen.tsx` → `CompareView`; preset/loadout resolution in `src/state/compareBuilds.ts` (unit-tested) |
 | Pickers / settings | `PickerModal` (`BottomSheet fillHeight`; search does not auto-focus on open), `SettingsMenu` (content-fit `BottomSheet`; read-only patch version + app version) |

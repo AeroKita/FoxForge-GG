@@ -268,3 +268,50 @@ export function saveOwnedEmblems(owned: Set<string>): void {
     /* quota */
   }
 }
+
+const VALID_GRADES: ReadonlySet<string> = new Set(["bronze", "silver", "gold", "platinum"]);
+
+/**
+ * Serialize the owned-emblem set to the canonical backup format: a sorted,
+ * pretty-printed JSON array of `emblemId:grade` strings. Sorting keeps file
+ * diffs stable. This is a direct mirror of what is persisted to localStorage.
+ */
+export function ownedEmblemsToFileJSON(owned: Set<string>): string {
+  return JSON.stringify([...owned].sort(), null, 2);
+}
+
+/**
+ * Parse a backup file back into an owned-emblem set.
+ *
+ * Returns `null` for a structurally invalid file (leave the inventory
+ * unchanged): not valid JSON, top-level value not an array, or any array
+ * element not a string. For a structurally valid array, returns a Set of the
+ * keys that survive per-entry validation; malformed keys, unknown grades, and
+ * (when `validEmblemIds` is supplied) emblem IDs not in the current patch are
+ * dropped silently. The Set deduplicates automatically.
+ */
+export function parseOwnedEmblemsFile(
+  text: string,
+  validEmblemIds?: Set<string>,
+): Set<string> | null {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(parsed)) return null;
+  if (!parsed.every((x) => typeof x === "string")) return null;
+
+  const next = new Set<string>();
+  for (const entry of parsed as string[]) {
+    const i = entry.lastIndexOf(":");
+    if (i <= 0) continue; // no colon, or empty emblemId → malformed, skip
+    const emblemId = entry.slice(0, i);
+    const grade = entry.slice(i + 1);
+    if (!VALID_GRADES.has(grade)) continue;
+    if (validEmblemIds && !validEmblemIds.has(emblemId)) continue;
+    next.add(ownedKey(emblemId, grade as EmblemGrade));
+  }
+  return next;
+}

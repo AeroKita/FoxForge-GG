@@ -7,6 +7,8 @@ import {
   parseLoadoutFile,
   sanitizeLoadout,
   loadoutFileName,
+  ownedEmblemsToFileJSON,
+  parseOwnedEmblemsFile,
   type Loadout,
 } from "../loadout";
 
@@ -102,5 +104,50 @@ describe("loadout file export/import", () => {
   it("builds a filesystem-safe download name", () => {
     expect(loadoutFileName(sample, "Mr. Mime")).toBe("foxforge-mr-mime.json");
     expect(loadoutFileName(emptyLoadout())).toBe("foxforge-build.json");
+  });
+});
+
+describe("owned-emblem inventory file export/import", () => {
+  it("round-trips a sorted array", () => {
+    const original = new Set(["004-charmander:silver", "001-bulbasaur:gold"]);
+    const json = ownedEmblemsToFileJSON(original);
+    expect(json.indexOf("001-bulbasaur:gold")).toBeLessThan(json.indexOf("004-charmander:silver"));
+    expect(parseOwnedEmblemsFile(json)).toEqual(original);
+  });
+
+  it("accepts all four grades including platinum", () => {
+    const parsed = parseOwnedEmblemsFile(JSON.stringify(["pikachu:platinum"]));
+    expect(parsed).toEqual(new Set(["pikachu:platinum"]));
+  });
+
+  it("returns null for structural errors", () => {
+    expect(parseOwnedEmblemsFile("not json")).toBeNull();
+    expect(parseOwnedEmblemsFile("{}")).toBeNull();
+    expect(parseOwnedEmblemsFile(JSON.stringify({ a: 1 }))).toBeNull();
+    expect(parseOwnedEmblemsFile(JSON.stringify(["ok:gold", 5]))).toBeNull();
+  });
+
+  it("skips malformed entries silently without nulling the whole file", () => {
+    const parsed = parseOwnedEmblemsFile(
+      JSON.stringify(["nocolon", ":gold", "x:diamond", "001-bulbasaur:gold"]),
+    );
+    expect(parsed).toEqual(new Set(["001-bulbasaur:gold"]));
+  });
+
+  it("drops unknown emblem IDs when validEmblemIds is supplied", () => {
+    const input = JSON.stringify(["001-bulbasaur:gold", "made-up-mon:gold"]);
+    const valid = new Set(["001-bulbasaur"]);
+    expect(parseOwnedEmblemsFile(input, valid)).toEqual(new Set(["001-bulbasaur:gold"]));
+    expect(parseOwnedEmblemsFile(input)).toEqual(
+      new Set(["001-bulbasaur:gold", "made-up-mon:gold"]),
+    );
+  });
+
+  it("deduplicates repeated keys", () => {
+    const parsed = parseOwnedEmblemsFile(
+      JSON.stringify(["001-bulbasaur:gold", "001-bulbasaur:gold"]),
+    );
+    expect(parsed).toEqual(new Set(["001-bulbasaur:gold"]));
+    expect(parsed?.size).toBe(1);
   });
 });

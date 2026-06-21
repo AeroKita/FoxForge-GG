@@ -189,6 +189,8 @@ interface Store {
   owned: Set<string>; // keys are `${emblemId}:${grade}`
   toggleOwned: (emblemId: string, grade: EmblemGrade) => void;
   bulkSetOwned: (emblemIds: string[], grade: EmblemGrade, own: boolean) => void;
+  /** Replace the entire owned-emblem set (used by inventory file import). */
+  replaceOwned: (keys: Set<string>) => void;
   shareUrl: () => string;
   mode: ViewMode;
   setMode: (m: ViewMode) => void;
@@ -309,6 +311,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             if (own) next.add(key);
             else next.delete(key);
           }
+          saveOwnedEmblems(next);
+          return next;
+        }),
+      replaceOwned: (keys) =>
+        setOwned(() => {
+          const next = new Set(keys);
           saveOwnedEmblems(next);
           return next;
         }),
