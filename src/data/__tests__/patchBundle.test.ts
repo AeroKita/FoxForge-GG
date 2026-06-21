@@ -253,7 +253,9 @@ describe("community data bundle", () => {
       for (const p of bundle.pokemon) {
         for (const m of p.moves) {
           expect(m.description ?? "", `${p.id}/${m.name}`).not.toContain("Activates at Level");
-          expect(m.descriptionAdvanced ?? "", `${p.id}/${m.name}`).not.toContain("Activates at Level");
+          expect(m.descriptionAdvanced ?? "", `${p.id}/${m.name}`).not.toContain(
+            "Activates at Level",
+          );
         }
       }
     });

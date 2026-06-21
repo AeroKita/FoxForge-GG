@@ -60,6 +60,8 @@ jobs:
           PY
       - name: Validate regenerated bundle
         run: |
+          npm run lint
+          npm run format:check
           npx tsx src/data/verifyPatch.ts
           npm test
           npm run validate:art

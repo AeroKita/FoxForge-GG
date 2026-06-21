@@ -22,7 +22,13 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt \"src/**/*.{ts,tsx}\" vite.config.ts",
-    "format:check": "oxfmt --check \"src/**/*.{ts,tsx}\" vite.config.ts"
+    "format:check": "oxfmt --check \"src/**/*.{ts,tsx}\" vite.config.ts",
+    "verify": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run validate && npx tsx src/data/verifyPatch.ts && npm run validate:art",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": "oxfmt",
+    "vite.config.ts": "oxfmt"
   },
   "dependencies": {
     "react": "^19.2.7",
@@ -36,6 +42,8 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "oxfmt": "0.55.0",
     "oxlint": "1.70.0",
     "sharp": "^0.35.1",

@@ -162,7 +162,7 @@ Branding constants: `src/ui/brand.ts`, `docs/08-branding.md`. Historical token r
 
 ### Web distribution & build
 
-FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint, format check, typecheck, tests, and accuracy gates on every push and pull request. [`.github/workflows/pages.yml`](.github/workflows/pages.yml) redeploys to GitHub Pages on push to `main` (after the same accuracy gates, then `build:pages`). Game-data refresh runs daily at 09:00 UTC (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml): scrape/normalize, mirror new art (`fetch_art.py`), validate (`verifyPatch.ts`, `npm test`, `validate:art`), publish to `public/data/`, and open or update a PR on `data/auto-refresh` with a semantic changelog from `tools/community/diff_bundle.py` (new entities flagged for curation). When that PR already exists, a follow-up `@AeroKita` comment re-notifies on each update — it never commits directly to `main`.
+FoxForge GG ships as a **hosted PWA only** — no native desktop shell. The same Vite build serves local dev, installable PWA (`base: "./"`), and GitHub Pages (`VITE_BASE=/FoxForge-GG/` via `npm run build:pages`). [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint, format check, typecheck, tests, and accuracy gates on every push and pull request. [`.github/workflows/pages.yml`](.github/workflows/pages.yml) redeploys to GitHub Pages on push to `main` (after the same accuracy gates, then `build:pages`). Game-data refresh runs daily at 09:00 UTC (and on demand) via [`.github/workflows/data.yml`](.github/workflows/data.yml): scrape/normalize, mirror new art (`fetch_art.py`), validate (lint, format check, `verifyPatch.ts`, `npm test`, `validate:art`), publish to `public/data/`, and open or update a PR on `data/auto-refresh` with a semantic changelog from `tools/community/diff_bundle.py` (new entities flagged for curation). When that PR already exists, a follow-up `@AeroKita` comment re-notifies on each update — it never commits directly to `main`.
 
 Two independent update channels: **app code** (PWA service worker picks up a new deploy on reload) and **game data** (`refreshDataInBackground` / `checkDataNow` in `src/data/dataSource.ts` fetches `data/manifest.json` from Pages, caches strictly newer payloads to localStorage, and `gameData.ts` applies them on the next load via `activeRaw()`; see `docs/07-distribution.md`). `vite.config.ts` encodes Pages-specific service-worker self-destruct behavior to avoid stale-cache blank screens—distribution concerns live in config, not business logic.
 
@@ -180,7 +180,7 @@ TypeScript/React SPA with a pure calculation engine and community-sourced game d
 - **npm** for JS dependencies and scripts (`package.json`).
 - **Python 3** with a venv under `tools/extract/.venv` for community data refresh scripts (`tools/community/`).
 
-Clone, `npm install`, and you're ready to develop.
+Clone, `npm install`, and you're ready to develop. The `prepare` script installs a Husky pre-commit hook (`.husky/pre-commit`) that runs `lint-staged` to auto-format staged `src/**/*.{ts,tsx}` and `vite.config.ts` with oxfmt before each commit.
 
 ### Build Tools
 
@@ -192,8 +192,9 @@ Clone, `npm install`, and you're ready to develop.
 | vite-plugin-pwa | PWA manifest + Workbox caching (non-Pages builds) | `vite.config.ts` |
 | oxlint | Lint (React hooks, correctness category); CI fails on errors | `.oxlintrc.json` |
 | oxfmt | Format TS/TSX (Prettier-compatible); data JSON bundles are excluded | `.oxfmtrc.json` |
+| Husky + lint-staged | Pre-commit oxfmt on staged TS/TSX; configured in `package.json` `lint-staged` | `.husky/pre-commit` |
 
-Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`, `npm run lint`, `npm run lint:fix`, `npm run format`, `npm run format:check`.
+Key scripts (from `package.json`): `npm run dev`, `npm run build`, `npm run build:pages`, `npm run typecheck`, `npm run lint`, `npm run lint:fix`, `npm run format`, `npm run format:check`, `npm run verify`.
 
 App version shown in Settings → Updates comes from the `"version"` field in `package.json` (currently `1.2.5`), injected at build time via `vite.config.ts` (`define.__APP_VERSION__`) into `src/ui/version.ts` (`APP_VERSION`). Bump with `npm version <semver> --no-git-tag-version` (or edit `package.json` and sync `package-lock.json`).
 
@@ -211,11 +212,12 @@ Tests run in **Vitest** with `environment: "node"`, matching `src/**/*.test.ts` 
 | `npm run validate:art` | Validates mirrored image assets under `public/assets/` are real PNG/JPEG/WebP (not corrupt/HTML); `.mp4`/`.webm` move preview clips are skipped |
 | `python3 -m unittest tools/community/test_diff_bundle.py tools/community/test_normalize.py` | Semantic bundle-diff changelog (`diff_bundle.py`) and `strip_activation_note` helper (`normalize.py`) |
 | `npm run typecheck` | `tsc --noEmit` |
+| `npm run verify` | Full CI gate locally: lint → format:check → typecheck → test → validate → verifyPatch → validate:art |
 
 Every push and PR runs the full gate via `.github/workflows/ci.yml` (lint through `validate:art`, in that order). Local pre-push equivalent:
 
 ```bash
-npm run lint && npm run format:check && npm run typecheck && npm test && npm run validate && npx tsx src/data/verifyPatch.ts
+npm run verify
 ```
 
 Game data refresh (separate `data.yml` workflow):
