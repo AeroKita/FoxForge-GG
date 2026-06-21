@@ -2,13 +2,8 @@ import { useModalDismiss } from "./useModalDismiss";
 import { heldItemStatLines } from "./format";
 import { statsAtGrade } from "../components/tips";
 import type { HeldItem } from "../types";
-
-/** Grade 1–9 → tier 0, 10–19 → tier 1, 20–40 → tier 2. */
-export function activeTierIndex(grade: number): 0 | 1 | 2 {
-  if (grade < 10) return 0;
-  if (grade < 20) return 1;
-  return 2;
-}
+import { activeTierIndex } from "../engine/formulas";
+export { activeTierIndex };
 
 export function HeldItemDetailBody({ item, grade }: { item: HeldItem; grade: number }) {
   const statLines = heldItemStatLines(statsAtGrade(item, grade));

@@ -152,11 +152,27 @@ describe("conditional item effects", () => {
     expect(stats.moveSpeed).toBe(4300 + 175);
   });
 
-  it("Float Stone +20% move speed applies only out of combat (display layer)", () => {
+  it("Float Stone +20% move speed applies out of combat (conditionalEffects path)", () => {
     const stats = computeEffectiveStats(lucario, 15, noEmblems, [floatStone], [40], OUT_OF_COMBAT);
-    expect(outOfCombatMoveSpeed(stats, [floatStone], OUT_OF_COMBAT)).toBe(
+    // example-lucario's float-stone carries the OOC % in conditionalEffects (0.2).
+    expect(outOfCombatMoveSpeed(stats.moveSpeed, [floatStone], [40])).toBe(
       Math.floor((4300 + 175) * 1.2), // 5370
     );
-    expect(outOfCombatMoveSpeed(stats, [floatStone], IN_COMBAT)).toBe(4475);
+  });
+
+  it("Float Stone OOC % comes from effect.tiers, grade-scaled (production data shape)", () => {
+    const floatStoneProd = {
+      id: "float-stone",
+      displayName: "Float Stone",
+      iconAsset: "",
+      description: "",
+      statsByGrade: {},
+      conditionalEffects: [],
+      effect: { label: "Speed", tiers: ["10%", "15%", "20%"] as [string, string, string] },
+    };
+    // grade 5 → tier 0 → 10%, grade 15 → tier 1 → 15%, grade 40 → tier 2 → 20%
+    expect(outOfCombatMoveSpeed(1000, [floatStoneProd], [5])).toBe(1100);
+    expect(outOfCombatMoveSpeed(1000, [floatStoneProd], [15])).toBe(1150);
+    expect(outOfCombatMoveSpeed(1000, [floatStoneProd], [40])).toBe(1200);
   });
 });

@@ -98,6 +98,11 @@ export function StatPanel() {
         <p className="mt-2 text-xs text-faint">
           Out-of-combat move speed:{" "}
           <span className="font-mono">{oocMoveSpeed?.toLocaleString()}</span>
+          {oocMoveSpeed != null && oocMoveSpeed > effective.moveSpeed && (
+            <span className="ml-1 text-pos">
+              ({formatExactDelta(oocMoveSpeed - effective.moveSpeed, "int")})
+            </span>
+          )}
           {emblemLoadout.activeSetBonuses.length > 0 && (
             <>
               {" "}
@@ -107,6 +112,9 @@ export function StatPanel() {
                 .join(", ")}
             </>
           )}
+        </p>
+        <p className="mt-1 text-xs text-faint">
+          Yellow set bonus and Float Stone apply only out of combat.
         </p>
       </CollapsibleCard>
 

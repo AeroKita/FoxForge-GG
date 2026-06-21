@@ -118,10 +118,19 @@ export function deriveBuild(
 
   const activePoints = activeAttackSpeedPoints(availableBoosts, activeIds, loadout.level);
   const attackSpeed = computeAttackSpeed(effective.attackSpeed * 100, [activePoints]);
-  const oocMoveSpeed = outOfCombatMoveSpeed(effective, equippedHeld, {
-    inCombat: false,
-    goalsScored: 0,
-  });
+  // OOC move speed must include yellow's set bonus, which is gated OUT of the
+  // in-combat `effective` block above. Re-derive move speed with inCombat:false,
+  // then layer on out-of-combat item %s (Float Stone). Active in-combat buffs
+  // (e.g. X-Speed) intentionally do NOT apply out of combat.
+  const oocEffective = computeEffectiveStats(
+    pokemon,
+    loadout.level,
+    emblemLoadout,
+    equippedHeld,
+    equippedGrades,
+    { inCombat: false, goalsScored: 0 },
+  );
+  const oocMoveSpeed = outOfCombatMoveSpeed(oocEffective.moveSpeed, equippedHeld, equippedGrades);
 
   return {
     pokemon,

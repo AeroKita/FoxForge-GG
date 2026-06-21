@@ -176,27 +176,56 @@ export function computeEffectiveStats(
   return stats;
 }
 
+/** Held-item grade → effect tier index. Grade 1–9 → 0, 10–19 → 1, 20–40 → 2. */
+export function activeTierIndex(grade: number): 0 | 1 | 2 {
+  if (grade < 10) return 0;
+  if (grade < 20) return 1;
+  return 2;
+}
+
 /**
- * Display-layer move speed when out of combat: applies % OOC item effects
- * (e.g. Float Stone +20%) on top of the already-computed effective move speed.
- * OOC percentages stack additively. When in combat, this is just the
- * effective move speed.
+ * Held items that grant a movement-speed bonus ONLY while out of combat.
+ * Float Stone is the only one in the current data; Choice Scarf's "Movement
+ * Speed" is a post-skill in-combat boost and is deliberately excluded.
  */
-export function outOfCombatMoveSpeed(
-  effectiveStats: StatBlock,
-  items: HeldItem[],
-  context: CalcContext,
-): number {
-  if (context.inCombat) return effectiveStats.moveSpeed;
-  let oocPercent = 0;
-  for (const item of items) {
-    for (const effect of item.conditionalEffects) {
-      if (effect.type === "outOfCombat" && effect.appliesInCombat === false && effect.value) {
-        oocPercent += effect.value;
-      }
+const OOC_MOVE_SPEED_ITEM_IDS: ReadonlySet<string> = new Set(["float-stone"]);
+
+/** Parse a UNITE-DB tier string like "20%" into a fraction (0.2). */
+function parsePercent(tier: string): number {
+  return parseFloat(tier) / 100;
+}
+
+/** A single item's out-of-combat move-speed % at the given grade (0 if none). */
+function itemOocMoveSpeedPercent(item: HeldItem, grade: number): number {
+  // Structured shape (example-lucario fixture / any future data that fills it in).
+  for (const effect of item.conditionalEffects) {
+    if (effect.type === "outOfCombat" && effect.appliesInCombat === false && effect.value) {
+      return effect.value;
     }
   }
-  return Math.floor(effectiveStats.moveSpeed * (1 + oocPercent));
+  // Production data shape: the % lives in effect.tiers, grade-scaled.
+  if (OOC_MOVE_SPEED_ITEM_IDS.has(item.id) && item.effect) {
+    return parsePercent(item.effect.tiers[activeTierIndex(grade)]);
+  }
+  return 0;
+}
+
+/**
+ * Out-of-combat move speed: applies additive OOC item %s (e.g. Float Stone
+ * +10/15/20% by grade) on top of an already-OOC move-speed value. The caller
+ * must pass a move speed that already includes yellow's set bonus (computed
+ * with inCombat:false) — see derive.ts.
+ */
+export function outOfCombatMoveSpeed(
+  oocMoveSpeed: number,
+  items: HeldItem[],
+  grades: number[],
+): number {
+  let oocPercent = 0;
+  for (let i = 0; i < items.length; i++) {
+    oocPercent += itemOocMoveSpeedPercent(items[i], grades[i] ?? 40);
+  }
+  return Math.floor(oocMoveSpeed * (1 + oocPercent));
 }
 
 /** Maps an emblem color to the stat its set bonus modifies. */
