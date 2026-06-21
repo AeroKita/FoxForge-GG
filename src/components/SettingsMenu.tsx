@@ -73,8 +73,8 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
 
         <Section title="Legal">
           <p className="text-xs text-faint">
-            Data from the amazing people behind Unite-DB · Serebii · attack-speed model from
-            community calculator
+            Most data from the amazing Unite-DB team · Serebii · Some values verified against
+            official in-game text · Attack-speed model from Mathcord.
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-muted">
             {LEGAL_DISCLAIMER}
