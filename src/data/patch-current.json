@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.2.5",
-  "lastUpdated": "2026-06-20",
+  "lastUpdated": "2026-06-21",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-06-20"
+    "fetched": "2026-06-21"
   },
   "pokemon": [
     {
@@ -305,17 +305,17 @@
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
-              "ratio": 1.32,
+              "ratio": 1.43,
               "scalingStat": "attack",
-              "slider": 13.0,
-              "base": 160.0,
+              "slider": 14.0,
+              "base": 173.0,
               "damageType": "physical"
             },
             {
-              "ratio": 1.98,
+              "ratio": 2.14,
               "scalingStat": "attack",
-              "slider": 19.0,
-              "base": 240.0,
+              "slider": 21.0,
+              "base": 259.0,
               "damageType": "physical"
             }
           ],
@@ -369,17 +369,17 @@
               "damageType": "physical"
             },
             {
-              "ratio": 0.6,
+              "ratio": 0.72,
               "scalingStat": "attack",
-              "slider": 4.0,
-              "base": 40.0,
+              "slider": 5.0,
+              "base": 48.0,
               "damageType": "physical"
             },
             {
-              "ratio": 0.9,
+              "ratio": 1.08,
               "scalingStat": "attack",
-              "slider": 6.0,
-              "base": 60.0,
+              "slider": 7.0,
+              "base": 72.0,
               "damageType": "physical"
             }
           ],
@@ -434,7 +434,7 @@
           "name": "Midnight Slash",
           "slot": "uniteMove",
           "description": "Unleashes a flurry of slashes in front of the user. This move ends by unleashing powerful blades of energy, dealing increased damage to enemies and shoves them.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 89.0,
           "damageInstances": [
             {
               "ratio": 0.83,
@@ -2279,7 +2279,7 @@
           "name": "Fire Spin",
           "slot": "move1",
           "description": "Has the user generate a fierce vortex of fire around itself, dealing damage to opposing Pokémon it hits and increasing the user's movement speed. When the user is moving toward Pokémon on the opposing team, its movement speed is further increased. Whenever the user deals damage, it receives a shield effect. This effect can stack up to 6 times.If the user hits opposing Pokémon with a basic attack, the duration of the vortex is increased.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 7.0,
           "damageInstances": [
             {
               "ratio": 0.252,
@@ -2289,10 +2289,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.18,
+              "ratio": 0.2,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 22.0,
+              "base": 24.0,
               "damageType": "special"
             }
           ],
@@ -2315,17 +2315,17 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 2.46,
+              "ratio": 2.66,
               "scalingStat": "spAttack",
-              "slider": 15.0,
-              "base": 466.0,
+              "slider": 16.0,
+              "base": 503.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.74,
+              "ratio": 0.8,
               "scalingStat": "spAttack",
               "slider": 5.0,
-              "base": 172.0,
+              "base": 151.0,
               "damageType": "special"
             }
           ],
@@ -2379,17 +2379,17 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 0.65,
+              "ratio": 0.85,
               "scalingStat": "spAttack",
-              "slider": 8.0,
-              "base": 300.0,
+              "slider": 10.0,
+              "base": 390.0,
               "damageType": "special"
             },
             {
-              "ratio": 1.38,
+              "ratio": 1.52,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 172.0,
+              "base": 189.0,
               "damageType": "special"
             }
           ],
@@ -2438,10 +2438,10 @@
           "cooldownSeconds": 112.0,
           "damageInstances": [
             {
-              "ratio": 2.5,
+              "ratio": 2.7,
               "scalingStat": "spAttack",
-              "slider": 16.0,
-              "base": 600.0,
+              "slider": 17.0,
+              "base": 648.0,
               "damageType": "special"
             }
           ],
@@ -2859,10 +2859,10 @@
           "cooldownSeconds": 0.0,
           "damageInstances": [
             {
-              "ratio": 0.5,
+              "ratio": 0.4,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 200.0,
+              "base": 160.0,
               "damageType": "special"
             }
           ],
@@ -2899,7 +2899,7 @@
           "name": "Blizzard",
           "slot": "move1",
           "description": "Has the user summon a howling blizzard centered on itself, applying a freeze counter and dealing damage to opposing Pokémon. If an opposing Pokémon’s freeze counter reaches 5, that Pokémon becomes frozen.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 9.0,
           "damageInstances": [
             {
               "ratio": 0.39,
@@ -13280,7 +13280,7 @@
           "name": "Spirit Shackle",
           "slot": "move1",
           "description": "Charges power before firing quills in the designated direction. Damage dealt increases the longer power is charged, but movement speed is decreased while charging. If this move hits after power is charged to the maximum, it can stitch enemies to the ground. The affected Pokémon receives damage upon moving a set distance from that location, and their movement speed is decreased for a short time.\n\nUpgrade (Level 11): Deals increased damage to enemies with low remaining HP.",
-          "cooldownSeconds": 8.5,
+          "cooldownSeconds": 9.0,
           "damageInstances": [
             {
               "ratio": 2.48,
@@ -13387,7 +13387,7 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 8,
-          "descriptionAdvanced": "Decidueye creates a shadow that lasts for up to 5s, increasing Decidueye's movement speed by 70% for 2s, decaying by 20% every 0.5s, and reveals all opposing Pokémon in range temporarily. Pokémon that are sneaking remain invisible but can be targeted by the shadow giving away their position if they were within the initial cast range. Afterwards the shadow will automatically target an enemy player that is visible to Decidueye, inflicting damage, lowering their movement speed by 30% for 1s, and decreasing their Defense by 60% for 1.5s. Wild Pokémon that are currently aggressive can also be targeted but are otherwise ignored.\n\nUpgrade (Level 13): Defense reduction of enemies is increased to 80%.",
+          "descriptionAdvanced": "Decidueye creates a shadow that lasts for up to 5s, increasing Decidueye's movement speed by 70% for 2s, decaying by 20% every 0.5s, and reveals all opposing Pokémon in range temporarily. Pokémon that are sneaking remain invisible but can be targeted by the shadow giving away their position if they were within the initial cast range. Afterwards the shadow will automatically target an enemy player that is visible to Decidueye, inflicting damage, lowering their movement speed by 30% for 1s, and decreasing their Defense by 40% for 1.5s. Wild Pokémon that are currently aggressive can also be targeted but are otherwise ignored.\n\nUpgrade (Level 13): Defense reduction of enemies is increased to 60%.",
           "gifAsset": "/assets/skills/Decidueye/Shadow+Sneak.webp"
         },
         {
@@ -17372,10 +17372,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 1.5,
+              "ratio": 1.65,
               "scalingStat": "spAttack",
-              "slider": 13.0,
-              "base": 300.0,
+              "slider": 14.0,
+              "base": 330.0,
               "damageType": "special"
             }
           ],
@@ -17387,7 +17387,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user throws a Pollen Puff at the designated location which attaches to the nearest Pokémon within 0.5s. The Pollen Puff explodes 2s after attaching to a Pokémon, restoring the HP of the user's teammates and damaging opposing Pokémon in the area of effect.\n\nThe Pollen Puff explodes on its own after 1s with the same effects if it doesn't attach to any Pokémon within the first 0.5s of landing.\n\nUpgrade (Level 10): If the Pollen Puff attaches to a teammate, it reduces the damage that teammate receives by 15% for 2s before it explodes. If the Pollen Puff attaches to any Pokémon, opposing Pokémon that come in contact with the target receive damage over time every 0.5s before the Pollen Puff explodes.",
+          "descriptionAdvanced": "The user throws a Pollen Puff at the designated location which attaches to the nearest Pokémon within 0.5s. The Pollen Puff explodes 2s after attaching to a Pokémon, restoring the HP of the user's teammates and damaging opposing Pokémon in the area of effect.\n\nThe Pollen Puff explodes on its own after 1s with the same effects if it doesn't attach to any Pokémon within the first 0.5s of landing.\n\nUpgrade (Level 10): If the Pollen Puff attaches to a teammate, it reduces the damage that teammate receives by 20% for 2s before it explodes. If the Pollen Puff attaches to any Pokémon, opposing Pokémon that come in contact with the target receive damage over time every 0.5s before the Pollen Puff explodes.",
           "gifAsset": "/assets/skills/Eldegoss/Pollen+Puff.webp"
         },
         {
@@ -17413,7 +17413,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user launches a tornado of sharp leaves in the designated direction, damaging opposing Pokémon hit by the tornado and creating a path in its wake that lasts for 4s. Teammates on the path have their movement speed increased by 55%, lingering for 1.5s after leaving the path. When the tornado reaches max distance, the tornado damages opposing Pokémon a second time.\n\n25% of the damage of the first hit.\n\nUpgrade (Level 10): Applies a debuff to opposing Pokémon hit by the tornado that causes auto attacks to deal no damage for 2.5s.",
+          "descriptionAdvanced": "The user launches a tornado of sharp leaves in the designated direction, damaging opposing Pokémon hit by the tornado and creating a path in its wake that lasts for 4s. Teammates on the path have their movement speed increased by 60%, lingering for 2s after leaving the path. When the tornado reaches max distance, the tornado damages opposing Pokémon a second time.\n\n25% of the damage of the first hit.\n\nUpgrade (Level 10): Applies a debuff to opposing Pokémon hit by the tornado that causes auto attacks to deal no damage for 2.5s.",
           "gifAsset": "/assets/skills/Eldegoss/Leaf+Tornado.webp"
         },
         {
@@ -17445,7 +17445,7 @@
           "name": "Cotton Guard",
           "slot": "move2",
           "description": "Protects the user and nearby allies with cotton. The cotton absorbs damage and when the move ends, the cotton restores some HP.\n\nUpgrade (Level 12): Also increases the user's movement speed while using this move.",
-          "cooldownSeconds": 10.5,
+          "cooldownSeconds": 9.5,
           "damageInstances": [
             {
               "ratio": 1.725,
@@ -17507,10 +17507,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 3.06,
+              "ratio": 3.37,
               "scalingStat": "spAttack",
-              "slider": 13.0,
-              "base": 636.0,
+              "slider": 14.0,
+              "base": 700.0,
               "damageType": "special"
             }
           ],
@@ -18112,10 +18112,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.47,
+              "ratio": 0.52,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 128.0,
+              "base": 141.0,
               "damageType": "special"
             }
           ],
@@ -18137,17 +18137,17 @@
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
-              "ratio": 0.62,
+              "ratio": 0.69,
               "scalingStat": "spAttack",
               "slider": 4.0,
-              "base": 90.0,
+              "base": 101.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.74,
+              "ratio": 0.83,
               "scalingStat": "spAttack",
-              "slider": 5.0,
-              "base": 108.0,
+              "slider": 6.0,
+              "base": 121.0,
               "damageType": "special"
             },
             {
@@ -18166,7 +18166,7 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user becomes unstoppable for 1s as they create a violent swirling whirlpool around themself, dealing damage to opposing Pokémon every 0.25s up to 4 hits. The user's HP is restored by 40% of the damage dealt against Pokémon on the opposing team, and by 20% against wild Pokémon. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will throw opposing Pokémon for 0.6s and the user will slash once at the end of the move in the designated direction extending the unstoppable duration to 1.33s. The healing of the move is increased to 50% of the damage dealt against Pokémon on the opposing team, and 25% against wild Pokémon.\n\nUpgrade (Level 13): Increased damage."
+          "descriptionAdvanced": "The user becomes unstoppable for 1s as they create a violent swirling whirlpool around themself, dealing damage to opposing Pokémon every 0.25s up to 4 hits. The user's HP is restored by 50% of the damage dealt against Pokémon on the opposing team (this healing is halved against wild Pokémon). Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will throw opposing Pokémon for 0.6s and the user will slash once at the end of the move in the designated direction extending the unstoppable duration to 1.33s. The healing of the move is increased to 60% of the damage dealt against Pokémon on the opposing team, and 30% against wild Pokémon.\n\nUpgrade (Level 13): Increased damage and increased healing to 60% of the damage dealt (this healing is halved against wild Pokémon)."
         },
         {
           "id": "peck",
@@ -18199,10 +18199,10 @@
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
-              "ratio": 2.07,
+              "ratio": 2.28,
               "scalingStat": "spAttack",
-              "slider": 11.0,
-              "base": 310.0,
+              "slider": 12.0,
+              "base": 341.0,
               "damageType": "special"
             },
             {
@@ -19359,7 +19359,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Charge with its horns, dealing damage to opposing Pokémon it hits and throwing them in the air for 0.25s. Immediately afterward, strike with its horns again and gain a shield for 2.5s.\n\n6% Max HP\n\nTrooper damage becomes additional to Column formation hitting the same target.\n\nIn No Retreat formation: Falinks becomes hindrance resistant and charges power for 1s. It then strikes forward with its horns, dealing additional damage to opposing Pokémon it hits based on their max HP and gaining a shield for 2.5s. This version of the move has a 4s cd that is separate from the column version.\n\nUpgrade (Level 10): Increases the shield value."
+          "descriptionAdvanced": "Charge with its horns, dealing damage to opposing Pokémon it hits and throwing them in the air for 0.25s. Immediately afterward, strike with its horns again and gain a shield for 3.5s.\n\n6% Max HP\n\nTrooper damage becomes additional to Column formation hitting the same target.\n\nIn No Retreat formation: Falinks becomes hindrance resistant and charges power for 1s. It then strikes forward with its horns, dealing additional damage to opposing Pokémon it hits based on their max HP and gaining a shield for 2.5s. This version of the move has a 4s cd that is separate from the column version.\n\nUpgrade (Level 10): Increases the shield value."
         },
         {
           "id": "iron-head",
@@ -19420,7 +19420,7 @@
           "name": "No Retreat",
           "slot": "move2",
           "description": "Has the user switch to No Retreat formation while shoving opposing Pokémon in front of it. While in No Retreat formation, the user cannot change the direction it's facing and its movement speed when moving backward is decreased, but its Attack is increased and damage it takes from the front is reduced. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.",
-          "cooldownSeconds": 5.0,
+          "cooldownSeconds": 4.0,
           "damageInstances": [
             {
               "ratio": 2.0,
@@ -19466,7 +19466,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Switch to No Retreat formation while shoving enemies for 0.4s in front of Falinks and become unstoppable during the formation change for 0.5s. While in No Retreat formation, the user cannot change the direction they're facing, unless they use the other move. Falinks' movement speed when moving backward is slowed by 10%, but Attack is increased by 25% and damage taken from the front is reduced by 20%. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.\n\nWhile in No Retreat formation both the Brass and Troopers take 20% less damage from the front. The Brass' total damage reduction becomes 28%; the Trooper's total damage reduction becomes 92%.\n\nUpgrade (Level 12): Attack increase is increased to 40% and damage reduction from the front is increased to 30%."
+          "descriptionAdvanced": "Switch to No Retreat formation while shoving enemies for 0.4s in front of Falinks and become unstoppable during the formation change for 0.5s. While in No Retreat formation, the user cannot change the direction they're facing, unless they use the other move. Falinks' movement speed when moving backward is slowed by 10%, but Attack is increased by 25% and damage taken from the front is reduced by 30%. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.\n\nWhile in No Retreat formation both the Brass and Troopers take 30% less damage from the front. The Brass' total damage reduction becomes 37%; the Trooper's total damage reduction becomes 93%.\n\nUpgrade (Level 12): Attack increase is increased to 40% and damage reduction from the front is increased to 35%."
         },
         {
           "id": "beat-up",
@@ -19512,7 +19512,7 @@
           "name": "Dust Devil Formation",
           "slot": "uniteMove",
           "description": "Has the five troopers run continuously around the brass at great speed, dealing damage and applying a slowing effect to opposing Pokémon they hit. While this move is being used, damage taken by the troopers is reduced. Activates at Level 9",
-          "cooldownSeconds": 112.0,
+          "cooldownSeconds": 100.0,
           "damageInstances": [
             {
               "ratio": 0.9,
@@ -24163,10 +24163,10 @@
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
-              "ratio": 1.35,
+              "ratio": 1.22,
               "scalingStat": "attack",
-              "slider": 8.0,
-              "base": 210.0,
+              "slider": 7.0,
+              "base": 189.0,
               "damageType": "physical"
             },
             {
@@ -24209,10 +24209,10 @@
               "damageType": "physical"
             },
             {
-              "ratio": 0.41,
+              "ratio": 0.37,
               "scalingStat": "attack",
               "slider": 5.0,
-              "base": 75.0,
+              "base": 68.0,
               "damageType": "physical"
             }
           ],
@@ -24246,7 +24246,7 @@
           "name": "Double Team",
           "slot": "move2",
           "description": "Quickly moves the user away from the current position, creating illusory copies of it to aid in battle.\n\nUpgrade (Level 13): Reduced cooldown.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 9.0,
           "damageInstances": [],
           "effects": [],
           "tags": [
@@ -24288,7 +24288,7 @@
           "name": "Waterburst Shuriken",
           "slot": "uniteMove",
           "description": "Throw a giant water shuriken toward the designated area, dealing damage to enemies in the area of effect and decreasing their movement speed for a short time when this move hits. The water shuriken then immediately explodes, dealing damage to enemies in the area of effect and throws them. Once this move ends, the user may jump in a designated direction.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 112.0,
           "damageInstances": [
             {
               "ratio": 2.2,
@@ -28166,7 +28166,7 @@
           "name": "Bubble Beam",
           "slot": "move2",
           "description": "Grants the user a shield and has the user spray bubbles in the designated direction, dealing damage to opposing Pokémon it hits. After the bubbles fly a set distance, they slowly float for a short time. Opposing Pokémon hit by a floating bubble are enveloped by it and left unable to act for a short time.",
-          "cooldownSeconds": 9.0,
+          "cooldownSeconds": 8.0,
           "damageInstances": [
             {
               "ratio": 1.725,
@@ -28223,7 +28223,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Unleash an icy-cold beam of energy in the designated direction, dealing damage to Pokémon hit and freezing the ground for 3s. Pokémon on the frozen ground take damage equal to the beam's damage every 0.4s they remain on it and have their movement speed decreased by 15% for 2s stacking up to 6 times. Pokémon become frozen for 1s if they remain on the frozen ground for 3 ticks. When Lapras is on the frozen ground, Lapras's movement speed is increased by 20%, lingering for 0.5s if Lapras leaves the frozen ground.\n\nUpgrade (Level 13): Increase the duration Pokémon are Frozen for to 1.5s."
+          "descriptionAdvanced": "Unleash an icy-cold beam of energy in the designated direction, dealing damage to Pokémon hit and freezing the ground for 3s. Pokémon on the frozen ground take damage equal to the beam's damage every 0.4s they remain on it and have their movement speed decreased by 15% for 2s stacking up to 6 times. Pokémon become frozen for 1s if they remain on the frozen ground for 3 ticks. When Lapras is on the frozen ground, Lapras's movement speed is increased by 40%, lingering for 0.5s if Lapras leaves the frozen ground.\n\nUpgrade (Level 13): Increase the duration Pokémon are Frozen for to 1.5s."
         },
         {
           "id": "lapras-express",
@@ -28252,9 +28252,9 @@
       "passiveAbility": {
         "id": "shell-armor",
         "name": "Shell Armor",
-        "description": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 20%.",
+        "description": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 25%.",
         "effects": [],
-        "descriptionAdvanced": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 20%.",
+        "descriptionAdvanced": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 25%.",
         "iconAsset": "/assets/skills/Lapras/Shell+Armor.png"
       },
       "builds": [
@@ -32174,7 +32174,7 @@
           "name": "Submission",
           "slot": "move2",
           "description": "Increases movement speed and become immune to hindrances. When the next basic attack hits, the attack deals increased damage and slams the enemy onto the ground, leaving it unable to act. Once this move ends, the user's critical-hit rate and basic attack speed are increased for a short time.\n\nUpgrade (Level 11): Increased critical-hit rate and basic attack speed.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 9.5,
           "damageInstances": [
             {
               "ratio": 1.15,
@@ -33371,10 +33371,10 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 1.92,
+              "ratio": 1.54,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 576.0,
+              "base": 461.0,
               "damageType": "special"
             }
           ],
@@ -33409,14 +33409,14 @@
           ],
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Meganium/Synthesis.png",
-          "descriptionAdvanced": "The user photosynthesizes and produces energy around the designated ally and the user for 1s. Allies in the area of effect get healed, doubly so if within both circles of energy, while opposing Pokémon have their damage lowered by 15% for 3s."
+          "descriptionAdvanced": "The user photosynthesizes and produces energy around the designated ally and the user for 1s. Allies in the area of effect get healed, if within both circles of energy the second circle's healing is halved, while opposing Pokémon have their damage lowered by 15% for 3s."
         },
         {
           "id": "petal-blizzard",
           "name": "Petal Blizzard",
           "slot": "move2",
           "description": "Has the user stir up a violent petal blizzard in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon while restoring ally Pokémon HP within its area of effect. The HP of ally Pokémon near to the user will also be restored. When this move becomes a full bloom move, the blizzard's area of effect is increased, and the petals remain for a set amount of time.",
-          "cooldownSeconds": 6.0,
+          "cooldownSeconds": 7.0,
           "damageInstances": [
             {
               "ratio": 1.24,
@@ -33464,7 +33464,7 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Meganium/Full+Bloom+Aroma.png",
-          "descriptionAdvanced": "The user emits a sweet aroma around themselves dealing damage to opposing Pokémon every 0.5s up to 10 times. Opposing Pokémon hit by this move have their damage reduced by 15% for 3s, the duration is refreshed on each hit. For up to 5s, the user's next move will be in full bloom, granting extra effects.\n\nMeganium gains 2700 energy per second instead of the usual 900. Hitting with moves grants 4500 energy."
+          "descriptionAdvanced": "The user emits a sweet aroma around themselves dealing damage to opposing Pokémon every 0.5s up to 10 times. Opposing Pokémon hit by this move have their damage reduced by 10% for 3s, the duration is refreshed on each hit. For up to 5s, the user's next move will be in full bloom, granting extra effects.\n\nMeganium gains 2700 energy per second instead of the usual 900. Hitting with moves grants 4500 energy."
         }
       ],
       "passiveAbility": {
@@ -38725,10 +38725,10 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 1.47,
+              "ratio": 1.32,
               "scalingStat": "spAttack",
-              "slider": 8.0,
-              "base": 434.0,
+              "slider": 7.0,
+              "base": 391.0,
               "damageType": "special"
             }
           ],
@@ -38740,7 +38740,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user exhales hot breath in the designated direction, dealing damage and granting health regeneration. This health regeneration lasts 2s and ticks every 0.5s.\n\n5% of Max HP\n\nUpgrade (Level 11): Lowers the cooldown of this move by 1s for each Pokémon from the opposing team hit."
+          "descriptionAdvanced": "The user exhales hot breath in the designated direction, dealing damage and granting health regeneration. This health regeneration lasts 2s and ticks every 0.5s.\n\n4% of Max HP\n\nUpgrade (Level 11): Lowers the cooldown of this move by 1s for each Pokémon from the opposing team hit."
         },
         {
           "id": "firebird-inferno",
@@ -46001,7 +46001,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.5s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
+          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.7s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
           "videoAsset": "/assets/skills/Skeledirge/Snarl.mp4"
         },
         {
@@ -46032,9 +46032,9 @@
       "passiveAbility": {
         "id": "blaze",
         "name": "Blaze",
-        "description": "The user's next move is granted 35% SpDef Pierce (20s CD).",
+        "description": "The user's next move is granted 35% SpDef Pierce (15s CD).",
         "effects": [],
-        "descriptionAdvanced": "The user's next move is granted 35% SpDef Pierce (20s CD).",
+        "descriptionAdvanced": "The user's next move is granted 35% SpDef Pierce (15s CD).",
         "iconAsset": "/assets/skills/Skeledirge/Blaze.png"
       },
       "builds": [
@@ -48365,10 +48365,10 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 0.74,
+              "ratio": 0.8,
               "scalingStat": "spAttack",
-              "slider": 12.0,
-              "base": 446.0,
+              "slider": 13.0,
+              "base": 482.0,
               "damageType": "special"
             }
           ],
@@ -48397,10 +48397,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.42,
+              "ratio": 0.48,
               "scalingStat": "spAttack",
-              "slider": 10.0,
-              "base": 175.0,
+              "slider": 12.0,
+              "base": 201.0,
               "damageType": "special"
             }
           ],
@@ -48474,7 +48474,7 @@
           "name": "Calm Mind",
           "slot": "move2",
           "description": "Sylveon quietly focuses their mind and calms their spirit, increasing movement speed, Sp. Attack by 40% and Sp. Defense by 10% for a short time.\n\nUpgrade (Level 12): One time only while using this move, if Sylveon is hit by an Enemy's move, the damage is completely nulliffied and Sylveon is granted a shield.",
-          "cooldownSeconds": 9.0,
+          "cooldownSeconds": 8.0,
           "damageInstances": [],
           "effects": [],
           "tags": [
@@ -49567,17 +49567,17 @@
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
-              "ratio": 1.68,
+              "ratio": 2.1,
               "scalingStat": "attack",
-              "slider": 12.0,
-              "base": 260.0,
+              "slider": 15.0,
+              "base": 325.0,
               "damageType": "physical"
             },
             {
-              "ratio": 2.94,
+              "ratio": 3.18,
               "scalingStat": "attack",
-              "slider": 21.0,
-              "base": 454.0,
+              "slider": 23.0,
+              "base": 490.0,
               "damageType": "physical"
             },
             {
@@ -49738,7 +49738,7 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Tinkaton/Kiss+Bliss+Kaboom.png",
-          "descriptionAdvanced": "The user first blows cute kisses at the designated Pokémon from the opposing team and their nearby allies, damaging and stunning them for 0.7s when Kiss Bliss hits a target. The user can then use the Unite Move again, leaping up forward and slamming their hammer down at the designated location, damaging opposing Pokémon in the area of effect of Kaboom.\n\nUnite Move buffs apply when Kiss Bliss hits a target."
+          "descriptionAdvanced": "The user first blows cute kisses at the designated Pokémon from the opposing team and their nearby allies, damaging and stunning them for 1.2s when Kiss Bliss hits a target. The user can then use the Unite Move again, leaping up forward and slamming their hammer down at the designated location, damaging opposing Pokémon in the area of effect of Kaboom.\n\nUnite Move buffs apply when Kiss Bliss hits a target."
         }
       ],
       "passiveAbility": {
@@ -49746,7 +49746,7 @@
         "name": "Mold Breaker",
         "description": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.",
         "effects": [],
-        "descriptionAdvanced": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.\n\nThis Pokémon's hammer strengthens every time they hit Pokémon from the opposing team with boosted attacks or moves, increasing this Pokémon's Attack by 0.5% per target hit (up to 60 times; maximum 30% Attack). After the hammer is strengthened 20, 40, and 60 times; Rock Smash, Gigaton Hammer, and Smack Down gain increased range.",
+        "descriptionAdvanced": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.\n\nThis Pokémon's hammer strengthens every time they hit Pokémon from the opposing team with boosted attacks or moves, increasing this Pokémon's Attack by 0.5% per target hit (up to 100 times; maximum 30% Attack). After the hammer is strengthened 20, 40, and 60 times; Rock Smash, Gigaton Hammer, and Smack Down gain increased range.",
         "iconAsset": "/assets/skills/Tinkaton/Mold+Breaker.png"
       },
       "builds": [

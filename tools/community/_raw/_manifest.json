@@ -1,0 +1,36 @@
+{
+  "source": "https://unite-db.com",
+  "fetched": "2026-06-21",
+  "files": {
+    "pokemon": {
+      "url": "https://unite-db.com/pokemon.json",
+      "bytes": 2967510,
+      "count": 94
+    },
+    "stats": {
+      "url": "https://unite-db.com/stats.json",
+      "bytes": 239018,
+      "count": 94
+    },
+    "held_items": {
+      "url": "https://unite-db.com/held_items.json",
+      "bytes": 20781,
+      "count": 41
+    },
+    "battle_items": {
+      "url": "https://unite-db.com/battle_items.json",
+      "bytes": 2276,
+      "count": 10
+    },
+    "emblems": {
+      "url": "https://unite-db.com/emblems.json",
+      "bytes": 95678,
+      "count": 762
+    },
+    "emblem_sets": {
+      "url": "https://unite-db.com/emblem_sets.json",
+      "bytes": 1960,
+      "count": 11
+    }
+  }
+}
