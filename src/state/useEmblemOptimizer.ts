@@ -404,22 +404,6 @@ export function useEmblemOptimizer(): {
     [pokemon],
   );
 
-  /** Switch owned/full pool; on full dataset, re-derive color UI (exact when feasible). */
-  const handleSetUseOwned = useCallback(
-    (nextUseOwned: boolean) => {
-      setUseOwned(nextUseOwned);
-      if (!nextUseOwned) {
-        const fullPool = buildPool(
-          allEmblems,
-          { useOwned: false, mixedGrades, allowedGrades },
-          owned,
-        );
-        applyAdvancedColorDefaults(fullPool);
-      }
-    },
-    [mixedGrades, allowedGrades, owned, applyAdvancedColorDefaults],
-  );
-
   const applyAdvancedProtectDefaults = useCallback(
     (level: number) => {
       if (pokemon) {
@@ -443,12 +427,24 @@ export function useEmblemOptimizer(): {
     [pokemon],
   );
 
-  const syncAdvancedFromPokemon = useCallback(() => {
-    setCustomWeights({});
-    applyAdvancedProtectDefaults(optimizeLevel);
-    applyAdvancedColorDefaults(pool);
-  }, [optimizeLevel, pool, applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
+  // Refs so pokemon-change reset uses the latest pool/level without re-binding when
+  // owned/full or grade filters change (those must never trigger a settings reset).
+  const poolConfigRef = useRef(poolConfig);
+  const ownedRef = useRef(owned);
+  const optimizeLevelRef = useRef(optimizeLevel);
+  poolConfigRef.current = poolConfig;
+  ownedRef.current = owned;
+  optimizeLevelRef.current = optimizeLevel;
 
+  /** Pokémon-specific defaults: colors, protect floors, custom priority tweaks. */
+  const resetAdvancedForNewPokemon = useCallback(() => {
+    setCustomWeights({});
+    applyAdvancedProtectDefaults(optimizeLevelRef.current);
+    const currentPool = buildPool(allEmblems, poolConfigRef.current, ownedRef.current);
+    applyAdvancedColorDefaults(currentPool);
+  }, [applyAdvancedProtectDefaults, applyAdvancedColorDefaults]);
+
+  /** Full Advanced reset — pool, mode, scoring toggles, colors, floors (Reset button). */
   const syncAdvancedFromBasic = useCallback(() => {
     const grades = new Set(DEFAULT_ALLOWED_GRADES);
     setUseOwned(BASIC_POOL_DEFAULTS.useOwned);
@@ -477,24 +473,20 @@ export function useEmblemOptimizer(): {
   const prevExpert = useRef(false);
   const prevPokemonIdForExpert = useRef(loadout.pokemonId);
   useEffect(() => {
-    const expertJustEnabled = expert && !prevExpert.current;
-    prevExpert.current = expert;
-
     if (!expert || !pokemon) {
       prevPokemonIdForExpert.current = loadout.pokemonId;
-      return;
-    }
-
-    if (expertJustEnabled) {
-      syncAdvancedFromBasic();
-      prevPokemonIdForExpert.current = loadout.pokemonId;
+      prevExpert.current = expert;
       return;
     }
 
     const pokemonChanged = prevPokemonIdForExpert.current !== loadout.pokemonId;
+    prevExpert.current = expert;
     prevPokemonIdForExpert.current = loadout.pokemonId;
-    if (pokemonChanged) syncAdvancedFromPokemon();
-  }, [expert, loadout.pokemonId, pokemon, syncAdvancedFromBasic, syncAdvancedFromPokemon]);
+
+    // Only Pokémon changes auto-sync Advanced settings. Pool toggles (owned/full,
+    // mixed grades, grade filters) and inventory updates must not reset the UI.
+    if (pokemonChanged) resetAdvancedForNewPokemon();
+  }, [expert, loadout.pokemonId, pokemon, resetAdvancedForNewPokemon]);
 
   const handleBasicSearch = useCallback(async () => {
     if (!pokemon || !basicObjective || basicPool.length < SLOTS) return;
@@ -598,7 +590,7 @@ export function useEmblemOptimizer(): {
   const advanced: OptimizerAdvancedProps = {
     pool,
     useOwned,
-    setUseOwned: handleSetUseOwned,
+    setUseOwned,
     mixedGrades,
     setMixedGrades,
     enumerateGradeVariants,
