@@ -73,7 +73,7 @@ export function SettingsMenu({ open, onClose }: { open: boolean; onClose: () => 
 
         <Section title="Legal">
           <p className="text-xs text-faint">
-            Most data from the amazing Unite-DB team · Serebii · Some values verified against
+            Most data is from the amazing Unite-DB team · Serebii · Some values verified against
             official in-game text · Attack-speed model from Mathcord.
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-muted">

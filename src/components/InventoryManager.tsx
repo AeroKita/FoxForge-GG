@@ -128,7 +128,7 @@ export function InventoryManager() {
             ↑ Import JSON
           </button>
         </div>
-        <p className="text-xs text-muted">Back up or restore your full collection (all grades)</p>
+        <p className="text-xs text-muted">Back up or restore your full collection (all grades).</p>
         <input
           ref={fileInputRef}
           type="file"
