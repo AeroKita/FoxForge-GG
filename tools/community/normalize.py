@@ -245,6 +245,13 @@ def build_upgrade_move(up: dict, slot: str, folder: str) -> dict:
     mtype = up.get("type")
     name = up.get("name", "")
     basic = up.get("description1", "") or ""
+    # Some UNITE-DB description1 fields embed a bare "Upgrade:" marker. Promote it
+    # to "Upgrade (Level N):" using the upgrade's own level2 so it matches every
+    # other move's formatting. Idempotent: "Upgrade (Level …):" has a space after
+    # "Upgrade" so it never contains the "Upgrade:" substring.
+    lvl2 = str(up.get("level2") or "").strip()
+    if lvl2 and "Upgrade:" in basic:
+        basic = basic.replace("Upgrade:", f"Upgrade (Level {lvl2}):")
     d2 = (up.get("description2") or "").strip()
     if d2:
         lvl = str(up.get("level2") or "").strip()

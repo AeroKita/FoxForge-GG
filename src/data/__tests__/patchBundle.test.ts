@@ -151,6 +151,20 @@ describe("community data bundle", () => {
       expect(thunderbolt.description).toContain("\n\nUpgrade (Level 13):");
     });
 
+    it("Quaquaval Low Sweep / Liquidation Basic text carries the upgrade level", () => {
+      const q = bundle.pokemon.find((p) => p.id === "quaquaval")!;
+      const lowSweep = q.moves.find((m) => m.name === "Low Sweep")!;
+      const liquidation = q.moves.find((m) => m.name === "Liquidation")!;
+      expect(lowSweep.description).toContain("\n\nUpgrade (Level 11):");
+      expect(liquidation.description).toContain("\n\nUpgrade (Level 13):");
+      // no bare marker left anywhere in Basic descriptions
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          expect(m.description ?? "", `${p.id}/${m.name}`).not.toMatch(/Upgrade:(?! \(Level)/);
+        }
+      }
+    });
+
     it("every Upgrade (Level marker is preceded by a blank line", () => {
       const upgradePattern = /Upgrade \(Level/g;
       for (const p of bundle.pokemon) {

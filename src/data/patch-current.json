@@ -58458,7 +58458,7 @@
           "id": "low-sweep",
           "name": "Low Sweep",
           "slot": "move1",
-          "description": "Has the user unleash three swift kicks in the designated direction, dealing damage and decreasing opposing Pokémon's movement speed.\n\nWhen this move causes vibes to reach max, Spinning Edge deals increased damage.\n\nUpgrade: Increases the damage dealt by this move and further increases the damage dealt by Spinning Edge when boosted.",
+          "description": "Has the user unleash three swift kicks in the designated direction, dealing damage and decreasing opposing Pokémon's movement speed.\n\nWhen this move causes vibes to reach max, Spinning Edge deals increased damage.\n\nUpgrade (Level 11): Increases the damage dealt by this move and further increases the damage dealt by Spinning Edge when boosted.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -58515,7 +58515,7 @@
           "id": "liquidation",
           "name": "Liquidation",
           "slot": "move2",
-          "description": "Has the user charge in the designated direction, dealing damage and decreasing the Defense of opposing Pokémon it hits, and restoring the user's HP.\n\nA maximum of 2 uses can be kept in reserve for this move.\n\nWhen this move causes vibes to reach max, Spinning Edge grants the user a shield effect.\n\nUpgrade: Increases the amount of HP restored by this move and strengthens the shield effect granted by Spinning Edge when boosted.",
+          "description": "Has the user charge in the designated direction, dealing damage and decreasing the Defense of opposing Pokémon it hits, and restoring the user's HP.\n\nA maximum of 2 uses can be kept in reserve for this move.\n\nWhen this move causes vibes to reach max, Spinning Edge grants the user a shield effect.\n\nUpgrade (Level 13): Increases the amount of HP restored by this move and strengthens the shield effect granted by Spinning Edge when boosted.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
