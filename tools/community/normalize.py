@@ -511,17 +511,26 @@ def apply_curated_builds(pokemon, emblems, held, battle) -> None:
         return
     overlay = json.loads(CURATED.read_text())
     remap = overlay.get("_emblemNameRemap", {})
+    prefix_remap = overlay.get("_emblemNamePrefixRemap", {})
     for p in pokemon:
         for b in p.get("builds", []):
-            rule = remap.get(b.get("emblemName"))
+            name = b.get("emblemName")
+            rule = remap.get(name)
+            if rule is None and name:
+                # Prefix fallback: survives UNITE-DB word-order changes in the
+                # "<Lean> Leaning ..." family (e.g. "Offense Leaning <X>").
+                for prefix, prule in prefix_remap.items():
+                    if name.startswith(prefix):
+                        rule = prule
+                        break
             if rule is None:
                 continue
             new = rule if isinstance(rule, str) else rule.get(p["role"])
             if new:
                 b["emblemName"] = new
             elif not isinstance(rule, str):
-                print(f"  ! {p['id']}: no _emblemNameRemap entry for role {p['role']!r} "
-                      f"on label {b.get('emblemName')!r} — left unchanged")
+                print(f"  ! {p['id']}: no remap entry for role {p['role']!r} "
+                      f"on label {name!r} — left unchanged")
     emblem_ids = {e["id"] for e in emblems}
     held_ids = {h["id"] for h in held}
     battle_ids = {b["id"] for b in battle}

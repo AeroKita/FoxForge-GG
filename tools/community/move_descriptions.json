@@ -38,7 +38,7 @@
       "overheat": "Has the user start charging power in place. If this move is used again after the user has started charging, the user unleashes a flaming kick in the designated direction, dealing damage to opposing Pokémon it hits.The longer power is charged, the more damage this move deals. If the user charges a set amount of power or more, this move also shoves opposing Pokémon it hits.",
       "ember": "Has the user release a small ball of fire in the designated direction, dealing damage to opposing Pokémon it hits and decreasing their movement speed.",
       "focus blast": "Has the user fire a ball of focused energy in the designated direction.The ball of focused energy explodes upon hitting an opposing Pokémon or after traveling a set distance, dealing damage to opposing Pokémon in the explosion's area of effect and decreasing their movement speed.",
-      "spinning flame fist": "Has the user do a flaming punch around itself, dealing damage to nearby opposing Pokémon it hits and increasing the user's movement speed for a short time.After using this move, the user switches to fist style. Activates at Level 9",
+      "spinning flame fist": "Has the user do a flaming punch around itself, dealing damage to nearby opposing Pokémon it hits and increasing the user's movement speed for a short time. After using this move, the user switches to fist style. Activates at Level 9",
       "spinning flame kick": "Has the user do a flaming kick around itself, dealing damage to nearby opposing Pokémon it hits and increasing the user's Attack for a short time. After using this move, the user switches to kick style."
     },
     "buzzwole": {

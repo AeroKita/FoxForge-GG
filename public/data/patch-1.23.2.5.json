@@ -451,8 +451,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Absol/Midnight+Slash.png",
           "descriptionAdvanced": "The user briefly becomes unstoppable before becoming untargetable and invulnerable for 1.15s while unleashing a flurry of 5 slashes in front of themself in the designated area, damaging opposing Pokémon in the area of effect. The user then becomes unstoppable again and unleashes a final slash in front of them with 3 blades of energy, shoving opposing Pokémon and dealing damage, up to 4 times at close range and down to 1 time at maximum range.\n\n30% of the full damage.\n\nThe damage of the flurry of 5 slashes is divided by the number of targets hit. The first hit from the final slash deals full damage to each target hit; subsequent hits deal 30% of the full damage to the same target.",
-          "videoAsset": "/assets/skills/Absol/Midnight+Slash.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Absol/Midnight+Slash.mp4"
         }
       ],
       "passiveAbility": {
@@ -1127,8 +1127,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Aegislash/Coup+de+Grace.png",
           "descriptionAdvanced": "Becomes unstoppable and unleashes a ground-splitting slash in the designated direction, damaging opposing Pokémon in the line area of effect, dealing additional missing HP damage to those hit.\n\n12% missing HP as damage.\n\nIncreases the boost count by 2 if this Unite Move knocks out an opposing Pokémon.",
-          "videoAsset": "/assets/skills/Aegislash/Coup+de+Grace.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Aegislash/Coup+de+Grace.mp4"
         }
       ],
       "passiveAbility": {
@@ -1190,7 +1190,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "full-heal",
           "moves": [
@@ -1248,7 +1248,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "muscle-band",
           "battleItemId": "full-heal",
           "moves": [
@@ -1306,7 +1306,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Lv 40 Scope Lens+Lv 40 Razor Claw",
+          "emblemName": "Critical Hit Specialist",
           "heldItemOptional": "scope-lens",
           "battleItemId": "full-heal",
           "moves": [
@@ -1364,7 +1364,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Lv 40 Scope Lens+Lv 40 Razor Claw",
+          "emblemName": "Critical Hit Specialist",
           "battleItemId": "full-heal",
           "moves": [
             "Shadow Claw",
@@ -1608,7 +1608,7 @@
           "id": "helping-hand",
           "name": "Helping Hand",
           "slot": "move1",
-          "description": "Has the user grant a designated ally Pokémon a shield and increase that Pokémon's Attack and Sp. Atk for a short time",
+          "description": "Has the user grant a designated ally Pokémon a shield and increase that Pokémon's Attack and Sp. Atk for a short time.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -1719,7 +1719,7 @@
           "id": "charm",
           "name": "Charm",
           "slot": "move2",
-          "description": "Has the user send its cute voice in the designated direction, applying a slowing effect on opposing Pokémon it hits, dercreasing their Attack and Sp. At and increasing the user's sweet gauge",
+          "description": "Has the user send its cute voice in the designated direction, applying a slowing effect on opposing Pokémon it hits, dercreasing their Attack and Sp. At and increasing the user's sweet gauge.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -1743,7 +1743,7 @@
           "id": "dazzling-gleam",
           "name": "Dazzling Gleam",
           "slot": "move2",
-          "description": "Has the user release a ray of light in the designated direction, dealing damage to opposing Pokémon it hits, leaving them unable to act, and increasing the user's sweet gauge. If an ally Pokémon has a shield granted by Decorate, that Pokémon releases a ray of light as well",
+          "description": "Has the user release a ray of light in the designated direction, dealing damage to opposing Pokémon it hits, leaving them unable to act, and increasing the user's sweet gauge. If an ally Pokémon has a shield granted by Decorate, that Pokémon releases a ray of light as well.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -1769,7 +1769,7 @@
           "id": "sweet-scent",
           "name": "Sweet Scent",
           "slot": "move2",
-          "description": "Has the user launch a sweet scent at a designated location, dealing damage to opposing Pokémon. A circle of scent remains for a short time, dealing damage, applying a slowing effect to opposing Pokémon that touch it, and increasing the user's sweet gauge",
+          "description": "Has the user launch a sweet scent at a designated location, dealing damage to opposing Pokémon. A circle of scent remains for a short time, dealing damage, applying a slowing effect to opposing Pokémon that touch it, and increasing the user's sweet gauge.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -1827,8 +1827,8 @@
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Alcremie/Fluffy+Cream+Supreme.png",
           "descriptionAdvanced": "Create a giant cake and stand atop it becoming unstoppable and gaining a shield for 6s. Then throw whipped cream at allies. Allies who receive whipped cream are healed and have their maximum HP buffed for 8s. This move ends early if this move's shield is lost, Alcremie becomes bound, or if the move is manually cancelled.\n\nThe shield is 60% of Alcremie's max HP",
-          "videoAsset": "/assets/skills/Alcremie/Fluffy+Cream+Supreme.mp4",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Alcremie/Fluffy+Cream+Supreme.mp4"
         }
       ],
       "passiveAbility": {
@@ -2455,8 +2455,8 @@
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Armarouge/Psykaboom.png",
           "descriptionAdvanced": "Has the user jump up, becoming unstoppable for 1.85s, and charge psychic power for 1s, then create an area that leaves opposing Pokémon unable to act. While the user is charging psychic power, the Unite Move can be used again to adjust the position of the area. The user then fires a ball of flame towards the center of the area, dealing damage to opposing Pokémon and throwing them away from the center of the area.",
-          "videoAsset": "/assets/skills/Armarouge/Psykaboom.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Armarouge/Psykaboom.mp4"
         }
       ],
       "passiveAbility": {
@@ -2878,7 +2878,7 @@
           "id": "icy-wind",
           "name": "Icy Wind",
           "slot": "move1",
-          "description": "Has the user blast a gust of chilled air in the designated direction, dealing damage to opposing Pokémon and causing snow to fall, freezing the ground for a short time",
+          "description": "Has the user blast a gust of chilled air in the designated direction, dealing damage to opposing Pokémon and causing snow to fall, freezing the ground for a short time.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -3010,8 +3010,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.png",
           "descriptionAdvanced": "The user becomes Unstoppable and immobile, summoning a raging blizzard centered on themself, dealing damage in 5 waves. The second wave deals 5% more damage, third 10%, fourth 15%, and the fifth deals 100% more damage.\n\n9000 HP, 0 Def and SpDef. Unaffected by some status effects and damage over time.\n\nIf the move hits an ally goal zone, a chunk of ice forms on the zone, blocking movement and scoring. The goal zone still provides healing and shielding by standing at the edge of it. This chunk of ice will remain until it is destroyed.",
-          "videoAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.mp4"
         }
       ],
       "passiveAbility": {
@@ -3536,8 +3536,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Azumarill/Belly+Bash.png",
           "descriptionAdvanced": "Azumarill targets an enemy player and then pounds their belly three times; losing 5% remaining HP with each pound in exchange for a 6.5% max HP shield that stacks with each pound and lasts 6s. Azumarill gains increased attack for 8s and can move while pounding their belly. Azumarill then charges at the target damaging and throwing all Pokémon hit while charging and Pokémon within the area effect around the target. Azumarill is unstoppable during this move.",
-          "videoAsset": "/assets/skills/Azumarill/Belly+Bash.mp4",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Azumarill/Belly+Bash.mp4"
         }
       ],
       "passiveAbility": {
@@ -4165,8 +4165,8 @@
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Blastoise/Hydro+Typhoon.png",
           "descriptionAdvanced": "Becomes unstoppable for 2s and gains a shield for 4s; shoots immense jets of water in a large circle around themself after 1.1s, damaging opposing Pokémon in the area of effect and throwing them for 1.5s when it hits.",
-          "videoAsset": "/assets/skills/Blastoise/Hydro+Typhoon.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Blastoise/Hydro+Typhoon.mp4"
         }
       ],
       "passiveAbility": {
@@ -4676,7 +4676,7 @@
           "id": "fire-punch",
           "name": "Fire Punch",
           "slot": "move1",
-          "description": "Has the user unleash a flaming punch in the designated direction, dealing damage to opposing Pokémon it hits.The designated direction can be changed during the move.When the user hits an opposing Pokémon with this move, for a short time, this move can be used again once only",
+          "description": "Has the user unleash a flaming punch in the designated direction, dealing damage to opposing Pokémon it hits.The designated direction can be changed during the move.When the user hits an opposing Pokémon with this move, for a short time, this move can be used again once only.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -4836,8 +4836,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Blaziken/Spinning+Flame+Fist.png",
           "descriptionAdvanced": "Perform a flaming punch around itself, dealing damage to nearby enemies hit and increase the user's movement speed by 20% for 4s. After using this move, the user switches to Punch Style and all Punch Style cooldowns are reset.",
-          "videoAsset": "/assets/skills/Blaziken/Spinning+Flame+Fist.mp4",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Blaziken/Spinning+Flame+Fist.mp4"
         },
         {
           "id": "spinning-flame-kick",
@@ -4861,8 +4861,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Blaziken/Spinning+Flame+Kick.png",
           "descriptionAdvanced": "Perform a flaming kick around itself, dealing damage to nearby enemies hit and increase the user's Attack stat by 30% for a 4s. After using this move, the user switches to Kick Style and all Kick Style cooldowns are reset.",
-          "videoAsset": "/assets/skills/Blaziken/Spinning+Flame+Kick.mp4",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Blaziken/Spinning+Flame+Kick.mp4"
         }
       ],
       "passiveAbility": {
@@ -5397,8 +5397,8 @@
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Blissey/Bliss+Assistance.png",
           "descriptionAdvanced": "The user becomes unstoppable and dashes to the designated ally Pokémon to give it an egg, granting that ally a shield and increasing their Attack and Sp. Atk by 20% for 6s. The user also intercepts 50% of the post-mitigation damage received by that ally as unmitigated damage for 6s. While dashing, opposing Pokémon hit are damaged and thrown into the air for 0.8s. When reaching the target ally, nearby opposing Pokémon are damaged again.",
-          "videoAsset": "/assets/skills/Blissey/Bliss+Assistance.mp4",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Blissey/Bliss+Assistance.mp4"
         }
       ],
       "passiveAbility": {
@@ -6024,8 +6024,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Buzzwole/Ultra+Swole+Slam.png",
           "descriptionAdvanced": "Buzzwole flies at high speed, dealing damage to enemies in the area-of-effect. Afterward, the user targets the enemy with the lowest percentage of HP remaining among those hit and charges down at them from the sky, dealing area damage once again and additional damage to the targeted enemy based on their missing HP. Buzzwole is Unstoppable during this move.\n\n50% of enemy missing HP\n\nAgainst Wild Pokemon: Missing HP damage is not dealt.",
-          "videoAsset": "/assets/skills/Buzzwole/Ultra+Swole+Slam.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Buzzwole/Ultra+Swole+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -6680,8 +6680,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Ceruledge/Revenant+Rend.png",
           "descriptionAdvanced": "Ceruledge charges both of their arm blades gaining unstoppable and 70% Damage reduction for 0.5s before slashing through to the designated location, leaving Ceruledge unable to act for 0.7s. Ceruledge also leaves enemies hit unable to act for 0.7s and applies a mark to them. After 0.7s, marked enemies are dealt damage with three slashing blows.\n\nThe mark can be cleansed, preventing the damage.",
-          "videoAsset": "/assets/skills/Ceruledge/Revenant+Rend.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Ceruledge/Revenant+Rend.mp4"
         }
       ],
       "passiveAbility": {
@@ -7196,7 +7196,7 @@
           "id": "flamethrower",
           "name": "Flamethrower",
           "slot": "move1",
-          "description": "Has the user shoot an intense blast of fire in the designated direction, dealing damage to opposing Pokémon it hits and leaving them burned. The end of the blast explodes, dealing increased damage. If this explosion hits an opposing Pokémon, this move's cooldown is reduced",
+          "description": "Has the user shoot an intense blast of fire in the designated direction, dealing damage to opposing Pokémon it hits and leaving them burned. The end of the blast explodes, dealing increased damage. If this explosion hits an opposing Pokémon, this move's cooldown is reduced.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -7347,7 +7347,7 @@
           "id": "imprison",
           "name": "Imprison",
           "slot": "move2",
-          "description": "Has the user create a zone in front of itself. The first opposing Pokémon caught in it will become unable to move, and all opposing Pokémon in or that enter the zone become imprisoned and cannot use moves",
+          "description": "Has the user create a zone in front of itself. The first opposing Pokémon caught in it will become unable to move, and all opposing Pokémon in or that enter the zone become imprisoned and cannot use moves.",
           "cooldownSeconds": 8.5,
           "damageInstances": [],
           "effects": [],
@@ -7390,8 +7390,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Chandelure/Ignite+Midnight.png",
           "descriptionAdvanced": "Reduce the vision of enemies around itself by 30% for 3s. If this Unite Move is used again, Chandelure continuously fires a beam of fire in a designated direction, dealing damage to Pokémon it hits. The beam may be redirected while firing and its final blast deals increased damage. Ignite Midnight can be cancelled early.",
-          "videoAsset": "/assets/skills/Chandelure/Ignite+Midnight.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Chandelure/Ignite+Midnight.mp4"
         }
       ],
       "passiveAbility": {
@@ -8088,8 +8088,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Charizard/Seismic+Slam.png",
           "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user gains hindrance resistance the moment they slam into the ground and fly up into the air for 10s. While flying in the air, the user is able to use basic attacks and move freely over obstacles. Unite Move basic attacks burn opposing Pokémon for 1s (dealing damage 2 times). The user restores HP for 60% of the damage dealt with Unite Move basic attacks (excluding burns or additional damage). Damage dealt by burns from Unite Move basic attacks also benefit from regular lifesteal.\n\nAdditional 8% of enemy max HP.\n\nThe Attack of opposing Pokémon burned by Unite Move basic attacks is decreased by 5%.",
-          "videoAsset": "/assets/skills/Charizard/Seismic+Slam.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Charizard/Seismic+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -8661,8 +8661,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Mega-Charizard-X/Seismic+Slam.png",
           "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user then mega evolves into Mega Charizard X for 20 seconds. During Mega evolution, Mega Charizard X receives 50% movement speed increase.\n\n8% of enemy max HP.",
-          "videoAsset": "/assets/skills/Mega-Charizard-X/Seismic+Slam.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Mega-Charizard-X/Seismic+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -9000,7 +9000,7 @@
           "id": "flamethrower",
           "name": "Flamethrower",
           "slot": "move1",
-          "description": "Attacks with an intense blast of fire, leaving opposing Pokémon burned and increases the user's movement speed for a short time",
+          "description": "Attacks with an intense blast of fire, leaving opposing Pokémon burned and increases the user's movement speed for a short time.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -9122,8 +9122,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Mega-Charizard-Y/Seismic+Slam.png",
           "descriptionAdvanced": "The user briefly becomes unstoppable and grabs the designated Pokémon from the opposing team. The target is bound, and the user and the target become invincible as the user flies up then slams them onto the ground, damaging the target and nearby opposing Pokémon, dealing an additional 8% max HP damage to each opposing Pokémon hit. The user gains hindrance resistance and mega evolves into Mega Charizard Y the moment they slam into the ground and fly up into the air for 15s. While flying in the air, the user is able to use basic attacks as well as moves and is able to move freely over obstacles. Unite Move basic attacks burn opposing Pokémon for 1s (dealing damage 2 times). The user restores HP for 60% of the damage dealt with Unite Move basic attacks (excluding burns or additional damage). Damage dealt by burns from Unite Move basic attacks also benefit from regular lifesteal.\n\nAdditional 8% of enemy max HP.\n\nThe Attack of opposing Pokémon burned by this move is decreased by 5%.",
-          "videoAsset": "/assets/skills/Mega-Charizard-Y/Seismic+Slam.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Mega-Charizard-Y/Seismic+Slam.mp4"
         }
       ],
       "passiveAbility": {
@@ -9614,8 +9614,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Cinderace/Blazing+Bicycle+Kick.png",
           "descriptionAdvanced": "Becomes unstoppable and kicks up a giant ball of flame, then kicks it toward the location of the designated opposing Pokémon. The ball releases a fierce shock wave upon impact, damaging opposing Pokémon in the area of effect, dealing additional missing HP damage to those hit; and increasing movement speed by 10% for 5s when this Unite Move hits.\n\n14% of enemy missing HP.",
-          "videoAsset": "/assets/skills/Cinderace/Blazing+Bicycle+Kick.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Cinderace/Blazing+Bicycle+Kick.mp4"
         }
       ],
       "passiveAbility": {
@@ -12550,7 +12550,7 @@
           "id": "hypnosis",
           "name": "Hypnosis",
           "slot": "move1",
-          "description": "Has the user employ hypnotic suggestion in the designated direction, dealing damage to opposing Pokémon it hits and making them fall asleep after a short time",
+          "description": "Has the user employ hypnotic suggestion in the designated direction, dealing damage to opposing Pokémon it hits and making them fall asleep after a short time.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -12573,7 +12573,7 @@
           "id": "dark-void",
           "name": "Dark Void",
           "slot": "move1",
-          "description": "Has the user fire balls of darkness at opposing Pokémon in the area of effect, dealing damage and marking them. When the user deals damage to marked opposing Pokémon, the marks are removed and the opposing Pokémon falls asleep",
+          "description": "Has the user fire balls of darkness at opposing Pokémon in the area of effect, dealing damage and marking them. When the user deals damage to marked opposing Pokémon, the marks are removed and the opposing Pokémon falls asleep.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -12598,7 +12598,7 @@
           "id": "shadow-claw",
           "name": "Shadow Claw",
           "slot": "move1",
-          "description": "Has the user slash in the designated direction with sharp claws made from shadows, dealing damage and marking opposing Pokémon it hits. When the user deals damage to marked opposing Pokémon, the mark is removed and the opposing Pokémon falls asleep. When this move hits, this move can be used agai and the user deals damage in the designated direction with huge claws",
+          "description": "Has the user slash in the designated direction with sharp claws made from shadows, dealing damage and marking opposing Pokémon it hits. When the user deals damage to marked opposing Pokémon, the mark is removed and the opposing Pokémon falls asleep. When this move hits, this move can be used agai and the user deals damage in the designated direction with huge claws.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -12673,7 +12673,7 @@
           "id": "nasty-plot",
           "name": "Nasty Plot",
           "slot": "move2",
-          "description": "Has the user gain 1 Nasty Plot counter while moving in the designated direction. A maximum of 2 Nasty Plot counters can be stored. When the user uses its next basic attack or boosted attack, the user consumes all Nasty Plot counters and deals additional damage based on the number of counters consumed",
+          "description": "Has the user gain 1 Nasty Plot counter while moving in the designated direction. A maximum of 2 Nasty Plot counters can be stored. When the user uses its next basic attack or boosted attack, the user consumes all Nasty Plot counters and deals additional damage based on the number of counters consumed.",
           "cooldownSeconds": 4.0,
           "damageInstances": [
             {
@@ -12705,7 +12705,7 @@
           "id": "dark-pulse",
           "name": "Dark Pulse",
           "slot": "move2",
-          "description": "Has the user hide in a circle of shadow and creates six additional circles of shadow around itself. While the circles of shadoww are active, the user can move between them freely. When this move is used again, the user appears from the designated circle of shadow and releases a horrible aura imbued with ill intent, dealing damage to opposing Pokémon it hits. While the user is hiding in a circle of shadow, it can use Shadow Claw to attack with claws from that shadow and deal damage to opposing Pokémon it hits",
+          "description": "Has the user hide in a circle of shadow and creates six additional circles of shadow around itself. While the circles of shadoww are active, the user can move between them freely. When this move is used again, the user appears from the designated circle of shadow and releases a horrible aura imbued with ill intent, dealing damage to opposing Pokémon it hits. While the user is hiding in a circle of shadow, it can use Shadow Claw to attack with claws from that shadow and deal damage to opposing Pokémon it hits.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -13503,7 +13503,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Attack Damage Carry (ADC)",
           "battleItemId": "eject-button",
           "moves": [
             "Spirit Shackle",
@@ -13560,7 +13560,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Attack Damage Carry (ADC)",
           "battleItemId": "eject-button",
           "battleItemOptional": "full-heal",
           "moves": [
@@ -13618,7 +13618,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Attack Damage Carry (ADC)",
           "battleItemId": "eject-button",
           "moves": [
             "Spirit Shackle",
@@ -14518,7 +14518,7 @@
           "id": "payback",
           "name": "Payback",
           "slot": "move1",
-          "description": "Has the user swing its anchor, dealing damage and applying a slowing effect to opposing Pokémon it hits. The user deals increased damage if opposing Pokémon hit the user with an attack while this move is being used",
+          "description": "Has the user swing its anchor, dealing damage and applying a slowing effect to opposing Pokémon it hits. The user deals increased damage if opposing Pokémon hit the user with an attack while this move is being used.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -14619,7 +14619,7 @@
           "id": "bulldoze",
           "name": "Bulldoze",
           "slot": "move2",
-          "description": "Has the user shake the ground by slamming its anchor dealing damage to opposing Pokémon and throwing them",
+          "description": "Has the user shake the ground by slamming its anchor dealing damage to opposing Pokémon and throwing them.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -14642,7 +14642,7 @@
           "id": "anchor-shot",
           "name": "Anchor Shot",
           "slot": "move2",
-          "description": "Has the user throw its anchor in the designated direction and catch an opposing Pokémon with it, dealing damage and leaving it uanble to act. The user then pulls the opposing Pokémon toward itself",
+          "description": "Has the user throw its anchor in the designated direction and catch an opposing Pokémon with it, dealing damage and leaving it uanble to act. The user then pulls the opposing Pokémon toward itself.",
           "cooldownSeconds": 8.5,
           "damageInstances": [
             {
@@ -14667,7 +14667,7 @@
           "id": "heavy-slam",
           "name": "Heavy Slam",
           "slot": "move2",
-          "description": "Has the user lob its anchor in the designated direction, dealing damage to opposing Pokémon at the point of impact and leaving the munable to act. Opposing Pokémon near the point of impact take damage and have a slowing effect applied to them. The user then slams its heavy body down at the anchor's point of impact, dealing damage and applying a slowing effect to opposing Pokémon it hits",
+          "description": "Has the user lob its anchor in the designated direction, dealing damage to opposing Pokémon at the point of impact and leaving the munable to act. Opposing Pokémon near the point of impact take damage and have a slowing effect applied to them. The user then slams its heavy body down at the anchor's point of impact, dealing damage and applying a slowing effect to opposing Pokémon it hits.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -14793,7 +14793,7 @@
             }
           ],
           "lane": "Anywhere Utility Damage",
-          "emblemName": "Bulk Leaning Physical Attack",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "weakness-policy",
           "battleItemId": "eject-button",
           "battleItemOptional": "x-speed"
@@ -16383,8 +16383,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Dragonite/Draco+Impact.png",
           "descriptionAdvanced": "Briefly fly up in the air, becoming untargetable, before crashing down, approximately 2s after activating, with several comets on a designated area, dealing damage and throwing enemies in the area for 0.5s. The farther Dragonite flies, the more the Unite gauge is consumed (50% at min distance and 100% at max). Dragonite is unstoppable while using this move.",
-          "gifAsset": "/assets/skills/Dragonite/Draco+Impact.webp",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "gifAsset": "/assets/skills/Dragonite/Draco+Impact.webp"
         }
       ],
       "passiveAbility": {
@@ -17550,8 +17550,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.png",
           "descriptionAdvanced": "The user becomes invincible as they float into the air for up to 3s, moving freely over obstacles and increasing their movement speed by 10% while in the air. If used again or after 3s, the user pounds the ground, restoring the HP of the user and teammates in the area of effect, damaging opposing Pokémon in the area of effect and shoving opposing Pokémon hit for 0.7s.",
-          "gifAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.webp",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "gifAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.webp"
         }
       ],
       "passiveAbility": {
@@ -18094,7 +18094,7 @@
           "id": "water-gun",
           "name": "Water Gun",
           "slot": "move1",
-          "description": "Has the user blast a forceful shot of water in the designated direction, dealing damage to opposing Pokmon it hits. When this move is boosted by Torrent, it deals increased damage. (Torrent gauge consumed: 50)",
+          "description": "Has the user blast a forceful shot of water in the designated direction, dealing damage to opposing Pokmon it hits. When this move is boosted by Torrent, it deals increased damage. (Torrent gauge consumed: 50).",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -18124,7 +18124,7 @@
           "id": "hydro-cannon",
           "name": "Hydro Cannon",
           "slot": "move1",
-          "description": "Has the user launch a watery blast in the designated direction, dealing damage to opposing Pokémon it hits and leaving them unable to act. When this move is boosted by Torrent, a whirlpool appears and deals damage over time. The user also recovers HP when in contact with the Whirlpool. (Torrent gauge consumed: 50)",
+          "description": "Has the user launch a watery blast in the designated direction, dealing damage to opposing Pokémon it hits and leaving them unable to act. When this move is boosted by Torrent, a whirlpool appears and deals damage over time. The user also recovers HP when in contact with the Whirlpool. (Torrent gauge consumed: 50).",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -18163,7 +18163,7 @@
           "id": "whirlpool",
           "name": "Whirlpool",
           "slot": "move1",
-          "description": "Has the user create a violent, swirling whirlpool around itself, dealing damage to opposing Pokémon it hits and restoring the user's HP. When this move is boosted by Torrent, the amount of damage dealt and HP restored are increased, and the move also throws opposing Pokémon before ending with a slash, dealing damage. (Torrent gauge consumed: 50)",
+          "description": "Has the user create a violent, swirling whirlpool around itself, dealing damage to opposing Pokémon it hits and restoring the user's HP. When this move is boosted by Torrent, the amount of damage dealt and HP restored are increased, and the move also throws opposing Pokémon before ending with a slash, dealing damage. (Torrent gauge consumed: 50).",
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
@@ -18202,7 +18202,7 @@
           "id": "peck",
           "name": "Peck",
           "slot": "move2",
-          "description": "Has the user jab its sharply pointed beak in the designated direction, dealing damage to opposing Pokémon it hits. When this move is boosted by Torrent, it applies a slowing effect (Torrent gauge consumed: 50)",
+          "description": "Has the user jab its sharply pointed beak in the designated direction, dealing damage to opposing Pokémon it hits. When this move is boosted by Torrent, it applies a slowing effect (Torrent gauge consumed: 50).",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -18225,7 +18225,7 @@
           "id": "metal-claw",
           "name": "Metal Claw",
           "slot": "move2",
-          "description": "Has the user charge in the designated direction, dealing damage to opposing Pokmon with wings of steel and shoving them. When this move is boosted by Torrent, the user receives a shield effect. (Torrent gauge consumed: 50)",
+          "description": "Has the user charge in the designated direction, dealing damage to opposing Pokmon with wings of steel and shoving them. When this move is boosted by Torrent, the user receives a shield effect. (Torrent gauge consumed: 50).",
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
@@ -18257,7 +18257,7 @@
           "id": "aqua-jet",
           "name": "Aqua Jet",
           "slot": "move2",
-          "description": "Has the user lunge at blinding speed in the designated direction, dealing damage to opposing Pokémon it hits and increasing the user's basic attack speed for a short time. When this move is boosted by Torrent, it decreases the Sp. Def of Pokémon from the opposing team. (Torrent gauge consumed: 50)",
+          "description": "Has the user lunge at blinding speed in the designated direction, dealing damage to opposing Pokémon it hits and increasing the user's basic attack speed for a short time. When this move is boosted by Torrent, it decreases the Sp. Def of Pokémon from the opposing team. (Torrent gauge consumed: 50).",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -18695,7 +18695,7 @@
           "id": "psyshock",
           "name": "Psyshock",
           "slot": "move1",
-          "description": "Has the user materialize psychic projectiles and hurl them at a designated location, dealing damage to opposing Pokémon hit by the projectiles and decreasing their movement speed for a short time. If an opposing Pokémon is hit by all of these psychic projectiles, that Pokémon is left unable to act for a short time",
+          "description": "Has the user materialize psychic projectiles and hurl them at a designated location, dealing damage to opposing Pokémon hit by the projectiles and decreasing their movement speed for a short time. If an opposing Pokémon is hit by all of these psychic projectiles, that Pokémon is left unable to act for a short time.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -18727,7 +18727,7 @@
           "id": "stored-power",
           "name": "Stored Power",
           "slot": "move1",
-          "description": "Has the user unleash blasts of psychic power at random opposing Pokémon in the area of effect, dealing damage to them and decreasing their movement speed for a short time. The user stores one blast of psychic power whenever a set amount of time passes or after the user hits an opposing Pokémon with a boosted basic attack. Up to five blasts of psychic power can be stored at once. After this move is used, the user's movement speed increases for a short time",
+          "description": "Has the user unleash blasts of psychic power at random opposing Pokémon in the area of effect, dealing damage to them and decreasing their movement speed for a short time. The user stores one blast of psychic power whenever a set amount of time passes or after the user hits an opposing Pokémon with a boosted basic attack. Up to five blasts of psychic power can be stored at once. After this move is used, the user's movement speed increases for a short time.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -18759,7 +18759,7 @@
           "id": "growl",
           "name": "Growl",
           "slot": "move2",
-          "description": "Has the user growl at a designated opposing Pokémon, dealing damage and decreasing its movement speed for a short time",
+          "description": "Has the user growl at a designated opposing Pokémon, dealing damage and decreasing its movement speed for a short time.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -18782,7 +18782,7 @@
           "id": "psybeam",
           "name": "Psybeam",
           "slot": "move2",
-          "description": "Has the user fire a peculiar ray in the designated direction. If the ray hits an opposing Pokémon, it will then split beyond the first Pokémon and deal damage to other opposing Pokémon in range. These split rays deal more damage the higher the max HP of the first Pokémon hit by the ray. Furthermore, if the first Pokémon hit by the ray has its movement speed decreased or unable to act, those same effects will be applied to the Pokémon hit by the split rays",
+          "description": "Has the user fire a peculiar ray in the designated direction. If the ray hits an opposing Pokémon, it will then split beyond the first Pokémon and deal damage to other opposing Pokémon in range. These split rays deal more damage the higher the max HP of the first Pokémon hit by the ray. Furthermore, if the first Pokémon hit by the ray has its movement speed decreased or unable to act, those same effects will be applied to the Pokémon hit by the split rays.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -22042,8 +22042,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Gengar/Phantom+Ambush.png",
           "descriptionAdvanced": "The user becomes unstoppable as they jump forward to the designated location, then enters stealth and increases their movement speed by 30% for 7s. The user exits stealth when they use an attack. If this Unite Move is used again, the user becomes invincible as they jump out to attack, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 50% for 1.5s when it hits.\n\nThe user readies a boosted attack each time this move is used.",
-          "gifAsset": "/assets/skills/Gengar/Phantom+Ambush.webp",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "gifAsset": "/assets/skills/Gengar/Phantom+Ambush.webp"
         }
       ],
       "passiveAbility": {
@@ -24766,7 +24766,7 @@
           "id": "flail",
           "name": "Flail",
           "slot": "move1",
-          "description": "Has the user flail about, dealing damage to nearby opposing Pokémon. The lower the user's remaining HP, the more damage this move deals",
+          "description": "Has the user flail about, dealing damage to nearby opposing Pokémon. The lower the user's remaining HP, the more damage this move deals.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -24803,7 +24803,7 @@
           "id": "dragon-breath",
           "name": "Dragon Breath",
           "slot": "move1",
-          "description": "Has the user exhale a mighty gust, dealing damage to opposing Pokémon and leaving them paralyzed. If the user hits an opposing Pokémon with this move, the user's basic attacks are boosted for a short time, dealing increased damage with increased basic attack speed. The more opposing Pokémon hit by this move, the greater the basic attack speed increase",
+          "description": "Has the user exhale a mighty gust, dealing damage to opposing Pokémon and leaving them paralyzed. If the user hits an opposing Pokémon with this move, the user's basic attacks are boosted for a short time, dealing increased damage with increased basic attack speed. The more opposing Pokémon hit by this move, the greater the basic attack speed increase.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -24842,7 +24842,7 @@
           "id": "aqua-tail",
           "name": "Aqua Tail",
           "slot": "move1",
-          "description": "Has the user swing its tail continuously for a set amount of time. If this move hits opposing Pokémon three times, this move can be used again. This second stage of the move has the user charge power then sweep its tail to attack a wider area. If the user charges power for a set amount of time or longer before attacking, the move's area of effect is increased and it deals increased damage",
+          "description": "Has the user swing its tail continuously for a set amount of time. If this move hits opposing Pokémon three times, this move can be used again. This second stage of the move has the user charge power then sweep its tail to attack a wider area. If the user charges power for a set amount of time or longer before attacking, the move's area of effect is increased and it deals increased damage.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -24881,7 +24881,7 @@
           "id": "splash",
           "name": "Splash",
           "slot": "move2",
-          "description": "Has the user jump to the designated location. A maximum of 3 uses can be kept in reserve for this move",
+          "description": "Has the user jump to the designated location. A maximum of 3 uses can be kept in reserve for this move.",
           "cooldownSeconds": 5.0,
           "damageInstances": [],
           "effects": [],
@@ -24896,7 +24896,7 @@
           "id": "waterfall",
           "name": "Waterfall",
           "slot": "move2",
-          "description": "Has the user charge three times in a row at awesome speed, dealing damage to opposing Pokémon it hits. The user can change direction between each charge. If the second charge hits an opposing Pokémon, the user is granted a shield. If the third charge hits an opposing Pokémon, the opposing Pokémon is thrown",
+          "description": "Has the user charge three times in a row at awesome speed, dealing damage to opposing Pokémon it hits. The user can change direction between each charge. If the second charge hits an opposing Pokémon, the user is granted a shield. If the third charge hits an opposing Pokémon, the opposing Pokémon is thrown.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -25608,7 +25608,7 @@
           "id": "flail",
           "name": "Flail",
           "slot": "move1",
-          "description": "Has the user flail about, dealing damage to nearby opposing Pokémon. The lower the user's remaining HP, the more damage this move deals",
+          "description": "Has the user flail about, dealing damage to nearby opposing Pokémon. The lower the user's remaining HP, the more damage this move deals.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -25645,7 +25645,7 @@
           "id": "dragon-breath",
           "name": "Dragon Breath",
           "slot": "move1",
-          "description": "Has the user exhale a mighty gust, dealing damage to opposing Pokémon and leaving them paralyzed. If the user hits an opposing Pokémon with this move, the user's basic attacks are boosted for a short time, dealing increased damage with increased basic attack speed. The more opposing Pokémon hit by this move, the greater the basic attack speed increase",
+          "description": "Has the user exhale a mighty gust, dealing damage to opposing Pokémon and leaving them paralyzed. If the user hits an opposing Pokémon with this move, the user's basic attacks are boosted for a short time, dealing increased damage with increased basic attack speed. The more opposing Pokémon hit by this move, the greater the basic attack speed increase.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -25691,7 +25691,7 @@
           "id": "splash",
           "name": "Splash",
           "slot": "move2",
-          "description": "Has the user jump to the designated location. A maximum of 3 uses can be kept in reserve for this move",
+          "description": "Has the user jump to the designated location. A maximum of 3 uses can be kept in reserve for this move.",
           "cooldownSeconds": 5.0,
           "damageInstances": [],
           "effects": [],
@@ -25706,7 +25706,7 @@
           "id": "waterfall",
           "name": "Waterfall",
           "slot": "move2",
-          "description": "Has the user charge three times in a row at awesome speed, dealing damage to opposing Pokémon it hits. The user can change direction between each charge. If the second charge hits an opposing Pokémon, the user is granted a shield. If the third charge hits an opposing Pokémon, the opposing Pokémon is thrown",
+          "description": "Has the user charge three times in a row at awesome speed, dealing damage to opposing Pokémon it hits. The user can change direction between each charge. If the second charge hits an opposing Pokémon, the user is granted a shield. If the third charge hits an opposing Pokémon, the opposing Pokémon is thrown.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -28716,7 +28716,7 @@
           "id": "confusion",
           "name": "Confusion",
           "slot": "move1",
-          "description": "Has the user release a weak telekinetic force in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits",
+          "description": "Has the user release a weak telekinetic force in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -28739,7 +28739,7 @@
           "id": "mist-ball",
           "name": "Mist Ball",
           "slot": "move1",
-          "description": "Has the user release a mist-like flurry of down in the designated direction, dealing damage, applying a slowing effect, and marking opposing Pokémon it hitos. After a set amount of time pases, or if the move is used again, the flurry of down bursts, creating a zone of mist. Opposing Pokémon in the zone take damage, receive a slowing effect, and are marked. Marked opposing Pokémon deal decreased damage. If either Latias or Latios deal damage to opposing marked Pokémon, the duration those Pokémon remain marked increases",
+          "description": "Has the user release a mist-like flurry of down in the designated direction, dealing damage, applying a slowing effect, and marking opposing Pokémon it hitos. After a set amount of time pases, or if the move is used again, the flurry of down bursts, creating a zone of mist. Opposing Pokémon in the zone take damage, receive a slowing effect, and are marked. Marked opposing Pokémon deal decreased damage. If either Latias or Latios deal damage to opposing marked Pokémon, the duration those Pokémon remain marked increases.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -28771,7 +28771,7 @@
           "id": "dragon-cheer",
           "name": "Dragon Cheer",
           "slot": "move1",
-          "description": "Has the user rally the designated ally Pokémon, granting its next 2 basic attacks additional damage. The move can be used again to rally a second designated ally Pokémon. If this second usage rallies the same ally Pokémon as the first, the user also flies to that Pokémon and rallies itself",
+          "description": "Has the user rally the designated ally Pokémon, granting its next 2 basic attacks additional damage. The move can be used again to rally a second designated ally Pokémon. If this second usage rallies the same ally Pokémon as the first, the user also flies to that Pokémon and rallies itself.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -28826,7 +28826,7 @@
           "id": "dragon-pulse",
           "name": "Dragon Pulse",
           "slot": "move2",
-          "description": "After the user learns this move, it gains Eon power whenever it defeats wild Pokémon or knocks out Pokémon on the opposing team. This move has the user generate a beam in the designated direction, dealing damage to opposing Pokémon it hits and restoring the user's HP. If the user hits an opposing Pokémon with this move, the user gains Eon power. The move also releases telekinetic projectiles which deal damage. The more Eon power the user has accumulated, the more projectiles are released and the more damage they deal",
+          "description": "After the user learns this move, it gains Eon power whenever it defeats wild Pokémon or knocks out Pokémon on the opposing team. This move has the user generate a beam in the designated direction, dealing damage to opposing Pokémon it hits and restoring the user's HP. If the user hits an opposing Pokémon with this move, the user gains Eon power. The move also releases telekinetic projectiles which deal damage. The more Eon power the user has accumulated, the more projectiles are released and the more damage they deal.",
           "cooldownSeconds": 6.5,
           "damageInstances": [
             {
@@ -28865,7 +28865,7 @@
           "id": "dragon-breath",
           "name": "Dragon Breath",
           "slot": "move2",
-          "description": "After the user learns this move, it gains Eon power whenever it defeats wild Pokémon or knocks out Pokémon on the opposing team. This move has the user exhale a mighty gust in the designated direction, dealing damage to opposing Pokémon it hits and decreasing their Sp. Def. If this move hits Pokémon on the opposing team, the user gains Eon power. The more Eon power the user has accumulated, the greater this move's attack range and damage",
+          "description": "After the user learns this move, it gains Eon power whenever it defeats wild Pokémon or knocks out Pokémon on the opposing team. This move has the user exhale a mighty gust in the designated direction, dealing damage to opposing Pokémon it hits and decreasing their Sp. Def. If this move hits Pokémon on the opposing team, the user gains Eon power. The more Eon power the user has accumulated, the greater this move's attack range and damage.",
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
@@ -29459,7 +29459,7 @@
           "id": "confusion",
           "name": "Confusion",
           "slot": "move1",
-          "description": "Has the user release a weak telekinetic force in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits",
+          "description": "Has the user release a weak telekinetic force in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -29507,7 +29507,7 @@
           "id": "telekinesis",
           "name": "Telekinesis",
           "slot": "move1",
-          "description": "Has the user unleash psychic power in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the user hits an opposing Pokémon with this move, the move can be used again to unleash psychic power at a designated opposing Pokémon, dealing damage to it. If the second Pokémon hit by this move is different from the first, the two Pokémon are pulled toward each other and are left unable to act if they collide. If the second Pokémon hit by this move is the same as the first, it is left unable to act",
+          "description": "Has the user unleash psychic power in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the user hits an opposing Pokémon with this move, the move can be used again to unleash psychic power at a designated opposing Pokémon, dealing damage to it. If the second Pokémon hit by this move is different from the first, the two Pokémon are pulled toward each other and are left unable to act if they collide. If the second Pokémon hit by this move is the same as the first, it is left unable to act.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -29587,7 +29587,7 @@
           "id": "draco-meteor",
           "name": "Draco Meteor",
           "slot": "move2",
-          "description": "After the user learns this move, it gains Eon power whenever it defeats wild Pokémon or knocks out Pokémon on the opposing team. This move has the user summon down comet s onto the designated area, dealing damage to opposing Pokémon they hit. If this move hits Pokémon on the opposing team, the user gains Eon power. The more Eon power the user has accumulated, the move comets are summoned and the more damage they deal",
+          "description": "After the user learns this move, it gains Eon power whenever it defeats wild Pokémon or knocks out Pokémon on the opposing team. This move has the user summon down comet s onto the designated area, dealing damage to opposing Pokémon they hit. If this move hits Pokémon on the opposing team, the user gains Eon power. The more Eon power the user has accumulated, the move comets are summoned and the more damage they deal.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -30140,7 +30140,7 @@
           "id": "razor-leaf",
           "name": "Razor Leaf",
           "slot": "move1",
-          "description": "Has the user launch five sharp-edged leaves in the designated direction, dealing damage to opposing Pokémon they hit before sticking into the ground for a short time. If this move is used again, the leaves return to the user and deal damage to opposing Pokémon they hit along the way. If the leaves are returned to the user after a set amount of time has passed since they stuck into the ground, they deal increased damage. If all five leaves hit one Pokémon, the user is granted a shield",
+          "description": "Has the user launch five sharp-edged leaves in the designated direction, dealing damage to opposing Pokémon they hit before sticking into the ground for a short time. If this move is used again, the leaves return to the user and deal damage to opposing Pokémon they hit along the way. If the leaves are returned to the user after a set amount of time has passed since they stuck into the ground, they deal increased damage. If all five leaves hit one Pokémon, the user is granted a shield.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -30412,7 +30412,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Physical Damage",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "x-attack",
           "battleItemOptional": "full-heal",
@@ -30916,8 +30916,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Lucario/Aura+Cannon.png",
           "descriptionAdvanced": "Becomes unstoppable for 0.6s and channels aura into a huge sphere, then launches the sphere in the designated direction, dealing damage to opposing Pokémon in its path. The aura sphere picks up speed as it travels; at close range, a target can be hit up to 4 times, while at max speed a target will only be hit once.\n\nIf the user learned Extreme Speed: applies an Extreme Speed marker to targets hit by this Unite Move. If the user learned Power-Up Punch: strengthens the damage of the next attack of Power-Up Punch by roughly 20% and the shove duration to 1s when Power-Up Punch is released.",
-          "videoAsset": "/assets/skills/Lucario/Aura+Cannon.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Lucario/Aura+Cannon.mp4"
         }
       ],
       "passiveAbility": {
@@ -30929,6 +30929,64 @@
         "iconAsset": "/assets/skills/Lucario/Steadfast.png"
       },
       "builds": [
+        {
+          "name": "Extreme Rush",
+          "heldItemIds": [
+            "attack-weight",
+            "weakness-policy",
+            "razor-claw"
+          ],
+          "emblems": [
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "128-tauros",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "130-gyarados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "031-nidoqueen",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            }
+          ],
+          "lane": "Path Damage",
+          "emblemName": "Doggo Zoomies",
+          "heldItemOptional": "muscle-band",
+          "battleItemId": "full-heal",
+          "moves": [
+            "Extreme Speed",
+            "Bone Rush"
+          ]
+        },
         {
           "name": "Power-Up Rush",
           "heldItemIds": [
@@ -30985,64 +31043,6 @@
           "battleItemOptional": "full-heal",
           "moves": [
             "Power-Up Punch",
-            "Bone Rush"
-          ]
-        },
-        {
-          "name": "Extreme Rush",
-          "heldItemIds": [
-            "attack-weight",
-            "weakness-policy",
-            "razor-claw"
-          ],
-          "emblems": [
-            {
-              "emblemId": "250-ho-oh",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "022-fearow",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "128-tauros",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "130-gyarados",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "018-pidgeot",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "142-aerodactyl",
-              "grade": "bronze"
-            },
-            {
-              "emblemId": "031-nidoqueen",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "057-primeape",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "068-machamp",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "105-marowak",
-              "grade": "gold"
-            }
-          ],
-          "lane": "Path Damage",
-          "emblemName": "Doggo Zoomies",
-          "heldItemOptional": "muscle-band",
-          "battleItemId": "full-heal",
-          "moves": [
-            "Extreme Speed",
             "Bone Rush"
           ]
         },
@@ -31656,7 +31656,7 @@
           "id": "quick-attack",
           "name": "Quick Attack",
           "slot": "move1",
-          "description": "Has the user lunge forward at a speed that makes them almost invisible, dealing damage to opposing Pokémon they come in contact with",
+          "description": "Has the user lunge forward at a speed that makes them almost invisible, dealing damage to opposing Pokémon they come in contact with.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -31680,7 +31680,7 @@
           "id": "power-up-punch",
           "name": "Power-Up Punch",
           "slot": "move1",
-          "description": "Charges power before unleashing a powerful attack. While the user is charging power, itsm ovement speed is decreased but its Attack slowly increases and the damage it receives is reduced. The user then charges in the designated direction and releases the move, dealing more damage the lower the opposing Pokémon's remaining HP is and making its own next basic attack a boosted attack if the move hits. This move's cooldown is reduced every time one of the user's move hits. When the user Mega Evolves, it can charge power for a longer duration, deals increased damage to opposing Pokémon, and shoves them",
+          "description": "Charges power before unleashing a powerful attack. While the user is charging power, itsm ovement speed is decreased but its Attack slowly increases and the damage it receives is reduced. The user then charges in the designated direction and releases the move, dealing more damage the lower the opposing Pokémon's remaining HP is and making its own next basic attack a boosted attack if the move hits. This move's cooldown is reduced every time one of the user's move hits. When the user Mega Evolves, it can charge power for a longer duration, deals increased damage to opposing Pokémon, and shoves them.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -31797,8 +31797,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Mega-Lucario/Aura+Cannon.png",
           "descriptionAdvanced": "The user becomes unstoppable and channels aura into a huge sphere, then launches the sphere in the designated direction, dealing damage to opposing Pokémon in its path. The aura sphere picks up speed as it travels; at close range, a target can be hit up to 4 times, while at max speed a target will only be hit once.\n\nAfter unleashing this move the user mega evolves for 25s adding additional effects to Close Combat and Power-Up Punch and changing the passive ability to Adaptability.",
-          "videoAsset": "/assets/skills/Mega-Lucario/Aura+Cannon.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Mega-Lucario/Aura+Cannon.mp4"
         }
       ],
       "passiveAbility": {
@@ -33905,7 +33905,7 @@
           "id": "flower-trick",
           "name": "Flower Trick",
           "slot": "move1",
-          "description": "Has the user attach a flower bomb to an opposing Pokémon. The flower bomb can be detonated at will if the move is used again, and when it explodes, it deals damage based on the percentage of HP the opposing Pokémon has lost. If the user deals damage to an opposing Pokémon that has a flower bomb attached to it, the explosion's area of effect is increased and it deals increased damage. If the user knocks out an opposing Pokémon with this move, the move's cooldown is reset",
+          "description": "Has the user attach a flower bomb to an opposing Pokémon. The flower bomb can be detonated at will if the move is used again, and when it explodes, it deals damage based on the percentage of HP the opposing Pokémon has lost. If the user deals damage to an opposing Pokémon that has a flower bomb attached to it, the explosion's area of effect is increased and it deals increased damage. If the user knocks out an opposing Pokémon with this move, the move's cooldown is reset.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -33969,7 +33969,7 @@
           "id": "hone-claws",
           "name": "Hone Claws",
           "slot": "move2",
-          "description": "Has the user sharpen its claws while moving, increasing the speed and damage of its next three basic attacks",
+          "description": "Has the user sharpen its claws while moving, increasing the speed and damage of its next three basic attacks.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -34762,8 +34762,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Meowth/Gold+Coin+Barrage.png",
           "descriptionAdvanced": "The user becomes unstoppable and unleashes a barrage of gold coins toward the designated Pokémon from the opposing team, dealing damage in a small area up to 10 times. If another Pokémon on the opposing team stands in the way, they will be hit instead. During the attack, up to 4 coins will periodically drop near Pokémon hit by this move. This move can be cancelled early.\n\nMeowth can move while using this move, but is slowed by 110%.",
-          "videoAsset": "/assets/skills/Meowth/Gold+Coin+Barrage.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Meowth/Gold+Coin+Barrage.mp4"
         }
       ],
       "passiveAbility": {
@@ -35245,7 +35245,7 @@
           "id": "iron-defense",
           "name": "Iron Defense",
           "slot": "move1",
-          "description": "The user is granted a shield, and the user's next basic attack becomes a boosted attack",
+          "description": "The user is granted a shield, and the user's next basic attack becomes a boosted attack.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -35275,7 +35275,7 @@
           "id": "meteor-mash",
           "name": "Meteor Mash",
           "slot": "move1",
-          "description": "Has the user charge power in its fist, dealing damage to opposing Pokémon in an area of effect while granting itself a shield. The more opposing Pokémon this move hits, the more the shield effect is strengthened and the more damage the user deals with its next basic attack This next basic attack hits with a hard punch fired like a meteor, dealing damage to opposing Pokémon in an area of effect",
+          "description": "Has the user charge power in its fist, dealing damage to opposing Pokémon in an area of effect while granting itself a shield. The more opposing Pokémon this move hits, the more the shield effect is strengthened and the more damage the user deals with its next basic attack This next basic attack hits with a hard punch fired like a meteor, dealing damage to opposing Pokémon in an area of effect.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -35335,7 +35335,7 @@
           "id": "gyro-ball",
           "name": "Gyro Ball",
           "slot": "move1",
-          "description": "Has the user spin rapdily, dealing damage to nearby opposing Pokémon. When the outer edge of the spin hits an opposing Pokémon, the user is granted a shield. If this move hits many opposing Pokémon, oor hits Pokémon on the opposing team, the shield effect becomes stronger",
+          "description": "Has the user spin rapdily, dealing damage to nearby opposing Pokémon. When the outer edge of the spin hits an opposing Pokémon, the user is granted a shield. If this move hits many opposing Pokémon, oor hits Pokémon on the opposing team, the shield effect becomes stronger.",
           "cooldownSeconds": 4.0,
           "damageInstances": [
             {
@@ -35367,7 +35367,7 @@
           "id": "tackle",
           "name": "Tackle",
           "slot": "move2",
-          "description": "Has the user scan to see if there is an opposing Pokémon in front of it. If there is, the user charges toward the opposing Pokémon it finds, dealing damage to it",
+          "description": "Has the user scan to see if there is an opposing Pokémon in front of it. If there is, the user charges toward the opposing Pokémon it finds, dealing damage to it.",
           "cooldownSeconds": 8.5,
           "damageInstances": [
             {
@@ -35390,7 +35390,7 @@
           "id": "zen-headbutt",
           "name": "Zen Headbutt",
           "slot": "move2",
-          "description": "Has the user fire a psychic wave in a forward direction, then charge toward opposing Pokémon it hits, dealing damage and throwing them",
+          "description": "Has the user fire a psychic wave in a forward direction, then charge toward opposing Pokémon it hits, dealing damage and throwing them.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -35415,7 +35415,7 @@
           "id": "magnet-rise",
           "name": "Magnet Rise",
           "slot": "move2",
-          "description": "Has the user levitate for a set amount of time using electrically-generated magnetism, increasing the user's movement speed. If the user performs a basic attack while levitating, the user falls on the ground forcefully, dealing damage to nearby opposing Pokémon and throwing them",
+          "description": "Has the user levitate for a set amount of time using electrically-generated magnetism, increasing the user's movement speed. If the user performs a basic attack while levitating, the user falls on the ground forcefully, dealing damage to nearby opposing Pokémon and throwing them.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -40455,7 +40455,7 @@
           "id": "thunder-punch",
           "name": "Thunder Punch",
           "slot": "move1",
-          "description": "Has the user unleash an electrified punch in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hit. Fighter Mode: The move has a shorter range and no longer applies a slowing effect, but it deals increased damage",
+          "description": "Has the user unleash an electrified punch in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hit. Fighter Mode: The move has a shorter range and no longer applies a slowing effect, but it deals increased damage.",
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
@@ -40487,7 +40487,7 @@
           "id": "supercell-slam",
           "name": "Supercell Slam",
           "slot": "move1",
-          "description": "Has the user electrify its body and dive toward the designated area, dealing damage and applying a slowing effect to the opposing Pokémon it hits. If this move misses, the user takes damage instead. When this move hits, it can be used again, and the user unleashes a punch in front of itself, dealing damage. Fighter Mode: The first stage of this move no longer applies a slowing effect, but it deals increased damage",
+          "description": "Has the user electrify its body and dive toward the designated area, dealing damage and applying a slowing effect to the opposing Pokémon it hits. If this move misses, the user takes damage instead. When this move hits, it can be used again, and the user unleashes a punch in front of itself, dealing damage. Fighter Mode: The first stage of this move no longer applies a slowing effect, but it deals increased damage.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -40540,7 +40540,7 @@
           "id": "scratch",
           "name": "Scratch",
           "slot": "move2",
-          "description": "Has the user attack a designated opposing Pokémon with its sharp claws, dealing damage",
+          "description": "Has the user attack a designated opposing Pokémon with its sharp claws, dealing damage.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -40563,7 +40563,7 @@
           "id": "volt-switch",
           "name": "Volt Switch",
           "slot": "move2",
-          "description": "Has the user cloak itself in electricity and charge into a designated Pokémon from the opposing team, dealing damage and moving behind it. After this move is used, for a short time it can be used again once only Fighter Mode; This move cannot be used repeatedly, but after it's used, the user's movement speed is increased",
+          "description": "Has the user cloak itself in electricity and charge into a designated Pokémon from the opposing team, dealing damage and moving behind it. After this move is used, for a short time it can be used again once only Fighter Mode; This move cannot be used repeatedly, but after it's used, the user's movement speed is increased.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -41125,9 +41125,9 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Pikachu/Thunderstorm.png",
           "descriptionAdvanced": "Becomes unstoppable and jumps into the air, then casts down bolts of lightning 4 times over 3s in a radius around Pikachu. The first cast targets all Pokémon on the opposing team in range with 1 bolt each; these bolts damage up to 1 target each. The following 3 casts target up to 2 random Pokémon from the opposing team in range; these following bolts deal damage to opposing Pokémon in a small area around them, but targets can only be damaged once for each of the following 3 casts.\n\nPikachu can act freely once the first bolts of lightning are cast down.",
+          "upgradeLevel": 9,
           "gifAsset": "/assets/skills/Pikachu/Thunderstorm.webp",
-          "videoAsset": "/assets/skills/Pikachu/Thunderstorm.mp4",
-          "upgradeLevel": 9
+          "videoAsset": "/assets/skills/Pikachu/Thunderstorm.mp4"
         }
       ],
       "passiveAbility": {
@@ -42294,7 +42294,7 @@
           "id": "thunder-shock",
           "name": "Thunder Shock",
           "slot": "move1",
-          "description": "Releases electricity at the designated opposing Pokémon, dealing damage to opposing Pokémon in the area of effect. Also paralyzes opposing Pokémon for a short time",
+          "description": "Releases electricity at the designated opposing Pokémon, dealing damage to opposing Pokémon in the area of effect. Also paralyzes opposing Pokémon for a short time.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -42317,7 +42317,7 @@
           "id": "stored-power",
           "name": "Stored Power",
           "slot": "move1",
-          "description": "For a short time, increases the user's basic attack speed. The user's next 6 basic attacks also launch a star shaped electric blast that deals additional damage",
+          "description": "For a short time, increases the user's basic attack speed. The user's next 6 basic attacks also launch a star shaped electric blast that deals additional damage.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -42342,7 +42342,7 @@
           "id": "electro-ball",
           "name": "Electro Ball",
           "slot": "move1",
-          "description": "Has the user hurl an electric orb to the designated location, where it remains for a short time. When an electric orb and an opposing Pokémon touch, the orb releases its electricity and deals damage to nearby opposing Pokémon. A maximum of 2 uses can be kept in reserve for this move",
+          "description": "Has the user hurl an electric orb to the designated location, where it remains for a short time. When an electric orb and an opposing Pokémon touch, the orb releases its electricity and deals damage to nearby opposing Pokémon. A maximum of 2 uses can be kept in reserve for this move.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -42374,7 +42374,7 @@
           "id": "thunder-wave",
           "name": "Thunder Wave",
           "slot": "move2",
-          "description": "Has the user discharge a weak jolt of electricity in the designated direction, dealing damage to opposing Pokémon and leaving them paralyzed for a short time",
+          "description": "Has the user discharge a weak jolt of electricity in the designated direction, dealing damage to opposing Pokémon and leaving them paralyzed for a short time.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -42397,7 +42397,7 @@
           "id": "thunderbolt",
           "name": "Thunderbolt",
           "slot": "move2",
-          "description": "Has the user release a strong electric blast in the designated direction, dealing damage to opposing Pokémon it hits and leaving them paralyzed. If this move hits an electric orb created by Electro Ball, the orb releases its electricty and deals damage to nearby opposing Pokémon",
+          "description": "Has the user release a strong electric blast in the designated direction, dealing damage to opposing Pokémon it hits and leaving them paralyzed. If this move hits an electric orb created by Electro Ball, the orb releases its electricty and deals damage to nearby opposing Pokémon.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -42422,7 +42422,7 @@
           "id": "psychic",
           "name": "Psychic",
           "slot": "move2",
-          "description": "Has the user release a strong telekinetic force in the designated area, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the user hits opposing Pokémon slowed by this effect with a basic attack, it deals additional damage. If this move hits an electric orb created by Electro Ball, the orb is pulled to the center of this move's area of effect",
+          "description": "Has the user release a strong telekinetic force in the designated area, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the user hits opposing Pokémon slowed by this effect with a basic attack, it deals additional damage. If this move hits an electric orb created by Electro Ball, the orb is pulled to the center of this move's area of effect.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -42905,7 +42905,7 @@
           "id": "confusion",
           "name": "Confusion",
           "slot": "move1",
-          "description": "Has the user release a telekinetic force around itself, dealing damage to opposing Pokémon. If this move hits opposing Pokémon, the user's movement speed is increased for a short time",
+          "description": "Has the user release a telekinetic force around itself, dealing damage to opposing Pokémon. If this move hits opposing Pokémon, the user's movement speed is increased for a short time.",
           "cooldownSeconds": 4.0,
           "damageInstances": [
             {
@@ -42928,7 +42928,7 @@
           "id": "dazzling-gleam",
           "name": "Dazzling Gleam",
           "slot": "move1",
-          "description": "Has the user emit a powerful flash around itself, dealing damage to opposing Pokémon it hits. If opposing Pokémon are hit by the outer edge of the flash, the user's movement speed is increased for a short time. The increase is based on the number of opposing Pokémon hit. If the outer edge of the flash hits Pokémon on the opposing team, the user's movement speed is increased by a greater amount, and the cooldown of Tackle, Smart Strike, or Agility is reduced",
+          "description": "Has the user emit a powerful flash around itself, dealing damage to opposing Pokémon it hits. If opposing Pokémon are hit by the outer edge of the flash, the user's movement speed is increased for a short time. The increase is based on the number of opposing Pokémon hit. If the outer edge of the flash hits Pokémon on the opposing team, the user's movement speed is increased by a greater amount, and the cooldown of Tackle, Smart Strike, or Agility is reduced.",
           "cooldownSeconds": 4.5,
           "damageInstances": [
             {
@@ -42953,7 +42953,7 @@
           "id": "fairy-wind",
           "name": "Fairy Wind",
           "slot": "move1",
-          "description": "Has the user jump in the direction it's facing and, when it lands, stir up a fairy wind that deals damage to nearby opposing Pokémon. This move can be used again, up to 2 times total. If it's used 2 times, then on the final time, the user deals increase damage based on its movement speed and throws opposing Pokémon",
+          "description": "Has the user jump in the direction it's facing and, when it lands, stir up a fairy wind that deals damage to nearby opposing Pokémon. This move can be used again, up to 2 times total. If it's used 2 times, then on the final time, the user deals increase damage based on its movement speed and throws opposing Pokémon.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -43008,7 +43008,7 @@
           "id": "smart-strike",
           "name": "Smart Strike",
           "slot": "move2",
-          "description": "Has the user stab the designated opposing Pokémon with its sharp horn, dealing damage to it. After that, the user leaps in the designated direction while shoving the opposing Pokémon in the opposite direction",
+          "description": "Has the user stab the designated opposing Pokémon with its sharp horn, dealing damage to it. After that, the user leaps in the designated direction while shoving the opposing Pokémon in the opposite direction.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -44178,7 +44178,7 @@
           "id": "bullet-punch",
           "name": "Bullet Punch",
           "slot": "move1",
-          "description": "Has the user dash in the designated direction and strike opposing Pokémon with tough punches. If this move hits opposing Pokémon, its cooldown is reduced, and the user recovers a portion of its HP based on the amount of damage dealt. If Bullet Punch is used again within a set amount of time, the number of punches and the amount of damage dealt increase. The number of punches increases from three to a maximum of five. If Scyther learns this move, it will evolve into Scizor",
+          "description": "Has the user dash in the designated direction and strike opposing Pokémon with tough punches. If this move hits opposing Pokémon, its cooldown is reduced, and the user recovers a portion of its HP based on the amount of damage dealt. If Bullet Punch is used again within a set amount of time, the number of punches and the amount of damage dealt increase. The number of punches increases from three to a maximum of five. If Scyther learns this move, it will evolve into Scizor.",
           "cooldownSeconds": 4.5,
           "damageInstances": [
             {
@@ -44819,7 +44819,7 @@
           "id": "dual-wingbeat",
           "name": "Dual Wingbeat",
           "slot": "move1",
-          "description": "Has the user slash in front of itself with both of its scythes, dealing damage to opposing Pokémon in the X-shaped area of effect. If this move deals damage to an opposing Pokémon in the center of the X-shaped area of effect, it restores the user's HP. If this move hits an opposing Pokémon, it can be used again within a set amount of time. If this move is used again, the user dashes in the designated direction, dealing damage to opposing Pokémon it makes contact with. The dash deals more damage the lower the opposing Pokémon's HP is. If Scyther learns this move, it will not evolve into Scizor",
+          "description": "Has the user slash in front of itself with both of its scythes, dealing damage to opposing Pokémon in the X-shaped area of effect. If this move deals damage to an opposing Pokémon in the center of the X-shaped area of effect, it restores the user's HP. If this move hits an opposing Pokémon, it can be used again within a set amount of time. If this move is used again, the user dashes in the designated direction, dealing damage to opposing Pokémon it makes contact with. The dash deals more damage the lower the opposing Pokémon's HP is. If Scyther learns this move, it will not evolve into Scizor.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -45018,7 +45018,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "charging-charm",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -45077,7 +45077,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "razor-claw",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -45136,7 +45136,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard All-Rounder",
           "heldItemOptional": "attack-weight",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -45969,7 +45969,7 @@
           "id": "disarming-voice",
           "name": "Disarming Voice",
           "slot": "move1",
-          "description": "Has the user let out a charming cry in the designated direction, dealing damage to opposing Pokémon it hits. When this move hits, the user sends an additional sound wave toward opposing Pokémon behind the Pokémon hit, dealing damage",
+          "description": "Has the user let out a charming cry in the designated direction, dealing damage to opposing Pokémon it hits. When this move hits, the user sends an additional sound wave toward opposing Pokémon behind the Pokémon hit, dealing damage.",
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
@@ -46000,7 +46000,7 @@
           "id": "hyper-voice",
           "name": "Hyper Voice",
           "slot": "move1",
-          "description": "Has the user unleash horribly loud vibrations in the designated direction, dealing damage to opposing Pokémon it hits. When this move hits opposing Pokémon, the vibrations travel farther",
+          "description": "Has the user unleash horribly loud vibrations in the designated direction, dealing damage to opposing Pokémon it hits. When this move hits opposing Pokémon, the vibrations travel farther.",
           "cooldownSeconds": 4.5,
           "damageInstances": [
             {
@@ -46033,7 +46033,7 @@
           "id": "roar",
           "name": "Roar",
           "slot": "move2",
-          "description": "Has the user let out a mighty roar, dealing damage and applying a fear effect to oppsing Pokémon. When this move hits opposing Pokémon, the roar travels farther",
+          "description": "Has the user let out a mighty roar, dealing damage and applying a fear effect to oppsing Pokémon. When this move hits opposing Pokémon, the roar travels farther.",
           "cooldownSeconds": 6.5,
           "damageInstances": [
             {
@@ -46057,7 +46057,7 @@
           "id": "snarl",
           "name": "Snarl",
           "slot": "move2",
-          "description": "Has the user snarl incessantly, dealing damage and applying a fear effect to nearby opposing Pokémon. For a short time, opposing Pokémon hit by this move deal less damage to the user. When this move hits Pokémon from the opposing team, the snarl travels farther",
+          "description": "Has the user snarl incessantly, dealing damage and applying a fear effect to nearby opposing Pokémon. For a short time, opposing Pokémon hit by this move deal less damage to the user. When this move hits Pokémon from the opposing team, the snarl travels farther.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -46101,8 +46101,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Skeledirge/Rousing+Symphony.png",
           "descriptionAdvanced": "The user vitalizes nearby allies and themself, increasing their damage by 15% for 6s. Afterward, the user unleashes a fiery bird in the designated direction, the range of which stretches across the whole arena.\n\nThis move can be aimed for up to 10s before it needs to be reselected. While aiming the field of view is increased greatly.",
-          "videoAsset": "/assets/skills/Skeledirge/Rousing+Symphony.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Skeledirge/Rousing+Symphony.mp4"
         }
       ],
       "passiveAbility": {
@@ -46639,8 +46639,8 @@
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Slowbro/Slowbeam.png",
           "descriptionAdvanced": "Stare at an enemy and attack continually, dealing damage every .5 seconds for 3s and applying 'Bound' to them. This ability counters Unstoppable. Grants a shield (10% max HP) and makes Slowbro unstoppable while using this move.",
-          "gifAsset": "/assets/skills/Slowbro/Slowbeam.webp",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "gifAsset": "/assets/skills/Slowbro/Slowbeam.webp"
         }
       ],
       "passiveAbility": {
@@ -47746,7 +47746,7 @@
           "id": "water-pulse",
           "name": "Water Pulse",
           "slot": "move1",
-          "description": "Has the user fire a pulse of water in the designated direction, dealing damage to opposing Pokémon it hits and shoving them. Also marks the opposing Pokémon by leaving them drenched",
+          "description": "Has the user fire a pulse of water in the designated direction, dealing damage to opposing Pokémon it hits and shoving them. Also marks the opposing Pokémon by leaving them drenched.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -47769,7 +47769,7 @@
           "id": "whirlpool",
           "name": "Whirlpool",
           "slot": "move1",
-          "description": "Has the user generate a vortex of water at the designated location, dealing damage to opposing Pokémon, puilling them toward its center, and leaving them drenched. If this move is used again, the vortex is moved in the designated dirction, flooding the area it passes through",
+          "description": "Has the user generate a vortex of water at the designated location, dealing damage to opposing Pokémon, puilling them toward its center, and leaving them drenched. If this move is used again, the vortex is moved in the designated dirction, flooding the area it passes through.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -47801,7 +47801,7 @@
           "id": "surf",
           "name": "Surf",
           "slot": "move1",
-          "description": "Has the user create a big wave in the designated direction, dealing damage to and shoving opposing Pokémon it hits and leaving them drenched. The area the wave passes through becomes flooded. If the wave hits a pillar of ice created by Icy Wind, the pillar breaks, dealing damage to opposing Pokémon it hits",
+          "description": "Has the user create a big wave in the designated direction, dealing damage to and shoving opposing Pokémon it hits and leaving them drenched. The area the wave passes through becomes flooded. If the wave hits a pillar of ice created by Icy Wind, the pillar breaks, dealing damage to opposing Pokémon it hits.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -47826,7 +47826,7 @@
           "id": "avalanche",
           "name": "Avalanche",
           "slot": "move2",
-          "description": "Has the user make snow continuously fall at the designated location, dealing damage and applying a slowing effect to the opposing Pokémon it hits.At the end of the move, the user drops a clump of snow, leaving flooded areas frozen. Also, if opposing Pokémon are drenched when hit, they are left frozen",
+          "description": "Has the user make snow continuously fall at the designated location, dealing damage and applying a slowing effect to the opposing Pokémon it hits.At the end of the move, the user drops a clump of snow, leaving flooded areas frozen. Also, if opposing Pokémon are drenched when hit, they are left frozen.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -47856,7 +47856,7 @@
           "id": "ice-beam",
           "name": "Ice Beam",
           "slot": "move2",
-          "description": "Has the user fire an icy-cold beam of energy in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the opposing Pokémon are drenched when hit, they are left frozen. If this move hits a flooded area, that area becomes frozen. A maximum of 2 uses can be kept in reserve for this move",
+          "description": "Has the user fire an icy-cold beam of energy in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the opposing Pokémon are drenched when hit, they are left frozen. If this move hits a flooded area, that area becomes frozen. A maximum of 2 uses can be kept in reserve for this move.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -49253,8 +49253,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Talonflame/Flame+Sweep.png",
           "descriptionAdvanced": "The user performs an aerial somersault and sweeps forward, becoming unstoppable, receiving 50% reduced damage, damaging opposing Pokémon in their path and shoving them toward the end of the sweep, then damaging opposing Pokémon again. This Unite Move cannot go through walls.",
-          "videoAsset": "/assets/skills/Talonflame/Flame+Sweep.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Talonflame/Flame+Sweep.mp4"
         }
       ],
       "passiveAbility": {
@@ -49316,7 +49316,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "accel-bracer",
           "battleItemId": "eject-button",
           "battleItemOptional": "shedinja-doll",
@@ -49375,7 +49375,7 @@
             }
           ],
           "lane": "Center Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "float-stone",
           "battleItemId": "eject-button",
           "battleItemOptional": "shedinja-doll",
@@ -49621,7 +49621,7 @@
           "id": "rock-smash",
           "name": "Rock Smash",
           "slot": "move1",
-          "description": "Has the user swing down its hammer with rock-crushing force, dealing damage to opposing Pokémon in the area of effect and leaving them unable to act. The stronger the hammer, the larger this move's area of effect",
+          "description": "Has the user swing down its hammer with rock-crushing force, dealing damage to opposing Pokémon in the area of effect and leaving them unable to act. The stronger the hammer, the larger this move's area of effect.",
           "cooldownSeconds": 6.5,
           "damageInstances": [
             {
@@ -49644,7 +49644,7 @@
           "id": "gigaton-hammer",
           "name": "Gigaton Hammer",
           "slot": "move1",
-          "description": "Has the user charge power before swinging down its hammer, dealing damage to opposing Pokémon in the area of effect and throwing them. The longer power is charged, the more damage this move deals, and the longer opposing Pokémon are thrown. The stronger the hammer, the larger this move's area of effect",
+          "description": "Has the user charge power before swinging down its hammer, dealing damage to opposing Pokémon in the area of effect and throwing them. The longer power is charged, the more damage this move deals, and the longer opposing Pokémon are thrown. The stronger the hammer, the larger this move's area of effect.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -49683,7 +49683,7 @@
           "id": "smack-down",
           "name": "Smack Down",
           "slot": "move1",
-          "description": "Has the user charge power, then use its hammer to send a rock flying to the designated location, dealing damage to opposing Pokémon at the rock's point of impact and applying a slowing effect to them. The longer power is charged, the farther the rock can fly. The stronger the hammer, the farther the rock can fly",
+          "description": "Has the user charge power, then use its hammer to send a rock flying to the designated location, dealing damage to opposing Pokémon at the rock's point of impact and applying a slowing effect to them. The longer power is charged, the farther the rock can fly. The stronger the hammer, the farther the rock can fly.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -49770,7 +49770,7 @@
           "id": "thief",
           "name": "Thief",
           "slot": "move2",
-          "description": "Increases the user's movement speed for a short time. When the user is moving toward an opposing Pokémon affected by hindrances, its movement speed is further increased. Also, when the user deals damage to opposing Pokémon with its next Basic Attack, the user steals and uses a portion of the Pokémon's Defense and Sp. Def for a short time",
+          "description": "Increases the user's movement speed for a short time. When the user is moving toward an opposing Pokémon affected by hindrances, its movement speed is further increased. Also, when the user deals damage to opposing Pokémon with its next Basic Attack, the user steals and uses a portion of the Pokémon's Defense and Sp. Def for a short time.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -50388,7 +50388,7 @@
           "id": "branch-poke",
           "name": "Branch Poke",
           "slot": "move2",
-          "description": "Has the user jab in the designated direction, dealing damage to opposing Pokémon and decreasing their movement speed for a short time when it hits. At the same time, the user's HP begins to gradually recover for a short time",
+          "description": "Has the user jab in the designated direction, dealing damage to opposing Pokémon and decreasing their movement speed for a short time when it hits. At the same time, the user's HP begins to gradually recover for a short time.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -51593,7 +51593,7 @@
           "id": "ember",
           "name": "Ember",
           "slot": "move1",
-          "description": "Has the user attack by shooting small flames at up to 2 opposing Pokémon. When the user is at peak rage, this move will target up to 3 opposing Pokémon and leave them burned when it hits",
+          "description": "Has the user attack by shooting small flames at up to 2 opposing Pokémon. When the user is at peak rage, this move will target up to 3 opposing Pokémon and leave them burned when it hits.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -51623,7 +51623,7 @@
           "id": "eruption",
           "name": "Eruption",
           "slot": "move1",
-          "description": "Has the user launch flames skyward 3 times in an explosive fury. The flames then rain down on nearby opposing Pokémon, dealing damage. When the user is at peak rage, the number of flames increases by 1",
+          "description": "Has the user launch flames skyward 3 times in an explosive fury. The flames then rain down on nearby opposing Pokémon, dealing damage. When the user is at peak rage, the number of flames increases by 1.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -51648,7 +51648,7 @@
           "id": "tackle",
           "name": "Tackle",
           "slot": "move2",
-          "description": "Has the user charge, slamming into the designated opposing Pokémn with its whole body, dealing damage and applying a slowing effect to them, and granting the user a shield effect. After this move is used, the user's basic attack becomes a boosted attack. When the user is at peak rage, opposing Pokémon it hits are left unable to act",
+          "description": "Has the user charge, slamming into the designated opposing Pokémn with its whole body, dealing damage and applying a slowing effect to them, and granting the user a shield effect. After this move is used, the user's basic attack becomes a boosted attack. When the user is at peak rage, opposing Pokémon it hits are left unable to act.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -51678,7 +51678,7 @@
           "id": "flame-wheel",
           "name": "Flame Wheel",
           "slot": "move2",
-          "description": "Has the user cloak itself in fire and charge forward, dealing damage to opposing Pokémon it hits and leaving them unable to act. The user is also granted a shield efffect, and the next basic attack becomes a boosted attack. If the user hits an opposing Pokémon, the user jumps and crashes down, dealing damage and applying a slowing effect to nearby opposing Pokémon. When the user is at peak rage, opposing Pokémon it hits upon landing are thrown",
+          "description": "Has the user cloak itself in fire and charge forward, dealing damage to opposing Pokémon it hits and leaving them unable to act. The user is also granted a shield efffect, and the next basic attack becomes a boosted attack. If the user hits an opposing Pokémon, the user jumps and crashes down, dealing damage and applying a slowing effect to nearby opposing Pokémon. When the user is at peak rage, opposing Pokémon it hits upon landing are thrown.",
           "cooldownSeconds": 7.5,
           "damageInstances": [
             {
@@ -53557,8 +53557,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Urshifu/Ebon+Fist.png",
           "descriptionAdvanced": "The user becomes unstoppable and the cooldown of Wicked Blow is reset when this Unite Move is used. The user dashes at the designated Pokémon from the opposing team, stunning them, then chooses whether to designate a direction to move or not. If no direction is chosen, the user pushes them slightly and delivers an uppercut, damaging the target, throwing them and stunning them when they land.\n\nIf the user chooses a direction, the user instead delivers a more powerful blow to the target, dealing increased damage and shoving them in the designated direction. The shoved target also deals reduced damage to opposing Pokémon they collide with and throws those hit.",
-          "videoAsset": "/assets/skills/Urshifu/Ebon+Fist.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Urshifu/Ebon+Fist.mp4"
         },
         {
           "id": "flowing-fists",
@@ -53596,8 +53596,8 @@
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Urshifu/Flowing+Fists.png",
           "descriptionAdvanced": "The user activates the Flowing Fists buff for up to 10s, and briefly becomes unstoppable and damages nearby opposing Pokémon, shoving them away. If this Unite Move is used again, the user becomes unstoppable and receives 30% reduced damage as they unleash a minimum of 5 consecutive blows upon the designated Pokémon from the opposing team, dealing damage to the target and shoving them with each hit. After the consecutive blows have finished, the user delivers a final kick, damaging opposing Pokémon in front of themself and shoving them when it hits.\n\nWhen the Flowing Fists buff is active, until the follow-up attack is used, every 2 times the user hits a Pokémon from the opposing team, the number of consecutive blows for the follow-up attack increases by 1 (up to 10 hits for an additional 5 blows; maximum 10 consecutive blows).",
-          "videoAsset": "/assets/skills/Urshifu/Flowing+Fists.mp4",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Urshifu/Flowing+Fists.mp4"
         }
       ],
       "passiveAbility": {
@@ -54020,7 +54020,7 @@
           "id": "swift",
           "name": "Swift",
           "slot": "move1",
-          "description": "Has the user shoot star-shaped rays in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon",
+          "description": "Has the user shoot star-shaped rays in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -54082,7 +54082,7 @@
           "id": "muddy-water",
           "name": "Muddy Water",
           "slot": "move1",
-          "description": "Has the user splash muddy water around itself, dealing damage, applying a slowing effect, and throwing opposing Pokémon",
+          "description": "Has the user splash muddy water around itself, dealing damage, applying a slowing effect, and throwing opposing Pokémon.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -54107,7 +54107,7 @@
           "id": "tackle",
           "name": "Tackle",
           "slot": "move2",
-          "description": "Has the user charge in the designated direction, dealing damage to opposing Pokémon it hits and shoving them",
+          "description": "Has the user charge in the designated direction, dealing damage to opposing Pokémon it hits and shoving them.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -54130,7 +54130,7 @@
           "id": "aqua-ring",
           "name": "Aqua Ring",
           "slot": "move2",
-          "description": "Has the user jump in the designated direction, creating a continuous wave centered on itself. Ally Pokémon who come in contact with the wave are enveloped by a veil of water that continually restores HP",
+          "description": "Has the user jump in the designated direction, creating a continuous wave centered on itself. Ally Pokémon who come in contact with the wave are enveloped by a veil of water that continually restores HP.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -54155,7 +54155,7 @@
           "id": "flip-turn",
           "name": "Flip Turn",
           "slot": "move2",
-          "description": "Has the user cloak itself in water, reducing damage received and increasing movement speed. The user then charges in the designated dirrection, dealing damage and shoving opposing Pokémon before jumping back in the opposite direction",
+          "description": "Has the user cloak itself in water, reducing damage received and increasing movement speed. The user then charges in the designated dirrection, dealing damage and shoving opposing Pokémon before jumping back in the opposite direction.",
           "cooldownSeconds": 6.5,
           "damageInstances": [
             {
@@ -54948,9 +54948,9 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Venusaur/Verdant+Anger.png",
           "descriptionAdvanced": "Venusaur becomes unstoppable to hurl a massive seed to the designated location, damaging all enemies in the radius and slowing them by 35% for 1s. The seed then splits apart into 4 smaller seeds, each damaging all enemies in their radius.",
+          "upgradeLevel": 9,
           "gifAsset": "/assets/skills/Venusaur/Verdant+Anger.webp",
-          "videoAsset": "/assets/skills/Venusaur/Verdant+Anger.mp4",
-          "upgradeLevel": 9
+          "videoAsset": "/assets/skills/Venusaur/Verdant+Anger.mp4"
         }
       ],
       "passiveAbility": {
@@ -57351,7 +57351,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "attack-weight",
           "battleItemId": "x-attack",
           "battleItemOptional": "full-heal",
@@ -57410,7 +57410,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "attack-weight",
           "battleItemId": "full-heal",
           "battleItemOptional": "x-attack",
@@ -57469,7 +57469,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "x-attack",
           "battleItemOptional": "full-heal",
@@ -57528,7 +57528,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "attack-weight",
           "battleItemId": "x-attack",
           "battleItemOptional": "full-heal",
@@ -58086,7 +58086,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "focus-band",
           "battleItemId": "full-heal",
           "battleItemOptional": "eject-button",
@@ -58145,7 +58145,7 @@
             }
           ],
           "lane": "Anywhere Damage",
-          "emblemName": "Offense Leaning Standard Physical",
+          "emblemName": "Standard Speedster",
           "heldItemOptional": "energy-amplifier",
           "battleItemId": "full-heal",
           "moves": [

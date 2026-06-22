@@ -14,6 +14,7 @@ import { STAT_ROWS, formatStat, formatDelta } from "../ui/format";
 import { asset } from "../ui/asset";
 import { CollapsibleCard } from "./CollapsibleCard";
 import { Segmented } from "./Segmented";
+import { MarqueeText } from "../ui/MarqueeText";
 import { PokemonPickerSheet } from "./PokemonPicker";
 
 function initialSelection(side: "A" | "B", currentPokemonId: string | null): SideSelection {
@@ -265,7 +266,7 @@ function SidePicker({
               >
                 ‹
               </button>
-              <p className="min-w-0 flex-1 truncate text-center text-xs text-muted">
+              <MarqueeText className="flex-1 text-xs text-muted">
                 {build ? (
                   <>
                     <span className="font-semibold text-ink">{build.emblemName ?? build.name}</span>
@@ -275,7 +276,7 @@ function SidePicker({
                 ) : (
                   "—"
                 )}
-              </p>
+              </MarqueeText>
               <button
                 type="button"
                 onClick={() => go(1)}
