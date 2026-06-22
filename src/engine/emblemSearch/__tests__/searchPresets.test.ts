@@ -25,7 +25,9 @@ import { buildCandidatePool } from "../adapt";
 import {
   resolveColorSearchMode,
   buildPresetSearchOptions,
+  colorTargetsFromUi,
   deriveAdvancedColorUiDefaults,
+  isExactColorModeFeasible,
   resolveBasicSearchParams,
   EXACT_FALLBACK_EFFORT,
 } from "../searchPresets";
@@ -553,6 +555,27 @@ describe("deriveAdvancedColorUiDefaults", () => {
     );
     const ownedDefaults = deriveAdvancedColorUiDefaults(pokemon, ownedPool, emblems);
     expect(ownedDefaults.colorMode).toBe("weighted");
+  });
+
+  it("[PRE-UI-6] isExactColorModeFeasible tracks pool without changing targets", () => {
+    const pokemon = pokemonById.get("pikachu")!;
+    const defaults = deriveAdvancedColorUiDefaults(pokemon, fullPool, emblems);
+    const targets = new Map(defaults.colorCounts);
+    const fromUi = colorTargetsFromUi(
+      defaults.activeColors,
+      Object.fromEntries(defaults.colorCounts) as Record<EmblemColor, number>,
+    );
+    expect(fromUi).toEqual(targets);
+
+    expect(isExactColorModeFeasible(fullPool, targets)).toBe(true);
+
+    const sparseOwned = new Set(emblems.slice(0, 8).map((e) => e.id));
+    const ownedPool = buildPool(
+      emblems,
+      { useOwned: true, mixedGrades: true, allowedGrades: new Set(DEFAULT_ALLOWED_GRADES) },
+      sparseOwned,
+    );
+    expect(isExactColorModeFeasible(ownedPool, targets)).toBe(false);
   });
 });
 

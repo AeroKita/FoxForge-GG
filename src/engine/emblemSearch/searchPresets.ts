@@ -206,6 +206,30 @@ export function resolveColorSearchMode(
   };
 }
 
+/** Build a color-target map from Advanced UI state (checked colors + counts). */
+export function colorTargetsFromUi(
+  activeColors: Iterable<EmblemColor>,
+  colorCounts: Readonly<Partial<Record<EmblemColor, number>>>,
+): Map<EmblemColor, number> {
+  const targets = new Map<EmblemColor, number>();
+  for (const col of activeColors) {
+    const n = colorCounts[col] ?? 0;
+    if (n > 0) targets.set(col, n);
+  }
+  return targets;
+}
+
+/** True when the pool can enforce the given targets as hard exact color constraints. */
+export function isExactColorModeFeasible(
+  pool: EmblemCandidate[],
+  targets: Map<EmblemColor, number>,
+  slots: number = SLOTS,
+  enumerateGradeVariants = false,
+): boolean {
+  if (targets.size === 0) return false;
+  return resolveColorSearchMode(pool, targets, slots, enumerateGradeVariants).mode === "exact";
+}
+
 /** Advanced Exact-color UI defaults derived from a Pokémon + pool. */
 export interface AdvancedColorUiDefaults {
   colorMode: "off" | ColorSearchMode;
