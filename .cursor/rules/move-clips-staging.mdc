@@ -1,0 +1,28 @@
+---
+description: Commit new Pokémon folders under tools/community/_clips when added
+globs: tools/community/_clips/**
+alwaysApply: false
+---
+
+# Move clip staging commits
+
+`tools/community/_clips/` holds one folder per Pokémon for raw move-clip capture staging.
+
+## Always commit new folders
+
+When the user (or you) adds a new subfolder under `tools/community/_clips/<pokemon-id>/`, **include it in the same commit** as related work — do not leave it untracked.
+
+Track and commit:
+
+- `MOVES.txt` (required checklist for that Pokémon)
+- Any other non-ignored files in the folder
+
+Do **not** commit raw recordings — `.gitignore` excludes `*.mp4` / `*.mov` under `_clips/*/` (large 720p sources). Only transcoded outputs under `public/assets/skills/` belong in git after `transcode_clips.py`.
+
+## README upkeep
+
+When adding a new Pokémon folder, add a row to the table in `tools/community/_clips/README.md` (folder name + clip count from `MOVES.txt`).
+
+## Pipeline reminder
+
+After raw clips land locally: `python3 tools/community/transcode_clips.py` then re-run `normalize.py` so `move_clips.json` and bundle `videoAsset` paths update.

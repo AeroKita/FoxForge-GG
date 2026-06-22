@@ -74,6 +74,7 @@ Scope: Base moves, Final (upgrade) moves, Unite moves. **No passives.**
 | Pawmot | `pawmot/` | 7 |
 | Pikachu | `pikachu/` | 7 |
 | Psyduck | `psyduck/` | 7 |
+| Quaquaval | `quaquaval/` | 5 |
 | Raichu | `raichu/` | 7 |
 | Rapidash | `rapidash/` | 7 |
 | Sableye | `sableye/` | 7 |
