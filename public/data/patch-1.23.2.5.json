@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.2.5",
-  "lastUpdated": "2026-06-21",
+  "lastUpdated": "2026-06-22",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-06-21"
+    "fetched": "2026-06-22"
   },
   "pokemon": [
     {
@@ -10115,7 +10115,8 @@
           ],
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Clefable/Heal+Pulse.png",
-          "descriptionAdvanced": "Immediately restores HP to itself and nearby allies."
+          "descriptionAdvanced": "Immediately restores HP to itself and nearby allies.",
+          "videoAsset": "/assets/skills/Clefable/Heal+Pulse.mp4"
         },
         {
           "id": "moonlight",
@@ -10140,7 +10141,8 @@
           "isUpgrade": true,
           "moveType": "Recovery",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Continually restores HP to Clefable and nearby allies for 3s at one tick per half second excluding activation at 0s. Clefable’s movement speed is increased by 20% while this move is active.\n\nUpgrade (Level 10): Widens this move’s area-of-effect and increases the duration of its effects by 1s."
+          "descriptionAdvanced": "Continually restores HP to Clefable and nearby allies for 3s at one tick per half second excluding activation at 0s. Clefable’s movement speed is increased by 20% while this move is active.\n\nUpgrade (Level 10): Widens this move’s area-of-effect and increases the duration of its effects by 1s.",
+          "videoAsset": "/assets/skills/Clefable/Moonlight.mp4"
         },
         {
           "id": "draining-kiss",
@@ -10165,7 +10167,8 @@
           "isUpgrade": true,
           "moveType": "Recovery",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Attacks nearby enemies with an energy-draining kiss. Each enemy hit by the kiss receives damage and releases an air kiss. These air kisses will travel to a nearby ally with the lowest HP and restore their HP. If no allies are near, the air kisses will return to Clefable and restore its HP for 180% of the damage dealt.\n\nUpgrade (Level 10): Widens this move’s area-of-effect and increases the amount of HP restored to 200% of the damage dealt."
+          "descriptionAdvanced": "Attacks nearby enemies with an energy-draining kiss. Each enemy hit by the kiss receives damage and releases an air kiss. These air kisses will travel to a nearby ally with the lowest HP and restore their HP. If no allies are near, the air kisses will return to Clefable and restore its HP for 180% of the damage dealt.\n\nUpgrade (Level 10): Widens this move’s area-of-effect and increases the amount of HP restored to 200% of the damage dealt.",
+          "videoAsset": "/assets/skills/Clefable/Draining+Kiss.mp4"
         },
         {
           "id": "disarming-voice",
@@ -10188,7 +10191,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Clefable/Disarming+Voice.png",
-          "descriptionAdvanced": "Let out a charming cry, dealing damage to nearby enemies and decreasing their movement speed by 40% for 2s."
+          "descriptionAdvanced": "Let out a charming cry, dealing damage to nearby enemies and decreasing their movement speed by 40% for 2s.",
+          "videoAsset": "/assets/skills/Clefable/Disarming+Voice.mp4"
         },
         {
           "id": "gravity",
@@ -10213,7 +10217,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Create a gravity zone centered on Clefable that persists for 3s. Inside the gravity zone, auto attacks change and deal increased damage. Enemies in the gravity zone have their movement speed decreased by 15% stacking up to 3 times gaining a stack whenever a set amount of time passes. These enemies are also unable to use Dash moves. If an enemy attempts to enter the gravity zone with a dash move, the dash move is stopped and that enemy is left unable to act for 1s.\n\nUpgrade (Level 12): Widens this move’s area-of-effect and increases the duration of its effects to 4s."
+          "descriptionAdvanced": "Create a gravity zone centered on Clefable that persists for 3s. Inside the gravity zone, auto attacks change and deal increased damage. Enemies in the gravity zone have their movement speed decreased by 15% stacking up to 3 times gaining a stack whenever a set amount of time passes. These enemies are also unable to use Dash moves. If an enemy attempts to enter the gravity zone with a dash move, the dash move is stopped and that enemy is left unable to act for 1s.\n\nUpgrade (Level 12): Widens this move’s area-of-effect and increases the duration of its effects to 4s.",
+          "videoAsset": "/assets/skills/Clefable/Gravity.mp4"
         },
         {
           "id": "follow-me",
@@ -10238,7 +10243,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Clefable moves to the designated location while waving its finger receiving a 3s shield. Attention of enemies hit and enemies near the designated location are drawn. These drawn enemies are forced to approach the user and attack Clefable with their auto attacks for 2s.\n\nUpgrade (Level 12): Increases Clefable's Defense by 150 for 3s and Sp. Def by 100 for 3s when this move is used."
+          "descriptionAdvanced": "Clefable moves to the designated location while waving its finger receiving a 3s shield. Attention of enemies hit and enemies near the designated location are drawn. These drawn enemies are forced to approach the user and attack Clefable with their auto attacks for 2s.\n\nUpgrade (Level 12): Increases Clefable's Defense by 150 for 3s and Sp. Def by 100 for 3s when this move is used.",
+          "videoAsset": "/assets/skills/Clefable/Follow+Me.mp4"
         },
         {
           "id": "wonder-wish",
@@ -10254,7 +10260,8 @@
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Clefable/Wonder+Wish.png",
           "descriptionAdvanced": "Clefable waggles their finger, restoring HP to allies in the area-of-effect. The lower an ally's HP is, the more HP this move restores to that ally. Afterward, Clefable gets a random move that can be performed by using the Unite Move again within 10s.\n\n30% missing HP\n\nNote: Some random moves will activate immediately.",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Clefable/Wonder+Wish.mp4"
         }
       ],
       "passiveAbility": {
@@ -10642,7 +10649,8 @@
           ],
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Comfey/Synthesis.png",
-          "descriptionAdvanced": "If detached attaches to the designated ally Pokémon and grants them a Triage shield effect.\n\nIf attached to an ally Pokémon: restores the HP of the ally. Restores additional HP with for each flower that is consumed (up to 8 flowers)."
+          "descriptionAdvanced": "If detached attaches to the designated ally Pokémon and grants them a Triage shield effect.\n\nIf attached to an ally Pokémon: restores the HP of the ally. Restores additional HP with for each flower that is consumed (up to 8 flowers).",
+          "videoAsset": "/assets/skills/Comfey/Synthesis.mp4"
         },
         {
           "id": "floral-healing",
@@ -10688,7 +10696,8 @@
           "isUpgrade": true,
           "moveType": "Recovery",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "If detached: attaches to the designated ally Pokémon and grants them a Triage shield effect.\n\nIf attached to an ally Pokémon: restores the HP of the ally; restores additional HP for each flower that is consumed (up to 8 flowers). Converts any HP restored in excess of the ally Pokémon’s max HP into an overheal shield effect for 5s when this move is used (up to 4 times, refreshing duration with additional uses); adds additional value to the overheal shield effect for each additional flower that is consumed.\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 30% for 2s."
+          "descriptionAdvanced": "If detached: attaches to the designated ally Pokémon and grants them a Triage shield effect.\n\nIf attached to an ally Pokémon: restores the HP of the ally; restores additional HP for each flower that is consumed (up to 8 flowers). Converts any HP restored in excess of the ally Pokémon’s max HP into an overheal shield effect for 5s when this move is used (up to 4 times, refreshing duration with additional uses); adds additional value to the overheal shield effect for each additional flower that is consumed.\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 30% for 2s.",
+          "videoAsset": "/assets/skills/Comfey/Floral+Healing.mp4"
         },
         {
           "id": "sweet-kiss",
@@ -10713,7 +10722,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "If detached: attaches to the designated ally Pokémon and grants them a Triage shield effect; adds additional shield value to the Triage shield effect with Sweet Kiss.\n\n0.6s + 0.1s per flower\n\nIf attached to an ally Pokémon: charges power for up to 2.5s, reaching maximum charge after 1.5s; then infatuates opposing Pokémon in the area of effect when released for a minimum of 0.6s. Increases the range of this move with charging. Infatuated Pokémon are unable to act and approach the user against their will. Infatuates opposing Pokémon hit for an additional 0.1s for each flower that is consumed (up to an additional 0.8s with 8 flowers; maximum 1.4s). (Note: it is impossible to use Sweet Kiss with fewer than 2 flowers due to the rate of gaining flowers and the cooldown reduction cap.)\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 50% for 2s while charging power."
+          "descriptionAdvanced": "If detached: attaches to the designated ally Pokémon and grants them a Triage shield effect; adds additional shield value to the Triage shield effect with Sweet Kiss.\n\n0.6s + 0.1s per flower\n\nIf attached to an ally Pokémon: charges power for up to 2.5s, reaching maximum charge after 1.5s; then infatuates opposing Pokémon in the area of effect when released for a minimum of 0.6s. Increases the range of this move with charging. Infatuated Pokémon are unable to act and approach the user against their will. Infatuates opposing Pokémon hit for an additional 0.1s for each flower that is consumed (up to an additional 0.8s with 8 flowers; maximum 1.4s). (Note: it is impossible to use Sweet Kiss with fewer than 2 flowers due to the rate of gaining flowers and the cooldown reduction cap.)\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 50% for 2s while charging power.",
+          "videoAsset": "/assets/skills/Comfey/Sweet+Kiss.mp4"
         },
         {
           "id": "vine-whip",
@@ -10736,7 +10746,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Comfey/Vine+Whip.png",
-          "descriptionAdvanced": "Strikes out with whiplike vines in the designated direction, damaging opposing Pokémon in the line area of effect and decreasing their movement speed by 40% for 2s when it hits.\n\nWhile attached to an ally: increases this move's range."
+          "descriptionAdvanced": "Strikes out with whiplike vines in the designated direction, damaging opposing Pokémon in the line area of effect and decreasing their movement speed by 40% for 2s when it hits.\n\nWhile attached to an ally: increases this move's range.",
+          "videoAsset": "/assets/skills/Comfey/Vine+Whip.mp4"
         },
         {
           "id": "magical-leaf",
@@ -10761,7 +10772,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Launches 3 curious, scattering leaves every 1s for 5s (up to 18 leaves) at random opposing Pokémon in the area of effect (even when in tall grass or in stealth), prioritizing Pokémon from the opposing team; damaging opposing Pokémon and applying a mark to them for 4s when hit by a leaf. When a marked target is damaged by 6 leaves, stuns them for 0.5s.\n\nWhile attached to an ally: increases this move's range of targeting.\n\nUpgrade (Level 12): Increases the number of leaves launched to 4 leaves every 1s (maximum 24 leaves)."
+          "descriptionAdvanced": "Launches 3 curious, scattering leaves every 1s for 5s (up to 18 leaves) at random opposing Pokémon in the area of effect (even when in tall grass or in stealth), prioritizing Pokémon from the opposing team; damaging opposing Pokémon and applying a mark to them for 4s when hit by a leaf. When a marked target is damaged by 6 leaves, stuns them for 0.5s.\n\nWhile attached to an ally: increases this move's range of targeting.\n\nUpgrade (Level 12): Increases the number of leaves launched to 4 leaves every 1s (maximum 24 leaves).",
+          "videoAsset": "/assets/skills/Comfey/Magical+Leaf.mp4"
         },
         {
           "id": "grass-knot",
@@ -10794,7 +10806,8 @@
           "moveType": "Hindrance",
           "upgradeLevel": 6,
           "descriptionAdvanced": "Unleashes vines in the designated direction, damaging up to two opposing Pokémon hit and immobilizing them. If this move hits two opposing Pokémon (within 75% of this move's max range from each other), pull the second target to the first target's location and deal additional damage to both.\n\nWhile attached to an ally: increases this move's range.\n\nUpgrade (Level 12): Increases this move’s area of effect.",
-          "gifAsset": "/assets/skills/Comfey/Grass+Knot.webp"
+          "gifAsset": "/assets/skills/Comfey/Grass+Knot.webp",
+          "videoAsset": "/assets/skills/Comfey/Grass+Knot.mp4"
         },
         {
           "id": "flowery-fields-forever",
@@ -10846,7 +10859,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Comfey/Flowery+Fields+Forever.png",
           "descriptionAdvanced": "Briefly becomes unstoppable and creates a large area of tall grass around their location for 6s. Pokémon in this tall grass cannot be seen, just as with other tall grass on the map. Restores the HP of teammates in this Unite Move's tall grass every 0.5s.\n\nIncreases infatuation base duration by 1.3s\n\nGains special flowers from this tall grass, which grant access to an empowered use of Floral Healing or Sweet Kiss.",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Comfey/Flowery+Fields+Forever.mp4"
         }
       ],
       "passiveAbility": {
@@ -11358,7 +11372,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Cramorant/Whirlpool.png",
-          "descriptionAdvanced": "The user creates a whirlpool at a designated location, damaging opposing Pokémon in the area of effect over 1.8s (up to 10 times). The area of effect shrinks in size over the duration; opposing Pokémon standing at the outer edge of the whirlpool are hit only up to 3 times. The movement speed of opposing Pokémon in the area of effect is decreased by 50% for 0.2s when hit.\n\nThe user can enter the whirlpool to catch prey for Gulp Missile (up to 2 times)."
+          "descriptionAdvanced": "The user creates a whirlpool at a designated location, damaging opposing Pokémon in the area of effect over 1.8s (up to 10 times). The area of effect shrinks in size over the duration; opposing Pokémon standing at the outer edge of the whirlpool are hit only up to 3 times. The movement speed of opposing Pokémon in the area of effect is decreased by 50% for 0.2s when hit.\n\nThe user can enter the whirlpool to catch prey for Gulp Missile (up to 2 times).",
+          "videoAsset": "/assets/skills/Cramorant/Whirlpool.mp4"
         },
         {
           "id": "surf",
@@ -11390,7 +11405,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "The user sends a wave in the designated direction, damaging opposing Pokémon in the wave. The wave reaches its maximum distance after 0.8s, then returns to its starting point at the same speed, damaging opposing Pokémon and pulling them with the returning wave, stunning them for 0.4s during the pull.\n\nThe user catches prey with the first wave, and can enter the returning wave to catch more prey for Gulp Missile.\n\nUpgrade (Level 13): The first wave decreases the movement speed of opposing Pokémon hit by 40% for 3s."
+          "descriptionAdvanced": "The user sends a wave in the designated direction, damaging opposing Pokémon in the wave. The wave reaches its maximum distance after 0.8s, then returns to its starting point at the same speed, damaging opposing Pokémon and pulling them with the returning wave, stunning them for 0.4s during the pull.\n\nThe user catches prey with the first wave, and can enter the returning wave to catch more prey for Gulp Missile.\n\nUpgrade (Level 13): The first wave decreases the movement speed of opposing Pokémon hit by 40% for 3s.",
+          "videoAsset": "/assets/skills/Cramorant/Surf.mp4"
         },
         {
           "id": "dive",
@@ -11422,7 +11438,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "The user becomes unstoppable for 0.5s as they change the designated location into a puddle then dive to the puddle, damaging opposing Pokémon and shoving them for 0.5s when the user emerges from the puddle. The next boosted attack within 5s deals additional damage; boosted attacks after 5s have passed become regular boosted attacks. A maximum of 3 uses can be kept in reserve for this move, and there is a 2s cooldown between uses.\n\nThe user catches prey for Gulp Missile as they emerge from the puddle.\n\nUpgrade (Level 13): Increases the damage of the dive."
+          "descriptionAdvanced": "The user becomes unstoppable for 0.5s as they change the designated location into a puddle then dive to the puddle, damaging opposing Pokémon and shoving them for 0.5s when the user emerges from the puddle. The next boosted attack within 5s deals additional damage; boosted attacks after 5s have passed become regular boosted attacks. A maximum of 3 uses can be kept in reserve for this move, and there is a 2s cooldown between uses.\n\nThe user catches prey for Gulp Missile as they emerge from the puddle.\n\nUpgrade (Level 13): Increases the damage of the dive.",
+          "videoAsset": "/assets/skills/Cramorant/Dive.mp4"
         },
         {
           "id": "feather-dance",
@@ -11437,7 +11454,8 @@
           ],
           "moveType": "Debuff",
           "iconAsset": "/assets/skills/Cramorant/Feather+Dance.png",
-          "descriptionAdvanced": "The user throws a circle of feathers at the designated area, decreasing the Attack of opposing Pokémon in the area of effect by 30% and their movement speed by 20% for 4s."
+          "descriptionAdvanced": "The user throws a circle of feathers at the designated area, decreasing the Attack of opposing Pokémon in the area of effect by 30% and their movement speed by 20% for 4s.",
+          "videoAsset": "/assets/skills/Cramorant/Feather+Dance.mp4"
         },
         {
           "id": "hurricane",
@@ -11462,7 +11480,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user creates a fierce wind at the designated location. After 0.5s, a hurricane catches opposing Pokémon in the area of effect, damaging them and throwing them for 1s. Afterwards the user's attack speed increases by 40% for 3s.\n\nUpgrade (Level 11): Increases the user's movement speed by 20% for 3s."
+          "descriptionAdvanced": "The user creates a fierce wind at the designated location. After 0.5s, a hurricane catches opposing Pokémon in the area of effect, damaging them and throwing them for 1s. Afterwards the user's attack speed increases by 40% for 3s.\n\nUpgrade (Level 11): Increases the user's movement speed by 20% for 3s.",
+          "videoAsset": "/assets/skills/Cramorant/Hurricane.mp4"
         },
         {
           "id": "air-slash",
@@ -11487,7 +11506,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user shoots out 5 blades of air in a cone in the designated direction, damaging the first opposing Pokémon hit with each blade. The user also hops backward to create distance. This move's cooldown is reduced by 0.8s for each blade that hits (up to 4s).\n\nUpgrade (Level 11): Restores the user's HP for each blade of air that hits an opposing Pokémon."
+          "descriptionAdvanced": "The user shoots out 5 blades of air in a cone in the designated direction, damaging the first opposing Pokémon hit with each blade. The user also hops backward to create distance. This move's cooldown is reduced by 0.8s for each blade that hits (up to 4s).\n\nUpgrade (Level 11): Restores the user's HP for each blade of air that hits an opposing Pokémon.",
+          "videoAsset": "/assets/skills/Cramorant/Air+Slash.mp4"
         },
         {
           "id": "gatling-gulp-missile",
@@ -11511,7 +11531,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Cramorant/Gatling+Gulp+Missile.png",
           "descriptionAdvanced": "The user becomes unstoppable for up to 6.5s and catches a series of prey to spit at the nearest Pokémon from the opposing team or wild Pokémon up to 10 times. The user cannot move or use moves while using Gatling Gulp Missile. The user can use this Unite Move again to cancel it early. The prey caught for each Gatling Gulp Missile attack depends on the user's current HP.\n\nIf a boosted attack is readied when this Unite Move is used, the user spits this prey out first as a regular boosted attack before catching and spitting out up to 10 Gatling Gulp Missile prey.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Cramorant/Gatling+Gulp+Missile.mp4"
         }
       ],
       "passiveAbility": {
@@ -11951,7 +11972,8 @@
           ],
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Crustle/Rock+Slide.png",
-          "descriptionAdvanced": "The user drops large rocks at the designated location, damaging opposing Pokémon in the area of effect and stunning them for 1s."
+          "descriptionAdvanced": "The user drops large rocks at the designated location, damaging opposing Pokémon in the area of effect and stunning them for 1s.",
+          "videoAsset": "/assets/skills/Crustle/Rock+Slide.mp4"
         },
         {
           "id": "rock-tomb",
@@ -11990,7 +12012,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user splits open the ground in a line towards the designated location, damaging opposing Pokémon in the path and decreasing their movement speed by 60% for 2s. A curved wall of rock is then created at the designated location that remains for up to 3s. When the wall of rock is created or destroyed, opposing Pokémon near the wall are damaged and their movement speed is decreased by 60% for 2s.\n\nThe user can use this move again to destroy the wall of rock early.\n\nUpgrade (Level 11): Strengthens the movement speed decrease from this move to 80%."
+          "descriptionAdvanced": "The user splits open the ground in a line towards the designated location, damaging opposing Pokémon in the path and decreasing their movement speed by 60% for 2s. A curved wall of rock is then created at the designated location that remains for up to 3s. When the wall of rock is created or destroyed, opposing Pokémon near the wall are damaged and their movement speed is decreased by 60% for 2s.\n\nThe user can use this move again to destroy the wall of rock early.\n\nUpgrade (Level 11): Strengthens the movement speed decrease from this move to 80%.",
+          "videoAsset": "/assets/skills/Crustle/Rock+Tomb.mp4"
         },
         {
           "id": "shell-smash",
@@ -12007,7 +12030,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user becomes unstoppable as they smash their shell over 0.8s, reducing their base Defense and Sp. Def stats to 0 and converting 40% of the value lost to bonus Attack and Sp. Atk respectively for 4.5s. The user's movement speed is increased by 75% for the duration of the buff (decaying by 5% every 1s; minimum 55% increased movement speed before the buff ends).\n\nAll modifiers (except emblem color bonuses) work with 0 base Defense and Sp. Def for the duration of this buff.\n\nUpgrade (Level 11): Strengthens the conversion rate from lost Defense and Sp. Def to bonus Attack and Sp. Atk to 50%."
+          "descriptionAdvanced": "The user becomes unstoppable as they smash their shell over 0.8s, reducing their base Defense and Sp. Def stats to 0 and converting 40% of the value lost to bonus Attack and Sp. Atk respectively for 4.5s. The user's movement speed is increased by 75% for the duration of the buff (decaying by 5% every 1s; minimum 55% increased movement speed before the buff ends).\n\nAll modifiers (except emblem color bonuses) work with 0 base Defense and Sp. Def for the duration of this buff.\n\nUpgrade (Level 11): Strengthens the conversion rate from lost Defense and Sp. Def to bonus Attack and Sp. Atk to 50%.",
+          "videoAsset": "/assets/skills/Crustle/Shell+Smash.mp4"
         },
         {
           "id": "fury-cutter",
@@ -12030,7 +12054,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Crustle/Fury+Cutter.png",
-          "descriptionAdvanced": "The user slashes once with their claw while dashing slightly in the designated direction, damaging opposing Pokémon hit. Targets hit by Fury Cutter receive a mark for 9s that stacks with subsequent Fury Cutter hits (up to 3 times). Subsequent hits of this move on marked targets have 20% increased damage (maximum 40% increased damage on the third and subsequent hits from this move).\n\nAdditional stacking damage from this move is always rounded up."
+          "descriptionAdvanced": "The user slashes once with their claw while dashing slightly in the designated direction, damaging opposing Pokémon hit. Targets hit by Fury Cutter receive a mark for 9s that stacks with subsequent Fury Cutter hits (up to 3 times). Subsequent hits of this move on marked targets have 20% increased damage (maximum 40% increased damage on the third and subsequent hits from this move).\n\nAdditional stacking damage from this move is always rounded up.",
+          "videoAsset": "/assets/skills/Crustle/Fury+Cutter.mp4"
         },
         {
           "id": "stealth-rock",
@@ -12055,7 +12080,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "The user launches a cluster of rocks in the designated direction which expands into a trap of levitating rocks on the first opposing Pokémon or wall hit, or after traveling their max distance. This trap deals damage to opposing Pokémon in the area of effect every 0.5s over 4s (up to 8 times). Subsequent hits on targets hit by the trap within 1.5s have 15% increased damage; this damage increase stacks with subsequent hits from that trap (maximum 105% increased damage on the eighth hit).\n\nAdditional stacking damage from subsequent hits for each trap is always rounded up.\n\nUpgrade (Level 13): The trap of levitating rocks remains for 1s longer; this move can hit up to 10 times (maximum 135% increased damage on the tenth hit). Also decreases the movement speed of opposing Pokémon hit by 35% for 1s."
+          "descriptionAdvanced": "The user launches a cluster of rocks in the designated direction which expands into a trap of levitating rocks on the first opposing Pokémon or wall hit, or after traveling their max distance. This trap deals damage to opposing Pokémon in the area of effect every 0.5s over 4s (up to 8 times). Subsequent hits on targets hit by the trap within 1.5s have 15% increased damage; this damage increase stacks with subsequent hits from that trap (maximum 105% increased damage on the eighth hit).\n\nAdditional stacking damage from subsequent hits for each trap is always rounded up.\n\nUpgrade (Level 13): The trap of levitating rocks remains for 1s longer; this move can hit up to 10 times (maximum 135% increased damage on the tenth hit). Also decreases the movement speed of opposing Pokémon hit by 35% for 1s.",
+          "videoAsset": "/assets/skills/Crustle/Stealth+Rock.mp4"
         },
         {
           "id": "x-scissor",
@@ -12094,7 +12120,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "The user dashes and attacks with crossed claws three times in the designated direction, damaging opposing Pokémon and shoving them for 0.2s with each attack. The third hit stuns opposing Pokémon for 1.5s if they are shoved into a wall.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s."
+          "descriptionAdvanced": "The user dashes and attacks with crossed claws three times in the designated direction, damaging opposing Pokémon and shoving them for 0.2s with each attack. The third hit stuns opposing Pokémon for 1.5s if they are shoved into a wall.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s.",
+          "videoAsset": "/assets/skills/Crustle/X-Scissor.mp4"
         },
         {
           "id": "rubble-rouser",
@@ -12125,7 +12152,8 @@
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Crustle/Rubble+Rouser.png",
           "descriptionAdvanced": "The user becomes unstoppable as they summon a whirlwind of rocks around them, gaining a shield, and stunning nearby enemies for 1s. For 10s after, the whirlwind of rocks damage nearby opposing Pokémon every 1s. If the user receives damage during Rubble Rouser, the user deals additional revenge damage to nearby opposing Pokémon (2s CD).\n\nThe value of the shield gained from Rubble Rouser is equal to 40% max HP + 600.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Crustle/Rubble+Rouser.mp4"
         }
       ],
       "passiveAbility": {
@@ -12567,7 +12595,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Darkrai/Hypnosis.png",
-          "descriptionAdvanced": "Send a hypnotic suggestion in the designated direction, dealing damage to the first enemy it hits. After 1s, the enemy will fall asleep for 2s."
+          "descriptionAdvanced": "Send a hypnotic suggestion in the designated direction, dealing damage to the first enemy it hits. After 1s, the enemy will fall asleep for 2s.",
+          "videoAsset": "/assets/skills/Darkrai/Hypnosis.mp4"
         },
         {
           "id": "dark-void",
@@ -12592,7 +12621,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Fire a ball of darkness at an enemy. Additional balls of darkness will be thrown at each enemy within in the area of effect. Enemies hit will be dealt damage and marked. The mark lasts 5s. When Darkrai deals damage to marked enemy, the marks are removed and the Enemy falls asleep for 2s.\n\nUpgrade (Level 11): Applies a 40% slow for 3s when applying a mark to an enemy."
+          "descriptionAdvanced": "Fire a ball of darkness at an enemy. Additional balls of darkness will be thrown at each enemy within in the area of effect. Enemies hit will be dealt damage and marked. The mark lasts 5s. When Darkrai deals damage to marked enemy, the marks are removed and the Enemy falls asleep for 2s.\n\nUpgrade (Level 11): Applies a 40% slow for 3s when applying a mark to an enemy.",
+          "videoAsset": "/assets/skills/Darkrai/Dark+Void.mp4"
         },
         {
           "id": "shadow-claw",
@@ -12652,7 +12682,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Slash in a designated direction with sharp claws made from shadows, dealing damage in a line, applying a 40% slow for 3s and marking enemies hit. When the user deals damage twice to marked enemies, that marked enemy falls asleep for 2s and has their mark removed. When this move hits, this move can be used again. The second use of this move hits a designated target with huge claws, dealing damage. If there are any opposing Pokémon suffering from Bad Dreams, the second use of this move will deal increased damage.\n\nUpgrade (Level 11): Increases the damage dealt by this move."
+          "descriptionAdvanced": "Slash in a designated direction with sharp claws made from shadows, dealing damage in a line, applying a 40% slow for 3s and marking enemies hit. When the user deals damage twice to marked enemies, that marked enemy falls asleep for 2s and has their mark removed. When this move hits, this move can be used again. The second use of this move hits a designated target with huge claws, dealing damage. If there are any opposing Pokémon suffering from Bad Dreams, the second use of this move will deal increased damage.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
+          "videoAsset": "/assets/skills/Darkrai/Shadow+Claw.mp4"
         },
         {
           "id": "calm-mind",
@@ -12667,7 +12698,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Darkrai/Calm+Mind.png",
-          "descriptionAdvanced": "The user focuses their mind, increasing their Special Attack and Special Defense by 30% for 3s and Movement Speed by 50% for 3s, decaying by 10% every 0.5 seconds to a minimum of 10%."
+          "descriptionAdvanced": "The user focuses their mind, increasing their Special Attack and Special Defense by 30% for 3s and Movement Speed by 50% for 3s, decaying by 10% every 0.5 seconds to a minimum of 10%.",
+          "videoAsset": "/assets/skills/Darkrai/Calm+Mind.mp4"
         },
         {
           "id": "nasty-plot",
@@ -12699,7 +12731,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Dash a short distance, gaining a Nasty Plot counter for 7s and refreshing the duration of all current counters. Upon using a basic attack, consume all nasty plot counters to deal damage to one of the targets hit. Upon using a boosted attack, turn the boosted and all nasty plot counters into a series of projectiles, hitting every target of Darkrai's boosted.\n\nA maximum of two counters may be held. Nasty Plot has no cooldown between dashes.\n\nUpgrade (Level 13): Gain one charge of this move in reserve when an enemy falls asleep."
+          "descriptionAdvanced": "Dash a short distance, gaining a Nasty Plot counter for 7s and refreshing the duration of all current counters. Upon using a basic attack, consume all nasty plot counters to deal damage to one of the targets hit. Upon using a boosted attack, turn the boosted and all nasty plot counters into a series of projectiles, hitting every target of Darkrai's boosted.\n\nA maximum of two counters may be held. Nasty Plot has no cooldown between dashes.\n\nUpgrade (Level 13): Gain one charge of this move in reserve when an enemy falls asleep.",
+          "videoAsset": "/assets/skills/Darkrai/Nasty+Plot.mp4"
         },
         {
           "id": "dark-pulse",
@@ -12724,7 +12757,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Hide in a shadow and create additional shadows around the hiding spot. Darkrai may freely move between the shadows. When this move is used again and held, the move ends and Darkrai appears from the shadow it dealt damage from. When this move is used again but is not held or after 4s elapses, Darkrai appears from the shadow they are currently hiding in, deals damage to enemies hit, then returns to the original shadow. Dark Pulse may then be used one more time if the move was only tapped. Darkrai will leave the shadow after 4s, dealing damage to all enemies in the shadow that Darkrai appears from.\n\nWhile hiding, Shadow Claw may be used to attack from the shadow that is being hidden in. Shadow Claws used this way will not apply the Shadow Claw mark to targets hit and deals reduced damage.\n\nUpgrade (Level 13): Dealing damage with this move causes Darkrai to gain a shield for 2.5 seconds."
+          "descriptionAdvanced": "Hide in a shadow and create additional shadows around the hiding spot. Darkrai may freely move between the shadows. When this move is used again and held, the move ends and Darkrai appears from the shadow it dealt damage from. When this move is used again but is not held or after 4s elapses, Darkrai appears from the shadow they are currently hiding in, deals damage to enemies hit, then returns to the original shadow. Dark Pulse may then be used one more time if the move was only tapped. Darkrai will leave the shadow after 4s, dealing damage to all enemies in the shadow that Darkrai appears from.\n\nWhile hiding, Shadow Claw may be used to attack from the shadow that is being hidden in. Shadow Claws used this way will not apply the Shadow Claw mark to targets hit and deals reduced damage.\n\nUpgrade (Level 13): Dealing damage with this move causes Darkrai to gain a shield for 2.5 seconds.",
+          "videoAsset": "/assets/skills/Darkrai/Dark+Pulse.mp4"
         },
         {
           "id": "worst-nightmare",
@@ -12740,7 +12774,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Darkrai/Worst+Nightmare.png",
           "descriptionAdvanced": "The user becomes unstoppable and casts a sleeping spell on the designated Pokémon from the opposing team. If the target is successfully put to sleep, the user's moves' cooldowns are reset, the target is marked to receive 3% max HP damage over time every 0.5s over 10s (up to 21 times; maximum 63% max HP damage as Sp. Atk-based damage), and the user sends that target into a nightmare realm centered on their initial location for up to 8s. The user follows the target into the nightmare realm. While inside the nightmare realm, Darkrai and the target are unaffected by goal zones, jump pads, and Berries. Other Pokémon outside of the nightmare realm cannot target Darkrai or their target while they're inside.\n\n3% max HP every 0.5s\n\nIf the designated Pokémon from the opposing team cannot be put to sleep, this Unite Move is canceled and 90% of the Unite Move gauge is refunded. This energy regeneration is affected by Energy Amplifier.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Darkrai/Worst+Nightmare.mp4"
         }
       ],
       "passiveAbility": {
@@ -13241,7 +13276,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Decidueye/Leafage.png",
-          "descriptionAdvanced": "Pelts leaves in the designated direction, dealing damage in a cone to enemies hit (only hits once). For a short time after using this move, Decidueye’s Attack is increased by 10% (this also affects Leafage) and auto attack speed is increased by 25% for 3s."
+          "descriptionAdvanced": "Pelts leaves in the designated direction, dealing damage in a cone to enemies hit (only hits once). For a short time after using this move, Decidueye’s Attack is increased by 10% (this also affects Leafage) and auto attack speed is increased by 25% for 3s.",
+          "videoAsset": "/assets/skills/Decidueye/Leafage.mp4"
         },
         {
           "id": "razor-leaf",
@@ -13295,7 +13331,8 @@
           "moveType": "Buff",
           "upgradeLevel": 7,
           "descriptionAdvanced": "Summons whirling razor leaves.  While active, Decidueye's auto attack is replaced by a new auto attack that targets up to 2 additional enemies in range, as well as increasing Attack by 10% and auto attack speed. This buff lasts for 5.5s.",
-          "gifAsset": "/assets/skills/Decidueye/Razor+Leaf.webp"
+          "gifAsset": "/assets/skills/Decidueye/Razor+Leaf.webp",
+          "videoAsset": "/assets/skills/Decidueye/Razor+Leaf.mp4"
         },
         {
           "id": "spirit-shackle",
@@ -13335,7 +13372,8 @@
           "moveType": "Ranged",
           "upgradeLevel": 7,
           "descriptionAdvanced": "Charges power before firing a large arrow in the designated direction. Damage dealt increases the longer power is charged (with 6 breakpoints and a max-charge at 1.3s), but movement speed is decreased by 25% while charging. If this move hits after power is charged to the maximum, it can stitch enemies to the ground. The affected enemy has their movement speed decreased by 80% for a short time when exiting the area, and receives damage upon leaving the area. A maximum of 3 uses can be kept in reserve for this move. There is a 2s cooldown between uses.\n\nUpgrade (Level 11): Deals 15% increased damage to enemies with less than 50% remaining HP.",
-          "gifAsset": "/assets/skills/Decidueye/Spirit+Shackle.webp"
+          "gifAsset": "/assets/skills/Decidueye/Spirit+Shackle.webp",
+          "videoAsset": "/assets/skills/Decidueye/Spirit+Shackle.mp4"
         },
         {
           "id": "astonish",
@@ -13358,7 +13396,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Decidueye/Astonish.png",
-          "descriptionAdvanced": "Deals damage to enemies and decreases their movement speed by 80% for a short time."
+          "descriptionAdvanced": "Deals damage to enemies and decreases their movement speed by 80% for a short time.",
+          "videoAsset": "/assets/skills/Decidueye/Astonish.mp4"
         },
         {
           "id": "leaf-storm",
@@ -13384,7 +13423,8 @@
           "moveType": "Ranged",
           "upgradeLevel": 8,
           "descriptionAdvanced": "Creates a tempest of sharp leaves, dealing damage to enemies it hits and decreases their movement speed by 60% for 2.5s. The slow decays at 10% per 0.5s up to four times. At point-blank range, it also shoves and stuns enemies hit for 1s.\n\nUpgrade (Level 13): Movement speed decrease now lasts 3.5s but still decaying up to four times at 10% per 0.5s.",
-          "gifAsset": "/assets/skills/Decidueye/Leaf+Storm.webp"
+          "gifAsset": "/assets/skills/Decidueye/Leaf+Storm.webp",
+          "videoAsset": "/assets/skills/Decidueye/Leaf+Storm.mp4"
         },
         {
           "id": "shadow-sneak",
@@ -13410,7 +13450,8 @@
           "moveType": "Sure Hit",
           "upgradeLevel": 8,
           "descriptionAdvanced": "Decidueye creates a shadow that lasts for up to 5s, increasing Decidueye's movement speed by 70% for 2s, decaying by 20% every 0.5s, and reveals all opposing Pokémon in range temporarily. Pokémon that are sneaking remain invisible but can be targeted by the shadow giving away their position if they were within the initial cast range. Afterwards the shadow will automatically target an enemy player that is visible to Decidueye, inflicting damage, lowering their movement speed by 30% for 1s, and decreasing their Defense by 60% for 1.5s. Wild Pokémon that are currently aggressive can also be targeted but are otherwise ignored.\n\nUpgrade (Level 13): Defense reduction of enemies is increased to 80%.",
-          "gifAsset": "/assets/skills/Decidueye/Shadow+Sneak.webp"
+          "gifAsset": "/assets/skills/Decidueye/Shadow+Sneak.webp",
+          "videoAsset": "/assets/skills/Decidueye/Shadow+Sneak.mp4"
         },
         {
           "id": "nock-nock",
@@ -13441,7 +13482,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Decidueye/Nock+Nock.png",
           "descriptionAdvanced": "Fires quills in the designated direction for 5s, dealing damage to enemies but does not pierce through them. The move ends by unleashing a large quill that deals damage to all enemies it hits (30% more damage if the target is below 50% HP) but Nock Nock can be cancelled early. While using this move, Decidueye becomes unstoppable but is unable to move.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Decidueye/Nock+Nock.mp4"
         }
       ],
       "passiveAbility": {
@@ -13938,7 +13980,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Delphox/Ember.png",
-          "descriptionAdvanced": "Shoot a small flame in front of itself, dealing damage to enemies hit."
+          "descriptionAdvanced": "Shoot a small flame in front of itself, dealing damage to enemies hit.",
+          "videoAsset": "/assets/skills/Delphox/Ember.mp4"
         },
         {
           "id": "fire-blast",
@@ -13970,7 +14013,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Delphox launches an intense, all-consuming fire in a forward direction; dealing damage to enemies hit. As the fire travels, it leaves behind a zone of flames in which a delayed explosion will occur; dealing damage to enemies in the area-of-effect.\n\nUpgrade (Level 11): Damage increased."
+          "descriptionAdvanced": "Delphox launches an intense, all-consuming fire in a forward direction; dealing damage to enemies hit. As the fire travels, it leaves behind a zone of flames in which a delayed explosion will occur; dealing damage to enemies in the area-of-effect.\n\nUpgrade (Level 11): Damage increased.",
+          "videoAsset": "/assets/skills/Delphox/Fire+Blast.mp4"
         },
         {
           "id": "mystical-fire",
@@ -13995,7 +14039,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Delphox unleashes a special, hot ball of fire in a forward direction. If it hits an enemy, the fire will explode; dealing damage to enemies in the area-of-effect.\n\nUpgrade (Level 11): Also reduces cooldowns of all moves if this move hits by 1s. If it hits an enemy player, cooldowns are reduced even further (1.5s)."
+          "descriptionAdvanced": "Delphox unleashes a special, hot ball of fire in a forward direction. If it hits an enemy, the fire will explode; dealing damage to enemies in the area-of-effect.\n\nUpgrade (Level 11): Also reduces cooldowns of all moves if this move hits by 1s. If it hits an enemy player, cooldowns are reduced even further (1.5s).",
+          "videoAsset": "/assets/skills/Delphox/Mystical+Fire.mp4"
         },
         {
           "id": "will-o-wisp",
@@ -14025,7 +14070,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Delphox/Will-o-Wisp.png",
-          "descriptionAdvanced": "Conjure up sinister flames and launch them toward the designated area. These flames then explode, dealing damage to enemies hit by the explosion and decreasing their movement speed by 30% for 2s. An enemy will only be counted as being hit by one flame and one explosion, even if all 3 flames visually hit."
+          "descriptionAdvanced": "Conjure up sinister flames and launch them toward the designated area. These flames then explode, dealing damage to enemies hit by the explosion and decreasing their movement speed by 30% for 2s. An enemy will only be counted as being hit by one flame and one explosion, even if all 3 flames visually hit.",
+          "videoAsset": "/assets/skills/Delphox/Will-o-Wisp.mp4"
         },
         {
           "id": "fire-spin",
@@ -14050,7 +14096,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Create a vortex of fire in the designated area. The vortex automatically moves toward the nearest enemy, dealing damage-over-time to all enemies caught in the area for a short time and decreasing their movement speed by 30% for 4s. After 3.5s passes or an enemy is caught in the center of the vortex; the flames increase in intensity causing a trap activation. This increases the rate at which the flames deal damage and also leaves the enemies unable to act for 1s. This trapped damage ticks four times total. The Fire Spin will otherwise deal damage as it travels. Move placement on top of enemies will apply a 'searching' tick and then apply 'trapped' damage. A maximum of 9 ticks is possible.\n\nUpgrade (Level 13): Applies a debuff on trap activation that increases all damage dealt by Delphox by 15% for 3s. Debuff is only cleansable after the first tick of trap damage and does not re-apply the debuff."
+          "descriptionAdvanced": "Create a vortex of fire in the designated area. The vortex automatically moves toward the nearest enemy, dealing damage-over-time to all enemies caught in the area for a short time and decreasing their movement speed by 30% for 4s. After 3.5s passes or an enemy is caught in the center of the vortex; the flames increase in intensity causing a trap activation. This increases the rate at which the flames deal damage and also leaves the enemies unable to act for 1s. This trapped damage ticks four times total. The Fire Spin will otherwise deal damage as it travels. Move placement on top of enemies will apply a 'searching' tick and then apply 'trapped' damage. A maximum of 9 ticks is possible.\n\nUpgrade (Level 13): Applies a debuff on trap activation that increases all damage dealt by Delphox by 15% for 3s. Debuff is only cleansable after the first tick of trap damage and does not re-apply the debuff.",
+          "videoAsset": "/assets/skills/Delphox/Fire+Spin.mp4"
         },
         {
           "id": "flame-charge",
@@ -14075,7 +14122,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Delphox charges forward in the designated direction. If there are any enemies within auto attack range when the charge ends, summon three flames to attack. These flames deal damage and decrease enemy movement speed by 30% for 2s. This move can be used while also using Fire Blast or Mystical Fire. Each subsequent flame that hits deals 70% less.\n\nUpgrade (Level 13): Increases Delphox's movement speed by 30% for 2s when this move is used."
+          "descriptionAdvanced": "Delphox charges forward in the designated direction. If there are any enemies within auto attack range when the charge ends, summon three flames to attack. These flames deal damage and decrease enemy movement speed by 30% for 2s. This move can be used while also using Fire Blast or Mystical Fire. Each subsequent flame that hits deals 70% less.\n\nUpgrade (Level 13): Increases Delphox's movement speed by 30% for 2s when this move is used.",
+          "videoAsset": "/assets/skills/Delphox/Flame+Charge.mp4"
         },
         {
           "id": "fanciful-fireworks",
@@ -14099,7 +14147,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Delphox/Fanciful+Fireworks.png",
           "descriptionAdvanced": "Deals damage-over-time to enemies in the designated area for 8s. Enemies that are hit have 50% decreased movement speed and 50% reduced HP recovery effects for 1.75s. Recovery effects are weakened within the zone and cannot be cleansed while in the zone. Leaving the zone will have the weakened HP recovery effects linger for 1.75s and may be cleansed after leaving the zone. 8s duration (ticks at 0.5s intervals).",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Delphox/Fanciful+Fireworks.mp4"
         }
       ],
       "passiveAbility": {
@@ -14542,7 +14591,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Dhelmise/Payback.png",
-          "descriptionAdvanced": "Has the user swing their anchor, dealing damage and applying a 30% slow for 2s to opposing Pokémon hit. The user deals increased damage if Dhelmise was hit with an attack while this move is being used."
+          "descriptionAdvanced": "Has the user swing their anchor, dealing damage and applying a 30% slow for 2s to opposing Pokémon hit. The user deals increased damage if Dhelmise was hit with an attack while this move is being used.",
+          "videoAsset": "/assets/skills/Dhelmise/Payback.mp4"
         },
         {
           "id": "power-whip",
@@ -14581,7 +14631,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Has the user slash their anchor horizontally in front of themself, dealing damage, applying a 40% slow for 2s, and granting the user a shield for 3s. The edge of the anchor deals additional damage and leaves the opposing Pokémon it hits unable to act for 0.5s instead of slowing them.\n\nUpgrade (Level 13): Increases the duration opposing Pokémon are left unable to act to 1s."
+          "descriptionAdvanced": "Has the user slash their anchor horizontally in front of themself, dealing damage, applying a 40% slow for 2s, and granting the user a shield for 3s. The edge of the anchor deals additional damage and leaves the opposing Pokémon it hits unable to act for 0.5s instead of slowing them.\n\nUpgrade (Level 13): Increases the duration opposing Pokémon are left unable to act to 1s.",
+          "videoAsset": "/assets/skills/Dhelmise/Power+Whip.mp4"
         },
         {
           "id": "whirlpool",
@@ -14613,7 +14664,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dhelmise swings their anchor diagonally, dealing damage and applying a 40% slow for 2s to opposing Pokémon hit. Every third time this move is used, it generates a whirlpool centered on the user for 2s, continuously pulling in nearby opposing Pokémon every tick. This move's cooldown is reduced by 0.8s every time Dhelmise hits with a basic attack.\n\nDhelmise can auto attack and cast moves while the whirlpool is active.\n\nUpgrade (Level 13): Further reduces this move's cooldown by 1.5s every time the user hits with a basic attack."
+          "descriptionAdvanced": "Dhelmise swings their anchor diagonally, dealing damage and applying a 40% slow for 2s to opposing Pokémon hit. Every third time this move is used, it generates a whirlpool centered on the user for 2s, continuously pulling in nearby opposing Pokémon every tick. This move's cooldown is reduced by 0.8s every time Dhelmise hits with a basic attack.\n\nDhelmise can auto attack and cast moves while the whirlpool is active.\n\nUpgrade (Level 13): Further reduces this move's cooldown by 1.5s every time the user hits with a basic attack.",
+          "videoAsset": "/assets/skills/Dhelmise/Whirlpool.mp4"
         },
         {
           "id": "bulldoze",
@@ -14636,7 +14688,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Dhelmise/Bulldoze.png",
-          "descriptionAdvanced": "Has the user shake the ground by slamming their anchor, dealing damage to opposing Pokémon and throwing them for 0.5s."
+          "descriptionAdvanced": "Has the user shake the ground by slamming their anchor, dealing damage to opposing Pokémon and throwing them for 0.5s.",
+          "videoAsset": "/assets/skills/Dhelmise/Bulldoze.mp4"
         },
         {
           "id": "anchor-shot",
@@ -14661,7 +14714,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Has the user throw their anchor in a designated direction catching the first opposing Pokémon hit, dealing damage and leaving them unable to act. The user then pulls the target toward Dhelmise.\n\nStun duration is 0.6s from close range, and 0.8s at max range.\n\nUpgrade (Level 11): Debuffs the targeted opposing Pokémon, increasing the amount of damage they receive from all sources by 50% for 0.8s or for as long as the target is being incapacitated."
+          "descriptionAdvanced": "Has the user throw their anchor in a designated direction catching the first opposing Pokémon hit, dealing damage and leaving them unable to act. The user then pulls the target toward Dhelmise.\n\nStun duration is 0.6s from close range, and 0.8s at max range.\n\nUpgrade (Level 11): Debuffs the targeted opposing Pokémon, increasing the amount of damage they receive from all sources by 50% for 0.8s or for as long as the target is being incapacitated.",
+          "videoAsset": "/assets/skills/Dhelmise/Anchor+Shot.mp4"
         },
         {
           "id": "heavy-slam",
@@ -14693,7 +14747,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user lobs their anchor in a designated direction dealing damage to opposing Pokémon at the central point of impact and leaving them unable to act for 0.5s. Opposing Pokémon near the point of impact take damage and are slowed by 40% for 2s. The user then slams their heavy body down at the anchor's point of impact, dealing damage and applying an additional 40% slow for 2s to opposing Pokémon hit.\n\nUpgrade (Level 11): When the user slams their heavy body down, opposing Pokémon at the center of the point of impact are left unable to act for 0.5s."
+          "descriptionAdvanced": "The user lobs their anchor in a designated direction dealing damage to opposing Pokémon at the central point of impact and leaving them unable to act for 0.5s. Opposing Pokémon near the point of impact take damage and are slowed by 40% for 2s. The user then slams their heavy body down at the anchor's point of impact, dealing damage and applying an additional 40% slow for 2s to opposing Pokémon hit.\n\nUpgrade (Level 11): When the user slams their heavy body down, opposing Pokémon at the center of the point of impact are left unable to act for 0.5s.",
+          "videoAsset": "/assets/skills/Dhelmise/Heavy+Slam.mp4"
         },
         {
           "id": "seaweed-snare",
@@ -14731,7 +14786,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Dhelmise/Seaweed+Snare.png",
           "descriptionAdvanced": "Has the user throw their anchor and ensnare a designated Pokémon from the opposing team, dealing damage and leaving the target unable to act for 0.45s. The user then charges at the target, dealing damage and leaving them unable to act for 0.45s. If other Pokémon from the opposing team are hit by the anchor or the charge, they take damage and are shoved for 0.7s.\n\n150% of DoT damage\n\nApplies a cleansable damage over time effect to Pokémon on the opposing team that deals damage on hit and every 0.5s up to 9 times, healing Dhelmise with each tick based on damage dealt. The duration of the DoT is refreshed with each hit of the Unite Move.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Dhelmise/Seaweed+Snare.mp4"
         }
       ],
       "passiveAbility": {
@@ -15059,7 +15115,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Dodrio/Peck.png",
-          "descriptionAdvanced": "Jabs forward with Doduo's beaks. When using the move, Doduo stops moving and loses sprint gauge due to dropping below the sprint gauge gaining threshold. When the sprint gauge is full, Doduo charges forward to jab the in the facing direction and fully consumes the sprint gauge."
+          "descriptionAdvanced": "Jabs forward with Doduo's beaks. When using the move, Doduo stops moving and loses sprint gauge due to dropping below the sprint gauge gaining threshold. When the sprint gauge is full, Doduo charges forward to jab the in the facing direction and fully consumes the sprint gauge.",
+          "videoAsset": "/assets/skills/Dodrio/Peck.mp4"
         },
         {
           "id": "tri-attack",
@@ -15105,7 +15162,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dodrio attacks with their beaks in a cone in front of themself, dealing damage to enemies and applying one of the following random effects to enemies hit: Burn, Paralyze, or Freeze. When the sprint gauge is full, Dodrio instead shoots out 3 projectiles in the facing direction. If a projectile hits an enemy, the projectile deals damage but only the first projectile of random colour/type applies one of the following enhanced random effects to enemies hit: Burn, Paralyze, or Freeze corresponding to the colour/type. After this move is used, Dodrio's next basic attack deals additional damage and restores HP. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nAlso heals Dodrio for 7% max HP.\n\nBurn: 8% Attack decrease for 2s, 12% Attack decrease if Sprint empowered. Paralyze: 8% Attack Speed decrease and 10% Movement speeed decrease for 2s, 12% Attack Speed decrease and 15% Movement speed decrease if Sprint empowered. Freeze: 20% Movement speed decrease for 2s, 40% if Sprint empowered.\n\nUpgrade (Level 11): The next auto attack gains additional healing by 3% of max HP. When using full sprint gauge attack the charge time for this move is additionally reduced by 1s."
+          "descriptionAdvanced": "Dodrio attacks with their beaks in a cone in front of themself, dealing damage to enemies and applying one of the following random effects to enemies hit: Burn, Paralyze, or Freeze. When the sprint gauge is full, Dodrio instead shoots out 3 projectiles in the facing direction. If a projectile hits an enemy, the projectile deals damage but only the first projectile of random colour/type applies one of the following enhanced random effects to enemies hit: Burn, Paralyze, or Freeze corresponding to the colour/type. After this move is used, Dodrio's next basic attack deals additional damage and restores HP. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nAlso heals Dodrio for 7% max HP.\n\nBurn: 8% Attack decrease for 2s, 12% Attack decrease if Sprint empowered. Paralyze: 8% Attack Speed decrease and 10% Movement speeed decrease for 2s, 12% Attack Speed decrease and 15% Movement speed decrease if Sprint empowered. Freeze: 20% Movement speed decrease for 2s, 40% if Sprint empowered.\n\nUpgrade (Level 11): The next auto attack gains additional healing by 3% of max HP. When using full sprint gauge attack the charge time for this move is additionally reduced by 1s.",
+          "videoAsset": "/assets/skills/Dodrio/Tri+Attack.mp4"
         },
         {
           "id": "drill-peck",
@@ -15137,7 +15195,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dodrio strikes forward with their sharp beaks multiple times, dealing damage to enemies hit. If used with a full sprint gauge, consume the sprint gauge and dash forward while striking with their sharp beaks multiple times, dealing damage to enemies hit and shoving them. During this dash, Dodrio receives 20% reduced damage.\n\n3% of enemy max HP.\n\nUpgrade (Level 11): Reduces base cd by 2s and restores a portion of Dodrio's HP equal to 30% of damage dealt by the flat damage (percent damage excluded)."
+          "descriptionAdvanced": "Dodrio strikes forward with their sharp beaks multiple times, dealing damage to enemies hit. If used with a full sprint gauge, consume the sprint gauge and dash forward while striking with their sharp beaks multiple times, dealing damage to enemies hit and shoving them. During this dash, Dodrio receives 20% reduced damage.\n\n3% of enemy max HP.\n\nUpgrade (Level 11): Reduces base cd by 2s and restores a portion of Dodrio's HP equal to 30% of damage dealt by the flat damage (percent damage excluded).",
+          "videoAsset": "/assets/skills/Dodrio/Drill+Peck.mp4"
         },
         {
           "id": "quick-attack",
@@ -15160,7 +15219,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Dodrio/Quick+Attack.png",
-          "descriptionAdvanced": "Dash forward, increasing the user's movement speed by 30% for 2s and dealing damage to enemies hit. This move's cooldown is reduced by 1.5s if it hits an enemy."
+          "descriptionAdvanced": "Dash forward, increasing the user's movement speed by 30% for 2s and dealing damage to enemies hit. This move's cooldown is reduced by 1.5s if it hits an enemy.",
+          "videoAsset": "/assets/skills/Dodrio/Quick+Attack.mp4"
         },
         {
           "id": "agility",
@@ -15177,7 +15237,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Become immune to hindrances for 0.5s and adds to the sprint gauge. Afterward, movement speed is increased by 20% for 4s, and the sprint gauge charges faster.\n\nUpgrade (Level 13): Fully charges the sprint gauge on use."
+          "descriptionAdvanced": "Become immune to hindrances for 0.5s and adds to the sprint gauge. Afterward, movement speed is increased by 20% for 4s, and the sprint gauge charges faster.\n\nUpgrade (Level 13): Fully charges the sprint gauge on use.",
+          "videoAsset": "/assets/skills/Dodrio/Agility.mp4"
         },
         {
           "id": "jump-kick",
@@ -15209,7 +15270,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Dodrio leaps forward while kicking. If this move makes contact with an enemy or obstacle, Dodrio leaps over it, stunning enemies by 0.5s, and stomps the ground when landing, dealing damage to enemies in the area-of-effect, slowing by 25% for 2s, and the sprint gauge charges by 75%. If this move makes contact with an enemy, that enemy is stunned briefly from getting kicked in the head and this move's cooldown is reduced by 3s.\n\nUpgrade (Level 13): Enemies in the area of the landing are also stunned for 0.6s."
+          "descriptionAdvanced": "Dodrio leaps forward while kicking. If this move makes contact with an enemy or obstacle, Dodrio leaps over it, stunning enemies by 0.5s, and stomps the ground when landing, dealing damage to enemies in the area-of-effect, slowing by 25% for 2s, and the sprint gauge charges by 75%. If this move makes contact with an enemy, that enemy is stunned briefly from getting kicked in the head and this move's cooldown is reduced by 3s.\n\nUpgrade (Level 13): Enemies in the area of the landing are also stunned for 0.6s.",
+          "videoAsset": "/assets/skills/Dodrio/Jump+Kick.mp4"
         },
         {
           "id": "triple-trample",
@@ -15233,7 +15295,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Dodrio/Triple+Trample.png",
           "descriptionAdvanced": "Dodrio runs to a designated location. If Dodrio makes contact with an enemy while running, they are dealt damage and thrown into the air for 1s. When Dodrio arrives at the designated location, Dodrio gains 25% increased Attack and loses 5% Sp. Attack for 3s, is granted a 10% Max HP shield for 3s, and the sprint gauge charges faster for 6s. Damage dealt at the designated location is affected by the Attack bonus. Dodrio is unstoppable during this move.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Dodrio/Triple+Trample.mp4"
         }
       ],
       "passiveAbility": {
@@ -15670,7 +15733,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Dragapult/Astonish.png",
-          "descriptionAdvanced": "Lets out a sound blast in a forward direction. The shout explodes when it hits an enemy or after traveling a set distance, dealing damage in an area and decreasing enemy movement speed by 30% for 2s."
+          "descriptionAdvanced": "Lets out a sound blast in a forward direction. The shout explodes when it hits an enemy or after traveling a set distance, dealing damage in an area and decreasing enemy movement speed by 30% for 2s.",
+          "videoAsset": "/assets/skills/Dragapult/Astonish.mp4"
         },
         {
           "id": "dragon-breath",
@@ -15702,7 +15766,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user exhales a mighty gust in the designated direction, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 30% for 2s. The gust leaves the ground burning for 3s, dealing damage to opposing Pokémon in the area of effect every 0.5s (up to 7 times) and decreasing their movement speed by 30% for 2s.\n\nIf this move is used while the user is flying with Dragon Dance, the mighty gust is exhaled along Dragon Dance's flight path instead, with the same effects; the burning ground can hit up to 9 times.\n\nUpgrade (Level 13): Increases the damage of this move and the burning ground; strengthens the movement speed decrease to 45%."
+          "descriptionAdvanced": "The user exhales a mighty gust in the designated direction, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 30% for 2s. The gust leaves the ground burning for 3s, dealing damage to opposing Pokémon in the area of effect every 0.5s (up to 7 times) and decreasing their movement speed by 30% for 2s.\n\nIf this move is used while the user is flying with Dragon Dance, the mighty gust is exhaled along Dragon Dance's flight path instead, with the same effects; the burning ground can hit up to 9 times.\n\nUpgrade (Level 13): Increases the damage of this move and the burning ground; strengthens the movement speed decrease to 45%.",
+          "videoAsset": "/assets/skills/Dragapult/Dragon+Breath.mp4"
         },
         {
           "id": "shadow-ball",
@@ -15741,7 +15806,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user hurls a shadowy blob in the designated direction, damaging opposing Pokémon hit and applying a marker with 4 parts to them for 5s; then dashes in the chosen direction forward. When the user hits a marked target, one part of the marker is consumed to deal additional damage. The fourth part of the mark deals increased additional damage and removes the mark when consumed, and the user restores 20% max HP.\n\nUpgrade (Level 13): Increases the damage of this move and the additional damage from marks."
+          "descriptionAdvanced": "The user hurls a shadowy blob in the designated direction, damaging opposing Pokémon hit and applying a marker with 4 parts to them for 5s; then dashes in the chosen direction forward. When the user hits a marked target, one part of the marker is consumed to deal additional damage. The fourth part of the mark deals increased additional damage and removes the mark when consumed, and the user restores 20% max HP.\n\nUpgrade (Level 13): Increases the damage of this move and the additional damage from marks.",
+          "videoAsset": "/assets/skills/Dragapult/Shadow+Ball.mp4"
         },
         {
           "id": "quick-attack",
@@ -15756,7 +15822,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Dragapult/Quick+Attack.png",
-          "descriptionAdvanced": "Dashes in the designated direction, increasing basic attack speed by 40% for 2s."
+          "descriptionAdvanced": "Dashes in the designated direction, increasing basic attack speed by 40% for 2s.",
+          "videoAsset": "/assets/skills/Dragapult/Quick+Attack.mp4"
         },
         {
           "id": "dragon-dance",
@@ -15788,7 +15855,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user prepares a circular flight path in the designated direction, then moves into a direction either side to fly on the path; the flight path takes 3.5s to complete. While flying, the user increases their basic attack speed by 200% and they continuously use auto attacks, dealing 10% reduced damage to opposing Pokémon hit. If this move is used again while the user is flying, the user stops flying, becomes briefly invincible and dashes a short distance forward. If the user knocks out a Pokémon from the opposing team, this move's cooldown is reset. If the user assists in knocking out a Pokémon from the opposing team instead, this move's cooldown is reduced by 50%.\n\nWhen this move is used, Dragon Breath's cooldown is reset.\n\nUpgrade (Level 11): While the user is flying, auto attacks restore the user's HP for an additional 25% of damage dealt."
+          "descriptionAdvanced": "The user prepares a circular flight path in the designated direction, then moves into a direction either side to fly on the path; the flight path takes 3.5s to complete. While flying, the user increases their basic attack speed by 200% and they continuously use auto attacks, dealing 10% reduced damage to opposing Pokémon hit. If this move is used again while the user is flying, the user stops flying, becomes briefly invincible and dashes a short distance forward. If the user knocks out a Pokémon from the opposing team, this move's cooldown is reset. If the user assists in knocking out a Pokémon from the opposing team instead, this move's cooldown is reduced by 50%.\n\nWhen this move is used, Dragon Breath's cooldown is reset.\n\nUpgrade (Level 11): While the user is flying, auto attacks restore the user's HP for an additional 25% of damage dealt.",
+          "videoAsset": "/assets/skills/Dragapult/Dragon+Dance.mp4"
         },
         {
           "id": "phantom-force",
@@ -15805,7 +15873,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user enters stealth for up to 6s or until using an attack, increasing their movement speed by 30% and increasing the boosted basic attack gauge by 1 every 1s. When the user exits stealth, the user's basic attack speed is increased by 85% for 3s.\n\nWhen this move is learned, if the user knocks out a Pokémon from the opposing team, this move's cooldown is reset and the user's Attack is increased by 8 until the end of the battle (up to 10 times; maximum 80 bonus Attack).\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.5s per opposing Pokémon hit by the user's auto attacks."
+          "descriptionAdvanced": "The user enters stealth for up to 6s or until using an attack, increasing their movement speed by 30% and increasing the boosted basic attack gauge by 1 every 1s. When the user exits stealth, the user's basic attack speed is increased by 85% for 3s.\n\nWhen this move is learned, if the user knocks out a Pokémon from the opposing team, this move's cooldown is reset and the user's Attack is increased by 8 until the end of the battle (up to 10 times; maximum 80 bonus Attack).\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.5s per opposing Pokémon hit by the user's auto attacks.",
+          "videoAsset": "/assets/skills/Dragapult/Phantom+Force.mp4"
         },
         {
           "id": "dreep-and-destroy",
@@ -15829,7 +15898,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Dragapult/Dreep+and+Destroy.png",
           "descriptionAdvanced": "The user launches two Dreepy at up to 2 different opposing Pokémon in range, damaging them and dealing additional missing HP damage to each target. If there is only one target in range, the second Dreepy deals 30% of the full damage to the target. A maximum of 2 uses can be kept in reserve for this Unite Move; there is a 2s cooldown between uses for this move.\n\n30% of Damage\n\nAgainst wild Pokémon: additional missing HP damage is capped at 1200.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Dragapult/Dreep+and+Destroy.mp4"
         }
       ],
       "passiveAbility": {
@@ -16211,7 +16281,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Dragonite/Twister.png",
           "descriptionAdvanced": "Creates a twister and releases it in the designated direction, dealing damage to enemies hit and decreases their movement speed by 50% for 1s.",
-          "gifAsset": "/assets/skills/Dragonite/Twister.webp"
+          "gifAsset": "/assets/skills/Dragonite/Twister.webp",
+          "videoAsset": "/assets/skills/Dragonite/Twister.mp4"
         },
         {
           "id": "dragon-dance",
@@ -16229,7 +16300,8 @@
           "moveType": "Dash",
           "upgradeLevel": 5,
           "descriptionAdvanced": "Dash in a designated direction, alternating each use between a left arc, right arc and a direct dash. After using this move, grant a buff increasing attack speed of the next 3 auto attacks by 80% for 4.5s, increasing movement speed by 30% for 1s, increasing Attack by 10% (capping at 30%), as well as increasing the stage of Hyper Beam. This buff stacks up to 3 times, and the duration is reset to full on reuse. All stacks are removed after a few seconds. Auto attacks reduce the cooldown of this ability by 1s.\n\nUpgrade (Level 11): Further increases Dragonite's movement speed by 10% for 4.5s if there are enemies nearby when the dance ends.",
-          "gifAsset": "/assets/skills/Dragonite/Dragon+Dance.webp"
+          "gifAsset": "/assets/skills/Dragonite/Dragon+Dance.webp",
+          "videoAsset": "/assets/skills/Dragonite/Dragon+Dance.mp4"
         },
         {
           "id": "extreme-speed",
@@ -16255,7 +16327,8 @@
           "moveType": "Hindrance",
           "upgradeLevel": 5,
           "descriptionAdvanced": "Dash toward the designated enemy, damaging and slowing all enemies in a small radius around the target upon impact by 50% for 2s, throwing the primary target and shoving others away.  Using this move resets the cooldown of Multiscale.\n\nUpgrade (Level 11): If Dragonite's movement speed is currently decreased when this move is used, that movement speed decrease is negated before the move is used.",
-          "gifAsset": "/assets/skills/Dragonite/Extreme+Speed.webp"
+          "gifAsset": "/assets/skills/Dragonite/Extreme+Speed.webp",
+          "videoAsset": "/assets/skills/Dragonite/Extreme+Speed.mp4"
         },
         {
           "id": "dragon-breath",
@@ -16279,7 +16352,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Dragonite/Dragon+Breath.png",
           "descriptionAdvanced": "Exhale a mighty gust in the designated direction. If this move hits an enemy, Dragonite's next attack becomes a boosted attack.",
-          "gifAsset": "/assets/skills/Dragonite/Dragon+Breath.webp"
+          "gifAsset": "/assets/skills/Dragonite/Dragon+Breath.webp",
+          "videoAsset": "/assets/skills/Dragonite/Dragon+Breath.mp4"
         },
         {
           "id": "hyper-beam",
@@ -16326,7 +16400,8 @@
           "moveType": "Ranged",
           "upgradeLevel": 8,
           "descriptionAdvanced": "Fires a beam of energy toward the targeted enemy after a delay, dealing damage to all enemies that it hits, as well as additional damage based on their Max HP. The move changes Stages based on the number of stacks of Dragon Dance that Dragonite has, from 0 to 3. The max HP damage is 0%/6%/12%/18%, determined by the current Stage. Dragonite cannot act while releasing the beam.\n\nAgainst Wild Pokémon: The additional damage from max HP is capped at 600/1200/1800/2400 depending on the stage.\n\nUpgrade (Level 13): Reduces damage taken by 50% while charging this move.",
-          "gifAsset": "/assets/skills/Dragonite/Hyper+Beam.webp"
+          "gifAsset": "/assets/skills/Dragonite/Hyper+Beam.webp",
+          "videoAsset": "/assets/skills/Dragonite/Hyper+Beam.mp4"
         },
         {
           "id": "outrage",
@@ -16359,7 +16434,8 @@
           "moveType": "Melee",
           "upgradeLevel": 8,
           "descriptionAdvanced": "Dragonite stomps the ground, dealing damage to enemies in an area around Dragonite with the bonus effect of the last Boosted Attack that was used. Additionally, Dragonite gains a buff for 5.5s, increasing auto attack speed by 35% for 5.5s, converting all attacks during the duration of Outrage into melee Boosted Attacks, and alternating through the water, electric, and fire Boosted Attacks in order. When the buff ends, Dragonite is stunned for .7s.\n\nUpgrade (Level 13): Reduce the duration of hindrances inflicted on Dragonite while rampaging by 40% for 5.5s.",
-          "gifAsset": "/assets/skills/Dragonite/Outrage.webp"
+          "gifAsset": "/assets/skills/Dragonite/Outrage.webp",
+          "videoAsset": "/assets/skills/Dragonite/Outrage.mp4"
         },
         {
           "id": "draco-impact",
@@ -16384,7 +16460,8 @@
           "iconAsset": "/assets/skills/Dragonite/Draco+Impact.png",
           "descriptionAdvanced": "Briefly fly up in the air, becoming untargetable, before crashing down, approximately 2s after activating, with several comets on a designated area, dealing damage and throwing enemies in the area for 0.5s. The farther Dragonite flies, the more the Unite gauge is consumed (50% at min distance and 100% at max). Dragonite is unstoppable while using this move.",
           "upgradeLevel": 9,
-          "gifAsset": "/assets/skills/Dragonite/Draco+Impact.webp"
+          "gifAsset": "/assets/skills/Dragonite/Draco+Impact.webp",
+          "videoAsset": "/assets/skills/Dragonite/Draco+Impact.mp4"
         }
       ],
       "passiveAbility": {
@@ -16763,7 +16840,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Duraludon/Laser+Focus.png",
-          "descriptionAdvanced": "Reduces damage received by 20% for .6s. Afterward, Duraludon's auto attacks deal additional damage to enemies hit. This buff expires after 8s or after 3 auto attacks."
+          "descriptionAdvanced": "Reduces damage received by 20% for .6s. Afterward, Duraludon's auto attacks deal additional damage to enemies hit. This buff expires after 8s or after 3 auto attacks.",
+          "videoAsset": "/assets/skills/Duraludon/Laser+Focus.mp4"
         },
         {
           "id": "flash-cannon",
@@ -16801,7 +16879,8 @@
           "iconAsset": "/assets/skills/Duraludon/Flash+Cannon.png",
           "isUpgrade": true,
           "moveType": "Buff",
-          "upgradeLevel": 5
+          "upgradeLevel": 5,
+          "videoAsset": "/assets/skills/Duraludon/Flash+Cannon.mp4"
         },
         {
           "id": "dragon-pulse",
@@ -16826,7 +16905,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Duraludon begins charging power, slowing itself by 30%. The longer the move is charged the greater the damage and area of effect. After learning this move a mark will be applied to any enemy Duraludon damages with auto attacks and moves. Each tick of damage from Duraludon (boosted attack counts as 1 instance) will apply 1 mark up to a maximum of 5 orbs and 1 ring. This mark lasts for 5s, is refreshed when Duraludon deals damage to the marked enemy and can be cleansed. When Dragon Pulse hits a marked enemy, the marks are consumed and additional damage is dealt for each mark. Opposing Duraludon's can consume the user's marks but will not gain the additional damage. Furthermore, if this move knocks out an enemy, the cooldown is reduced by 30% and Duraludon receives a buff for 8s or 3 auto attacks. While this buff is active, auto attacks deal additional damage and reduce this moves cooldown by 1.5s each.\n\nUpgrade (Level 11): Also restores 8% of Duraludon's max HP if this move knocks out an enemy player."
+          "descriptionAdvanced": "Duraludon begins charging power, slowing itself by 30%. The longer the move is charged the greater the damage and area of effect. After learning this move a mark will be applied to any enemy Duraludon damages with auto attacks and moves. Each tick of damage from Duraludon (boosted attack counts as 1 instance) will apply 1 mark up to a maximum of 5 orbs and 1 ring. This mark lasts for 5s, is refreshed when Duraludon deals damage to the marked enemy and can be cleansed. When Dragon Pulse hits a marked enemy, the marks are consumed and additional damage is dealt for each mark. Opposing Duraludon's can consume the user's marks but will not gain the additional damage. Furthermore, if this move knocks out an enemy, the cooldown is reduced by 30% and Duraludon receives a buff for 8s or 3 auto attacks. While this buff is active, auto attacks deal additional damage and reduce this moves cooldown by 1.5s each.\n\nUpgrade (Level 11): Also restores 8% of Duraludon's max HP if this move knocks out an enemy player.",
+          "videoAsset": "/assets/skills/Duraludon/Dragon+Pulse.mp4"
         },
         {
           "id": "metal-claw",
@@ -16849,7 +16929,8 @@
           ],
           "moveType": "Hindrance",
           "iconAsset": "/assets/skills/Duraludon/Metal+Claw.png",
-          "descriptionAdvanced": "Send sharp claws forward; dealing damage to enemies hit and decreasing their movement speed by 30% for 2s. After this move is used, Duraludon's next auto attack becomes a boosted attack."
+          "descriptionAdvanced": "Send sharp claws forward; dealing damage to enemies hit and decreasing their movement speed by 30% for 2s. After this move is used, Duraludon's next auto attack becomes a boosted attack.",
+          "videoAsset": "/assets/skills/Duraludon/Metal+Claw.mp4"
         },
         {
           "id": "dragon-tail",
@@ -16874,7 +16955,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Duraludon shoves enemies for 0.5s and moves itself backward a short distance. The next auto attack becomes a boosted attack. This move ignores obstacles. A maximum of 2 uses can be kept in reserve for this move. There is a 2.5s cooldown between uses.\n\nUpgrade (Level 13): Apply a mark for 5s that is consumed the next time Duraludon damages them, dealing additional damage."
+          "descriptionAdvanced": "Duraludon shoves enemies for 0.5s and moves itself backward a short distance. The next auto attack becomes a boosted attack. This move ignores obstacles. A maximum of 2 uses can be kept in reserve for this move. There is a 2.5s cooldown between uses.\n\nUpgrade (Level 13): Apply a mark for 5s that is consumed the next time Duraludon damages them, dealing additional damage.",
+          "videoAsset": "/assets/skills/Duraludon/Dragon+Tail.mp4"
         },
         {
           "id": "stealth-rock",
@@ -16906,7 +16988,8 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Hurl a stone at the designated area, creating an invisible field of stones for 60s or until triggered. The field deals damage over time to enemies in the area of effect and decreases their movement speed by 25% for 2s, stacking up to 4 times. If the hurled stone hits an enemy before the designated area, the field will instead be centered on where the stone hit that Pokémon. Once an enemy takes damage from the field, it will become visible to all enemies. When the field becomes visible this way, Duraludon is granted a shield for 3s, can stack a maximum of 5 times, and the duration is refreshed upon gaining a stack. If an enemy takes damage from this move 2 times, that enemy becomes unable to move for 1s. After this move is used, Duraludon's next auto attack becomes a boosted attack. A maximum of 2 uses can be kept in reserve for this move. There is a 1s cooldown between uses.\n\nA maximum of 2 Stealth Rocks may be on the game field at one time, but 2 more can still be kept in reserve.\n\nUpgrade (Level 13): Stores 3 uses in reserve instead."
+          "descriptionAdvanced": "Hurl a stone at the designated area, creating an invisible field of stones for 60s or until triggered. The field deals damage over time to enemies in the area of effect and decreases their movement speed by 25% for 2s, stacking up to 4 times. If the hurled stone hits an enemy before the designated area, the field will instead be centered on where the stone hit that Pokémon. Once an enemy takes damage from the field, it will become visible to all enemies. When the field becomes visible this way, Duraludon is granted a shield for 3s, can stack a maximum of 5 times, and the duration is refreshed upon gaining a stack. If an enemy takes damage from this move 2 times, that enemy becomes unable to move for 1s. After this move is used, Duraludon's next auto attack becomes a boosted attack. A maximum of 2 uses can be kept in reserve for this move. There is a 1s cooldown between uses.\n\nA maximum of 2 Stealth Rocks may be on the game field at one time, but 2 more can still be kept in reserve.\n\nUpgrade (Level 13): Stores 3 uses in reserve instead.",
+          "videoAsset": "/assets/skills/Duraludon/Stealth+Rock.mp4"
         },
         {
           "id": "revolving-ruin",
@@ -16944,7 +17027,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Duraludon/Revolving+Ruin.png",
           "descriptionAdvanced": "Fire a beam of light at the ground in a sweeping circle around Duraludon, becoming unstoppable during the rotation. If this beam hits an enemy, it deals damage to them, grants Duraludon a shield and increases Attack by 8% for 8s. Both the shield effect and the Attack increase are strengthened for each enemy that is hit by the beam, stacking up to 5 times. Damage is dealt to any enemy in the area of effect after the beam of light is fired and enemies are shoved for 0.5s. A burning ring is also left where the beam of light touched the ground for 10s; enemies that touch this ring take additional damage every 0.5s and have their movement speed decreased by 50% for 1s. Subsequent hits after the first have the Attack stat bonus from this move applied to them.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Duraludon/Revolving+Ruin.mp4"
         }
       ],
       "passiveAbility": {
@@ -17384,7 +17468,8 @@
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Eldegoss/Leafage.png",
           "descriptionAdvanced": "The user shoots a bundle of leaves in the designated direction which explodes on the first opposing Pokémon hit or after traveling max distance, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 40% for 2s.",
-          "gifAsset": "/assets/skills/Eldegoss/Leafage.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Leafage.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Leafage.mp4"
         },
         {
           "id": "pollen-puff",
@@ -17417,7 +17502,8 @@
           "moveType": "Ranged",
           "upgradeLevel": 4,
           "descriptionAdvanced": "The user throws a Pollen Puff at the designated location which attaches to the nearest Pokémon within 0.5s. The Pollen Puff explodes 2s after attaching to a Pokémon, restoring the HP of the user's teammates and damaging opposing Pokémon in the area of effect.\n\nThe Pollen Puff explodes on its own after 1s with the same effects if it doesn't attach to any Pokémon within the first 0.5s of landing.\n\nUpgrade (Level 10): If the Pollen Puff attaches to a teammate, it reduces the damage that teammate receives by 15% for 2s before it explodes. If the Pollen Puff attaches to any Pokémon, opposing Pokémon that come in contact with the target receive damage over time every 0.5s before the Pollen Puff explodes.",
-          "gifAsset": "/assets/skills/Eldegoss/Pollen+Puff.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Pollen+Puff.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Pollen+Puff.mp4"
         },
         {
           "id": "leaf-tornado",
@@ -17443,7 +17529,8 @@
           "moveType": "Ranged",
           "upgradeLevel": 4,
           "descriptionAdvanced": "The user launches a tornado of sharp leaves in the designated direction, damaging opposing Pokémon hit by the tornado and creating a path in its wake that lasts for 4s. Teammates on the path have their movement speed increased by 55%, lingering for 1.5s after leaving the path. When the tornado reaches max distance, the tornado damages opposing Pokémon a second time.\n\n25% of the damage of the first hit.\n\nUpgrade (Level 10): Applies a debuff to opposing Pokémon hit by the tornado that causes auto attacks to deal no damage for 2.5s.",
-          "gifAsset": "/assets/skills/Eldegoss/Leaf+Tornado.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Leaf+Tornado.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Leaf+Tornado.mp4"
         },
         {
           "id": "synthesis",
@@ -17467,7 +17554,8 @@
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Eldegoss/Synthesis.png",
           "descriptionAdvanced": "The user uses sunlight to heal themself and teammates in the area of effect.",
-          "gifAsset": "/assets/skills/Eldegoss/Synthesis.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Synthesis.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Synthesis.mp4"
         },
         {
           "id": "cotton-guard",
@@ -17493,7 +17581,8 @@
           "moveType": "Buff",
           "upgradeLevel": 6,
           "descriptionAdvanced": "The user grants teammates in the area of effect cotton shields for 3s. After 3s, any cotton leftover is used to restore the HP of teammates with cotton shields for 15% of the remaining shield value.\n\nUpgrade (Level 12): Increases the movement speed of teammates in the area of effect by 30% for 2s.",
-          "gifAsset": "/assets/skills/Eldegoss/Cotton+Guard.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Cotton+Guard.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Cotton+Guard.mp4"
         },
         {
           "id": "cotton-spore",
@@ -17519,7 +17608,8 @@
           "moveType": "Area",
           "upgradeLevel": 6,
           "descriptionAdvanced": "The user gathers spores around them for 2s, increasing their movement speed by 40% for 2s. The spores burst at the end, damaging opposing Pokémon in the area of effect, throwing them for 0.5s and decreasing their movement speed by 40% for 2s when it hits.\n\nCotton Cloud Crash can be used during this move, ending the move early and making the spores burst immediately.\n\nUpgrade (Level 12): Increases the user's Defense and Sp. Def by 50% for 2s.",
-          "gifAsset": "/assets/skills/Eldegoss/Cotton+Spore.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Cotton+Spore.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Cotton+Spore.mp4"
         },
         {
           "id": "cotton-cloud-crash",
@@ -17551,7 +17641,8 @@
           "iconAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.png",
           "descriptionAdvanced": "The user becomes invincible as they float into the air for up to 3s, moving freely over obstacles and increasing their movement speed by 10% while in the air. If used again or after 3s, the user pounds the ground, restoring the HP of the user and teammates in the area of effect, damaging opposing Pokémon in the area of effect and shoving opposing Pokémon hit for 0.7s.",
           "upgradeLevel": 9,
-          "gifAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.webp"
+          "gifAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.webp",
+          "videoAsset": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.mp4"
         }
       ],
       "passiveAbility": {
@@ -18118,7 +18209,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Empoleon/Water+Gun.png",
-          "descriptionAdvanced": "The user blasts a forceful shot of water in the designated direction, dealing damage to opposing Pokémon it hits. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move deals increased damage."
+          "descriptionAdvanced": "The user blasts a forceful shot of water in the designated direction, dealing damage to opposing Pokémon it hits. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move deals increased damage.",
+          "videoAsset": "/assets/skills/Empoleon/Water+Gun.mp4"
         },
         {
           "id": "hydro-cannon",
@@ -18157,7 +18249,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user launches a watery blast in the designated direction, dealing damage to opposing Pokémon it hits and stunning them for 0.5s. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move leaves behind a whirlpool for 3s which deals damage to opposing Pokémon, and heals the user when they stand in it, every 0.5s.\n\nUpgrade (Level 13): Reduces this moves cooldown by 30% of the remaining cooldown when it hits Pokémon from the opposing team."
+          "descriptionAdvanced": "The user launches a watery blast in the designated direction, dealing damage to opposing Pokémon it hits and stunning them for 0.5s. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move leaves behind a whirlpool for 3s which deals damage to opposing Pokémon, and heals the user when they stand in it, every 0.5s.\n\nUpgrade (Level 13): Reduces this moves cooldown by 30% of the remaining cooldown when it hits Pokémon from the opposing team.",
+          "videoAsset": "/assets/skills/Empoleon/Hydro+Cannon.mp4"
         },
         {
           "id": "whirlpool",
@@ -18196,7 +18289,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user becomes unstoppable for 1s as they create a violent swirling whirlpool around themself, dealing damage to opposing Pokémon every 0.25s up to 4 hits. The user's HP is restored by 40% of the damage dealt against Pokémon on the opposing team, and by 20% against wild Pokémon. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will throw opposing Pokémon for 0.6s and the user will slash once at the end of the move in the designated direction extending the unstoppable duration to 1.33s. The healing of the move is increased to 50% of the damage dealt against Pokémon on the opposing team, and 25% against wild Pokémon.\n\nUpgrade (Level 13): Increased damage."
+          "descriptionAdvanced": "The user becomes unstoppable for 1s as they create a violent swirling whirlpool around themself, dealing damage to opposing Pokémon every 0.25s up to 4 hits. The user's HP is restored by 40% of the damage dealt against Pokémon on the opposing team, and by 20% against wild Pokémon. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will throw opposing Pokémon for 0.6s and the user will slash once at the end of the move in the designated direction extending the unstoppable duration to 1.33s. The healing of the move is increased to 50% of the damage dealt against Pokémon on the opposing team, and 25% against wild Pokémon.\n\nUpgrade (Level 13): Increased damage.",
+          "videoAsset": "/assets/skills/Empoleon/Whirlpool.mp4"
         },
         {
           "id": "peck",
@@ -18219,7 +18313,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Empoleon/Peck.png",
-          "descriptionAdvanced": "The user jabs its sharply pointed beak in the designated direction, dealing damage to opposing Pokémon it hits. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move applies a 40% slow for 2s."
+          "descriptionAdvanced": "The user jabs its sharply pointed beak in the designated direction, dealing damage to opposing Pokémon it hits. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move applies a 40% slow for 2s.",
+          "videoAsset": "/assets/skills/Empoleon/Peck.mp4"
         },
         {
           "id": "metal-claw",
@@ -18251,7 +18346,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Has the user charge towards a designated target, dealing damage to opposing Pokémon with wings of steel and shoving them for 0.25s. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move grants the user a shield for 3s. This shield will not stack with itself.\n\nUpgrade (Level 11): Increased the shield from Torrent."
+          "descriptionAdvanced": "Has the user charge towards a designated target, dealing damage to opposing Pokémon with wings of steel and shoving them for 0.25s. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move grants the user a shield for 3s. This shield will not stack with itself.\n\nUpgrade (Level 11): Increased the shield from Torrent.",
+          "videoAsset": "/assets/skills/Empoleon/Metal+Claw.mp4"
         },
         {
           "id": "aqua-jet",
@@ -18276,7 +18372,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Has the user lunge at blinding speed in the designated direction, dealing damage to opposing Pokémon it hits and increasing the user's basic attack speed by 40% for 5s. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will also lower the special defense of those hit by 60% for 3s.\n\nUpgrade (Level 11): Lowers the base cooldown of this move by 1s."
+          "descriptionAdvanced": "Has the user lunge at blinding speed in the designated direction, dealing damage to opposing Pokémon it hits and increasing the user's basic attack speed by 40% for 5s. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will also lower the special defense of those hit by 60% for 3s.\n\nUpgrade (Level 11): Lowers the base cooldown of this move by 1s.",
+          "videoAsset": "/assets/skills/Empoleon/Aqua+Jet.mp4"
         },
         {
           "id": "sovereign-slide",
@@ -18300,7 +18397,8 @@
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Empoleon/Sovereign+Slide.png",
           "descriptionAdvanced": "Has the user slide at high speed in the designated direction and form a whirlpool on impact, or when the maximum distance is reached, dealing damage to opposing Pokémon it hits and throwing them for 1s. The whirlpool remains centered on the user for 7s and applies a 50% slow to opposing Pokémon in the area. The slow lasts 1s when opposing Pokémon leave the area. Empoleon is unstoppable throughout this move. The longer the user slides, the faster the recovery to perform other actions.\n\nIncreases Torrent gauge by 10/15/20 when the move connects. While the whirlpool is active the amount of Torrent gauge gained per second is increased to 12/18/24.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Empoleon/Sovereign+Slide.mp4"
         }
       ],
       "passiveAbility": {
@@ -18689,7 +18787,8 @@
           ],
           "moveType": "Ranged",
           "iconAsset": "/assets/skills/Espeon/Swift.png",
-          "descriptionAdvanced": "Eevee launches three stars at target location. Stars start in a horizontal line perpendicular to Eevee's facing. Stars continue to fly in the direction once past the target location until the maximum range is reached. When an enemy is hit by a star, subsequent stars deal 70% less damage."
+          "descriptionAdvanced": "Eevee launches three stars at target location. Stars start in a horizontal line perpendicular to Eevee's facing. Stars continue to fly in the direction once past the target location until the maximum range is reached. When an enemy is hit by a star, subsequent stars deal 70% less damage.",
+          "videoAsset": "/assets/skills/Espeon/Swift.mp4"
         },
         {
           "id": "psyshock",
@@ -18721,7 +18820,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Espeon materializes psychic projectiles and launches them at a designated location; dealing damage to enemies hit by the projectiles and decreasing their movement speed for each projectile hit by 15% for 3s (maximum 75%). Orbs start in a horizontal line perpendicular to Espeon's facing and continue flying in the  designated direction until the maximum range of the move. Targets hit by all five projectiles are stunned for 1.25s. When an enemy is hit by a projectile, subsequent projectiles deal 70% less damage. When Psyshock is enhanced via Future Sight reset, it launches stronger psychic projectiles at a designated location. These projectiles at their point of convergence cause an explosion, dealing damage to enemies in the area-of-effect. There is no damage increase.\n\nUpgrade (Level 10): Increase the speed at which projectiles travel."
+          "descriptionAdvanced": "Espeon materializes psychic projectiles and launches them at a designated location; dealing damage to enemies hit by the projectiles and decreasing their movement speed for each projectile hit by 15% for 3s (maximum 75%). Orbs start in a horizontal line perpendicular to Espeon's facing and continue flying in the  designated direction until the maximum range of the move. Targets hit by all five projectiles are stunned for 1.25s. When an enemy is hit by a projectile, subsequent projectiles deal 70% less damage. When Psyshock is enhanced via Future Sight reset, it launches stronger psychic projectiles at a designated location. These projectiles at their point of convergence cause an explosion, dealing damage to enemies in the area-of-effect. There is no damage increase.\n\nUpgrade (Level 10): Increase the speed at which projectiles travel.",
+          "videoAsset": "/assets/skills/Espeon/Psyshock.mp4"
         },
         {
           "id": "stored-power",
@@ -18753,7 +18853,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Unleash blasts of psychic power at random enemies within an area; dealing damage to enemies hit and decreasing their movement speed from each projectile hit by 10% for 2s (maximum 50%). Espeon stores one blast of psychic power every 2s (unaffected by cooldown reduction), or after hitting an enemy with a boosted attack (gaining 1 stored blast per enemy hit). Up to five blasts can be stored at once. After this move is used, Espeon's movement speed is increased by 70% for 1.2s. Targets hit by a psychic blast will take 70% less damage from subsequent hits. When Stored Power is enhanced via Future Sight reset, it unleashes an increased number of psychic blasts (8 total) and restores Espeon's HP by 150 per blast.\n\nUpgrade (Level 10): Also deals additional damage to enemies below 50% max HP."
+          "descriptionAdvanced": "Unleash blasts of psychic power at random enemies within an area; dealing damage to enemies hit and decreasing their movement speed from each projectile hit by 10% for 2s (maximum 50%). Espeon stores one blast of psychic power every 2s (unaffected by cooldown reduction), or after hitting an enemy with a boosted attack (gaining 1 stored blast per enemy hit). Up to five blasts can be stored at once. After this move is used, Espeon's movement speed is increased by 70% for 1.2s. Targets hit by a psychic blast will take 70% less damage from subsequent hits. When Stored Power is enhanced via Future Sight reset, it unleashes an increased number of psychic blasts (8 total) and restores Espeon's HP by 150 per blast.\n\nUpgrade (Level 10): Also deals additional damage to enemies below 50% max HP.",
+          "videoAsset": "/assets/skills/Espeon/Stored+Power.mp4"
         },
         {
           "id": "growl",
@@ -18776,7 +18877,8 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Espeon/Growl.png",
-          "descriptionAdvanced": "Growl at a designated enemy; dealing damage and decreasing their movement speed by 30% for 2s."
+          "descriptionAdvanced": "Growl at a designated enemy; dealing damage and decreasing their movement speed by 30% for 2s.",
+          "videoAsset": "/assets/skills/Espeon/Growl.mp4"
         },
         {
           "id": "psybeam",
@@ -18801,7 +18903,8 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Fires a peculiar ray in the designated direction. If the beam hits an enemy, it will then split beyond the first enemy hit and deal damage to other enemies in range. The initial enemy hit and these split rays deal more damage based on the max HP of the first enemy hit by the ray. If the first enemy hit by the ray is slowed or is stunned, those same effects will be applied to the enemies hit by the split rays. The split rays follow Espeons relative facing direction and will refract at a maximum of a 90 degree angle. Distance from initial target to split ray hit is 75% of the max range. Stun copied duration is the maximum duration of the stun causing the initial Pokémon to be stunned.\n\n6% max HP of the first enemy hit as additional damage.\n\nFor the split ray, the damage component from the initial target's max HP damage is capped at 1000 against Wild Pokémon and capped at 2000 against Player Pokémon.\n\nUpgrade (Level 12): Deals additional damage to enemies that are unable to act. If Psybeam hits an unable to act initial target, the split rays will also deal the additional damage to other enemies hit and leaves them unable to act."
+          "descriptionAdvanced": "Fires a peculiar ray in the designated direction. If the beam hits an enemy, it will then split beyond the first enemy hit and deal damage to other enemies in range. The initial enemy hit and these split rays deal more damage based on the max HP of the first enemy hit by the ray. If the first enemy hit by the ray is slowed or is stunned, those same effects will be applied to the enemies hit by the split rays. The split rays follow Espeons relative facing direction and will refract at a maximum of a 90 degree angle. Distance from initial target to split ray hit is 75% of the max range. Stun copied duration is the maximum duration of the stun causing the initial Pokémon to be stunned.\n\n6% max HP of the first enemy hit as additional damage.\n\nFor the split ray, the damage component from the initial target's max HP damage is capped at 1000 against Wild Pokémon and capped at 2000 against Player Pokémon.\n\nUpgrade (Level 12): Deals additional damage to enemies that are unable to act. If Psybeam hits an unable to act initial target, the split rays will also deal the additional damage to other enemies hit and leaves them unable to act.",
+          "videoAsset": "/assets/skills/Espeon/Psybeam.mp4"
         },
         {
           "id": "future-sight",
@@ -18826,7 +18929,8 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Espeon locks-on to an enemy, dealing damage 2 seconds later in an area centered on the locked-on target. Deal more damage based on the locked-on targets missing HP. While locked-on to an enemy, Espeon's other moves will target that enemy whenever possible. If the center of Psyshock is within the area-of-effect of Future Sight when released, Psyshock will home in on the Future Sight affected target. Each time Espeon deals damage to a Future Sight locked-on target through Psyshock, Stored Power, auto attacks, Future Sight's cooldown is reduced by 0.8 seconds. If the locked-on target is an opponent, and is knocked out by Future Sight or by Espeon, then a single powered-up use of Psyshock or Stored Power becomes available for a short time.\n\n12% of enemy missing HP.\n\nFull Heal and other cleanses such as Blissey's Natural cure remove Future Sight. Against Wild Pokémon: The total damage is capped at 1800.\n\nUpgrade (Level 12): Espeon deals 15% additional damage to locked-on targets."
+          "descriptionAdvanced": "Espeon locks-on to an enemy, dealing damage 2 seconds later in an area centered on the locked-on target. Deal more damage based on the locked-on targets missing HP. While locked-on to an enemy, Espeon's other moves will target that enemy whenever possible. If the center of Psyshock is within the area-of-effect of Future Sight when released, Psyshock will home in on the Future Sight affected target. Each time Espeon deals damage to a Future Sight locked-on target through Psyshock, Stored Power, auto attacks, Future Sight's cooldown is reduced by 0.8 seconds. If the locked-on target is an opponent, and is knocked out by Future Sight or by Espeon, then a single powered-up use of Psyshock or Stored Power becomes available for a short time.\n\n12% of enemy missing HP.\n\nFull Heal and other cleanses such as Blissey's Natural cure remove Future Sight. Against Wild Pokémon: The total damage is capped at 1800.\n\nUpgrade (Level 12): Espeon deals 15% additional damage to locked-on targets.",
+          "videoAsset": "/assets/skills/Espeon/Future+Sight.mp4"
         },
         {
           "id": "psychic-solare",
@@ -18850,7 +18954,8 @@
           "moveType": "Area",
           "iconAsset": "/assets/skills/Espeon/Psychic+Solare.png",
           "descriptionAdvanced": "Espeon throws enemies in the area of effect into the air and suspends them using psychic power. After a delay, an explosion occurs that deals damage to all enemies in the area of effect and shoves them. Espeon is unstoppable during this move.",
-          "upgradeLevel": 8
+          "upgradeLevel": 8,
+          "videoAsset": "/assets/skills/Espeon/Psychic+Solare.mp4"
         }
       ],
       "passiveAbility": {
@@ -19345,7 +19450,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Falinks/Tackle.png",
-          "descriptionAdvanced": "Charge in the designated direction, dealing damage to enemies hit and shoving them. The user's next basic attack becomes a boosted attack."
+          "descriptionAdvanced": "Charge in the designated direction, dealing damage to enemies hit and shoving them. The user's next basic attack becomes a boosted attack.",
+          "videoAsset": "/assets/skills/Falinks/Tackle.mp4"
         },
         {
           "id": "megahorn",
@@ -19391,7 +19497,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Charge with its horns, dealing damage to opposing Pokémon it hits and throwing them in the air for 0.25s. Immediately afterward, strike with its horns again and gain a shield for 2.5s.\n\n6% Max HP\n\nTrooper damage becomes additional to Column formation hitting the same target.\n\nIn No Retreat formation: Falinks becomes hindrance resistant and charges power for 1s. It then strikes forward with its horns, dealing additional damage to opposing Pokémon it hits based on their max HP and gaining a shield for 2.5s. This version of the move has a 4s cd that is separate from the column version.\n\nUpgrade (Level 10): Increases the shield value."
+          "descriptionAdvanced": "Charge with its horns, dealing damage to opposing Pokémon it hits and throwing them in the air for 0.25s. Immediately afterward, strike with its horns again and gain a shield for 2.5s.\n\n6% Max HP\n\nTrooper damage becomes additional to Column formation hitting the same target.\n\nIn No Retreat formation: Falinks becomes hindrance resistant and charges power for 1s. It then strikes forward with its horns, dealing additional damage to opposing Pokémon it hits based on their max HP and gaining a shield for 2.5s. This version of the move has a 4s cd that is separate from the column version.\n\nUpgrade (Level 10): Increases the shield value.",
+          "videoAsset": "/assets/skills/Falinks/Megahorn.mp4"
         },
         {
           "id": "iron-head",
@@ -19430,7 +19537,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Attacks the designated area with its steel-hard heads, dealing damage and applying 50% slow for 1.5s to opposing Pokémon it hits, as well as granting itself a shield.\n\n10% Max HP\n\nIn No Retreat formation: The move's range is shortened but the area of effect is widened. Pokémon hit in the landing area are also knocked up and briefly stunned for 0.33s. After using this move, for the next 4 attacks, the user can attack while moving with the Brass and Troops all deal damage separately in front of them.\n\nUpgrade (Level 10): Iron Head and the Troopers returning deal an additional 2% max hp damage to enemies they hit, capped to 400."
+          "descriptionAdvanced": "Attacks the designated area with its steel-hard heads, dealing damage and applying 50% slow for 1.5s to opposing Pokémon it hits, as well as granting itself a shield.\n\n10% Max HP\n\nIn No Retreat formation: The move's range is shortened but the area of effect is widened. Pokémon hit in the landing area are also knocked up and briefly stunned for 0.33s. After using this move, for the next 4 attacks, the user can attack while moving with the Brass and Troops all deal damage separately in front of them.\n\nUpgrade (Level 10): Iron Head and the Troopers returning deal an additional 2% max hp damage to enemies they hit, capped to 400.",
+          "videoAsset": "/assets/skills/Falinks/Iron+Head.mp4"
         },
         {
           "id": "bulk-up",
@@ -19445,7 +19553,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Falinks/Bulk+Up.png",
-          "descriptionAdvanced": "Increases the user's Defense, Special Defense and Attack Speed by 25%, and Attack by 30% for 3s"
+          "descriptionAdvanced": "Increases the user's Defense, Special Defense and Attack Speed by 25%, and Attack by 30% for 3s",
+          "videoAsset": "/assets/skills/Falinks/Bulk+Up.mp4"
         },
         {
           "id": "no-retreat",
@@ -19498,7 +19607,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Switch to No Retreat formation while shoving enemies for 0.4s in front of Falinks and become unstoppable during the formation change for 0.5s. While in No Retreat formation, the user cannot change the direction they're facing, unless they use the other move. Falinks' movement speed when moving backward is slowed by 10%, but Attack is increased by 25% and damage taken from the front is reduced by 20%. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.\n\nWhile in No Retreat formation both the Brass and Troopers take 20% less damage from the front. The Brass' total damage reduction becomes 28%; the Trooper's total damage reduction becomes 92%.\n\nUpgrade (Level 12): Attack increase is increased to 40% and damage reduction from the front is increased to 30%."
+          "descriptionAdvanced": "Switch to No Retreat formation while shoving enemies for 0.4s in front of Falinks and become unstoppable during the formation change for 0.5s. While in No Retreat formation, the user cannot change the direction they're facing, unless they use the other move. Falinks' movement speed when moving backward is slowed by 10%, but Attack is increased by 25% and damage taken from the front is reduced by 20%. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.\n\nWhile in No Retreat formation both the Brass and Troopers take 20% less damage from the front. The Brass' total damage reduction becomes 28%; the Trooper's total damage reduction becomes 92%.\n\nUpgrade (Level 12): Attack increase is increased to 40% and damage reduction from the front is increased to 30%.",
+          "videoAsset": "/assets/skills/Falinks/No+Retreat.mp4"
         },
         {
           "id": "beat-up",
@@ -19537,7 +19647,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Has the user charge in the designated direction, dealing damage to enemies hit. The user then switches to Dispatch formation, sending out two Troopers toward enemies that were hit. The dispatched Troopers will continue to attack enemies, but they will return to the Brass after they either: take a set amount of damage, become separated from the Brass by more than a set distance, or after 5s. A maximum of 2 uses can be kept in reserve for this move with a 0.5s cooldown between each use.\n\nWhile in Dispatch formation, the Troopers sent out no longer have any damage resistance nor share damage taken with the Brass. Dispatched Troopers share the same stats as the Brass, except for HP.\n\nUpgrade (Level 12): Also restores HP when this move hits."
+          "descriptionAdvanced": "Has the user charge in the designated direction, dealing damage to enemies hit. The user then switches to Dispatch formation, sending out two Troopers toward enemies that were hit. The dispatched Troopers will continue to attack enemies, but they will return to the Brass after they either: take a set amount of damage, become separated from the Brass by more than a set distance, or after 5s. A maximum of 2 uses can be kept in reserve for this move with a 0.5s cooldown between each use.\n\nWhile in Dispatch formation, the Troopers sent out no longer have any damage resistance nor share damage taken with the Brass. Dispatched Troopers share the same stats as the Brass, except for HP.\n\nUpgrade (Level 12): Also restores HP when this move hits.",
+          "videoAsset": "/assets/skills/Falinks/Beat+Up.mp4"
         },
         {
           "id": "dust-devil-formation",
@@ -19561,7 +19672,8 @@
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Falinks/Dust+Devil+Formation.png",
           "descriptionAdvanced": "Has the five troopers run continuously around the Brass at great speed for 5s, dealing damage and slowing enemies hit by 20% for 1s. Falinks is unstoppable during the formation change for 0.25s. While this move is being used, damage taken by the troopers is reduced. While in Dust Devil formation the Troopers take 30% less damage making the Trooper's total damage reduction 93%.\n\nMoving counter to the rotation of the troopers will grant more hits against that target, and moving along the rotation will reduce the number of hits.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Falinks/Dust+Devil+Formation.mp4"
         }
       ],
       "passiveAbility": {
@@ -20001,7 +20113,8 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Feraligatr/Bite.png",
-          "descriptionAdvanced": "Empowers the next basic attack for up to 5s with extra damage, the user bites with its viciously sharp fangs dealing damage and slowing opposing Pokémon by 35% for 1.5s."
+          "descriptionAdvanced": "Empowers the next basic attack for up to 5s with extra damage, the user bites with its viciously sharp fangs dealing damage and slowing opposing Pokémon by 35% for 1.5s.",
+          "videoAsset": "/assets/skills/Feraligatr/Bite.mp4"
         },
         {
           "id": "crunch",
@@ -20040,7 +20153,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user cycles between 3 Fangs for up to 5s. When a Fang is chosen; empowers the next basic attack with extra damage, and a variety of effects based on the chosen Fang for up to 5s. After landing the empowered basic attack, the user's attack speed increases by 140% for 5s or 3 hits. After hitting an opposing Pokémon with a Fang, a mark is left for 5s. There are three marks, one for each Fang, the more marks there are the more damage Big Jaw Bite will deal, as well as refreshing the duration of the effects from the Fangs. Future uses of this move will cycle starting from the last effect chosen.\n\nDestructive Fangs (Yellow): deals increased damage and reduces the defense of opposing Pokémon by 30% for 5s when landing the empowered basic attack. Gluttonous Fangs (Red): after landing the empowered basic attack, for the next 5s basic attacks restore extra HP once per attack. Clamping Fangs (Purple): after landing the empowered basic attack; slows opposing Pokémon by 80% for 3s, decaying by 15% every 0.25s down to 20%.\n\nUpgrade (Level 11): Increases the damage of this move."
+          "descriptionAdvanced": "The user cycles between 3 Fangs for up to 5s. When a Fang is chosen; empowers the next basic attack with extra damage, and a variety of effects based on the chosen Fang for up to 5s. After landing the empowered basic attack, the user's attack speed increases by 140% for 5s or 3 hits. After hitting an opposing Pokémon with a Fang, a mark is left for 5s. There are three marks, one for each Fang, the more marks there are the more damage Big Jaw Bite will deal, as well as refreshing the duration of the effects from the Fangs. Future uses of this move will cycle starting from the last effect chosen.\n\nDestructive Fangs (Yellow): deals increased damage and reduces the defense of opposing Pokémon by 30% for 5s when landing the empowered basic attack. Gluttonous Fangs (Red): after landing the empowered basic attack, for the next 5s basic attacks restore extra HP once per attack. Clamping Fangs (Purple): after landing the empowered basic attack; slows opposing Pokémon by 80% for 3s, decaying by 15% every 0.25s down to 20%.\n\nUpgrade (Level 11): Increases the damage of this move.",
+          "videoAsset": "/assets/skills/Feraligatr/Crunch.mp4"
         },
         {
           "id": "scratch",
@@ -20063,7 +20177,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Feraligatr/Scratch.png",
-          "descriptionAdvanced": "The user dashes in the designated direction, raking opposing Pokémon with sharp claws dealing damage and stunning them for 0.6s."
+          "descriptionAdvanced": "The user dashes in the designated direction, raking opposing Pokémon with sharp claws dealing damage and stunning them for 0.6s.",
+          "videoAsset": "/assets/skills/Feraligatr/Scratch.mp4"
         },
         {
           "id": "waterfall",
@@ -20109,7 +20224,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user becomes Hindrance Resistant, gaining a shield for 3s, and begins storming in the designated direction for up to 3s. This move can be manually cancelled, or ended by colliding with a wall. This move will pierce through wild Pokémon, but stops when colliding with Pokémon from the opposing team, dealing damage and stunning or throwing them depending on how far the user travelled.\n\nThere are 7 damage thresholds based on how far the user travelled, each one increasing the damage of the point blank hit by 10%. At point blank range the move will stun opposing Pokémon for 0.2s. Travelling a short distance will cause the move to throw opposing Pokémon for 0.45s. Travelling a medium distance will cause the move to throw opposing Pokémon for 0.67s. Travelling a long distance will cause the move to throw opposing Pokémon for 1s.\n\nUpgrade (Level 13): The point blank hit will now throw opposing Pokémon for 0.45s."
+          "descriptionAdvanced": "The user becomes Hindrance Resistant, gaining a shield for 3s, and begins storming in the designated direction for up to 3s. This move can be manually cancelled, or ended by colliding with a wall. This move will pierce through wild Pokémon, but stops when colliding with Pokémon from the opposing team, dealing damage and stunning or throwing them depending on how far the user travelled.\n\nThere are 7 damage thresholds based on how far the user travelled, each one increasing the damage of the point blank hit by 10%. At point blank range the move will stun opposing Pokémon for 0.2s. Travelling a short distance will cause the move to throw opposing Pokémon for 0.45s. Travelling a medium distance will cause the move to throw opposing Pokémon for 0.67s. Travelling a long distance will cause the move to throw opposing Pokémon for 1s.\n\nUpgrade (Level 13): The point blank hit will now throw opposing Pokémon for 0.45s.",
+          "videoAsset": "/assets/skills/Feraligatr/Waterfall.mp4"
         },
         {
           "id": "big-jaw-bite",
@@ -20154,7 +20270,8 @@
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Feraligatr/Big+Jaw+Bite.png",
           "descriptionAdvanced": "The user becomes Unstoppable while letting out an intimidating growl, reducing move cooldowns by 40% of the remaining cooldown, and reduces move cooldowns by 40% of the max cooldown for future move uses while this move is active for up to 15s. Additionally the user's tenacity is increased by 30% for 15s.\n\nWhen this move is used again, the user becomes Unstoppable and charges at the designated Pokémon from the opposing team and sinks their teeth into them, dealing damage. The amount of damage dealt is based on the number of Fang marks applied by Crunch.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Feraligatr/Big+Jaw+Bite.mp4"
         }
       ],
       "passiveAbility": {
@@ -20469,7 +20586,8 @@
           ],
           "moveType": "Debuff",
           "iconAsset": "/assets/skills/Garchomp/Sand+Attack.png",
-          "descriptionAdvanced": "The user hurls sand in the designated direction, reducing the field of vision of opposing Pokémon by 50% and decreasing their movement speed by 20% for 2s; increasing the user's movement speed by 30% for 2s and auto attack speed by 30% for 3s when this move hits."
+          "descriptionAdvanced": "The user hurls sand in the designated direction, reducing the field of vision of opposing Pokémon by 50% and decreasing their movement speed by 20% for 2s; increasing the user's movement speed by 30% for 2s and auto attack speed by 30% for 3s when this move hits.",
+          "videoAsset": "/assets/skills/Garchomp/Sand+Attack.mp4"
         },
         {
           "id": "dig",
@@ -20501,7 +20619,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user digs underground, becoming untargetable while underground, and dashes quickly forward. The user then jumps out from underground beneath the first opposing Pokémon hit, after traveling max distance, or when coming into contact with an unpassable wall, increasing the user's Defense and Sp. Def for 4s, dealing damage to nearby opposing Pokémon and throwing them for 0.6s.\n\nUpgrade (Level 11): Strengthens the duration of the throw to 1s."
+          "descriptionAdvanced": "The user digs underground, becoming untargetable while underground, and dashes quickly forward. The user then jumps out from underground beneath the first opposing Pokémon hit, after traveling max distance, or when coming into contact with an unpassable wall, increasing the user's Defense and Sp. Def for 4s, dealing damage to nearby opposing Pokémon and throwing them for 0.6s.\n\nUpgrade (Level 11): Strengthens the duration of the throw to 1s.",
+          "videoAsset": "/assets/skills/Garchomp/Dig.mp4"
         },
         {
           "id": "dragon-rush",
@@ -20526,7 +20645,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user jumps back and briefly channels, reducing damage received by 45% for 0.9s, and dives forward, dragging all enemies within a small radius to the designated location, then damaging nearby opposing Pokémon afterward.\n\nThe user can use Dragon Claw during the first half of the channel to add the Dragon Claw hits as a combo attack. This combo attack scoops up opposing Pokémon, dealing damage with both Dragon Rush and Dragon Claw's first attack and stunning them. If the combo attack hits, the user then throws opposing Pokémon back down with the second Dragon Claw attack, dealing damage with a strengthened slow.\n\nUpgrade (Level 11): Becomes unstoppable during this move; this includes the combo attack with Dragon Claw."
+          "descriptionAdvanced": "The user jumps back and briefly channels, reducing damage received by 45% for 0.9s, and dives forward, dragging all enemies within a small radius to the designated location, then damaging nearby opposing Pokémon afterward.\n\nThe user can use Dragon Claw during the first half of the channel to add the Dragon Claw hits as a combo attack. This combo attack scoops up opposing Pokémon, dealing damage with both Dragon Rush and Dragon Claw's first attack and stunning them. If the combo attack hits, the user then throws opposing Pokémon back down with the second Dragon Claw attack, dealing damage with a strengthened slow.\n\nUpgrade (Level 11): Becomes unstoppable during this move; this includes the combo attack with Dragon Claw.",
+          "videoAsset": "/assets/skills/Garchomp/Dragon+Rush.mp4"
         },
         {
           "id": "bulldoze",
@@ -20549,7 +20669,8 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Garchomp/Bulldoze.png",
-          "descriptionAdvanced": "The user stomps down on the ground, damaging opposing Pokémon in the area of effect."
+          "descriptionAdvanced": "The user stomps down on the ground, damaging opposing Pokémon in the area of effect.",
+          "videoAsset": "/assets/skills/Garchomp/Bulldoze.mp4"
         },
         {
           "id": "earthquake",
@@ -20581,7 +20702,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user jumps up and crashes forcefully to the ground, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 20% for 2s. Two aftershocks follow the initial crash, dealing less damage to opposing Pokémon in the area of effect.\n\nUpgrade (Level 13): Strengthens the movement speed decrease of opposing Pokémon near the center of the crash to 40%."
+          "descriptionAdvanced": "The user jumps up and crashes forcefully to the ground, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 20% for 2s. Two aftershocks follow the initial crash, dealing less damage to opposing Pokémon in the area of effect.\n\nUpgrade (Level 13): Strengthens the movement speed decrease of opposing Pokémon near the center of the crash to 40%.",
+          "videoAsset": "/assets/skills/Garchomp/Earthquake.mp4"
         },
         {
           "id": "dragon-claw",
@@ -20613,7 +20735,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user charges in the designated direction viciously and attacks with two claw swipes. The first attack damages opposing Pokémon and shoves them in the designated direction. The second attack deals more damage to opposing Pokémon and decreases their movement speed by 45% for 2s.\n\nWhen this move is used in a combo attack with Dragon Rush, the movement speed decrease on the second attack is strengthened to 60% for 2s.\n\nUpgrade (Level 13): Increases the damage of both attacks."
+          "descriptionAdvanced": "The user charges in the designated direction viciously and attacks with two claw swipes. The first attack damages opposing Pokémon and shoves them in the designated direction. The second attack deals more damage to opposing Pokémon and decreases their movement speed by 45% for 2s.\n\nWhen this move is used in a combo attack with Dragon Rush, the movement speed decrease on the second attack is strengthened to 60% for 2s.\n\nUpgrade (Level 13): Increases the damage of both attacks.",
+          "videoAsset": "/assets/skills/Garchomp/Dragon+Claw.mp4"
         },
         {
           "id": "livid-outrage",
@@ -20665,7 +20788,8 @@
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Garchomp/Livid+Outrage.png",
           "descriptionAdvanced": "The user goes berserk, becoming unstoppable and receiving 30% reduced damage for 5s while unleashing five powerful attacks in a row. The user dashes forward and damages opposing Pokémon in a unique designated area with each attack, taking a brief moment after each attack to aim the next dash. Every attack more damage than the last. The fifth attack throws opposing Pokémon hit and decreases their movement speed by 30% for 1s. The user is left confused for 0.5s afterward.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Garchomp/Livid+Outrage.mp4"
         }
       ],
       "passiveAbility": {
@@ -44174,7 +44298,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Scizor/Fury+Cutter.png",
-          "descriptionAdvanced": "Slashes twice dealing damage with its scythes in a cone. The second slash deals more damage than the first."
+          "descriptionAdvanced": "Slashes twice dealing damage with its scythes in a cone. The second slash deals more damage than the first.",
+          "videoAsset": "/assets/skills/Scizor/Fury+Cutter.mp4"
         },
         {
           "id": "bullet-punch",
@@ -44206,7 +44331,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dash in the designated direction and strike enemies, reducing this move's cooldown by 40% of its current cooldown if the attack connects and recovering a portion of HP with each hit. If Bullet Punch is used again within 8s, the number of punches increases. The number of punches increases from 3 to a maximum of 5.\n\n30% damage of initial punch.\n\nUpgrade (Level 11): Also grants a shield for 3s if this move hits an enemy."
+          "descriptionAdvanced": "Dash in the designated direction and strike enemies, reducing this move's cooldown by 40% of its current cooldown if the attack connects and recovering a portion of HP with each hit. If Bullet Punch is used again within 8s, the number of punches increases. The number of punches increases from 3 to a maximum of 5.\n\n30% damage of initial punch.\n\nUpgrade (Level 11): Also grants a shield for 3s if this move hits an enemy.",
+          "videoAsset": "/assets/skills/Scizor/Bullet+Punch.mp4"
         },
         {
           "id": "quick-attack",
@@ -44229,7 +44355,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Scizor/Quick+Attack.png",
-          "descriptionAdvanced": "Dashes in designated direction dealing damage to enemies hit along the way."
+          "descriptionAdvanced": "Dashes in designated direction dealing damage to enemies hit along the way.",
+          "videoAsset": "/assets/skills/Scizor/Quick+Attack.mp4"
         },
         {
           "id": "double-hit",
@@ -44254,7 +44381,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Jumps in the designated direction, dealing damage to enemies during the jump and applying a mark to that enemy until they leave combat. After hitting an enemy, jump again. An enhanced auto attack is prepared on landing that has increased range and charges at the enemy being attacked. This enhanced attack is available for 5s.\n\nIf a marked enemy is knocked out, all of the user's move cooldowns are reset. The mark may be cleansed.\n\nUpgrade (Level 13): Reduces cooldown by 1s."
+          "descriptionAdvanced": "Jumps in the designated direction, dealing damage to enemies during the jump and applying a mark to that enemy until they leave combat. After hitting an enemy, jump again. An enhanced auto attack is prepared on landing that has increased range and charges at the enemy being attacked. This enhanced attack is available for 5s.\n\nIf a marked enemy is knocked out, all of the user's move cooldowns are reset. The mark may be cleansed.\n\nUpgrade (Level 13): Reduces cooldown by 1s.",
+          "videoAsset": "/assets/skills/Scizor/Double+Hit.mp4"
         },
         {
           "id": "swords-dance",
@@ -44279,7 +44407,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Dashes a short distance, increasing Attack by 15% for 5s. While Swords Dance's attack buff is active, after basic attacks or abilities make contact 8 times, the user launches an area-of-effect attack that pierces through enemies in a line.\n\nUpgrade (Level 13): Reduces the damage the user receives by 50% while dashing (0.3s)."
+          "descriptionAdvanced": "Dashes a short distance, increasing Attack by 15% for 5s. While Swords Dance's attack buff is active, after basic attacks or abilities make contact 8 times, the user launches an area-of-effect attack that pierces through enemies in a line.\n\nUpgrade (Level 13): Reduces the damage the user receives by 50% while dashing (0.3s).",
+          "videoAsset": "/assets/skills/Scizor/Swords+Dance.mp4"
         },
         {
           "id": "red-illusion-dive",
@@ -44310,7 +44439,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Scizor/Red+Illusion+Dive.png",
           "descriptionAdvanced": "Target an enemy and punch them, dealing an initial hit of damage, decreasing their movement speed by 40% for 3s. Then create 5 copies that dash away from Scizor. If a copy hits a non targetted enemy while dashing out, it deals damage, decreases that enemy's movement speed by 40% for 3s, then disappears. If untouched, the illusory copy will remain on the battlefield for 8 seconds. Enemies that come in contact with an illusary copy will detonate the copy, having damage dealt to them an slowing them for 40% for 3s. For 8s after activation, this move may be used again, dashing in a designated direction dealing damage to enemies hit. The enemies hit are also grabbed and carried while Scizor continues dashing. At the end of the dash, Scizor punches the ground dealing damage in an area-of-effect. If the grabbed enemy hits an illusory copy during the shove, they will be dealt damage and be left incapacitated for 2s.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Scizor/Red+Illusion+Dive.mp4"
         }
       ],
       "passiveAbility": {
@@ -44815,7 +44945,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Scyther/Fury+Cutter.png",
-          "descriptionAdvanced": "Slashes twice dealing damage with its scythes in a cone. The second slash deals more damage than the first."
+          "descriptionAdvanced": "Slashes twice dealing damage with its scythes in a cone. The second slash deals more damage than the first.",
+          "videoAsset": "/assets/skills/Scyther/Fury+Cutter.mp4"
         },
         {
           "id": "dual-wingbeat",
@@ -44854,7 +44985,8 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Slashes in front with scythes, dealing damage in an X-shaped area-of-effect. If the second slash deals damage to an enemy in the center, restore the user's HP. If this move hits an enemy, it can be activated again within a set amount of time. If this move is used again, the user dashes in the designated direction, dealing damage to enemies hit. The dash deals more damage the lower their HP is.\n\n15% of enemy missing HP. Against Wild Pokemon: The total damage is capped at 1200.\n\nUpgrade (Level 11): Increases the damage dealt by this move."
+          "descriptionAdvanced": "Slashes in front with scythes, dealing damage in an X-shaped area-of-effect. If the second slash deals damage to an enemy in the center, restore the user's HP. If this move hits an enemy, it can be activated again within a set amount of time. If this move is used again, the user dashes in the designated direction, dealing damage to enemies hit. The dash deals more damage the lower their HP is.\n\n15% of enemy missing HP. Against Wild Pokemon: The total damage is capped at 1200.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
+          "videoAsset": "/assets/skills/Scyther/Dual+Wingbeat.mp4"
         },
         {
           "id": "quick-attack",
@@ -44877,7 +45009,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Scyther/Quick+Attack.png",
-          "descriptionAdvanced": "Dashes in designated direction dealing damage to enemies hit along the way."
+          "descriptionAdvanced": "Dashes in designated direction dealing damage to enemies hit along the way.",
+          "videoAsset": "/assets/skills/Scyther/Quick+Attack.mp4"
         },
         {
           "id": "double-hit",
@@ -44902,7 +45035,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Jumps in the designated direction, dealing damage to enemies during the jump and applying a mark to that enemy until they leave combat. After hitting an enemy, jump again. An enhanced auto attack is prepared on landing that has increased range and charges at the enemy being attacked. This enhanced attack is available for 5s.\n\nIf a marked enemy is knocked out, all of the user's move cooldowns are reset. The mark may be cleansed.\n\nUpgrade (Level 13): Reduces cooldown by 1s."
+          "descriptionAdvanced": "Jumps in the designated direction, dealing damage to enemies during the jump and applying a mark to that enemy until they leave combat. After hitting an enemy, jump again. An enhanced auto attack is prepared on landing that has increased range and charges at the enemy being attacked. This enhanced attack is available for 5s.\n\nIf a marked enemy is knocked out, all of the user's move cooldowns are reset. The mark may be cleansed.\n\nUpgrade (Level 13): Reduces cooldown by 1s.",
+          "videoAsset": "/assets/skills/Scyther/Double+Hit.mp4"
         },
         {
           "id": "swords-dance",
@@ -44927,7 +45061,8 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Dashes a short distance, increasing Attack by 15% for 5s. While Swords Dance's attack buff is active, after basic attacks or abilities make contact 8 times, the user launches an area-of-effect attack that pierces through enemies in a line.\n\nUpgrade (Level 13): Reduces the damage the user receives by 50% while dashing (0.3s)."
+          "descriptionAdvanced": "Dashes a short distance, increasing Attack by 15% for 5s. While Swords Dance's attack buff is active, after basic attacks or abilities make contact 8 times, the user launches an area-of-effect attack that pierces through enemies in a line.\n\nUpgrade (Level 13): Reduces the damage the user receives by 50% while dashing (0.3s).",
+          "videoAsset": "/assets/skills/Scyther/Swords+Dance.mp4"
         },
         {
           "id": "green-illusion-dive",
@@ -44958,7 +45093,8 @@
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Scyther/Green+Illusion+Dive.png",
           "descriptionAdvanced": "Target an enemy, slashing through them dealing an initial hit of damage and creating 5 copies a set distance away. Copies deal damage to enemies they make contact with and apply a mark to them for 5s. After 5s, the copies return to Scyther, dealing damage to enemies they make contact with and healing Scyther for each hit. This move may be used again within 5s of activating as a dash in a designated direction dealing damage to enemies hit. The copies then dash to the end location of the user's dash. If a copy makes contact with an enemy while returning to Scyther, the copy deals damage to that enemy and disappears. If a marked enemy is knocked out, all of Scyther's move cooldowns are reset. Subsequent copies hitting the same target deal 70% reduced damage.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Scyther/Green+Illusion+Dive.mp4"
         }
       ],
       "passiveAbility": {
@@ -58423,7 +58559,8 @@
           ],
           "moveType": "Melee",
           "iconAsset": "/assets/skills/Quaquaval/Pound.png",
-          "descriptionAdvanced": "The user pounds the area, dealing damage and slowing opposing Pokémon by 30% for 2s."
+          "descriptionAdvanced": "The user pounds the area, dealing damage and slowing opposing Pokémon by 30% for 2s.",
+          "videoAsset": "/assets/skills/Quaquaval/Pound.mp4"
         },
         {
           "id": "low-sweep",
@@ -58448,7 +58585,8 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user unleashes three swift kicks in the designated direction, dealing damage and slowing opposing Pokémon by 60% for 1s, decaying by 15% every 0.25s. The third kick can be aimed, launching the user in that direction before unleashing the kick.\n\nUpgrade (Level 11): Increases the damage of this move, and Spinning Edge when this move precedes it."
+          "descriptionAdvanced": "The user unleashes three swift kicks in the designated direction, dealing damage and slowing opposing Pokémon by 60% for 1s, decaying by 15% every 0.25s. The third kick can be aimed, launching the user in that direction before unleashing the kick.\n\nUpgrade (Level 11): Increases the damage of this move, and Spinning Edge when this move precedes it.",
+          "videoAsset": "/assets/skills/Quaquaval/Low+Sweep.mp4"
         },
         {
           "id": "wing-attack",
@@ -58478,7 +58616,8 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Quaquaval/Wing+Attack.png",
-          "descriptionAdvanced": "The user lunges in the designated direction dealing damage, and gaining a shield for 3s on hit."
+          "descriptionAdvanced": "The user lunges in the designated direction dealing damage, and gaining a shield for 3s on hit.",
+          "videoAsset": "/assets/skills/Quaquaval/Wing+Attack.mp4"
         },
         {
           "id": "liquidation",
@@ -58503,7 +58642,8 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user charges in the designated direction, dealing damage, lowering the defense of opposing Pokémon by 30% for 3s, and restoring the user's HP.\n\n8% of Max HP\n\nTwo uses can be kept in reserve, with a 0.5s cooldown between uses.\n\nUpgrade (Level 13): Increases the amount of health this move restores, and increases Spinning Edge's shield when this move precedes it."
+          "descriptionAdvanced": "The user charges in the designated direction, dealing damage, lowering the defense of opposing Pokémon by 30% for 3s, and restoring the user's HP.\n\n8% of Max HP\n\nTwo uses can be kept in reserve, with a 0.5s cooldown between uses.\n\nUpgrade (Level 13): Increases the amount of health this move restores, and increases Spinning Edge's shield when this move precedes it.",
+          "videoAsset": "/assets/skills/Quaquaval/Liquidation.mp4"
         },
         {
           "id": "carnival-splash",
@@ -58541,7 +58681,8 @@
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Quaquaval/Carnival+Splash.png",
           "descriptionAdvanced": "The user becomes Unstoppable while dancing in place, gaining a shield and dealing damage to opposing Pokémon up to 3 times. The third hit will pull in opposing Pokémon towards the user, stunning them for 1s. Each opposing Pokémon pulled in grants the user a shield, up to 3 times.\n\nThe third hit of this move will not affect wild Pokémon.",
-          "upgradeLevel": 9
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Quaquaval/Carnival+Splash.mp4"
         }
       ],
       "passiveAbility": {

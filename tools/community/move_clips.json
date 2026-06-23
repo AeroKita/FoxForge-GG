@@ -163,6 +163,130 @@
       "stealth-rock": "/assets/skills/Crustle/Stealth+Rock.mp4",
       "x-scissor": "/assets/skills/Crustle/X-Scissor.mp4"
     },
+    "darkrai": {
+      "calm-mind": "/assets/skills/Darkrai/Calm+Mind.mp4",
+      "dark-pulse": "/assets/skills/Darkrai/Dark+Pulse.mp4",
+      "dark-void": "/assets/skills/Darkrai/Dark+Void.mp4",
+      "hypnosis": "/assets/skills/Darkrai/Hypnosis.mp4",
+      "nasty-plot": "/assets/skills/Darkrai/Nasty+Plot.mp4",
+      "shadow-claw": "/assets/skills/Darkrai/Shadow+Claw.mp4",
+      "worst-nightmare": "/assets/skills/Darkrai/Worst+Nightmare.mp4"
+    },
+    "decidueye": {
+      "astonish": "/assets/skills/Decidueye/Astonish.mp4",
+      "leaf-storm": "/assets/skills/Decidueye/Leaf+Storm.mp4",
+      "leafage": "/assets/skills/Decidueye/Leafage.mp4",
+      "nock-nock": "/assets/skills/Decidueye/Nock+Nock.mp4",
+      "razor-leaf": "/assets/skills/Decidueye/Razor+Leaf.mp4",
+      "shadow-sneak": "/assets/skills/Decidueye/Shadow+Sneak.mp4",
+      "spirit-shackle": "/assets/skills/Decidueye/Spirit+Shackle.mp4"
+    },
+    "delphox": {
+      "ember": "/assets/skills/Delphox/Ember.mp4",
+      "fanciful-fireworks": "/assets/skills/Delphox/Fanciful+Fireworks.mp4",
+      "fire-blast": "/assets/skills/Delphox/Fire+Blast.mp4",
+      "fire-spin": "/assets/skills/Delphox/Fire+Spin.mp4",
+      "flame-charge": "/assets/skills/Delphox/Flame+Charge.mp4",
+      "mystical-fire": "/assets/skills/Delphox/Mystical+Fire.mp4",
+      "will-o-wisp": "/assets/skills/Delphox/Will-o-Wisp.mp4"
+    },
+    "dhelmise": {
+      "anchor-shot": "/assets/skills/Dhelmise/Anchor+Shot.mp4",
+      "bulldoze": "/assets/skills/Dhelmise/Bulldoze.mp4",
+      "heavy-slam": "/assets/skills/Dhelmise/Heavy+Slam.mp4",
+      "payback": "/assets/skills/Dhelmise/Payback.mp4",
+      "power-whip": "/assets/skills/Dhelmise/Power+Whip.mp4",
+      "seaweed-snare": "/assets/skills/Dhelmise/Seaweed+Snare.mp4",
+      "whirlpool": "/assets/skills/Dhelmise/Whirlpool.mp4"
+    },
+    "dodrio": {
+      "agility": "/assets/skills/Dodrio/Agility.mp4",
+      "drill-peck": "/assets/skills/Dodrio/Drill+Peck.mp4",
+      "jump-kick": "/assets/skills/Dodrio/Jump+Kick.mp4",
+      "peck": "/assets/skills/Dodrio/Peck.mp4",
+      "quick-attack": "/assets/skills/Dodrio/Quick+Attack.mp4",
+      "tri-attack": "/assets/skills/Dodrio/Tri+Attack.mp4",
+      "triple-trample": "/assets/skills/Dodrio/Triple+Trample.mp4"
+    },
+    "dragapult": {
+      "astonish": "/assets/skills/Dragapult/Astonish.mp4",
+      "dragon-breath": "/assets/skills/Dragapult/Dragon+Breath.mp4",
+      "dragon-dance": "/assets/skills/Dragapult/Dragon+Dance.mp4",
+      "dreep-and-destroy": "/assets/skills/Dragapult/Dreep+and+Destroy.mp4",
+      "phantom-force": "/assets/skills/Dragapult/Phantom+Force.mp4",
+      "quick-attack": "/assets/skills/Dragapult/Quick+Attack.mp4",
+      "shadow-ball": "/assets/skills/Dragapult/Shadow+Ball.mp4"
+    },
+    "dragonite": {
+      "draco-impact": "/assets/skills/Dragonite/Draco+Impact.mp4",
+      "dragon-breath": "/assets/skills/Dragonite/Dragon+Breath.mp4",
+      "dragon-dance": "/assets/skills/Dragonite/Dragon+Dance.mp4",
+      "extreme-speed": "/assets/skills/Dragonite/Extreme+Speed.mp4",
+      "hyper-beam": "/assets/skills/Dragonite/Hyper+Beam.mp4",
+      "outrage": "/assets/skills/Dragonite/Outrage.mp4",
+      "twister": "/assets/skills/Dragonite/Twister.mp4"
+    },
+    "duraludon": {
+      "dragon-pulse": "/assets/skills/Duraludon/Dragon+Pulse.mp4",
+      "dragon-tail": "/assets/skills/Duraludon/Dragon+Tail.mp4",
+      "flash-cannon": "/assets/skills/Duraludon/Flash+Cannon.mp4",
+      "laser-focus": "/assets/skills/Duraludon/Laser+Focus.mp4",
+      "metal-claw": "/assets/skills/Duraludon/Metal+Claw.mp4",
+      "revolving-ruin": "/assets/skills/Duraludon/Revolving+Ruin.mp4",
+      "stealth-rock": "/assets/skills/Duraludon/Stealth+Rock.mp4"
+    },
+    "eldegoss": {
+      "cotton-cloud-crash": "/assets/skills/Eldegoss/Cotton+Cloud+Crash.mp4",
+      "cotton-guard": "/assets/skills/Eldegoss/Cotton+Guard.mp4",
+      "cotton-spore": "/assets/skills/Eldegoss/Cotton+Spore.mp4",
+      "leaf-tornado": "/assets/skills/Eldegoss/Leaf+Tornado.mp4",
+      "leafage": "/assets/skills/Eldegoss/Leafage.mp4",
+      "pollen-puff": "/assets/skills/Eldegoss/Pollen+Puff.mp4",
+      "synthesis": "/assets/skills/Eldegoss/Synthesis.mp4"
+    },
+    "empoleon": {
+      "aqua-jet": "/assets/skills/Empoleon/Aqua+Jet.mp4",
+      "hydro-cannon": "/assets/skills/Empoleon/Hydro+Cannon.mp4",
+      "metal-claw": "/assets/skills/Empoleon/Metal+Claw.mp4",
+      "peck": "/assets/skills/Empoleon/Peck.mp4",
+      "sovereign-slide": "/assets/skills/Empoleon/Sovereign+Slide.mp4",
+      "water-gun": "/assets/skills/Empoleon/Water+Gun.mp4",
+      "whirlpool": "/assets/skills/Empoleon/Whirlpool.mp4"
+    },
+    "espeon": {
+      "future-sight": "/assets/skills/Espeon/Future+Sight.mp4",
+      "growl": "/assets/skills/Espeon/Growl.mp4",
+      "psybeam": "/assets/skills/Espeon/Psybeam.mp4",
+      "psychic-solare": "/assets/skills/Espeon/Psychic+Solare.mp4",
+      "psyshock": "/assets/skills/Espeon/Psyshock.mp4",
+      "stored-power": "/assets/skills/Espeon/Stored+Power.mp4",
+      "swift": "/assets/skills/Espeon/Swift.mp4"
+    },
+    "falinks": {
+      "beat-up": "/assets/skills/Falinks/Beat+Up.mp4",
+      "bulk-up": "/assets/skills/Falinks/Bulk+Up.mp4",
+      "dust-devil-formation": "/assets/skills/Falinks/Dust+Devil+Formation.mp4",
+      "iron-head": "/assets/skills/Falinks/Iron+Head.mp4",
+      "megahorn": "/assets/skills/Falinks/Megahorn.mp4",
+      "no-retreat": "/assets/skills/Falinks/No+Retreat.mp4",
+      "tackle": "/assets/skills/Falinks/Tackle.mp4"
+    },
+    "feraligatr": {
+      "big-jaw-bite": "/assets/skills/Feraligatr/Big+Jaw+Bite.mp4",
+      "bite": "/assets/skills/Feraligatr/Bite.mp4",
+      "crunch": "/assets/skills/Feraligatr/Crunch.mp4",
+      "scratch": "/assets/skills/Feraligatr/Scratch.mp4",
+      "waterfall": "/assets/skills/Feraligatr/Waterfall.mp4"
+    },
+    "garchomp": {
+      "bulldoze": "/assets/skills/Garchomp/Bulldoze.mp4",
+      "dig": "/assets/skills/Garchomp/Dig.mp4",
+      "dragon-claw": "/assets/skills/Garchomp/Dragon+Claw.mp4",
+      "dragon-rush": "/assets/skills/Garchomp/Dragon+Rush.mp4",
+      "earthquake": "/assets/skills/Garchomp/Earthquake.mp4",
+      "livid-outrage": "/assets/skills/Garchomp/Livid+Outrage.mp4",
+      "sand-attack": "/assets/skills/Garchomp/Sand+Attack.mp4"
+    },
     "lucario": {
       "aura-cannon": "/assets/skills/Lucario/Aura+Cannon.mp4",
       "bone-rush": "/assets/skills/Lucario/Bone+Rush.mp4",
@@ -217,6 +341,22 @@
       "low-sweep": "/assets/skills/Quaquaval/Low+Sweep.mp4",
       "pound": "/assets/skills/Quaquaval/Pound.mp4",
       "wing-attack": "/assets/skills/Quaquaval/Wing+Attack.mp4"
+    },
+    "scizor": {
+      "bullet-punch": "/assets/skills/Scizor/Bullet+Punch.mp4",
+      "double-hit": "/assets/skills/Scizor/Double+Hit.mp4",
+      "fury-cutter": "/assets/skills/Scizor/Fury+Cutter.mp4",
+      "quick-attack": "/assets/skills/Scizor/Quick+Attack.mp4",
+      "red-illusion-dive": "/assets/skills/Scizor/Red+Illusion+Dive.mp4",
+      "swords-dance": "/assets/skills/Scizor/Swords+Dance.mp4"
+    },
+    "scyther": {
+      "double-hit": "/assets/skills/Scyther/Double+Hit.mp4",
+      "dual-wingbeat": "/assets/skills/Scyther/Dual+Wingbeat.mp4",
+      "fury-cutter": "/assets/skills/Scyther/Fury+Cutter.mp4",
+      "green-illusion-dive": "/assets/skills/Scyther/Green+Illusion+Dive.mp4",
+      "quick-attack": "/assets/skills/Scyther/Quick+Attack.mp4",
+      "swords-dance": "/assets/skills/Scyther/Swords+Dance.mp4"
     },
     "skeledirge": {
       "disarming-voice": "/assets/skills/Skeledirge/Disarming+Voice.mp4",
