@@ -245,11 +245,14 @@ describe("community data bundle", () => {
       expect(fly.gifAsset).toBeDefined();
     });
 
-    it("Garchomp has no videoAsset on any move", () => {
-      const garchomp = bundle.pokemon.find((p) => p.id === "garchomp")!;
-      for (const m of garchomp.moves) {
-        expect(m.videoAsset).toBeUndefined();
-      }
+    it("videoAsset is optional: at least one Pokémon has none (fallback path)", () => {
+      // Clips are recorded and added incrementally across the roster, so this
+      // guards the "no recorded clip -> undefined videoAsset" fallback without
+      // pinning a specific Pokémon (which goes stale the moment it gets clips).
+      const hasUnclipped = bundle.pokemon.some((p) =>
+        p.moves.every((m) => m.videoAsset === undefined),
+      );
+      expect(hasUnclipped).toBe(true);
     });
   });
 
