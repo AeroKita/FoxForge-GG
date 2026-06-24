@@ -254,14 +254,13 @@ describe("community data bundle", () => {
       }
     });
 
-    it("videoAsset is optional: at least one Pokémon has none (fallback path)", () => {
-      // Clips are recorded and added incrementally across the roster, so this
-      // guards the "no recorded clip -> undefined videoAsset" fallback without
-      // pinning a specific Pokémon (which goes stale the moment it gets clips).
-      const hasUnclipped = bundle.pokemon.some((p) =>
-        p.moves.every((m) => m.videoAsset === undefined),
-      );
-      expect(hasUnclipped).toBe(true);
+    it("every non-basicAttack move has videoAsset when the roster clip registry is complete", () => {
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          if (m.slot === "basicAttack") continue;
+          expect(m.videoAsset, `${p.id}/${m.name}`).toBeDefined();
+        }
+      }
     });
   });
 
