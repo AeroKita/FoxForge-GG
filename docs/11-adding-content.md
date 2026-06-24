@@ -21,8 +21,7 @@ Use these npm commands from the repo root (`FoxForge-GG/`):
 | Mode | Use case |
 | --- | --- |
 | `full` (default) | New patch / new Pokémon from UNITE-DB |
-| `curate` | After editing `curated_builds.json` (no re-scrape) |
-| `descriptions` | Refresh move text only |
+| `curate` | After editing `curated_builds.json` or `move_descriptions.json` (no re-fetch) |
 | `clips` | After dropping new raw recordings |
 
 Flags: `--patch-version X` (new patch id for normalize), `--no-verify` (skip final gate), `--skip-art` (full mode only — skip art mirror).
@@ -55,10 +54,10 @@ From the repo root, with the Python venv activated:
 
 ```bash
 cd tools/community && source ../extract/.venv/bin/activate
-python3 fetch.py && python3 scrape_serebii.py && python3 normalize.py && cd ../.. && npm run generate:presets && cd tools/community && python3 fetch_art.py && python3 normalize_as_boosts.py
+python3 fetch.py && python3 normalize.py && cd ../.. && npm run generate:presets && cd tools/community && python3 fetch_art.py && python3 normalize_as_boosts.py
 ```
 
-`scrape_serebii.py` fetches Serebii move text into `move_descriptions.json` (run after `fetch.py`, before `normalize.py`). `normalize.py` writes `src/data/patch-current.json`.
+`normalize.py` writes `src/data/patch-current.json`, backfilling blank UNITE-DB move text from the owned `move_descriptions.json` (see [Descriptions](#descriptions)).
 
 Then **publish** the runtime copy and verify:
 
@@ -67,16 +66,10 @@ npm run data:publish
 npm run verify
 ```
 
-For curated-build-only edits (no UNITE-DB re-scrape):
+For curated-build- or description-only edits (no UNITE-DB re-fetch):
 
 ```bash
 npm run data:refresh -- --mode curate
-```
-
-To refresh move descriptions only:
-
-```bash
-npm run data:refresh -- --mode descriptions
 ```
 
 ## Curating a Pokémon (builds, labels, descriptions)
@@ -93,9 +86,9 @@ Use a per-Pokémon `builds` overlay (not `recommendedTitles`) when both display 
 
 ### Descriptions
 
-Move Basic descriptions: `scrape_serebii.py` → `move_descriptions.json`, merged by `normalize.py` when UNITE-DB text is blank. When UNITE-DB ships Advanced-only text for a new Pokémon, inject official Basic text into the raw skill fields in `_raw/pokemon.json` before normalize (the Quaquaval case). See [`AGENTS.md`](../AGENTS.md) **Data Bundle Versioning** for the full schema — do not restate every field here.
+Move **Advanced** descriptions come from UNITE-DB (`rsb` text via `advanced_desc()`). Move **Basic** descriptions come from UNITE-DB where it ships them, and otherwise from [`tools/community/move_descriptions.json`](../tools/community/move_descriptions.json) — an **owned, hand-maintained** data file that `normalize.py` uses to backfill any move whose UNITE-DB Basic text is blank. (It was originally seeded from Serebii, but the scraper has been retired; this file is now yours to edit directly.)
 
-For text that **neither UNITE-DB nor Serebii provides** (e.g. a Unite move that stays blank after a scrape), add it to [`tools/community/move_descriptions_manual.json`](../tools/community/move_descriptions_manual.json) — a hand-curated overlay keyed by `pokemon id` → normalized move name (lowercase, trailing parenthetical and apostrophes stripped) → text. `normalize.py` applies it as an override **after** the Serebii backfill. Because it is never auto-generated, it survives both a re-fetch (`_raw/`) and a re-scrape (`move_descriptions.json`) — unlike editing those files directly. This is the durable home for official in-game text the upstream sources lack. Run `npm run data:gaps` to find moves still missing a Basic description.
+To add or fix a Basic description, edit `move_descriptions.json`: under the Pokémon's id, add an entry keyed by the **normalized move name** — lowercase, with a trailing parenthetical and apostrophes stripped (e.g. `Sovereign Slide` → `sovereign slide`, `Sirfetch'd`'s moves drop the apostrophe). The key must match UNITE-DB's exact move spelling, or the backfill won't find it. Then run `npm run data:refresh -- --mode curate`. Run `npm run data:gaps` to list moves still missing a Basic description. See [`AGENTS.md`](../AGENTS.md) **Data Bundle Versioning** for the full schema.
 
 ### Single-Pokémon roster add
 

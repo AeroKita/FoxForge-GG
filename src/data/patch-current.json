@@ -18357,7 +18357,7 @@
           "id": "sovereign-slide",
           "name": "Sovereign Slide",
           "slot": "uniteMove",
-          "description": "",
+          "description": "Has the user slide at high speed in the designated direction and form a whirlpool on impact, dealing damage to opposing Pokémon it hits and throwing them.\n\nThe whirlpool remains centered on the user for a short time, applying a slowing effect to opposing Pokémon.\n\nWhile the whirlpool remains, the amount the Torrent gauge increases is greater.",
           "cooldownSeconds": 112.0,
           "damageInstances": [
             {
@@ -42075,7 +42075,7 @@
           "id": "full-power-psy-ay-ay",
           "name": "Full-Power Psy-ay-ay!",
           "slot": "uniteMove",
-          "description": "",
+          "description": "Has the user release three mysterious psychic waves around itself, dealing damage and decreasing the damage dealt by opposing Pokémon they hit.\n\nAfter using this move, the user's headache gauge greatly increases as a consequence of it unleashing its full power.",
           "cooldownSeconds": 112.0,
           "damageInstances": [
             {
@@ -57163,7 +57163,7 @@
           "id": "high-voltage-siege",
           "name": "High-Voltage Siege",
           "slot": "uniteMove",
-          "description": "",
+          "description": "Has the user continuously drop lightning bolts in the designated area, creating an electric field where the lightning strikes. The lightning bolts paralyze and deal damage to opposing Pokémon they hit.\n\nIf lightning bolts hit the same opposing Pokémon 3 consecutive times, that Pokémon will be left unable to act.\n\nIf lightning bolts hit one of the opposing team's goal zones 5 times, that goal zone will become defenseless, and 1 ally Pokémon will be able to score immediately.",
           "cooldownSeconds": 100.0,
           "damageInstances": [
             {

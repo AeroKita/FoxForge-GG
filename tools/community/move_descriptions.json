@@ -1,6 +1,5 @@
 {
-  "_source": "serebii.net/pokemonunite",
-  "_fetched": "2026-06-17",
+  "_source": "Move Basic descriptions — owned, hand-maintained data (originally sourced from serebii.net/pokemonunite; the scraper has been retired). normalize.py backfills blank UNITE-DB descriptions from here, keyed by pokemon id -> normalized move name (lowercase; trailing parenthetical/apostrophes stripped) -> Basic-tier text.",
   "descriptions": {
     "alcremie": {
       "basic attack": "Attacks by throwing whipped cream",
@@ -133,7 +132,7 @@
       "peck": "Has the user jab its sharply pointed beak in the designated direction, dealing damage to opposing Pokémon it hits. When this move is boosted by Torrent, it applies a slowing effect (Torrent gauge consumed: 50)",
       "metal claw": "Has the user charge in the designated direction, dealing damage to opposing Pokmon with wings of steel and shoving them. When this move is boosted by Torrent, the user receives a shield effect. (Torrent gauge consumed: 50)",
       "aqua jet": "Has the user lunge at blinding speed in the designated direction, dealing damage to opposing Pokémon it hits and increasing the user's basic attack speed for a short time. When this move is boosted by Torrent, it decreases the Sp. Def of Pokémon from the opposing team. (Torrent gauge consumed: 50)",
-      "soverign slide": "Has the user slide at high speed in the designated direction and form a whirlpool on impact, dealing damage to opposing Pokmon it hits and throwing them. The whirlpool remains centered on the user for a short time, applying a slowing effect to opposing Pokmon. While the whirlpool remains, the amount the Torrent gauge increases is greater. Activates at Level 9"
+      "sovereign slide": "Has the user slide at high speed in the designated direction and form a whirlpool on impact, dealing damage to opposing Pokémon it hits and throwing them.\n\nThe whirlpool remains centered on the user for a short time, applying a slowing effect to opposing Pokémon.\n\nWhile the whirlpool remains, the amount the Torrent gauge increases is greater."
     },
     "espeon": {
       "aeos emporium - 10,000 aeos coins / 575 aeos gems": "Anticipation",
@@ -394,7 +393,7 @@
       "tail whip": "Has the user wag its tail, dealing damage, applying a slowing effect, and decreasing the SpDef of the designated opposing Pokémon. While the mysterious power is active, the opposing Pokémon's SpDef is decreased by a greater amount.",
       "disable": "Has the user release electricity that limits the designated opposing Pokémon's moves while dealing damage and leaving them unable to act. The electricity spreads to nearby Pokémon 5 times. (The electricity can only spread to the same Pokémon up to 2 times). Opposing Pokémon hit by the electricity will have the cooldown of their last used move increased. If an opposing Pokémon has no move on cooldown, the cooldown of the next move it uses will be increased. When an effect to increase a move's cooldown is applied, a slowing effect is also applied. While the mysterious power is active.",
       "psychic": "Has the user release a strong telekinetic force in the designated area, dealing damage to opposing Pokémon it hits and leaving them unable to act. The user continues to release a telekinetic force at the opposing Pokémon that took damage closest to the center of the area of effect. If this move it used again, the user pulls the opposing Pokémon receiving the telekinetic force in the designated direction. While the mysterious power is active, the user leaves the opposing Pokémon unable to act after pulling.",
-      "full-power psy-ay-ay": "Has the user release three mysterious psychic waves around itself, decreasing the damage dealt by opposing Pokémon it hits. After using this move, the user's headache gauge greatly increases as a consequence of it unleashing its full power. Activates at Level 8"
+      "full-power psy-ay-ay!": "Has the user release three mysterious psychic waves around itself, dealing damage and decreasing the damage dealt by opposing Pokémon they hit.\n\nAfter using this move, the user's headache gauge greatly increases as a consequence of it unleashing its full power."
     },
     "raichu": {
       "basic attack": "If this Pokémon hits an opposing Pokémon with a basic attack or move, its boosted basic attack gauge increases by 1. When the boosted basic attack gauge reaches 4, the Pokémon's next basic attack becomes a boosted attack that deals increased damage and also deals damage to opposing Pokémon near its target (up to a maximum of 5 Pokémon) Alolan Raichu",
@@ -566,7 +565,7 @@
       "thunderbolt": "Has the user unleash a strong electric blast to the designated area, dealing damage and paralyzing opposing Pokémon. An electric field is left in the move's area of effect.",
       "discharge": "Has the user let loose a flare of electricity from its feathers, dealing damage to nearby opposing Pokémon and leaving them paralyzed. If there is an electric field within this move's area of effect, the electric field is absorbed, increasing this move's area of effect and duration.",
       "zap cannon": "Has the user fire an electric cannon-like blast that explodes on contact, dealing damage to opposing Pokémon caught in the explosion's area of effect. When the electric orb passes through an electric field, it absorbs the electric field, increasing its size, travel distance, and damage dealt to opposing Pokémon. Opposing Pokémon caught in the explosion are also left unable to act.",
-      "high-voltage seige": "Has the user continuously drop lightning bolts in the designated area, creating an electric field where the lightning strikes. The lightning bolts paralyze and deal damage to opposing Pokémon they hit. If lightning bolts hit the same opposing Pokémon 3 consecutive times, that Pokémon will be left unable to act. If lightning bolts hit one of the opposing team's goal zones 5 times, that goal zone will become defenseless, and 1 ally Pokémon will be able to score immediately. Activates at Level 9"
+      "high-voltage siege": "Has the user continuously drop lightning bolts in the designated area, creating an electric field where the lightning strikes. The lightning bolts paralyze and deal damage to opposing Pokémon they hit.\n\nIf lightning bolts hit the same opposing Pokémon 3 consecutive times, that Pokémon will be left unable to act.\n\nIf lightning bolts hit one of the opposing team's goal zones 5 times, that goal zone will become defenseless, and 1 ally Pokémon will be able to score immediately."
     }
   }
 }

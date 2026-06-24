@@ -81,7 +81,7 @@ class TestRefreshHelp(unittest.TestCase):
     def test_help_lists_modes(self):
         script = Path(__file__).resolve().parent / "refresh.py"
         out = subprocess.check_output([shutil.which("python3") or "python3", str(script), "--help"], text=True)
-        for mode in ("full", "curate", "descriptions", "clips"):
+        for mode in ("full", "curate", "clips"):
             self.assertIn(mode, out)
 
 

@@ -39,10 +39,6 @@ def run_fetch() -> int:
     return run("fetch", [venv_py(), str(COMMUNITY / "fetch.py")])
 
 
-def run_scrape() -> int:
-    return run("scrape_serebii", [venv_py(), str(COMMUNITY / "scrape_serebii.py")])
-
-
 def run_transcode() -> int:
     if not shutil.which("ffprobe"):
         print("⚠ ffprobe missing — skipping transcode_clips (clips optional)")
@@ -90,7 +86,6 @@ def run_mode(
         steps = [
             ("doctor", lambda: run_doctor()),
             ("fetch", lambda: run_fetch()),
-            ("scrape_serebii", lambda: run_scrape()),
             ("transcode_clips", lambda: run_transcode()),
             ("normalize", lambda: run_normalize(patch_version)),
             ("generate:presets", lambda: run_generate_presets()),
@@ -105,13 +100,6 @@ def run_mode(
         )
     elif mode == "curate":
         steps = [
-            ("normalize", lambda: run_normalize(patch_version)),
-            ("generate:presets", lambda: run_generate_presets()),
-            ("publish", lambda: run_publish()),
-        ]
-    elif mode == "descriptions":
-        steps = [
-            ("scrape_serebii", lambda: run_scrape()),
             ("normalize", lambda: run_normalize(patch_version)),
             ("generate:presets", lambda: run_generate_presets()),
             ("publish", lambda: run_publish()),
@@ -140,16 +128,15 @@ def main() -> None:
         description="Run the FoxForge GG data pipeline in one command.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""Modes:
-  full          (default) doctor → fetch → scrape → transcode → normalize →
+  full          (default) doctor → fetch → transcode → normalize →
                 presets → fetch_art → boosts → publish → verify
   curate        normalize → presets → publish → verify (after curated_builds edits)
-  descriptions  scrape → normalize → presets → publish → verify
   clips         transcode → normalize → publish → verify
 """,
     )
     parser.add_argument(
         "--mode",
-        choices=("full", "curate", "descriptions", "clips"),
+        choices=("full", "curate", "clips"),
         default="full",
         help="pipeline subset to run (default: full)",
     )
