@@ -31571,36 +31571,8 @@
           "battleItemId": "full-heal",
           "emblems": [
             {
-              "emblemId": "172-pichu",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "025-pikachu",
-              "grade": "platinum"
-            },
-            {
               "emblemId": "051-dugtrio",
               "grade": "gold"
-            },
-            {
-              "emblemId": "050-diglett",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "142-aerodactyl",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "145-zapdos",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "1008-miraidon",
-              "grade": "platinum"
-            },
-            {
-              "emblemId": "082-magneton",
-              "grade": "bronze"
             },
             {
               "emblemId": "101-electrode",
@@ -31608,6 +31580,34 @@
             },
             {
               "emblemId": "100-voltorb",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "050-diglett",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "172-pichu",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "1008-miraidon",
+              "grade": "platinum"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "171-lanturn",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "243-raikou",
               "grade": "gold"
             }
           ],

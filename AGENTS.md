@@ -238,6 +238,8 @@ Curated-build- or description-only edits (no UNITE-DB re-fetch) — after editin
 npm run data:refresh -- --mode curate
 ```
 
+For a localized `creativeBuilds` emblem swap only (same build name, 10 slots), maintainers may instead hand-edit `curated_builds.json` and mirror the identical `emblems` array into `src/data/patch-current.json` and `public/data/patch-<version>.json` so the change is visible in dev without running the Python pipeline; those two patch copies must stay byte-identical (`publishedSync.test.ts`). Run `npx tsx src/data/verifyPatch.ts` afterward. Do not edit emblem arrays in patch JSON without updating `curated_builds.json` — the next `data:refresh` would revert orphaned edits.
+
 ### Design System
 
 Semantic color and surface tokens are defined in `src/index.css` using Tailwind v4 `@theme` blocks; dark overrides live under `[data-theme="dark"]`. Components should use generated utilities (`bg-surface`, `text-ink`, `border-line`, etc.) rather than raw palette classes for chrome.
