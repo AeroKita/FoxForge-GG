@@ -2,6 +2,37 @@
 
 This is the maintenance runbook for the only expected ongoing work on FoxForge GG: adding a Pokémon, held item, trainer (battle) item, curated build or label, or move clip after a balance patch or roster update. Game data is **always regenerated, never hand-edited** — the pipeline rewrites `src/data/patch-current.json` in place. [`AGENTS.md`](../AGENTS.md) remains the architecture authority; this doc is a task-oriented copy-paste sequence drawn from it and the numbered docs.
 
+## Quick start — the 90% path
+
+Two situations cover almost everything you'll ever do. Both finish by pushing to `main`, which auto-deploys the live site a couple of minutes later. **Nothing goes live until you push (or merge the PR), and every path runs the full test gate first — if something is wrong, it stops and tells you instead of shipping it.**
+
+> First time on a new computer? Run `npm run data:doctor` once. It checks you have everything installed and prints exactly what's missing.
+
+### A new Held Item or Trainer Item (or a balance patch)
+
+These come straight from UNITE-DB — nothing to hand-write. Easiest route, no terminal:
+
+1. On GitHub: **Actions** → **Refresh game data** → **Run workflow**.
+2. Wait for it to finish — it opens a Pull Request listing what changed.
+3. Skim the PR, then **Merge** it. Done.
+
+Prefer the terminal? From the `FoxForge-GG` folder: `npm run data:refresh`, then `git add -A && git commit -m "data: refresh" && git push`.
+
+### A new Pokémon
+
+A new Pokémon needs one thing added by hand — a recommended build. Everything else (stats, art, moves) is automatic. From the `FoxForge-GG` folder:
+
+1. `npm run data:refresh` — pulls the new Pokémon's stats, art, and moves from UNITE-DB.
+2. `npm run data:gaps` — lists what the Pokémon still needs (a build, and maybe a description or clips).
+3. `npm run data:curate -- scaffold <pokemon-id> --write` — drops a fill-in-the-blanks build template into `curated_builds.json`. Fill in the emblems, held items, and moves (the template lists the valid move names for you).
+4. `npm run data:curate -- check` — confirms your entry is valid; it even suggests fixes for typos.
+5. `npm run data:refresh -- --mode curate` — rebuilds and re-verifies with your build.
+6. `git add -A && git commit -m "feat: add <Pokémon>" && git push`.
+
+Move-preview clips are optional — the Pokémon works fine without them; add them later via [Adding move clips](#adding-move-clips). If a move's Basic description is blank (step 2 will tell you), fix it in [Descriptions](#descriptions).
+
+The rest of this document is the detailed reference behind these steps.
+
 ## The tool (preferred path)
 
 Use these npm commands from the repo root (`FoxForge-GG/`):
