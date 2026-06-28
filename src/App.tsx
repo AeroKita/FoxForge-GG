@@ -88,7 +88,7 @@ function Workspace() {
           <button
             type="button"
             onClick={() => setPokePickerOpen(true)}
-            aria-label={p ? "Change Pokémon" : "Select Pokémon"}
+            aria-label={p ? "Change Pokémon" : "Select a Pokémon"}
             className="shrink-0 rounded-full"
           >
             {p ? (
@@ -114,7 +114,7 @@ function Workspace() {
             )}
           </button>
         ),
-        title: p?.displayName ?? "Select Pokémon",
+        title: p?.displayName ?? "Select a Pokémon",
         subtitle: p ? (
           <span className="flex items-center gap-1.5">
             <span

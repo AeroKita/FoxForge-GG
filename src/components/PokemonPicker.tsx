@@ -23,7 +23,7 @@ interface PokemonPickerSheetProps {
   selectedId?: string | null;
   /** Called with the chosen Pokémon id. Omit to dispatch setPokemon (default). */
   onSelect?: (pokemonId: string) => void;
-  /** Sheet heading. Defaults to "Choose Pokémon". */
+  /** Sheet heading. Defaults to "Choose a Pokémon". */
   title?: string;
 }
 
@@ -51,7 +51,7 @@ export function PokemonPickerSheet({
   );
 
   return (
-    <BottomSheet title={title ?? "Choose Pokémon"} onClose={onClose} fillHeight>
+    <BottomSheet title={title ?? "Choose a Pokémon"} onClose={onClose} fillHeight>
       <div className="sticky top-0 z-10 -mx-4 border-b border-line bg-surface px-4 pb-3 pt-1">
         <input
           value={query}
