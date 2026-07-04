@@ -203,6 +203,20 @@ def strip_activation_note(text: str) -> str:
     return cleaned
 
 
+def passive_basic_desc(passive: dict | None, over: dict) -> str:
+    """Resolve Basic-tier passive text: UNITE-DB description, then move_descriptions
+    override, then Advanced (rsb.true_desc). Returns empty string when passive is None."""
+    if passive is None:
+        return ""
+    desc = paragraphize_upgrade((passive.get("description") or "").strip())
+    if desc.strip():
+        return desc
+    override = strip_activation_note(over.get(_norm_move_name(passive.get("name", "")), ""))
+    if override.strip():
+        return paragraphize_upgrade(override)
+    return paragraphize_upgrade(((passive.get("rsb") or {}).get("true_desc") or "").strip())
+
+
 def build_move(skill: dict, slot: str, folder: str) -> dict:
     rsb = skill.get("rsb") or {}
     mtype = skill.get("type")
@@ -393,10 +407,7 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
                     m["description"] = strip_activation_note(
                         over.get(_norm_move_name(m["name"]), m.get("description", ""))
                     )
-        passive_desc = paragraphize_upgrade((passive or {}).get("description", "") or "")
-        if passive and not passive_desc.strip():
-            passive_desc = paragraphize_upgrade(
-                ((passive.get("rsb") or {}).get("true_desc") or "").strip())
+        passive_desc = passive_basic_desc(passive, over)
         passive_adv = paragraphize_upgrade(advanced_desc((passive or {}).get("rsb"))) if passive else ""
         pokemon_gifs = gifs.get(pid, {})
         pokemon_clips = clips.get(pid, {})

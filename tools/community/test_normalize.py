@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from normalize import build_upgrade_move, strip_activation_note
+from normalize import build_upgrade_move, passive_basic_desc, strip_activation_note
 
 
 class TestStripActivationNote(unittest.TestCase):
@@ -22,6 +22,25 @@ class TestStripActivationNote(unittest.TestCase):
 
     def test_noop(self):
         self.assertEqual(strip_activation_note("A plain sentence."), "A plain sentence.")
+
+
+class TestPassiveBasicDesc(unittest.TestCase):
+    def test_unite_db_description_present(self):
+        passive = {"name": "Dark Aura", "description": "From UNITE-DB.", "rsb": {"true_desc": "Advanced."}}
+        over = {"dark aura": "Override text."}
+        self.assertEqual(passive_basic_desc(passive, over), "From UNITE-DB.")
+
+    def test_blank_description_uses_override(self):
+        passive = {"name": "Dark Aura", "description": "", "rsb": {"true_desc": "Advanced."}}
+        over = {"dark aura": "Override text."}
+        self.assertEqual(passive_basic_desc(passive, over), "Override text.")
+
+    def test_both_blank_falls_back_to_rsb(self):
+        passive = {"name": "Dark Aura", "description": "", "rsb": {"true_desc": "Advanced text."}}
+        self.assertEqual(passive_basic_desc(passive, {}), "Advanced text.")
+
+    def test_none_passive_returns_empty(self):
+        self.assertEqual(passive_basic_desc(None, {}), "")
 
 
 class TestBuildUpgradeMove(unittest.TestCase):

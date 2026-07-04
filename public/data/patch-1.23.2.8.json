@@ -1,11 +1,11 @@
 {
-  "patchVersion": "1.23.2.5",
-  "lastUpdated": "2026-06-24",
+  "patchVersion": "1.23.2.8",
+  "lastUpdated": "2026-07-04",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-06-24"
+    "fetched": "2026-07-04"
   },
   "pokemon": [
     {
@@ -304,17 +304,17 @@
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
-              "ratio": 1.32,
+              "ratio": 1.43,
               "scalingStat": "attack",
-              "slider": 13.0,
-              "base": 160.0,
+              "slider": 14.0,
+              "base": 173.0,
               "damageType": "physical"
             },
             {
-              "ratio": 1.98,
+              "ratio": 2.14,
               "scalingStat": "attack",
-              "slider": 19.0,
-              "base": 240.0,
+              "slider": 21.0,
+              "base": 259.0,
               "damageType": "physical"
             }
           ],
@@ -368,17 +368,17 @@
               "damageType": "physical"
             },
             {
-              "ratio": 0.6,
+              "ratio": 0.72,
               "scalingStat": "attack",
-              "slider": 4.0,
-              "base": 40.0,
+              "slider": 5.0,
+              "base": 48.0,
               "damageType": "physical"
             },
             {
-              "ratio": 0.9,
+              "ratio": 1.08,
               "scalingStat": "attack",
-              "slider": 6.0,
-              "base": 60.0,
+              "slider": 7.0,
+              "base": 72.0,
               "damageType": "physical"
             }
           ],
@@ -431,7 +431,7 @@
           "name": "Midnight Slash",
           "slot": "uniteMove",
           "description": "Unleashes a flurry of slashes in front of the user. This move ends by unleashing powerful blades of energy, dealing increased damage to enemies and shoves them.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 89.0,
           "damageInstances": [
             {
               "ratio": 0.83,
@@ -2279,7 +2279,7 @@
           "name": "Fire Spin",
           "slot": "move1",
           "description": "Has the user generate a fierce vortex of fire around itself, dealing damage to opposing Pokémon it hits and increasing the user's movement speed. When the user is moving toward Pokémon on the opposing team, its movement speed is further increased. Whenever the user deals damage, it receives a shield effect. This effect can stack up to 6 times.If the user hits opposing Pokémon with a basic attack, the duration of the vortex is increased.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 7.0,
           "damageInstances": [
             {
               "ratio": 0.252,
@@ -2289,10 +2289,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.18,
+              "ratio": 0.2,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 22.0,
+              "base": 24.0,
               "damageType": "special"
             }
           ],
@@ -2315,17 +2315,17 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 2.46,
+              "ratio": 2.66,
               "scalingStat": "spAttack",
-              "slider": 15.0,
-              "base": 466.0,
+              "slider": 16.0,
+              "base": 503.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.74,
+              "ratio": 0.8,
               "scalingStat": "spAttack",
               "slider": 5.0,
-              "base": 172.0,
+              "base": 151.0,
               "damageType": "special"
             }
           ],
@@ -2379,17 +2379,17 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 0.65,
+              "ratio": 0.85,
               "scalingStat": "spAttack",
-              "slider": 8.0,
-              "base": 300.0,
+              "slider": 10.0,
+              "base": 390.0,
               "damageType": "special"
             },
             {
-              "ratio": 1.38,
+              "ratio": 1.52,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 172.0,
+              "base": 189.0,
               "damageType": "special"
             }
           ],
@@ -2438,10 +2438,10 @@
           "cooldownSeconds": 112.0,
           "damageInstances": [
             {
-              "ratio": 2.5,
+              "ratio": 2.7,
               "scalingStat": "spAttack",
-              "slider": 16.0,
-              "base": 600.0,
+              "slider": 17.0,
+              "base": 648.0,
               "damageType": "special"
             }
           ],
@@ -2860,10 +2860,10 @@
           "cooldownSeconds": 0.0,
           "damageInstances": [
             {
-              "ratio": 0.5,
+              "ratio": 0.4,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 200.0,
+              "base": 160.0,
               "damageType": "special"
             }
           ],
@@ -2900,7 +2900,7 @@
           "name": "Blizzard",
           "slot": "move1",
           "description": "Has the user summon a howling blizzard centered on itself, applying a freeze counter and dealing damage to opposing Pokémon. If an opposing Pokémon’s freeze counter reaches 5, that Pokémon becomes frozen.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 9.0,
           "damageInstances": [
             {
               "ratio": 0.39,
@@ -6543,7 +6543,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Ceruledge focuses bitter feelings towards the world of the living into a slashing attack. The user recovers HP equals to 50% of the damage dealt with this move. Damage dealt to wild Pokémon only heals for half of the normal amount. Any leftover healing from the move that exceeds the user's max HP is converted into a shield (effects that alter healing directly are ignored). The shield lasts 2s, the duration is refreshed with each application, and can stack up to 10x. The maximum capacity of the shield is determined by the life steal amount.\n\nUpgrade (Level 11): Increases the amount of HP recovered to 70% of damage dealt.",
+          "descriptionAdvanced": "Ceruledge focuses bitter feelings towards the world of the living into a slashing attack. The user recovers HP equals to 50% of the damage dealt with this move. Damage dealt to wild Pokémon only heals for half of the normal amount. Any leftover healing from the move that exceeds the user's max HP is converted into a shield (effects that alter healing directly are ignored). The shield lasts 2s, the duration is refreshed with each application, and can stack up to 10x. The maximum capacity of the shield is determined by the healing value of the most recent application.\n\nUpgrade (Level 11): Increases the amount of HP recovered to 70% of damage dealt.",
           "videoAsset": "/assets/skills/Ceruledge/Bitter+Blade.mp4"
         },
         {
@@ -9620,7 +9620,7 @@
         "name": "Blaze",
         "description": "When using a move, the next basic attack becomes a boosted attack. When hitting an enemy with a basic attack or move, a cinder is placed on that enemy. Attacking a cindered enemy a certain number of times will cause the cinder to flare, dealing damage to the enemy. When at half HP or less, critical-hit rate is increased by 10% and basic attack speed is increased by 20% for a short time.",
         "effects": [],
-        "descriptionAdvanced": "When at 50% max HP or below, increases critical-hit rate by 10% and auto attack speed by 20% for 5s (30s CD).\n\n90% Atk + 0.7% Enemy Max HP x (Level - 1) + 25\n\nWhen hitting an opposing Pokémon with an auto attack or move, places a cinder on the target for 5s; applies 2 cinders with boosted attacks and moves. When placing a 5th cinder on a target, consumes the cinders, dealing additional damage to the target.",
+        "descriptionAdvanced": "When at 50% max HP or below, increases critical-hit rate by 10% and auto attack speed by 20% for 5s (30s CD).\n\n0.7% Enemy Max HP x (Level - 1)\n\nWhen hitting an opposing Pokémon with an auto attack or move, places a cinder on the target for 5s; applies 2 cinders with boosted attacks and moves. When placing a 5th cinder on a target, consumes the cinders, dealing additional damage to the target.",
         "iconAsset": "/assets/skills/Cinderace/Blaze.png"
       },
       "builds": [
@@ -13334,7 +13334,7 @@
           "name": "Spirit Shackle",
           "slot": "move1",
           "description": "Charges power before firing quills in the designated direction. Damage dealt increases the longer power is charged, but movement speed is decreased while charging. If this move hits after power is charged to the maximum, it can stitch enemies to the ground. The affected Pokémon receives damage upon moving a set distance from that location, and their movement speed is decreased for a short time.\n\nUpgrade (Level 11): Deals increased damage to enemies with low remaining HP.",
-          "cooldownSeconds": 8.5,
+          "cooldownSeconds": 9.0,
           "damageInstances": [
             {
               "ratio": 2.48,
@@ -13442,7 +13442,7 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 8,
-          "descriptionAdvanced": "Decidueye creates a shadow that lasts for up to 5s, increasing Decidueye's movement speed by 70% for 2s, decaying by 20% every 0.5s, and reveals all opposing Pokémon in range temporarily. Pokémon that are sneaking remain invisible but can be targeted by the shadow giving away their position if they were within the initial cast range. Afterwards the shadow will automatically target an enemy player that is visible to Decidueye, inflicting damage, lowering their movement speed by 30% for 1s, and decreasing their Defense by 60% for 1.5s. Wild Pokémon that are currently aggressive can also be targeted but are otherwise ignored.\n\nUpgrade (Level 13): Defense reduction of enemies is increased to 80%.",
+          "descriptionAdvanced": "Decidueye creates a shadow that lasts for up to 5s, increasing Decidueye's movement speed by 70% for 2s, decaying by 20% every 0.5s, and reveals all opposing Pokémon in range temporarily. Pokémon that are sneaking remain invisible but can be targeted by the shadow giving away their position if they were within the initial cast range. Afterwards the shadow will automatically target an enemy player that is visible to Decidueye, inflicting damage, lowering their movement speed by 30% for 1s, and decreasing their Defense by 40% for 1.5s. Wild Pokémon that are currently aggressive can also be targeted but are otherwise ignored.\n\nUpgrade (Level 13): Defense reduction of enemies is increased to 60%.",
           "videoAsset": "/assets/skills/Decidueye/Shadow+Sneak.mp4"
         },
         {
@@ -17470,10 +17470,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 1.5,
+              "ratio": 1.65,
               "scalingStat": "spAttack",
-              "slider": 13.0,
-              "base": 300.0,
+              "slider": 14.0,
+              "base": 330.0,
               "damageType": "special"
             }
           ],
@@ -17485,7 +17485,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user throws a Pollen Puff at the designated location which attaches to the nearest Pokémon within 0.5s. The Pollen Puff explodes 2s after attaching to a Pokémon, restoring the HP of the user's teammates and damaging opposing Pokémon in the area of effect.\n\nThe Pollen Puff explodes on its own after 1s with the same effects if it doesn't attach to any Pokémon within the first 0.5s of landing.\n\nUpgrade (Level 10): If the Pollen Puff attaches to a teammate, it reduces the damage that teammate receives by 15% for 2s before it explodes. If the Pollen Puff attaches to any Pokémon, opposing Pokémon that come in contact with the target receive damage over time every 0.5s before the Pollen Puff explodes.",
+          "descriptionAdvanced": "The user throws a Pollen Puff at the designated location which attaches to the nearest Pokémon within 0.5s. The Pollen Puff explodes 2s after attaching to a Pokémon, restoring the HP of the user's teammates and damaging opposing Pokémon in the area of effect.\n\nThe Pollen Puff explodes on its own after 1s with the same effects if it doesn't attach to any Pokémon within the first 0.5s of landing.\n\nUpgrade (Level 10): If the Pollen Puff attaches to a teammate, it reduces the damage that teammate receives by 20% for 2s before it explodes. If the Pollen Puff attaches to any Pokémon, opposing Pokémon that come in contact with the target receive damage over time every 0.5s before the Pollen Puff explodes.",
           "videoAsset": "/assets/skills/Eldegoss/Pollen+Puff.mp4"
         },
         {
@@ -17511,7 +17511,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user launches a tornado of sharp leaves in the designated direction, damaging opposing Pokémon hit by the tornado and creating a path in its wake that lasts for 4s. Teammates on the path have their movement speed increased by 55%, lingering for 1.5s after leaving the path. When the tornado reaches max distance, the tornado damages opposing Pokémon a second time.\n\n25% of the damage of the first hit.\n\nUpgrade (Level 10): Applies a debuff to opposing Pokémon hit by the tornado that causes auto attacks to deal no damage for 2.5s.",
+          "descriptionAdvanced": "The user launches a tornado of sharp leaves in the designated direction, damaging opposing Pokémon hit by the tornado and creating a path in its wake that lasts for 4s. Teammates on the path have their movement speed increased by 60%, lingering for 2s after leaving the path. When the tornado reaches max distance, the tornado damages opposing Pokémon a second time.\n\n25% of the damage of the first hit.\n\nUpgrade (Level 10): Applies a debuff to opposing Pokémon hit by the tornado that causes auto attacks to deal no damage for 2.5s.",
           "videoAsset": "/assets/skills/Eldegoss/Leaf+Tornado.mp4"
         },
         {
@@ -17543,7 +17543,7 @@
           "name": "Cotton Guard",
           "slot": "move2",
           "description": "Protects the user and nearby allies with cotton. The cotton absorbs damage and when the move ends, the cotton restores some HP.\n\nUpgrade (Level 12): Also increases the user's movement speed while using this move.",
-          "cooldownSeconds": 10.5,
+          "cooldownSeconds": 9.5,
           "damageInstances": [
             {
               "ratio": 1.725,
@@ -17605,10 +17605,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 3.06,
+              "ratio": 3.37,
               "scalingStat": "spAttack",
-              "slider": 13.0,
-              "base": 636.0,
+              "slider": 14.0,
+              "base": 700.0,
               "damageType": "special"
             }
           ],
@@ -18212,10 +18212,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.47,
+              "ratio": 0.52,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 128.0,
+              "base": 141.0,
               "damageType": "special"
             }
           ],
@@ -18238,17 +18238,17 @@
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
-              "ratio": 0.62,
+              "ratio": 0.69,
               "scalingStat": "spAttack",
               "slider": 4.0,
-              "base": 90.0,
+              "base": 101.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.74,
+              "ratio": 0.83,
               "scalingStat": "spAttack",
-              "slider": 5.0,
-              "base": 108.0,
+              "slider": 6.0,
+              "base": 121.0,
               "damageType": "special"
             },
             {
@@ -18267,7 +18267,7 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user becomes unstoppable for 1s as they create a violent swirling whirlpool around themself, dealing damage to opposing Pokémon every 0.25s up to 4 hits. The user's HP is restored by 40% of the damage dealt against Pokémon on the opposing team, and by 20% against wild Pokémon. Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will throw opposing Pokémon for 0.6s and the user will slash once at the end of the move in the designated direction extending the unstoppable duration to 1.33s. The healing of the move is increased to 50% of the damage dealt against Pokémon on the opposing team, and 25% against wild Pokémon.\n\nUpgrade (Level 13): Increased damage.",
+          "descriptionAdvanced": "The user becomes unstoppable for 1s as they create a violent swirling whirlpool around themself, dealing damage to opposing Pokémon every 0.25s up to 4 hits. The user's HP is restored by 50% of the damage dealt against Pokémon on the opposing team (this healing is halved against wild Pokémon). Increases Torrent gauge by 10/15/20 when under 50 Torrent gauge.\n\nWhen empowered by Torrent, this move will throw opposing Pokémon for 0.6s and the user will slash once at the end of the move in the designated direction extending the unstoppable duration to 1.33s. The healing of the move is increased to 60% of the damage dealt against Pokémon on the opposing team, and 30% against wild Pokémon.\n\nUpgrade (Level 13): Increased damage and increased healing to 60% of the damage dealt (this healing is halved against wild Pokémon).",
           "videoAsset": "/assets/skills/Empoleon/Whirlpool.mp4"
         },
         {
@@ -18302,10 +18302,10 @@
           "cooldownSeconds": 5.5,
           "damageInstances": [
             {
-              "ratio": 2.07,
+              "ratio": 2.28,
               "scalingStat": "spAttack",
-              "slider": 11.0,
-              "base": 310.0,
+              "slider": 12.0,
+              "base": 341.0,
               "damageType": "special"
             },
             {
@@ -19475,7 +19475,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Charge with its horns, dealing damage to opposing Pokémon it hits and throwing them in the air for 0.25s. Immediately afterward, strike with its horns again and gain a shield for 2.5s.\n\n6% Max HP\n\nTrooper damage becomes additional to Column formation hitting the same target.\n\nIn No Retreat formation: Falinks becomes hindrance resistant and charges power for 1s. It then strikes forward with its horns, dealing additional damage to opposing Pokémon it hits based on their max HP and gaining a shield for 2.5s. This version of the move has a 4s cd that is separate from the column version.\n\nUpgrade (Level 10): Increases the shield value.",
+          "descriptionAdvanced": "Charge with its horns, dealing damage to opposing Pokémon it hits and throwing them in the air for 0.25s. Immediately afterward, strike with its horns again and gain a shield for 3.5s.\n\n6% Max HP\n\nTrooper damage becomes additional to Column formation hitting the same target.\n\nIn No Retreat formation: Falinks becomes hindrance resistant and charges power for 1s. It then strikes forward with its horns, dealing additional damage to opposing Pokémon it hits based on their max HP and gaining a shield for 2.5s. This version of the move has a 4s cd that is separate from the column version.\n\nUpgrade (Level 10): Increases the shield value.",
           "videoAsset": "/assets/skills/Falinks/Megahorn.mp4"
         },
         {
@@ -19539,7 +19539,7 @@
           "name": "No Retreat",
           "slot": "move2",
           "description": "Has the user switch to No Retreat formation while shoving opposing Pokémon in front of it. While in No Retreat formation, the user cannot change the direction it's facing and its movement speed when moving backward is decreased, but its Attack is increased and damage it takes from the front is reduced. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.",
-          "cooldownSeconds": 5.0,
+          "cooldownSeconds": 4.0,
           "damageInstances": [
             {
               "ratio": 2.0,
@@ -19585,7 +19585,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Switch to No Retreat formation while shoving enemies for 0.4s in front of Falinks and become unstoppable during the formation change for 0.5s. While in No Retreat formation, the user cannot change the direction they're facing, unless they use the other move. Falinks' movement speed when moving backward is slowed by 10%, but Attack is increased by 25% and damage taken from the front is reduced by 20%. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.\n\nWhile in No Retreat formation both the Brass and Troopers take 20% less damage from the front. The Brass' total damage reduction becomes 28%; the Trooper's total damage reduction becomes 92%.\n\nUpgrade (Level 12): Attack increase is increased to 40% and damage reduction from the front is increased to 30%.",
+          "descriptionAdvanced": "Switch to No Retreat formation while shoving enemies for 0.4s in front of Falinks and become unstoppable during the formation change for 0.5s. While in No Retreat formation, the user cannot change the direction they're facing, unless they use the other move. Falinks' movement speed when moving backward is slowed by 10%, but Attack is increased by 25% and damage taken from the front is reduced by 30%. If this move is used while the user is in No Retreat formation, the user will switch to Column formation.\n\nWhile in No Retreat formation both the Brass and Troopers take 30% less damage from the front. The Brass' total damage reduction becomes 37%; the Trooper's total damage reduction becomes 93%.\n\nUpgrade (Level 12): Attack increase is increased to 40% and damage reduction from the front is increased to 35%.",
           "videoAsset": "/assets/skills/Falinks/No+Retreat.mp4"
         },
         {
@@ -19633,7 +19633,7 @@
           "name": "Dust Devil Formation",
           "slot": "uniteMove",
           "description": "Has the five troopers run continuously around the brass at great speed, dealing damage and applying a slowing effect to opposing Pokémon they hit. While this move is being used, damage taken by the troopers is reduced.",
-          "cooldownSeconds": 112.0,
+          "cooldownSeconds": 100.0,
           "damageInstances": [
             {
               "ratio": 0.9,
@@ -20247,7 +20247,7 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Feraligatr/Big+Jaw+Bite.png",
-          "descriptionAdvanced": "The user becomes Unstoppable while letting out an intimidating growl, reducing move cooldowns by 40% of the remaining cooldown, and reduces move cooldowns by 40% of the max cooldown for future move uses while this move is active for up to 15s. Additionally the user's tenacity is increased by 30% for 15s.\n\nWhen this move is used again, the user becomes Unstoppable and charges at the designated Pokémon from the opposing team and sinks their teeth into them, dealing damage. The amount of damage dealt is based on the number of Fang marks applied by Crunch.",
+          "descriptionAdvanced": "The user becomes Unstoppable while letting out an intimidating growl, reducing move cooldowns by 40% of the remaining cooldown, and reduces move cooldowns by 40% of the max cooldown for future move uses while this move is active for up to 15s. Additionally the user's tenacity is increased by 30% for 15s.\n\nWhen this move is used again, the user becomes Unstoppable and charges at the designated Pokémon from the opposing team and sinks their teeth into them, dealing damage and stunning them for 0.4s. The amount of damage dealt is based on the number of Fang marks applied by Crunch.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Feraligatr/Big+Jaw+Bite.mp4"
         }
@@ -24300,7 +24300,7 @@
           ],
           "effects": [],
           "tags": [],
-          "descriptionAdvanced": "Auto attacks differ depending on range, and become boosted attacks with every third attack, dealing increased damage. Auto attacks used at long range reduce the cooldown of Bubble, Water Shuriken, or Surf by 0.5s when they hit. Boosted attacks used at long range also decrease the movement speed of the opposing Pokémon hit by 25% for 0.5s.\n\nAuto attacks used in close range instead deal a bonus 5% missing HP damage to opposing Pokémon hit. Boosted attacks used in close range dash through the target, dealing a bonus 10% missing HP damage to opposing Pokémon hit instead. Against wild Pokémon: the total damage of auto attacks used in close range is capped at 500."
+          "descriptionAdvanced": "Auto attacks differ depending on range, and become boosted attacks with every third attack, dealing increased damage. Auto attacks used at long range reduce the cooldown of Bubble, Water Shuriken, or Surf by 0.5s when they hit. Boosted attacks used at long range also decrease the movement speed of the opposing Pokémon hit by 25% for 0.5s.\n\nAuto attacks used in close range instead deal a bonus 5% missing HP damage to opposing Pokémon hit. Boosted attacks used in close range dash through the target, dealing a bonus 10% missing HP damage to opposing Pokémon hit instead. Against wild Pokémon: the missing HP damage of auto attacks used in close range is capped at 500."
         },
         {
           "id": "bubble",
@@ -24334,10 +24334,10 @@
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
-              "ratio": 1.35,
+              "ratio": 1.22,
               "scalingStat": "attack",
-              "slider": 8.0,
-              "base": 210.0,
+              "slider": 7.0,
+              "base": 189.0,
               "damageType": "physical"
             },
             {
@@ -24381,10 +24381,10 @@
               "damageType": "physical"
             },
             {
-              "ratio": 0.41,
+              "ratio": 0.37,
               "scalingStat": "attack",
               "slider": 5.0,
-              "base": 75.0,
+              "base": 68.0,
               "damageType": "physical"
             }
           ],
@@ -24420,7 +24420,7 @@
           "name": "Double Team",
           "slot": "move2",
           "description": "Quickly moves the user away from the current position, creating illusory copies of it to aid in battle.\n\nUpgrade (Level 13): Reduced cooldown.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 9.0,
           "damageInstances": [],
           "effects": [],
           "tags": [
@@ -24464,7 +24464,7 @@
           "name": "Waterburst Shuriken",
           "slot": "uniteMove",
           "description": "Throw a giant water shuriken toward the designated area, dealing damage to enemies in the area of effect and decreasing their movement speed for a short time when this move hits. The water shuriken then immediately explodes, dealing damage to enemies in the area of effect and throws them. Once this move ends, the user may jump in a designated direction.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 112.0,
           "damageInstances": [
             {
               "ratio": 2.2,
@@ -28388,7 +28388,7 @@
           "name": "Bubble Beam",
           "slot": "move2",
           "description": "Grants the user a shield and has the user spray bubbles in the designated direction, dealing damage to opposing Pokémon it hits. After the bubbles fly a set distance, they slowly float for a short time. Opposing Pokémon hit by a floating bubble are enveloped by it and left unable to act for a short time.",
-          "cooldownSeconds": 9.0,
+          "cooldownSeconds": 8.0,
           "damageInstances": [
             {
               "ratio": 1.725,
@@ -28446,7 +28446,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Unleash an icy-cold beam of energy in the designated direction, dealing damage to Pokémon hit and freezing the ground for 3s. Pokémon on the frozen ground take damage equal to the beam's damage every 0.4s they remain on it and have their movement speed decreased by 15% for 2s stacking up to 6 times. Pokémon become frozen for 1s if they remain on the frozen ground for 3 ticks. When Lapras is on the frozen ground, Lapras's movement speed is increased by 20%, lingering for 0.5s if Lapras leaves the frozen ground.\n\nUpgrade (Level 13): Increase the duration Pokémon are Frozen for to 1.5s.",
+          "descriptionAdvanced": "Unleash an icy-cold beam of energy in the designated direction, dealing damage to Pokémon hit and freezing the ground for 3s. Pokémon on the frozen ground take damage every 0.4s they remain on it and have their movement speed decreased by 15% for 2s stacking up to 6 times. Pokémon become frozen for 1s if they remain on the frozen ground for 3 ticks. When Lapras is on the frozen ground, Lapras's movement speed is increased by 40%, lingering for 0.5s if Lapras leaves the frozen ground.\n\nUpgrade (Level 13): Increase the duration Pokémon are Frozen for to 1.5s.",
           "videoAsset": "/assets/skills/Lapras/Ice+Beam.mp4"
         },
         {
@@ -28478,9 +28478,9 @@
       "passiveAbility": {
         "id": "shell-armor",
         "name": "Shell Armor",
-        "description": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 20%.",
+        "description": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 25%.",
         "effects": [],
-        "descriptionAdvanced": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 20%.",
+        "descriptionAdvanced": "If Lapras would take a single instance of damage that would be greater than 10% of Lapras's maximum HP, this damage will be reduced by 25%.",
         "iconAsset": "/assets/skills/Lapras/Shell+Armor.png"
       },
       "builds": [
@@ -28978,7 +28978,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Rallies the designated ally Pokémon, granting the user and the ally a shield, and additional damage for a single hit for up to 3s. This move can be recast within 3s to rally a second designated ally Pokémon, however the user will not gain a shield this time. Alternatively the user can target themselves, however the recast must be used on an allied Pokémon. If the designated ally is Latios, then Latios will additionally gain 20% movement speed for 2s.\n\nWhen this move is recast; Latias will fly towards the designated ally. This move's cooldown begins once the recast is used or expires. The damage increase is based on the rallied Pokémon's level.\n\nUpgrade (Level 12): Increased the strength of the shield.",
+          "descriptionAdvanced": "Rallies the designated ally Pokémon, granting a shield for 3s and extra damage for the next hit up to 3s: if the user targeted themself, the user will gain the shield and the extra damage. If an ally was targeted, the ally will gain the shield and the extra damage, while the user only gains the shield. The move can the be recasted within 3s, the recast must target an ally other than the user. When used, the ally will gain the shield and the extra damage, while the user will only gain the extra damage. If the designated ally is Latios, then Latios will additionally gain 20% movement speed for 2s.\n\nWhen this move is recast; Latias will fly towards the designated ally. This move's cooldown begins once the recast is used or expires. The damage increase is based on the rallied Pokémon's level.\n\nUpgrade (Level 12): Increased the strength of the shield.",
           "videoAsset": "/assets/skills/Latias/Dragon+Cheer.mp4"
         },
         {
@@ -32426,7 +32426,7 @@
           "name": "Submission",
           "slot": "move2",
           "description": "Increases movement speed and become immune to hindrances. When the next basic attack hits, the attack deals increased damage and slams the enemy onto the ground, leaving it unable to act. Once this move ends, the user's critical-hit rate and basic attack speed are increased for a short time.\n\nUpgrade (Level 11): Increased critical-hit rate and basic attack speed.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 9.5,
           "damageInstances": [
             {
               "ratio": 1.15,
@@ -33635,10 +33635,10 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 1.92,
+              "ratio": 1.54,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 576.0,
+              "base": 461.0,
               "damageType": "special"
             }
           ],
@@ -33674,7 +33674,7 @@
           ],
           "moveType": "Recovery",
           "iconAsset": "/assets/skills/Meganium/Synthesis.png",
-          "descriptionAdvanced": "The user photosynthesizes and produces energy around the designated ally and the user for 1s. Allies in the area of effect get healed, doubly so if within both circles of energy, while opposing Pokémon have their damage lowered by 15% for 3s.",
+          "descriptionAdvanced": "The user photosynthesizes and produces energy around the designated ally and the user for 1s. Allies in the area of effect get healed, if within both circles of energy the second circle's healing is halved, while opposing Pokémon have their damage lowered by 15% for 3s.",
           "videoAsset": "/assets/skills/Meganium/Synthesis.mp4"
         },
         {
@@ -33682,7 +33682,7 @@
           "name": "Petal Blizzard",
           "slot": "move2",
           "description": "Has the user stir up a violent petal blizzard in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon while restoring ally Pokémon HP within its area of effect. The HP of ally Pokémon near to the user will also be restored. When this move becomes a full bloom move, the blizzard's area of effect is increased, and the petals remain for a set amount of time.",
-          "cooldownSeconds": 6.0,
+          "cooldownSeconds": 7.0,
           "damageInstances": [
             {
               "ratio": 1.24,
@@ -33731,7 +33731,7 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Meganium/Full+Bloom+Aroma.png",
-          "descriptionAdvanced": "The user emits a sweet aroma around themselves dealing damage to opposing Pokémon every 0.5s up to 10 times. Opposing Pokémon hit by this move have their damage reduced by 15% for 3s, the duration is refreshed on each hit. For up to 5s, the user's next move will be in full bloom, granting extra effects.\n\nMeganium gains 2700 energy per second instead of the usual 900. Hitting with moves grants 4500 energy.",
+          "descriptionAdvanced": "The user emits a sweet aroma around themselves dealing damage to opposing Pokémon every 0.5s up to 10 times. Opposing Pokémon hit by this move have their damage reduced by 10% for 3s, the duration is refreshed on each hit. For up to 5s, the user's next move will be in full bloom, granting extra effects.\n\nMeganium gains 2700 energy per second instead of the usual 900. Hitting with moves grants 4500 energy.",
           "upgradeLevel": 7,
           "videoAsset": "/assets/skills/Meganium/Full+Bloom+Aroma.mp4"
         }
@@ -39054,10 +39054,10 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 1.47,
+              "ratio": 1.32,
               "scalingStat": "spAttack",
-              "slider": 8.0,
-              "base": 434.0,
+              "slider": 7.0,
+              "base": 391.0,
               "damageType": "special"
             }
           ],
@@ -39069,7 +39069,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user exhales hot breath in the designated direction, dealing damage and granting health regeneration. This health regeneration lasts 2s and ticks every 0.5s.\n\n5% of Max HP\n\nUpgrade (Level 11): Lowers the cooldown of this move by 1s for each Pokémon from the opposing team hit.",
+          "descriptionAdvanced": "The user exhales hot breath in the designated direction, dealing damage and granting health regeneration. This health regeneration lasts 2s and ticks every 0.5s.\n\n4% of Max HP\n\nUpgrade (Level 11): Lowers the cooldown of this move by 1s for each Pokémon from the opposing team hit.",
           "videoAsset": "/assets/skills/Moltres/Heat+Wave.mp4"
         },
         {
@@ -42338,6 +42338,523 @@
           "moves": [
             "Bubble Beam",
             "Psychic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quaquaval",
+      "displayName": "Quaquaval",
+      "role": "AllRounder",
+      "attackType": "physical",
+      "difficulty": 2,
+      "imageAsset": "/assets/pokemon/portrait/Quaquaval.png",
+      "iconAsset": "/assets/pokemon/thumbnail/Quaquaval.png",
+      "evolutions": [
+        {
+          "level": 1,
+          "formName": "Quaquaval"
+        }
+      ],
+      "baseStatsByLevel": [
+        {
+          "hp": 3460.0,
+          "attack": 160.0,
+          "defense": 94.0,
+          "spAttack": 20.0,
+          "spDefense": 92.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3528.0,
+          "attack": 165.0,
+          "defense": 100.0,
+          "spAttack": 21.0,
+          "spDefense": 97.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.10289999999999999,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3610.0,
+          "attack": 172.0,
+          "defense": 106.0,
+          "spAttack": 23.0,
+          "spDefense": 104.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1063,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3708.0,
+          "attack": 179.0,
+          "defense": 114.0,
+          "spAttack": 25.0,
+          "spDefense": 112.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1105,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 4062.0,
+          "attack": 207.0,
+          "defense": 143.0,
+          "spAttack": 32.0,
+          "spDefense": 140.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.12539999999999998,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4203.0,
+          "attack": 218.0,
+          "defense": 155.0,
+          "spAttack": 35.0,
+          "spDefense": 151.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.13140000000000002,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4847.0,
+          "attack": 268.0,
+          "defense": 207.0,
+          "spAttack": 48.0,
+          "spDefense": 203.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1585,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5050.0,
+          "attack": 284.0,
+          "defense": 223.0,
+          "spAttack": 52.0,
+          "spDefense": 219.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1671,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5294.0,
+          "attack": 303.0,
+          "defense": 243.0,
+          "spAttack": 57.0,
+          "spDefense": 238.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.17739999999999997,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5587.0,
+          "attack": 326.0,
+          "defense": 267.0,
+          "spAttack": 63.0,
+          "spDefense": 262.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.18969999999999998,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5938.0,
+          "attack": 353.0,
+          "defense": 296.0,
+          "spAttack": 70.0,
+          "spDefense": 290.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2045,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6359.0,
+          "attack": 386.0,
+          "defense": 330.0,
+          "spAttack": 79.0,
+          "spDefense": 323.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2223,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6865.0,
+          "attack": 426.0,
+          "defense": 371.0,
+          "spAttack": 89.0,
+          "spDefense": 364.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2437,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7472.0,
+          "attack": 473.0,
+          "defense": 421.0,
+          "spAttack": 101.0,
+          "spDefense": 412.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2693,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 8200.0,
+          "attack": 530.0,
+          "defense": 480.0,
+          "spAttack": 116.0,
+          "spDefense": 470.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3,
+          "moveSpeed": 4300.0
+        }
+      ],
+      "moves": [
+        {
+          "id": "attack",
+          "name": "Attack",
+          "slot": "basicAttack",
+          "description": "",
+          "cooldownSeconds": 0.0,
+          "damageInstances": [
+            {
+              "ratio": 1.0,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 0.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.3,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 0.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 0.5,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 150.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [],
+          "descriptionAdvanced": "The user kicks at opposing Pokémon dealing damage. Becomes a boosted attack every third attack, with the user stepping in for a kick with increased damage.\n\nSpinning Edge deals damage 3 times in an area around the user over time, before rapidly dealing damage 3 more times. If Low Sweep was used preceding Spinning Edge, then it will do increased damage. If Liquidation was used preceding Spinning Edge, then it will grant a shield on use. If Carnival Splash was used preceding Spinning Edge, it will gain both effects."
+        },
+        {
+          "id": "pound",
+          "name": "Pound",
+          "slot": "move1",
+          "description": "",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 1.45,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 435.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "melee"
+          ],
+          "moveType": "Melee",
+          "iconAsset": "/assets/skills/Quaquaval/Pound.png",
+          "descriptionAdvanced": "The user pounds the area, dealing damage and slowing opposing Pokémon by 30% for 2s.",
+          "videoAsset": "/assets/skills/Quaquaval/Pound.mp4"
+        },
+        {
+          "id": "low-sweep",
+          "name": "Low Sweep",
+          "slot": "move1",
+          "description": "Has the user unleash three swift kicks in the designated direction, dealing damage and decreasing opposing Pokémon's movement speed.\n\nWhen this move causes vibes to reach max, Spinning Edge deals increased damage.\n\nUpgrade (Level 11): Increases the damage dealt by this move and further increases the damage dealt by Spinning Edge when boosted.",
+          "cooldownSeconds": 7.0,
+          "damageInstances": [
+            {
+              "ratio": 1.0,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 300.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "melee"
+          ],
+          "iconAsset": "/assets/skills/Quaquaval/Low+Sweep.png",
+          "isUpgrade": true,
+          "moveType": "Melee",
+          "upgradeLevel": 5,
+          "descriptionAdvanced": "The user unleashes three swift kicks in the designated direction, dealing damage and slowing opposing Pokémon by 60% for 1s, decaying by 15% every 0.25s. The third kick can be aimed, launching the user in that direction before unleashing the kick.\n\nUpgrade (Level 11): Increases the damage of this move, and Spinning Edge when this move precedes it.",
+          "videoAsset": "/assets/skills/Quaquaval/Low+Sweep.mp4"
+        },
+        {
+          "id": "wing-attack",
+          "name": "Wing Attack",
+          "slot": "move2",
+          "description": "",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 1.05,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 315.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.25,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 375.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "moveType": "Dash",
+          "iconAsset": "/assets/skills/Quaquaval/Wing+Attack.png",
+          "descriptionAdvanced": "The user lunges in the designated direction dealing damage, and gaining a shield for 3s on hit.",
+          "videoAsset": "/assets/skills/Quaquaval/Wing+Attack.mp4"
+        },
+        {
+          "id": "liquidation",
+          "name": "Liquidation",
+          "slot": "move2",
+          "description": "Has the user charge in the designated direction, dealing damage and decreasing the Defense of opposing Pokémon it hits, and restoring the user's HP.\n\nA maximum of 2 uses can be kept in reserve for this move.\n\nWhen this move causes vibes to reach max, Spinning Edge grants the user a shield effect.\n\nUpgrade (Level 13): Increases the amount of HP restored by this move and strengthens the shield effect granted by Spinning Edge when boosted.",
+          "cooldownSeconds": 7.0,
+          "damageInstances": [
+            {
+              "ratio": 1.9,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 570.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "iconAsset": "/assets/skills/Quaquaval/Liquidation.png",
+          "isUpgrade": true,
+          "moveType": "Dash",
+          "upgradeLevel": 7,
+          "descriptionAdvanced": "The user charges in the designated direction, dealing damage, lowering the defense of opposing Pokémon by 30% for 3s, and restoring the user's HP.\n\n10% of Max HP\n\nTwo uses can be kept in reserve, with a 0.5s cooldown between uses.\n\nUpgrade (Level 13): Increases the amount of health this move restores, and increases Spinning Edge's shield when this move precedes it.",
+          "videoAsset": "/assets/skills/Quaquaval/Liquidation.mp4"
+        },
+        {
+          "id": "carnival-splash",
+          "name": "Carnival Splash",
+          "slot": "uniteMove",
+          "description": "",
+          "cooldownSeconds": 100.0,
+          "damageInstances": [
+            {
+              "ratio": 1.5,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 448.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.2,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 360.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 0.39990000000000003,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 119.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "buff"
+          ],
+          "moveType": "Buff",
+          "iconAsset": "/assets/skills/Quaquaval/Carnival+Splash.png",
+          "descriptionAdvanced": "The user becomes Unstoppable while dancing in place, gaining a shield and dealing damage to opposing Pokémon up to 3 times. The third hit will pull in opposing Pokémon towards the user, stunning them for 1s. Each opposing Pokémon pulled in grants the user a shield, up to 3 times.\n\nThe third hit of this move will not affect wild Pokémon.",
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Quaquaval/Carnival+Splash.mp4"
+        }
+      ],
+      "passiveAbility": {
+        "id": "moxie",
+        "name": "Moxie",
+        "description": "When the user deals damage with auto attacks or moves, vibes increase, which increase Attack by 5% per stack up to 3. If no vibes are gained within 3s, they are lost, along with the user's boosted gauge.",
+        "effects": [],
+        "descriptionAdvanced": "When the user deals damage with auto attacks or moves, vibes increase, which increase Attack by 5% per stack up to 3. If no vibes are gained within 3s, they are lost, along with the user's boosted gauge.\n\nAfter evolving into Quaquaval, the next auto attack when vibes are maxed becomes Spinning Edge. Each time Spinning Edge hits opposing Pokémon, the user's movement speed is increased by 15% for 3s, stacking up to 3 times.",
+        "iconAsset": "/assets/skills/Quaquaval/Moxie.png"
+      },
+      "builds": [
+        {
+          "name": "Serving Looks",
+          "emblemName": "Serving Looks",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "drain-crown",
+            "razor-claw"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "197-umbreon",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "169-crobat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "168-ariados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "024-arbok",
+              "grade": "silver"
+            }
+          ],
+          "moves": [
+            "Low Sweep",
+            "Liquidation"
+          ]
+        },
+        {
+          "name": "Carnival King",
+          "emblemName": "Carnival King",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "weakness-policy",
+            "razor-claw"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "128-tauros",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "130-gyarados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "031-nidoqueen",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Low Sweep",
+            "Liquidation"
           ]
         }
       ]
@@ -46399,7 +46916,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.5s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
+          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.7s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
           "videoAsset": "/assets/skills/Skeledirge/Snarl.mp4"
         },
         {
@@ -46431,9 +46948,9 @@
       "passiveAbility": {
         "id": "blaze",
         "name": "Blaze",
-        "description": "The user's next move is granted 35% SpDef Pierce (20s CD).",
+        "description": "The user's next move is granted 35% SpDef Pierce (15s CD).",
         "effects": [],
-        "descriptionAdvanced": "The user's next move is granted 35% SpDef Pierce (20s CD).",
+        "descriptionAdvanced": "The user's next move is granted 35% SpDef Pierce (15s CD).",
         "iconAsset": "/assets/skills/Skeledirge/Blaze.png"
       },
       "builds": [
@@ -46885,7 +47402,7 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Slowbro rides on a wave, damaging, knocking enemies back, and throwing them in the air for .4s. Two more waves follow after the first, damaging and slowing enemies by 30% for 1s. Restore 10% of Slowbro's Oblivious health (blue HP) per wave, when hitting at least one enemy (maximum 3 times).\n\nUpgrade (Level 11): The second and third waves will now also throw enemies in the air for .75s, and the second wave will knock them back.",
+          "descriptionAdvanced": "Slowbro rides on a wave, damaging, knocking enemies back, and throwing them in the air for .4s. Two more waves follow after the first, damaging and slowing enemies by 30% for 1s. Restore 10% of Slowbro's Oblivious health (blue HP) per wave, when hitting at least one enemy (maximum 3 times).\n\nUpgrade (Level 11): The first and second wave will knock up enemies in the direction of the wave for 0.2s each, and the third wave will throw enemies in the air for 0.4s.",
           "videoAsset": "/assets/skills/Slowbro/Surf.mp4"
         },
         {
@@ -48782,10 +49299,10 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 0.74,
+              "ratio": 0.8,
               "scalingStat": "spAttack",
-              "slider": 12.0,
-              "base": 446.0,
+              "slider": 13.0,
+              "base": 482.0,
               "damageType": "special"
             }
           ],
@@ -48815,10 +49332,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.42,
+              "ratio": 0.48,
               "scalingStat": "spAttack",
-              "slider": 10.0,
-              "base": 175.0,
+              "slider": 12.0,
+              "base": 201.0,
               "damageType": "special"
             }
           ],
@@ -48895,7 +49412,7 @@
           "name": "Calm Mind",
           "slot": "move2",
           "description": "Sylveon quietly focuses their mind and calms their spirit, increasing movement speed, Sp. Attack by 40% and Sp. Defense by 10% for a short time.\n\nUpgrade (Level 12): One time only while using this move, if Sylveon is hit by an Enemy's move, the damage is completely nulliffied and Sylveon is granted a shield.",
-          "cooldownSeconds": 9.0,
+          "cooldownSeconds": 8.0,
           "damageInstances": [],
           "effects": [],
           "tags": [
@@ -49988,17 +50505,17 @@
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
-              "ratio": 1.68,
+              "ratio": 2.1,
               "scalingStat": "attack",
-              "slider": 12.0,
-              "base": 260.0,
+              "slider": 15.0,
+              "base": 325.0,
               "damageType": "physical"
             },
             {
-              "ratio": 2.94,
+              "ratio": 3.18,
               "scalingStat": "attack",
-              "slider": 21.0,
-              "base": 454.0,
+              "slider": 23.0,
+              "base": 490.0,
               "damageType": "physical"
             },
             {
@@ -50164,7 +50681,7 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Tinkaton/Kiss+Bliss+Kaboom.png",
-          "descriptionAdvanced": "The user first blows cute kisses at the designated Pokémon from the opposing team and their nearby allies, damaging and stunning them for 0.7s when Kiss Bliss hits a target. The user can then use the Unite Move again, leaping up forward and slamming their hammer down at the designated location, damaging opposing Pokémon in the area of effect of Kaboom.\n\nUnite Move buffs apply when Kiss Bliss hits a target.",
+          "descriptionAdvanced": "The user first blows cute kisses at the designated Pokémon from the opposing team and their nearby allies, damaging and stunning them for 1.2s when Kiss Bliss hits a target. The user can then use the Unite Move again, leaping up forward and slamming their hammer down at the designated location, damaging opposing Pokémon in the area of effect of Kaboom.\n\nUnite Move buffs apply when Kiss Bliss hits a target.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Tinkaton/Kiss+Bliss+Kaboom.mp4"
         }
@@ -50174,7 +50691,7 @@
         "name": "Mold Breaker",
         "description": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.",
         "effects": [],
-        "descriptionAdvanced": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.\n\nThis Pokémon's hammer strengthens every time they hit Pokémon from the opposing team with boosted attacks or moves, increasing this Pokémon's Attack by 0.5% per target hit (up to 60 times; maximum 30% Attack). After the hammer is strengthened 20, 40, and 60 times; Rock Smash, Gigaton Hammer, and Smack Down gain increased range.",
+        "descriptionAdvanced": "When damaging an opposing Pokémon with an active shield effect, 30% of the damage dealt to the shield is dealt as additional damage to the target's HP.\n\nThis Pokémon's hammer strengthens every time they hit Pokémon from the opposing team with boosted attacks or moves, increasing this Pokémon's Attack by 0.5% per target hit (up to 100 times; maximum 50% Attack). After the hammer is strengthened 20, 40, and 60 times; Rock Smash, Gigaton Hammer, and Smack Down gain increased range.",
         "iconAsset": "/assets/skills/Tinkaton/Mold+Breaker.png"
       },
       "builds": [
@@ -56107,6 +56624,516 @@
       ]
     },
     {
+      "id": "yveltal",
+      "displayName": "Yveltal",
+      "role": "Attacker",
+      "attackType": "special",
+      "difficulty": 1,
+      "imageAsset": "/assets/pokemon/portrait/Yveltal.png",
+      "iconAsset": "/assets/pokemon/thumbnail/Yveltal.png",
+      "evolutions": [
+        {
+          "level": 1,
+          "formName": "Yveltal"
+        }
+      ],
+      "baseStatsByLevel": [
+        {
+          "hp": 3360.0,
+          "attack": 20.0,
+          "defense": 76.0,
+          "spAttack": 120.0,
+          "spDefense": 76.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3504.0,
+          "attack": 23.0,
+          "defense": 85.0,
+          "spAttack": 141.0,
+          "spDefense": 85.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1036,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3663.0,
+          "attack": 27.0,
+          "defense": 95.0,
+          "spAttack": 165.0,
+          "spDefense": 95.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1075,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3838.0,
+          "attack": 31.0,
+          "defense": 106.0,
+          "spAttack": 191.0,
+          "spDefense": 106.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1118,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 4030.0,
+          "attack": 36.0,
+          "defense": 117.0,
+          "spAttack": 219.0,
+          "spDefense": 118.0,
+          "critRate": 0.0,
+          "cdr": 0.05,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1166,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4241.0,
+          "attack": 41.0,
+          "defense": 131.0,
+          "spAttack": 251.0,
+          "spDefense": 131.0,
+          "critRate": 0.0,
+          "cdr": 0.05,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.12179999999999999,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4474.0,
+          "attack": 46.0,
+          "defense": 145.0,
+          "spAttack": 285.0,
+          "spDefense": 146.0,
+          "critRate": 0.0,
+          "cdr": 0.05,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1276,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 4730.0,
+          "attack": 53.0,
+          "defense": 161.0,
+          "spAttack": 323.0,
+          "spDefense": 162.0,
+          "critRate": 0.0,
+          "cdr": 0.05,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.13390000000000002,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5011.0,
+          "attack": 59.0,
+          "defense": 178.0,
+          "spAttack": 365.0,
+          "spDefense": 180.0,
+          "critRate": 0.0,
+          "cdr": 0.15,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1409,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5321.0,
+          "attack": 67.0,
+          "defense": 197.0,
+          "spAttack": 411.0,
+          "spDefense": 199.0,
+          "critRate": 0.0,
+          "cdr": 0.15,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1485,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5661.0,
+          "attack": 75.0,
+          "defense": 218.0,
+          "spAttack": 462.0,
+          "spDefense": 221.0,
+          "critRate": 0.0,
+          "cdr": 0.15,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.157,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6035.0,
+          "attack": 84.0,
+          "defense": 242.0,
+          "spAttack": 517.0,
+          "spDefense": 244.0,
+          "critRate": 0.0,
+          "cdr": 0.15,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.16620000000000001,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6448.0,
+          "attack": 93.0,
+          "defense": 267.0,
+          "spAttack": 579.0,
+          "spDefense": 270.0,
+          "critRate": 0.0,
+          "cdr": 0.25,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1764,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6901.0,
+          "attack": 104.0,
+          "defense": 295.0,
+          "spAttack": 646.0,
+          "spDefense": 299.0,
+          "critRate": 0.0,
+          "cdr": 0.25,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.18760000000000002,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7400.0,
+          "attack": 116.0,
+          "defense": 326.0,
+          "spAttack": 720.0,
+          "spDefense": 330.0,
+          "critRate": 0.0,
+          "cdr": 0.25,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2,
+          "moveSpeed": 4300.0
+        }
+      ],
+      "moves": [
+        {
+          "id": "attack",
+          "name": "Attack",
+          "slot": "basicAttack",
+          "description": "",
+          "cooldownSeconds": 0.0,
+          "damageInstances": [
+            {
+              "ratio": 0.3,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 160.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [],
+          "descriptionAdvanced": "The user fires dark energy at the target. Becomes a boosted attack every third attack dealing increased damage in an area."
+        },
+        {
+          "id": "gust",
+          "name": "Gust",
+          "slot": "move1",
+          "description": "Has the user attack with a gust of wind from its wings, dealing damage to opposing Pokémon.\n\nAfter traveling a set distance, the gust leaves behind a breeze, dealing damage over time to opposing Pokémon in the area of effect.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 0.8,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 240.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.24,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 72.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Yveltal/Gust.png",
+          "descriptionAdvanced": "The user launches a swirling gust of wind in the designated direction, dealing damage to opposing Pokémon in the area.\n\nThe move leaves a lingering breeze at the edge of the move's range, lasting 1s, and deals damage every 0.5s up to 2 times.",
+          "videoAsset": "/assets/skills/Yveltal/Gust.mp4"
+        },
+        {
+          "id": "oblivion-wing",
+          "name": "Oblivion Wing",
+          "slot": "move1",
+          "description": "Has the user unleash a destructive ray in the designated direction, restoring the user's HP based on the damage dealt. If the Pokémon exceeds its max HP, a set percentage is converted into a shield effect.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 2.44,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 684.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "ranged"
+          ],
+          "iconAsset": "/assets/skills/Yveltal/Oblivion+Wing.png",
+          "isUpgrade": true,
+          "moveType": "Ranged",
+          "upgradeLevel": 5,
+          "descriptionAdvanced": "The user launches a destructive beam in the designated direction, dealing damage and healing the user for 21% of the damage dealt. Against wild Pokémon the healing is reduced to 7%. Any leftover healing from the move that exceeds the user's max HP is converted into a shield at a 50% conversion (effects that alter healing directly are ignored). The shield lasts 2s, the duration is refreshed with each application, and can stack up to 10x. The maximum capacity of the shield is determined by the healing value of the most recent application.\n\nUpgrade (Level 11): Increases the damage of this move.",
+          "videoAsset": "/assets/skills/Yveltal/Oblivion+Wing.mp4"
+        },
+        {
+          "id": "lash-out",
+          "name": "Lash Out",
+          "slot": "move2",
+          "description": "Has the user lash out in the designated area, dealing damage over time to opposing Pokémon. The last hit deals damage and leaves the opposing Pokémon unable to act.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 0.32,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 96.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.64,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 192.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Yveltal/Lash+Out.png",
+          "descriptionAdvanced": "The user lashes out in the designated area, leaving a damaging zone for 1s, dealing damage every 0.5s up to 3 times.\n\nThe third hit deals increased damage and stuns opposing Pokémon for 0.6s.",
+          "videoAsset": "/assets/skills/Yveltal/Lash+Out.mp4"
+        },
+        {
+          "id": "dark-pulse",
+          "name": "Dark Pulse",
+          "slot": "move2",
+          "description": "Has the user unleash a malicious orb in the designated direction, dealing damage to opposing Pokémon it hits and leaving them unable to act.\n\nWhen the orb travels a set distance or this move hits opposing Pokémon, the orb detonates, dealing damage over time and applying a slow effect to opposing Pokémon in the area of effect.\n\nUpgrade (Level 13): Reduces this move's cooldown.",
+          "cooldownSeconds": 7.0,
+          "damageInstances": [
+            {
+              "ratio": 0.84,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 252.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.14,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 42.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "iconAsset": "/assets/skills/Yveltal/Dark+Pulse.png",
+          "isUpgrade": true,
+          "moveType": "Area",
+          "upgradeLevel": 7,
+          "descriptionAdvanced": "The user unleashes a malicious orb in the designated direction, exploding against the first opposing Pokémon hit, or after reaching the edge of the move's range. The explosion deals damage and stuns opposing Pokémon for 0.6s and leaves a damaging zone for 2.5s, dealing damage every 0.5s up to 6 times.\n\nDamage from the lingering zone slows opposing Pokémon by 30% for 2s.\n\nUpgrade (Level 13): Reduces the cooldown of this move by 1s.",
+          "videoAsset": "/assets/skills/Yveltal/Dark+Pulse.mp4"
+        },
+        {
+          "id": "lumiere-of-demise",
+          "name": "Lumiere of Demise",
+          "slot": "uniteMove",
+          "description": "Has the user fire a violent beam of light at the designated location, dealing continuous damage to opposing Pokémon in the beam's area of effect.\n\nThe longer the beam is fired, the larger the area of effect. Afterward, it creates an explosion, dealing increased damage to opposing Pokémon.\n\nWhile firing the beam, the user is resistant to hindrances.",
+          "cooldownSeconds": 100.0,
+          "damageInstances": [
+            {
+              "ratio": 0.4,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 120.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 2.4,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 720.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Yveltal/Lumiere+of+Demise.png",
+          "descriptionAdvanced": "The user becomes Hindrance Resistant, and begins channeling a violent beam at the designated area for 3.5s, dealing damage every 0.5s up to 6 times. While firing the beam the area of effect increases. At the end of the move's channel, a large explosion occurs dealing increased damage.\n\nYveltal can move around while firing the beam, moving the damaging area as well.",
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Yveltal/Lumiere+of+Demise.mp4"
+        }
+      ],
+      "passiveAbility": {
+        "id": "dark-aura",
+        "name": "Dark Aura",
+        "description": "When the Pokémon deals damage to opposing Pokémon with a boosted attack, a move, or its Unite Move, the hit Pokémon's destruction counter increases. The higher the hit Pokémon's destruction counter, the more damage it receives.\n\nWhen Pokémon from the opposing team have a maxed destruction counter and take damage from this Pokémon's moves, they are immediately knocked out if their HP drops below a certain percentage.\n\nWhen this Pokémon immediately knocks out a Pokémon from the opposing team, its own HP is restored. If the Pokémon exceeds its max HP, a set percentage is converted into a shield effect.",
+        "effects": [],
+        "descriptionAdvanced": "When this Pokémon deals damage with boosted attacks or moves, a mark of destruction is applied onto opposing Pokémon. This mark lasts 3s and stacks up to 5 times, increasing Yveltal's damage towards the marked Pokémon by 3% per stack.\n\nWhen Yveltal hits a Pokémon on the opposing team with a move or boosted attack, if that Pokémon has 5 marks of destruction and is below 10% Max HP, Yveltal will additionally deal 40% of that Pokémon's Max HP as true damage (Effectively 46% Max HP due to the required 5 marks of destruction). Pokémon KO'd by this damage will heal Yveltal, any healing exceeding the user's Max HP will be converted into a shield for 3s, at a 50% conversion rate.",
+        "iconAsset": "/assets/skills/Yveltal/Dark+Aura.png"
+      },
+      "builds": [
+        {
+          "name": "Dark Survival",
+          "emblemName": "Dark Survival",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "wise-glasses",
+            "slick-spoon",
+            "focus-band"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "071-victreebel",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Oblivion Wing",
+            "Dark Pulse"
+          ]
+        },
+        {
+          "name": "Lumière of CDR",
+          "emblemName": "Lumière of CDR",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "wise-glasses",
+            "drive-lens",
+            "shell-bell"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "169-crobat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "015-beedrill",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "251-celebi",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "041-zubat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "042-golbat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "094-gengar",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Oblivion Wing",
+            "Dark Pulse"
+          ]
+        }
+      ]
+    },
+    {
       "id": "zacian",
       "displayName": "Zacian",
       "role": "AllRounder",
@@ -57201,48 +58228,7 @@
             "drive-lens",
             "wise-glasses"
           ],
-          "emblems": [
-            {
-              "emblemId": "045-vileplume",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "049-venomoth",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "088-grimer",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "089-muk",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "211-qwilfish",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "248-tyranitar",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "048-venonat",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "012-butterfree",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "249-lugia",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "071-victreebel",
-              "grade": "bronze"
-            }
-          ],
+          "emblems": [],
           "lane": "Path Damage",
           "emblemName": "Standard Special Attacker",
           "heldItemOptional": "sp--atk-specs",
@@ -58563,523 +59549,6 @@
           "moves": [
             "Night Slash",
             "Cut"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "quaquaval",
-      "displayName": "Quaquaval",
-      "role": "AllRounder",
-      "attackType": "physical",
-      "difficulty": 2,
-      "imageAsset": "/assets/pokemon/portrait/Quaquaval.png",
-      "iconAsset": "/assets/pokemon/thumbnail/Quaquaval.png",
-      "evolutions": [
-        {
-          "level": 1,
-          "formName": "Quaquaval"
-        }
-      ],
-      "baseStatsByLevel": [
-        {
-          "hp": 3460.0,
-          "attack": 160.0,
-          "defense": 94.0,
-          "spAttack": 20.0,
-          "spDefense": 92.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 3528.0,
-          "attack": 165.0,
-          "defense": 100.0,
-          "spAttack": 21.0,
-          "spDefense": 97.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.10289999999999999,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 3610.0,
-          "attack": 172.0,
-          "defense": 106.0,
-          "spAttack": 23.0,
-          "spDefense": 104.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1063,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 3708.0,
-          "attack": 179.0,
-          "defense": 114.0,
-          "spAttack": 25.0,
-          "spDefense": 112.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1105,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 4062.0,
-          "attack": 207.0,
-          "defense": 143.0,
-          "spAttack": 32.0,
-          "spDefense": 140.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.12539999999999998,
-          "moveSpeed": 3850.0
-        },
-        {
-          "hp": 4203.0,
-          "attack": 218.0,
-          "defense": 155.0,
-          "spAttack": 35.0,
-          "spDefense": 151.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.13140000000000002,
-          "moveSpeed": 3850.0
-        },
-        {
-          "hp": 4847.0,
-          "attack": 268.0,
-          "defense": 207.0,
-          "spAttack": 48.0,
-          "spDefense": 203.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1585,
-          "moveSpeed": 4000.0
-        },
-        {
-          "hp": 5050.0,
-          "attack": 284.0,
-          "defense": 223.0,
-          "spAttack": 52.0,
-          "spDefense": 219.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1671,
-          "moveSpeed": 4000.0
-        },
-        {
-          "hp": 5294.0,
-          "attack": 303.0,
-          "defense": 243.0,
-          "spAttack": 57.0,
-          "spDefense": 238.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.17739999999999997,
-          "moveSpeed": 4150.0
-        },
-        {
-          "hp": 5587.0,
-          "attack": 326.0,
-          "defense": 267.0,
-          "spAttack": 63.0,
-          "spDefense": 262.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.18969999999999998,
-          "moveSpeed": 4150.0
-        },
-        {
-          "hp": 5938.0,
-          "attack": 353.0,
-          "defense": 296.0,
-          "spAttack": 70.0,
-          "spDefense": 290.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2045,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 6359.0,
-          "attack": 386.0,
-          "defense": 330.0,
-          "spAttack": 79.0,
-          "spDefense": 323.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2223,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 6865.0,
-          "attack": 426.0,
-          "defense": 371.0,
-          "spAttack": 89.0,
-          "spDefense": 364.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.15,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2437,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 7472.0,
-          "attack": 473.0,
-          "defense": 421.0,
-          "spAttack": 101.0,
-          "spDefense": 412.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.15,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2693,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 8200.0,
-          "attack": 530.0,
-          "defense": 480.0,
-          "spAttack": 116.0,
-          "spDefense": 470.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.15,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.3,
-          "moveSpeed": 4300.0
-        }
-      ],
-      "moves": [
-        {
-          "id": "attack",
-          "name": "Attack",
-          "slot": "basicAttack",
-          "description": "",
-          "cooldownSeconds": 0.0,
-          "damageInstances": [
-            {
-              "ratio": 1.0,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 0.0,
-              "damageType": "physical"
-            },
-            {
-              "ratio": 1.3,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 0.0,
-              "damageType": "physical"
-            },
-            {
-              "ratio": 0.5,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 150.0,
-              "damageType": "physical"
-            }
-          ],
-          "effects": [],
-          "tags": [],
-          "descriptionAdvanced": "The user kicks at opposing Pokémon dealing damage. Becomes a boosted attack every third attack, with the user stepping in for a kick with increased damage.\n\nSpinning Edge deals damage 3 times in an area around the user over time, before rapidly dealing damage 3 more times. If Low Sweep was used preceding Spinning Edge, then it will do increased damage. If Liquidation was used preceding Spinning Edge, then it will grant a shield on use. If Carnival Splash was used preceding Spinning Edge, it will gain both effects."
-        },
-        {
-          "id": "pound",
-          "name": "Pound",
-          "slot": "move1",
-          "description": "Has the user deal damage and decrease opposing Pokémon's movement speed.",
-          "cooldownSeconds": 6.0,
-          "damageInstances": [
-            {
-              "ratio": 1.45,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 435.0,
-              "damageType": "physical"
-            }
-          ],
-          "effects": [],
-          "tags": [
-            "melee"
-          ],
-          "moveType": "Melee",
-          "iconAsset": "/assets/skills/Quaquaval/Pound.png",
-          "descriptionAdvanced": "The user pounds the area, dealing damage and slowing opposing Pokémon by 30% for 2s.",
-          "videoAsset": "/assets/skills/Quaquaval/Pound.mp4"
-        },
-        {
-          "id": "low-sweep",
-          "name": "Low Sweep",
-          "slot": "move1",
-          "description": "Has the user unleash three swift kicks in the designated direction, dealing damage and decreasing opposing Pokémon's movement speed.\n\nWhen this move causes vibes to reach max, Spinning Edge deals increased damage.\n\nUpgrade (Level 11): Increases the damage dealt by this move and further increases the damage dealt by Spinning Edge when boosted.",
-          "cooldownSeconds": 7.0,
-          "damageInstances": [
-            {
-              "ratio": 1.0,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 300.0,
-              "damageType": "physical"
-            }
-          ],
-          "effects": [],
-          "tags": [
-            "melee"
-          ],
-          "iconAsset": "/assets/skills/Quaquaval/Low+Sweep.png",
-          "isUpgrade": true,
-          "moveType": "Melee",
-          "upgradeLevel": 5,
-          "descriptionAdvanced": "The user unleashes three swift kicks in the designated direction, dealing damage and slowing opposing Pokémon by 60% for 1s, decaying by 15% every 0.25s. The third kick can be aimed, launching the user in that direction before unleashing the kick.\n\nUpgrade (Level 11): Increases the damage of this move, and Spinning Edge when this move precedes it.",
-          "videoAsset": "/assets/skills/Quaquaval/Low+Sweep.mp4"
-        },
-        {
-          "id": "wing-attack",
-          "name": "Wing Attack",
-          "slot": "move2",
-          "description": "Has the user lunge in the designated direction, dealing damage to opposing Pokémon in the area of effect.\n\nWhen this move deals damage to opposing Pokémon, the user receives a shield effect.",
-          "cooldownSeconds": 6.0,
-          "damageInstances": [
-            {
-              "ratio": 1.05,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 315.0,
-              "damageType": "physical"
-            },
-            {
-              "ratio": 1.25,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 375.0,
-              "damageType": "physical"
-            }
-          ],
-          "effects": [],
-          "tags": [
-            "dash"
-          ],
-          "moveType": "Dash",
-          "iconAsset": "/assets/skills/Quaquaval/Wing+Attack.png",
-          "descriptionAdvanced": "The user lunges in the designated direction dealing damage, and gaining a shield for 3s on hit.",
-          "videoAsset": "/assets/skills/Quaquaval/Wing+Attack.mp4"
-        },
-        {
-          "id": "liquidation",
-          "name": "Liquidation",
-          "slot": "move2",
-          "description": "Has the user charge in the designated direction, dealing damage and decreasing the Defense of opposing Pokémon it hits, and restoring the user's HP.\n\nA maximum of 2 uses can be kept in reserve for this move.\n\nWhen this move causes vibes to reach max, Spinning Edge grants the user a shield effect.\n\nUpgrade (Level 13): Increases the amount of HP restored by this move and strengthens the shield effect granted by Spinning Edge when boosted.",
-          "cooldownSeconds": 7.0,
-          "damageInstances": [
-            {
-              "ratio": 1.9,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 570.0,
-              "damageType": "physical"
-            }
-          ],
-          "effects": [],
-          "tags": [
-            "dash"
-          ],
-          "iconAsset": "/assets/skills/Quaquaval/Liquidation.png",
-          "isUpgrade": true,
-          "moveType": "Dash",
-          "upgradeLevel": 7,
-          "descriptionAdvanced": "The user charges in the designated direction, dealing damage, lowering the defense of opposing Pokémon by 30% for 3s, and restoring the user's HP.\n\n8% of Max HP\n\nTwo uses can be kept in reserve, with a 0.5s cooldown between uses.\n\nUpgrade (Level 13): Increases the amount of health this move restores, and increases Spinning Edge's shield when this move precedes it.",
-          "videoAsset": "/assets/skills/Quaquaval/Liquidation.mp4"
-        },
-        {
-          "id": "carnival-splash",
-          "name": "Carnival Splash",
-          "slot": "uniteMove",
-          "description": "Has the user dance in place, pulling in opposing Pokémon, dealing damage, and leaving them unable to act.\n\nThis move grants the user a shield effect. With each opposing Pokémon this move hits, vibes and this shield effect will increase.\n\nWhen this move causes vibes to reach max, Spinning Edge deals increased damage and grants the user a shield effect.",
-          "cooldownSeconds": 100.0,
-          "damageInstances": [
-            {
-              "ratio": 1.3,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 390.0,
-              "damageType": "physical"
-            },
-            {
-              "ratio": 1.2,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 360.0,
-              "damageType": "physical"
-            },
-            {
-              "ratio": 0.39990000000000003,
-              "scalingStat": "attack",
-              "slider": 0.0,
-              "base": 119.0,
-              "damageType": "physical"
-            }
-          ],
-          "effects": [],
-          "tags": [
-            "buff"
-          ],
-          "moveType": "Buff",
-          "iconAsset": "/assets/skills/Quaquaval/Carnival+Splash.png",
-          "descriptionAdvanced": "The user becomes Unstoppable while dancing in place, gaining a shield and dealing damage to opposing Pokémon up to 3 times. The third hit will pull in opposing Pokémon towards the user, stunning them for 1s. Each opposing Pokémon pulled in grants the user a shield, up to 3 times.\n\nThe third hit of this move will not affect wild Pokémon.",
-          "upgradeLevel": 9,
-          "videoAsset": "/assets/skills/Quaquaval/Carnival+Splash.mp4"
-        }
-      ],
-      "passiveAbility": {
-        "id": "moxie",
-        "name": "Moxie",
-        "description": "When the user's basic attacks and moves hit opposing Pokémon, vibes increase, which increases Attack.\n\nVibes can increase to a maximum of 3, and they lower over time.\n\nWhen vibes reach max, the next basic attack becomes Spinning Edge. Each time Spinning Edge hits opposing Pokémon, the user's movement speed increases.",
-        "effects": [],
-        "descriptionAdvanced": "When the user deals damage with auto attacks or moves, vibes increase, which increase Attack by 5% per stack up to 3. If no vibes are gained within 3s, they are lost, along with the user's boosted gauge.\n\nAfter evolving into Quaquaval, the next auto attack when vibes are maxed becomes Spinning Edge. Each time Spinning Edge hits opposing Pokémon, the user's movement speed is increased by 15% for 3s, stacking up to 3 times.",
-        "iconAsset": "/assets/skills/Quaquaval/Moxie.png"
-      },
-      "builds": [
-        {
-          "name": "Serving Looks",
-          "emblemName": "Serving Looks",
-          "lane": "Anywhere Damage",
-          "heldItemIds": [
-            "attack-weight",
-            "drain-crown",
-            "razor-claw"
-          ],
-          "battleItemId": "full-heal",
-          "emblems": [
-            {
-              "emblemId": "250-ho-oh",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "197-umbreon",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "169-crobat",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "211-qwilfish",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "168-ariados",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "142-aerodactyl",
-              "grade": "bronze"
-            },
-            {
-              "emblemId": "089-muk",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "057-primeape",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "248-tyranitar",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "024-arbok",
-              "grade": "silver"
-            }
-          ],
-          "moves": [
-            "Low Sweep",
-            "Liquidation"
-          ]
-        },
-        {
-          "name": "Carnival King",
-          "emblemName": "Carnival King",
-          "lane": "Anywhere Damage",
-          "heldItemIds": [
-            "attack-weight",
-            "weakness-policy",
-            "razor-claw"
-          ],
-          "battleItemId": "full-heal",
-          "emblems": [
-            {
-              "emblemId": "250-ho-oh",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "022-fearow",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "128-tauros",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "130-gyarados",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "018-pidgeot",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "142-aerodactyl",
-              "grade": "bronze"
-            },
-            {
-              "emblemId": "031-nidoqueen",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "057-primeape",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "068-machamp",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "105-marowak",
-              "grade": "gold"
-            }
-          ],
-          "moves": [
-            "Low Sweep",
-            "Liquidation"
           ]
         }
       ]

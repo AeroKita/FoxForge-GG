@@ -799,6 +799,13 @@
       "sing": "/assets/skills/Wigglytuff/Sing.mp4",
       "starlight-recital": "/assets/skills/Wigglytuff/Starlight+Recital.mp4"
     },
+    "yveltal": {
+      "dark-pulse": "/assets/skills/Yveltal/Dark+Pulse.mp4",
+      "gust": "/assets/skills/Yveltal/Gust.mp4",
+      "lash-out": "/assets/skills/Yveltal/Lash+Out.mp4",
+      "lumiere-of-demise": "/assets/skills/Yveltal/Lumiere+of+Demise.mp4",
+      "oblivion-wing": "/assets/skills/Yveltal/Oblivion+Wing.mp4"
+    },
     "zacian": {
       "agility": "/assets/skills/Zacian/Agility.mp4",
       "metal-claw": "/assets/skills/Zacian/Metal+Claw.mp4",
