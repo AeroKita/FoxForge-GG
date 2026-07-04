@@ -84,15 +84,6 @@ export function LoadoutBoard() {
     [loadout.emblems],
   );
 
-  const gradeChips = loadout.heldItemIds
-    .map((id, slot) => {
-      if (!id) return null;
-      const item = heldItemById.get(id);
-      if (!item || isUniqueHeldItem(item)) return null;
-      return { slot, item, grade: heldSlotGrades[slot] };
-    })
-    .filter((c): c is NonNullable<typeof c> => c !== null);
-
   const progressRows =
     loadout.emblems.length > 0 ? setProgressRows(countColors(slots), setBonuses) : [];
 
@@ -145,7 +136,7 @@ export function LoadoutBoard() {
               <SlotTile
                 item={item ?? null}
                 grade={grade}
-                showGrade={item != null && !isUniqueHeldItem(item)}
+                onGradeTap={item && !isUniqueHeldItem(item) ? () => setGradeSlot(slot) : undefined}
                 emptyLabel="Held"
                 onClick={() => setPicker({ kind: "held", slot })}
                 tip={item ? itemTip(item, grade) : "Add a held item"}
@@ -167,24 +158,6 @@ export function LoadoutBoard() {
           />
         </div>
       </div>
-
-      {gradeChips.length > 0 && (
-        <div className="mt-3">
-          <p className="mb-1.5 text-[11px] text-faint">Grades</p>
-          <div className="flex flex-wrap gap-1.5">
-            {gradeChips.map(({ slot, item, grade }) => (
-              <button
-                key={slot}
-                type="button"
-                onClick={() => setGradeSlot(slot)}
-                className="min-h-11 rounded-full bg-raise px-3 text-xs font-medium text-ink"
-              >
-                {item.displayName} · {grade}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       <div className="mt-4">
         <p className="mb-1 text-[11px] text-faint">
@@ -426,14 +399,14 @@ export function LoadoutBoard() {
 function SlotTile({
   item,
   grade,
-  showGrade,
+  onGradeTap,
   emptyLabel,
   onClick,
   tip,
 }: {
   item: HeldItem | BattleItem | null;
   grade?: number;
-  showGrade?: boolean;
+  onGradeTap?: () => void;
   emptyLabel: string;
   onClick: () => void;
   tip: React.ReactNode;
@@ -446,11 +419,6 @@ function SlotTile({
       className="relative flex h-14 w-14 items-center justify-center rounded-xl bg-raise"
     >
       <img src={asset(item.iconAsset)} alt="" className="h-10 w-10 object-contain" />
-      {showGrade && grade != null && (
-        <span className="absolute -bottom-1 -right-1 rounded bg-grade-badge px-1 text-[10px] font-bold text-white">
-          {grade}
-        </span>
-      )}
     </button>
   ) : (
     <button
@@ -463,12 +431,25 @@ function SlotTile({
     </button>
   );
 
+  const captionClass = "w-16 min-h-7 text-center text-[11px] leading-[13px] text-muted break-words";
+
   return (
     <>
       <Tooltip content={tip}>{tile}</Tooltip>
-      <span className="mt-0.5 w-14 truncate text-center text-[11px] text-muted">
-        {item ? item.displayName : emptyLabel}
-      </span>
+      {item && onGradeTap && grade != null ? (
+        <button
+          type="button"
+          onClick={onGradeTap}
+          aria-label={`${item.displayName} grade`}
+          className={`mt-0.5 min-h-11 ${captionClass}`}
+        >
+          {item.displayName} · {grade}
+        </button>
+      ) : (
+        <span className={`mt-0.5 flex min-h-11 items-start justify-center pt-0.5 ${captionClass}`}>
+          {item ? item.displayName : emptyLabel}
+        </span>
+      )}
     </>
   );
 }

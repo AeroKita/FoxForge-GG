@@ -4,6 +4,7 @@ import { heldItems, isUniqueHeldItem, ITEM_GRADE_MAX } from "../data/gameData";
 import { asset } from "../ui/asset";
 import { heldItemStatLines } from "../ui/format";
 import { HeldItemDetailModal } from "../ui/heldItemDetail";
+import { useHoldRepeat } from "../ui/useHoldRepeat";
 import { GradeField } from "./GradeField";
 import { statsAtGrade } from "./tips";
 import type { HeldItem } from "../types";
@@ -95,31 +96,11 @@ export function HeldItemsInventory() {
                       .join(" · ") || "—"}
                   </p>
                 </div>
-                <div className="flex items-center gap-1">
-                  <button
-                    type="button"
-                    aria-label={`${item.displayName} grade down`}
-                    onClick={() => setHeldItemGradeById(item.id, Math.max(1, grade - 1))}
-                    className="min-h-11 min-w-11 rounded-lg border border-line text-lg"
-                  >
-                    −
-                  </button>
-                  <GradeField
-                    value={grade}
-                    label={item.displayName}
-                    onCommit={(g) => setHeldItemGradeById(item.id, g)}
-                  />
-                  <button
-                    type="button"
-                    aria-label={`${item.displayName} grade up`}
-                    onClick={() =>
-                      setHeldItemGradeById(item.id, Math.min(ITEM_GRADE_MAX, grade + 1))
-                    }
-                    className="min-h-11 min-w-11 rounded-lg border border-line text-lg"
-                  >
-                    +
-                  </button>
-                </div>
+                <GradeStepper
+                  item={item}
+                  grade={grade}
+                  onCommit={(g) => setHeldItemGradeById(item.id, g)}
+                />
               </div>
             );
           })}
@@ -166,6 +147,41 @@ export function HeldItemsInventory() {
         open={detailItem !== null}
         onClose={() => setDetailItem(null)}
       />
+    </div>
+  );
+}
+
+function GradeStepper({
+  item,
+  grade,
+  onCommit,
+}: {
+  item: HeldItem;
+  grade: number;
+  onCommit: (g: number) => void;
+}) {
+  const decrement = useHoldRepeat(() => onCommit(Math.max(1, grade - 1)));
+  const increment = useHoldRepeat(() => onCommit(Math.min(ITEM_GRADE_MAX, grade + 1)));
+
+  return (
+    <div className="flex items-center gap-1">
+      <button
+        type="button"
+        aria-label={`${item.displayName} grade down`}
+        className="min-h-11 min-w-11 select-none touch-none rounded-lg border border-line text-lg"
+        {...decrement}
+      >
+        −
+      </button>
+      <GradeField value={grade} label={item.displayName} onCommit={onCommit} />
+      <button
+        type="button"
+        aria-label={`${item.displayName} grade up`}
+        className="min-h-11 min-w-11 select-none touch-none rounded-lg border border-line text-lg"
+        {...increment}
+      >
+        +
+      </button>
     </div>
   );
 }
