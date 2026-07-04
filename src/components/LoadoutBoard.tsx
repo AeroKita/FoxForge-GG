@@ -11,7 +11,7 @@ import {
   setBonuses,
 } from "../data/gameData";
 import { MAX_EMBLEMS } from "../state/loadout";
-import { countColors, sumEmblemFlats } from "../engine/emblems";
+import { countColors } from "../engine/emblems";
 import { asset } from "../ui/asset";
 import { emblemIconForGrade } from "../ui/emblemIcon";
 import { heldItemStatLines, statLines } from "../ui/format";
@@ -38,7 +38,6 @@ export function LoadoutBoard() {
     dispatch,
     owned,
     toggleOwned,
-    expert,
     heldSlotGrades,
     setHeldItemGradeForSlot,
     heldItemGrade,
@@ -96,8 +95,6 @@ export function LoadoutBoard() {
 
   const progressRows =
     loadout.emblems.length > 0 ? setProgressRows(countColors(slots), setBonuses) : [];
-
-  const flatLines = loadout.emblems.length > 0 ? statLines(sumEmblemFlats(slots), expert) : [];
 
   const gradeSheetItem =
     gradeSlot != null && loadout.heldItemIds[gradeSlot]
@@ -254,9 +251,11 @@ export function LoadoutBoard() {
                 />
                 {row.met ? (
                   <>
-                    <span className="font-medium text-ink">
-                      ×{row.count} +{(row.met.bonusPercent * 100).toFixed(0)}%{" "}
-                      {STAT_LABEL[row.met.stat] ?? row.met.stat}
+                    <span className="font-medium text-ink">×{row.count}</span>
+                    <span className="text-muted">
+                      {" "}
+                      (+{(row.met.bonusPercent * 100).toFixed(0)}%{" "}
+                      {STAT_LABEL[row.met.stat] ?? row.met.stat})
                     </span>
                     <span className="text-pos">✓</span>
                   </>
@@ -291,19 +290,6 @@ export function LoadoutBoard() {
             );
           })}
         </div>
-      )}
-
-      {flatLines.length > 0 && (
-        <p className="mt-2 text-xs font-mono">
-          {flatLines.map((line, i) => (
-            <span key={line.key}>
-              {i > 0 && " · "}
-              <span className={line.sign === "pos" ? "text-pos" : "text-neg"}>
-                {line.value} {STAT_LABEL[line.key] ?? line.label}
-              </span>
-            </span>
-          ))}
-        </p>
       )}
 
       {picker?.kind === "held" && (
