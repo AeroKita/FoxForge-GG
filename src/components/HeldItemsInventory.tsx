@@ -2,76 +2,15 @@ import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { heldItems, isUniqueHeldItem, ITEM_GRADE_MAX } from "../data/gameData";
 import { asset } from "../ui/asset";
+import { heldItemStatLines } from "../ui/format";
 import { HeldItemDetailModal } from "../ui/heldItemDetail";
 import { GradeField } from "./GradeField";
+import { statsAtGrade } from "./tips";
 import type { HeldItem } from "../types";
-
-function ItemTile({
-  item,
-  selected,
-  onSelect,
-  grade,
-  onGradeChange,
-  showGradeControls,
-}: {
-  item: HeldItem;
-  selected: boolean;
-  onSelect: () => void;
-  grade?: number;
-  onGradeChange?: (g: number) => void;
-  showGradeControls: boolean;
-}) {
-  return (
-    <div className="flex min-w-0 flex-col gap-1.5">
-      <button
-        type="button"
-        onClick={onSelect}
-        aria-pressed={selected}
-        aria-label={item.displayName}
-        className={`group relative aspect-square min-h-11 rounded-lg border-2 p-0.5 transition
-          ${
-            selected
-              ? "border-transparent bg-mon-sel-bg ring-2 ring-mon-sel-ring"
-              : "border-transparent bg-mon-bg hover:border-mon-hover"
-          }`}
-      >
-        <img
-          src={asset(item.iconAsset)}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-contain"
-        />
-      </button>
-      {showGradeControls && grade !== undefined && onGradeChange && (
-        <div
-          className="px-0.5"
-          onClick={(e) => e.stopPropagation()}
-          onPointerDown={(e) => e.stopPropagation()}
-        >
-          <div className="mb-0.5 flex items-center justify-between">
-            <span className="text-sm font-medium text-muted">Grade</span>
-            <GradeField value={grade} label={item.displayName} onCommit={onGradeChange} />
-          </div>
-          <div className="py-3">
-            <input
-              type="range"
-              min={1}
-              max={ITEM_GRADE_MAX}
-              value={grade}
-              onChange={(e) => onGradeChange(Number(e.target.value))}
-              aria-label={`${item.displayName} grade`}
-              className="block w-full accent-grade-slider"
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 /**
  * Global held item grade inventory — set per-item grades (1–40) that sync with
- * the Builder's Held Items card. Icons only (Pokémon-picker tile styling).
+ * the Builder's held-item slots.
  */
 export function HeldItemsInventory() {
   const { heldItemGrade, setHeldItemGradeById } = useStore();
@@ -91,12 +30,18 @@ export function HeldItemsInventory() {
 
   const detailGrade = detailItem ? heldItemGrade(detailItem.id) : 40;
 
+  const setAllShown = (value: number) => {
+    for (const item of gradedItems) {
+      setHeldItemGradeById(item.id, value);
+    }
+  };
+
   return (
     <div className="rounded-2xl border border-line bg-surface p-3 shadow-sm">
       <div className="mb-3">
         <p className="text-xs text-muted">
           Set each item&apos;s grade (1–{ITEM_GRADE_MAX}). Grades apply everywhere that item appears
-          in your builds. Tap on a Held Item for more info!
+          in your builds. Tap an item&apos;s icon for full details.
         </p>
       </div>
 
@@ -107,23 +52,79 @@ export function HeldItemsInventory() {
         className="mb-3 min-h-11 w-full rounded-lg border border-line px-3 py-2 text-sm outline-none focus:border-accent"
       />
 
-      <div className="grid max-h-[65vh] grid-cols-3 gap-3 overflow-y-auto sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
-        {gradedItems.map((item) => {
-          const grade = heldItemGrade(item.id);
-          const selected = detailItem?.id === item.id;
-          return (
-            <ItemTile
-              key={item.id}
-              item={item}
-              selected={selected}
-              onSelect={() => setDetailItem(item)}
-              grade={grade}
-              onGradeChange={(g) => setHeldItemGradeById(item.id, g)}
-              showGradeControls
-            />
-          );
-        })}
-      </div>
+      {gradedItems.length > 0 && (
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          <span className="text-xs text-muted">Set all shown to</span>
+          {[20, 30, ITEM_GRADE_MAX].map((value) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setAllShown(value)}
+              className="min-h-11 rounded-full border border-line px-4 text-sm font-medium hover:bg-raise"
+            >
+              {value === ITEM_GRADE_MAX ? "Max" : value}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {gradedItems.length > 0 && (
+        <div className="rounded-xl border border-line divide-y divide-line-soft">
+          {gradedItems.map((item) => {
+            const grade = heldItemGrade(item.id);
+            return (
+              <div key={item.id} className="flex items-center gap-3 px-3 py-2">
+                <button
+                  type="button"
+                  onClick={() => setDetailItem(item)}
+                  aria-label={item.displayName}
+                  className="h-11 w-11 shrink-0 rounded-lg bg-mon-bg p-1"
+                >
+                  <img
+                    src={asset(item.iconAsset)}
+                    alt=""
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </button>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-ink">{item.displayName}</p>
+                  <p className="truncate text-[11px] text-muted">
+                    {heldItemStatLines(statsAtGrade(item, grade))
+                      .map((l) => `${l.label} ${l.value}`)
+                      .join(" · ") || "—"}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    aria-label={`${item.displayName} grade down`}
+                    onClick={() => setHeldItemGradeById(item.id, Math.max(1, grade - 1))}
+                    className="min-h-11 min-w-11 rounded-lg border border-line text-lg"
+                  >
+                    −
+                  </button>
+                  <GradeField
+                    value={grade}
+                    label={item.displayName}
+                    onCommit={(g) => setHeldItemGradeById(item.id, g)}
+                  />
+                  <button
+                    type="button"
+                    aria-label={`${item.displayName} grade up`}
+                    onClick={() =>
+                      setHeldItemGradeById(item.id, Math.min(ITEM_GRADE_MAX, grade + 1))
+                    }
+                    className="min-h-11 min-w-11 rounded-lg border border-line text-lg"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {uniqueItems.length > 0 && (
         <div className="mt-4">
@@ -131,24 +132,33 @@ export function HeldItemsInventory() {
           <p className="mb-2 text-xs text-muted">
             Mega Stones &amp; Rusted Sword have no grade or level.
           </p>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8">
-            {uniqueItems.map((item) => {
-              const selected = detailItem?.id === item.id;
-              return (
-                <ItemTile
-                  key={item.id}
-                  item={item}
-                  selected={selected}
-                  onSelect={() => setDetailItem(item)}
-                  showGradeControls={false}
-                />
-              );
-            })}
+          <div className="rounded-xl border border-line divide-y divide-line-soft">
+            {uniqueItems.map((item) => (
+              <div key={item.id} className="flex items-center gap-3 px-3 py-2">
+                <button
+                  type="button"
+                  onClick={() => setDetailItem(item)}
+                  aria-label={item.displayName}
+                  className="h-11 w-11 shrink-0 rounded-lg bg-mon-bg p-1"
+                >
+                  <img
+                    src={asset(item.iconAsset)}
+                    alt=""
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </button>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium text-ink">{item.displayName}</p>
+                </div>
+                <span className="text-xs text-faint">No grade</span>
+              </div>
+            ))}
           </div>
         </div>
       )}
 
-      <p className="mt-2 text-xs text-faint">{shown.length} held items · tap an icon for details</p>
+      <p className="mt-2 text-xs text-faint">{shown.length} held items</p>
 
       <HeldItemDetailModal
         item={detailItem}

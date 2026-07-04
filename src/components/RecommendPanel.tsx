@@ -26,7 +26,7 @@ type Tab = "recommended" | "creative" | "yours";
 const TAB_LABEL: Record<Tab, string> = {
   recommended: "Recommended",
   creative: "Creative",
-  yours: "Your Emblems",
+  yours: "Yours",
 };
 
 // A unified shape for curated, creative, and inventory builds.
@@ -153,13 +153,7 @@ export function RecommendPanel() {
     applyFor(list[next] ?? null);
   };
 
-  if (!pokemon) {
-    return (
-      <div className="rounded-2xl border border-line bg-surface p-5 text-muted shadow-sm">
-        Select a Pokémon to get a recommended build.
-      </div>
-    );
-  }
+  if (!pokemon) return null;
 
   const builds = buildsForTab(tab, curated, creative, yours);
   const idx = builds.length ? Math.min(idxByTab[tab], builds.length - 1) : 0;
@@ -204,7 +198,7 @@ export function RecommendPanel() {
           <button
             key={t}
             onClick={() => selectTab(t)}
-            className={`flex min-h-11 flex-1 items-center justify-center rounded-lg px-2 text-sm font-semibold transition ${
+            className={`flex min-h-11 flex-1 items-center justify-center whitespace-nowrap rounded-lg px-2 text-sm font-semibold transition ${
               tab === t ? "bg-surface text-ink shadow-sm" : "text-muted hover:text-ink"
             }`}
           >

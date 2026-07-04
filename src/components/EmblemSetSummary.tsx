@@ -1,20 +1,9 @@
 import { emblemById, setBonuses } from "../data/gameData";
 import { sumEmblemFlats, countColors, computeEmblemLoadout } from "../engine/emblems";
 import { statLines } from "../ui/format";
+import { STAT_LABEL } from "../ui/setProgress";
 import { EMBLEM_COLOR_HEX } from "../ui/colors";
-import type { EmblemColor, EmblemGrade, StatBlock } from "../types";
-
-// Short stat labels for the color-set bonuses.
-const STAT_LABEL: Partial<Record<keyof StatBlock, string>> = {
-  attack: "Atk",
-  spAttack: "Sp.Atk",
-  defense: "Def",
-  spDefense: "Sp.Def",
-  hp: "HP",
-  attackSpeed: "Atk Spd",
-  cdr: "CDR",
-  moveSpeed: "Move",
-};
+import type { EmblemColor, EmblemGrade } from "../types";
 
 /**
  * The net flat stats a 10-emblem set provides in isolation (rounded as in-game),

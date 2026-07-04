@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../state/store";
 import { pokemonById, pokemonList, ITEM_GRADE_DEFAULT } from "../data/gameData";
-import { deriveBuild } from "../engine/derive";
+import { deriveBuild, type DerivedBuild } from "../engine/derive";
 import { type Loadout, type SavedLoadout } from "../state/loadout";
 import {
   presetBuilds,
@@ -11,11 +11,13 @@ import {
   type CompareSource,
 } from "../state/compareBuilds";
 import { STAT_ROWS, formatStat, formatDelta } from "../ui/format";
+import { radarRows } from "../ui/radarData";
 import { asset } from "../ui/asset";
 import { CollapsibleCard } from "./CollapsibleCard";
 import { Segmented } from "./Segmented";
 import { MarqueeText } from "../ui/MarqueeText";
 import { PokemonPickerSheet } from "./PokemonPicker";
+import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer } from "recharts";
 
 function initialSelection(side: "A" | "B", currentPokemonId: string | null): SideSelection {
   if (side === "A") {
@@ -56,7 +58,7 @@ function clampSelectionForPokemon(sel: SideSelection): SideSelection {
 
 // Compare two builds: pick A and B from presets, current, or saved.
 export function CompareView() {
-  const { loadout, saved, heldItemGrade } = useStore();
+  const { loadout, saved, heldItemGrade, theme } = useStore();
   const [a, setA] = useState<SideSelection>(() => initialSelection("A", loadout.pokemonId));
   const [b, setB] = useState<SideSelection>(() => initialSelection("B", loadout.pokemonId));
   const [pickerSide, setPickerSide] = useState<"A" | "B" | null>(null);
@@ -117,53 +119,58 @@ export function CompareView() {
       {!da.effective || !db.effective ? (
         <p className="text-sm text-faint">Both builds need a Pokémon selected.</p>
       ) : (
-        <div className="-mx-1 min-w-0 overflow-x-auto px-1">
-          <table className="w-full min-w-[20rem] text-sm">
-            <thead>
-              <tr className="text-left text-xs uppercase text-faint">
-                <th className="py-1">Stat</th>
-                <th className="py-1 text-right">A</th>
-                <th className="py-1 text-right">B</th>
-                <th className="py-1 text-right">Δ (B−A)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {STAT_ROWS.map((row) => {
-                const av = da.effective![row.key];
-                const bv = db.effective![row.key];
-                const delta = bv - av;
-                const better = delta > 1e-9;
-                const worse = delta < -1e-9;
-                return (
-                  <tr key={row.key} className="border-t border-line-soft">
-                    <td className="py-1 text-muted">{row.label}</td>
-                    <td className="py-1 text-right font-mono">{formatStat(av, row.kind)}</td>
-                    <td className="py-1 text-right font-mono">{formatStat(bv, row.kind)}</td>
-                    <td
-                      className={`py-1 text-right font-mono ${better ? "text-pos" : worse ? "text-neg" : "text-faint"}`}
-                    >
-                      {Math.abs(delta) < 1e-9 ? "—" : formatDelta(delta, row.kind)}
+        <>
+          {da.attackSpeed && db.attackSpeed && <CompareRadar da={da} db={db} theme={theme} />}
+          <div className="-mx-1 min-w-0 overflow-x-auto px-1">
+            <table className="w-full min-w-[20rem] text-sm">
+              <thead>
+                <tr className="text-left text-xs uppercase text-faint">
+                  <th className="py-1">Stat</th>
+                  <th className="py-1 text-right">A</th>
+                  <th className="py-1 text-right">B</th>
+                  <th className="py-1 text-right">Δ (B−A)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {STAT_ROWS.map((row) => {
+                  const av = da.effective![row.key];
+                  const bv = db.effective![row.key];
+                  const delta = bv - av;
+                  const better = delta > 1e-9;
+                  const worse = delta < -1e-9;
+                  return (
+                    <tr key={row.key} className="border-t border-line-soft">
+                      <td className="py-1 text-muted">{row.label}</td>
+                      <td className="py-1 text-right font-mono">{formatStat(av, row.kind)}</td>
+                      <td className="py-1 text-right font-mono">{formatStat(bv, row.kind)}</td>
+                      <td
+                        className={`py-1 text-right font-mono ${better ? "text-pos" : worse ? "text-neg" : "text-faint"}`}
+                      >
+                        {Math.abs(delta) < 1e-9 ? "—" : formatDelta(delta, row.kind)}
+                      </td>
+                    </tr>
+                  );
+                })}
+                {da.attackSpeed && db.attackSpeed && (
+                  <tr className="border-t border-line font-semibold">
+                    <td className="py-1 text-muted">Attacks / sec</td>
+                    <td className="py-1 text-right font-mono">
+                      {da.attackSpeed.attacksPerSecond.toFixed(2)}
+                    </td>
+                    <td className="py-1 text-right font-mono">
+                      {db.attackSpeed.attacksPerSecond.toFixed(2)}
+                    </td>
+                    <td className="py-1 text-right font-mono text-muted">
+                      {(db.attackSpeed.attacksPerSecond - da.attackSpeed.attacksPerSecond).toFixed(
+                        2,
+                      )}
                     </td>
                   </tr>
-                );
-              })}
-              {da.attackSpeed && db.attackSpeed && (
-                <tr className="border-t border-line font-semibold">
-                  <td className="py-1 text-muted">Attacks / sec</td>
-                  <td className="py-1 text-right font-mono">
-                    {da.attackSpeed.attacksPerSecond.toFixed(2)}
-                  </td>
-                  <td className="py-1 text-right font-mono">
-                    {db.attackSpeed.attacksPerSecond.toFixed(2)}
-                  </td>
-                  <td className="py-1 text-right font-mono text-muted">
-                    {(db.attackSpeed.attacksPerSecond - da.attackSpeed.attacksPerSecond).toFixed(2)}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
       {pickerSide && (
         <PokemonPickerSheet
@@ -177,6 +184,57 @@ export function CompareView() {
         />
       )}
     </CollapsibleCard>
+  );
+}
+
+function CompareRadar({
+  da,
+  db,
+  theme,
+}: {
+  da: DerivedBuild;
+  db: DerivedBuild;
+  theme: "light" | "dark";
+}) {
+  const aInput = {
+    hp: da.effective!.hp,
+    attack: da.effective!.attack,
+    spAttack: da.effective!.spAttack,
+    defense: da.effective!.defense,
+    spDefense: da.effective!.spDefense,
+    aps: da.attackSpeed!.attacksPerSecond,
+  };
+  const bInput = {
+    hp: db.effective!.hp,
+    attack: db.effective!.attack,
+    spAttack: db.effective!.spAttack,
+    defense: db.effective!.defense,
+    spDefense: db.effective!.spDefense,
+    aps: db.attackSpeed!.attacksPerSecond,
+  };
+  const rows = radarRows(aInput, bInput);
+  const colorA = theme === "dark" ? "#22d3ee" : "#4f5bd5";
+  const colorB = theme === "dark" ? "#f472b6" : "#d4537e";
+
+  return (
+    <div className="mb-4">
+      <div className="mb-2 flex items-center justify-center gap-4">
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <span className="h-2.5 w-2.5 rounded-full" style={{ background: colorA }} />A
+        </span>
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <span className="h-2.5 w-2.5 rounded-full" style={{ background: colorB }} />B
+        </span>
+      </div>
+      <ResponsiveContainer width="100%" height={240}>
+        <RadarChart data={rows} outerRadius="72%">
+          <PolarGrid stroke="var(--color-line)" />
+          <PolarAngleAxis dataKey="axis" tick={{ fill: "var(--color-muted)", fontSize: 11 }} />
+          <Radar name="A" dataKey="a" stroke={colorA} fill={colorA} fillOpacity={0.15} />
+          <Radar name="B" dataKey="b" stroke={colorB} fill={colorB} fillOpacity={0.15} />
+        </RadarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 
@@ -203,7 +261,7 @@ function SidePicker({
   if (saved.length > 0) sourceOptions.push("saved");
 
   const sourceLabels: Partial<Record<CompareSource, string>> = {
-    recommended: "Recommended",
+    recommended: "Preset",
     creative: "Creative",
     current: "Current",
     saved: "Saved",

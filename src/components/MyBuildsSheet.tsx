@@ -8,9 +8,9 @@ import {
   loadoutFileName,
 } from "../state/loadout";
 import { asset } from "../ui/asset";
-import { CollapsibleCard } from "./CollapsibleCard";
+import { BottomSheet } from "./shell/BottomSheet";
 
-export function LoadoutBar() {
+export function MyBuildsSheet({ onClose }: { onClose: () => void }) {
   const { loadout, saved, save, remove, loadSaved, saveError, dispatch, shareUrl } = useStore();
   const [name, setName] = useState("");
   const [copied, setCopied] = useState(false);
@@ -42,7 +42,7 @@ export function LoadoutBar() {
 
   const importFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    e.target.value = ""; // allow re-importing the same file
+    e.target.value = "";
     if (!file) return;
     try {
       const parsed = parseLoadoutFile(await file.text());
@@ -65,7 +65,7 @@ export function LoadoutBar() {
   };
 
   return (
-    <CollapsibleCard title="Save & Load" persistKey="loadouts" defaultOpen={false}>
+    <BottomSheet title="My Builds" onClose={onClose}>
       <div className="mb-3 flex items-center gap-2">
         <input
           value={name}
@@ -158,6 +158,6 @@ export function LoadoutBar() {
           })}
         </ul>
       )}
-    </CollapsibleCard>
+    </BottomSheet>
   );
 }

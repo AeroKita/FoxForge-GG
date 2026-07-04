@@ -3,8 +3,9 @@ import { useStore } from "../state/store";
 import { deriveBuild } from "../engine/derive";
 import { effectiveHp } from "../engine/formulas";
 import { boostAvailableAtLevel, boostPointsAtLevel } from "../engine/effects";
-import { STAT_ROWS, formatStat, formatExactDelta } from "../ui/format";
+import { offenseFor } from "../ui/offense";
 import { CollapsibleCard } from "./CollapsibleCard";
+import { EffectiveStatsGrid } from "./EffectiveStatsGrid";
 
 export function StatPanel() {
   const { loadout, dispatch, expert, heldSlotGrades } = useStore();
@@ -12,115 +13,22 @@ export function StatPanel() {
     () => deriveBuild(loadout, true, heldSlotGrades),
     [loadout, heldSlotGrades],
   );
-  const {
-    pokemon,
-    effective,
-    base,
-    attackSpeed,
-    oocMoveSpeed,
-    availableBoosts,
-    emblemLoadout,
-    buffedStats,
-  } = derived;
+  const { pokemon, effective, base, attackSpeed, availableBoosts } = derived;
 
-  if (!pokemon || !effective || !base || !attackSpeed) {
-    return (
-      <div className="rounded-xl border border-line bg-surface p-6 text-muted">
-        Select a Pokémon to see live stats.
-      </div>
-    );
-  }
+  if (!pokemon || !effective || !base || !attackSpeed) return null;
+  if (!expert) return null;
 
   const activeIds = new Set(loadout.activeBoostIds);
-  const offenseStat =
-    pokemon.attackType === "special"
-      ? effective.spAttack
-      : pokemon.attackType === "hybrid"
-        ? Math.max(effective.attack, effective.spAttack)
-        : effective.attack;
+  const offenseStat = offenseFor(pokemon.attackType, effective).value;
 
   return (
     <div className="flex flex-col gap-3">
-      {/* Level slider */}
-      <div className="rounded-2xl border border-line bg-surface p-4 shadow-sm">
-        <div className="mb-2 flex items-center justify-between">
-          <label className="text-sm font-medium text-ink">Level</label>
-          <span className="rounded-md bg-grade-badge px-2 py-0.5 text-sm font-bold text-white">
-            {loadout.level}
-          </span>
-        </div>
-        <div className="py-3">
-          <input
-            type="range"
-            min={1}
-            max={15}
-            value={loadout.level}
-            onChange={(e) => dispatch({ type: "setLevel", level: Number(e.target.value) })}
-            className="block w-full accent-grade-slider"
-          />
-        </div>
-      </div>
+      {expert && (
+        <CollapsibleCard title="Effective Stats" persistKey="stats">
+          <EffectiveStatsGrid derived={derived} />
+        </CollapsibleCard>
+      )}
 
-      {/* Effective stats */}
-      <CollapsibleCard title="Effective Stats" persistKey="stats">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-2">
-          {STAT_ROWS.map((row) => {
-            const eff = effective[row.key];
-            const delta = eff - base[row.key];
-            const buffed = buffedStats.has(row.key);
-            return (
-              <div
-                key={row.key}
-                className={`flex items-baseline justify-between border-b py-1 ${buffed ? "border-as-border" : "border-line-soft"}`}
-              >
-                <dt className="text-sm text-muted">
-                  {row.label}
-                  {buffed && (
-                    <span className="ml-1 align-middle text-[9px] font-bold uppercase text-as-ink">
-                      buff
-                    </span>
-                  )}
-                </dt>
-                <dd
-                  className={`text-right font-mono text-sm font-semibold ${buffed ? "text-as-ink" : "text-ink"}`}
-                >
-                  {formatStat(eff, row.kind)}
-                  {Math.abs(delta) > 1e-9 && (
-                    <span
-                      className={`ml-1 text-xs font-normal ${delta >= 0 ? "text-pos" : "text-neg"}`}
-                    >
-                      ({formatExactDelta(delta, row.kind)})
-                    </span>
-                  )}
-                </dd>
-              </div>
-            );
-          })}
-        </dl>
-        <p className="mt-2 text-xs text-faint">
-          Out-of-combat move speed:{" "}
-          <span className="font-mono">{oocMoveSpeed?.toLocaleString()}</span>
-          {oocMoveSpeed != null && oocMoveSpeed > effective.moveSpeed && (
-            <span className="ml-1 text-pos">
-              ({formatExactDelta(oocMoveSpeed - effective.moveSpeed, "int")})
-            </span>
-          )}
-          {emblemLoadout.activeSetBonuses.length > 0 && (
-            <>
-              {" "}
-              · Set bonuses:{" "}
-              {emblemLoadout.activeSetBonuses
-                .map((b) => `${b.color} +${(b.bonusPercent * 100).toFixed(0)}%`)
-                .join(", ")}
-            </>
-          )}
-        </p>
-        <p className="mt-1 text-xs text-faint">
-          Yellow set bonus and Float Stone apply only out of combat.
-        </p>
-      </CollapsibleCard>
-
-      {/* Attack speed (Expert) */}
       {expert && (
         <CollapsibleCard title="Attack Speed" persistKey="attackspeed" tone="amber">
           <div className="grid grid-cols-3 gap-2 text-center">
@@ -131,7 +39,6 @@ export function StatPanel() {
         </CollapsibleCard>
       )}
 
-      {/* Combat analytics (Expert) */}
       {expert && (
         <CollapsibleCard title="Combat Analytics" persistKey="analytics" tone="sky">
           <div className="grid grid-cols-3 gap-2 text-center">
@@ -158,7 +65,6 @@ export function StatPanel() {
         </CollapsibleCard>
       )}
 
-      {/* Active effect toggles (Expert) */}
       {expert && (
         <CollapsibleCard title="Active Effects" persistKey="effects">
           <p className="mb-3 text-xs text-faint">

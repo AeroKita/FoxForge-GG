@@ -1,21 +1,23 @@
 import { lazy, Suspense } from "react";
 import { useStore } from "../../state/store";
+import { HeroBand } from "../HeroBand";
 import { RecommendPanel } from "../RecommendPanel";
-import { LoadoutEditor } from "../LoadoutEditor";
+import { LoadoutBoard } from "../LoadoutBoard";
 import { MovesCard } from "../MovesCard";
 import { StatPanel } from "../StatPanel";
-import { LoadoutBar } from "../LoadoutBar";
+import { StatDock } from "../StatDock";
 
 const LevelGraph = lazy(() => import("../LevelGraph").then((m) => ({ default: m.LevelGraph })));
 
-/** Build tab: recommendations, editor, stats, and persistence. */
+/** Build tab: hero band, recommendations, loadout board, moves, stats, and the stat dock. */
 export function BuildScreen() {
   const { expert } = useStore();
 
   return (
     <div className="flex flex-col gap-3">
+      <HeroBand />
       <RecommendPanel />
-      <LoadoutEditor />
+      <LoadoutBoard />
       <MovesCard />
       <StatPanel />
       {expert && (
@@ -23,7 +25,8 @@ export function BuildScreen() {
           <LevelGraph />
         </Suspense>
       )}
-      <LoadoutBar />
+      <div aria-hidden className="h-16" />
+      <StatDock />
     </div>
   );
 }

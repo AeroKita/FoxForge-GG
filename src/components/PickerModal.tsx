@@ -31,6 +31,7 @@ interface Props {
   tipForGrade?: (id: string, grade: EmblemGrade) => ReactNode; // grade-aware tooltip (emblems)
   subtitleForGrade?: (id: string, grade: EmblemGrade) => string; // grade-aware subtitle (emblems)
   goldOnlyIds?: Set<string>; // hide from silver/bronze pickers (UNITE-DB gold-only emblems)
+  initialFilterLabel?: string;
   footer?: ReactNode;
 }
 
@@ -48,9 +49,10 @@ export function PickerModal({
   subtitleForGrade,
   onClear,
   goldOnlyIds,
+  initialFilterLabel,
 }: Props) {
   const [query, setQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string | null>(initialFilterLabel ?? null);
   const [ownedOnly, setOwnedOnly] = useState(false);
   const [grade, setGrade] = useState<EmblemGrade>("gold");
 
