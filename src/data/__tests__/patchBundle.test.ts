@@ -135,6 +135,19 @@ describe("community data bundle", () => {
       expect(tyranitar.passiveAbility.descriptionAdvanced).toBeUndefined();
       expect(tyranitar.passiveAbility.description.length).toBeGreaterThan(0);
     });
+
+    it("every real move and passive has a non-blank Basic description", () => {
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          if (m.slot === "basicAttack") continue;
+          expect((m.description ?? "").trim().length, `${p.id}/${m.name}`).toBeGreaterThan(0);
+        }
+        expect(
+          (p.passiveAbility.description ?? "").trim().length,
+          `${p.id}/passive`,
+        ).toBeGreaterThan(0);
+      }
+    });
   });
 
   // Curated-merge regression guard: normalize.py must keep hand-curated emblemName labels.

@@ -57,6 +57,10 @@ def run_generate_presets() -> int:
     return run("generate:presets", ["npm", "run", "generate:presets"])
 
 
+def run_harvest() -> int:
+    return run("harvest_descriptions", [SYSTEM_PY, str(COMMUNITY / "harvest_descriptions.py")])
+
+
 def run_fetch_art() -> int:
     return run("fetch_art", [venv_py(), str(COMMUNITY / "fetch_art.py")])
 
@@ -89,6 +93,7 @@ def run_mode(
             ("transcode_clips", lambda: run_transcode()),
             ("normalize", lambda: run_normalize(patch_version)),
             ("generate:presets", lambda: run_generate_presets()),
+            ("harvest_descriptions", lambda: run_harvest()),
         ]
         if not skip_art:
             steps.append(("fetch_art", lambda: run_fetch_art()))

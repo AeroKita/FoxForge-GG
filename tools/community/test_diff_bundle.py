@@ -122,6 +122,44 @@ class TestDiffBundles(unittest.TestCase):
         self.assertEqual(len(diff["changed"]), 1)
         self.assertIn("moveSpeed@G40 175 → 180", diff["changed"][0]["deltas"])
 
+    def test_move_basic_description_blanked(self):
+        move = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "Has punch text.",
+            "cooldownSeconds": 6,
+            "damageInstances": [],
+            "effects": [],
+            "tags": [],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move])])
+        blanked = {**move, "description": ""}
+        new = _minimal_bundle(pokemon=[_pokemon(moves=[blanked])])
+        diff = diff_bundles(old, new)
+        self.assertIn("⚠ Basic description BLANKED: Power-Up Punch", diff["changed"][0]["deltas"])
+
+    def test_passive_basic_description_blanked(self):
+        old = _minimal_bundle(
+            pokemon=[_pokemon(passiveAbility={"id": "p1", "name": "Steadfast", "description": "old passive", "effects": []})]
+        )
+        new = _minimal_bundle(
+            pokemon=[_pokemon(passiveAbility={"id": "p1", "name": "Steadfast", "description": "", "effects": []})]
+        )
+        diff = diff_bundles(old, new)
+        self.assertIn("⚠ passive Basic description BLANKED", diff["changed"][0]["deltas"])
+
+    def test_passive_text_to_text_still_reports_updated(self):
+        old = _minimal_bundle(
+            pokemon=[_pokemon(passiveAbility={"id": "p1", "name": "Steadfast", "description": "old passive", "effects": []})]
+        )
+        new = _minimal_bundle(
+            pokemon=[_pokemon(passiveAbility={"id": "p1", "name": "Steadfast", "description": "new passive", "effects": []})]
+        )
+        diff = diff_bundles(old, new)
+        self.assertIn("passive updated", diff["changed"][0]["deltas"])
+        self.assertNotIn("⚠ passive Basic description BLANKED", diff["changed"][0]["deltas"])
+
     def test_moves_added_removed(self):
         move_a = {"id": "m1", "name": "Power-Up Punch", "slot": "move1", "description": "", "cooldownSeconds": 6, "damageInstances": [], "effects": [], "tags": []}
         move_b = {"id": "m2", "name": "Bone Rush", "slot": "move2", "description": "", "cooldownSeconds": 8, "damageInstances": [], "effects": [], "tags": []}

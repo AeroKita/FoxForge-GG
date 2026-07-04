@@ -235,8 +235,13 @@ def _compare_pokemon(old: dict, new: dict) -> list[str]:
     if old.get("attackType") != new.get("attackType"):
         deltas.append(f"attackType {old.get('attackType')} → {new.get('attackType')}")
 
-    if (old.get("passiveAbility") or {}).get("description") != (new.get("passiveAbility") or {}).get("description"):
-        deltas.append("passive updated")
+    old_passive_desc = ((old.get("passiveAbility") or {}).get("description") or "").strip()
+    new_passive_desc = ((new.get("passiveAbility") or {}).get("description") or "").strip()
+    if old_passive_desc != new_passive_desc:
+        if old_passive_desc and not new_passive_desc:
+            deltas.append("⚠ passive Basic description BLANKED")
+        elif old_passive_desc or new_passive_desc:
+            deltas.append("passive updated")
 
     old_moves = {m.get("name") for m in (old.get("moves") or []) if m.get("name")}
     new_moves = {m.get("name") for m in (new.get("moves") or []) if m.get("name")}
@@ -244,6 +249,22 @@ def _compare_pokemon(old: dict, new: dict) -> list[str]:
         deltas.append(f"move added: {name}")
     for name in sorted(old_moves - new_moves):
         deltas.append(f"move removed: {name}")
+
+    old_desc_by_name = {
+        m.get("name"): (m.get("description") or "").strip()
+        for m in (old.get("moves") or [])
+        if m.get("name")
+    }
+    new_desc_by_name = {
+        m.get("name"): (m.get("description") or "").strip()
+        for m in (new.get("moves") or [])
+        if m.get("name")
+    }
+    for name in sorted(set(old_desc_by_name) & set(new_desc_by_name)):
+        old_desc = old_desc_by_name[name]
+        new_desc = new_desc_by_name[name]
+        if old_desc and not new_desc:
+            deltas.append(f"⚠ Basic description BLANKED: {name}")
 
     return deltas
 

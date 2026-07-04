@@ -21,6 +21,7 @@
     "data:refresh": "python3 tools/community/refresh.py",
     "data:curate": "python3 tools/community/curate.py",
     "data:gaps": "python3 tools/community/gaps.py",
+    "data:harvest": "python3 tools/community/harvest_descriptions.py",
     "validate:art": "python3 tools/community/validate_art.py",
     "fetch:art": "python3 tools/community/fetch_art.py",
     "fetch:gifs": "python3 tools/community/fetch_gifs.py",
