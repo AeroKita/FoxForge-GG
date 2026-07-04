@@ -42591,7 +42591,7 @@
           "id": "pound",
           "name": "Pound",
           "slot": "move1",
-          "description": "",
+          "description": "Has the user deal damage and decrease opposing Pokémon's movement speed.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -42641,7 +42641,7 @@
           "id": "wing-attack",
           "name": "Wing Attack",
           "slot": "move2",
-          "description": "",
+          "description": "Has the user lunge in the designated direction, dealing damage to opposing Pokémon in the area of effect.\n\nWhen this move deals damage to opposing Pokémon, the user receives a shield effect.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -42698,7 +42698,7 @@
           "id": "carnival-splash",
           "name": "Carnival Splash",
           "slot": "uniteMove",
-          "description": "",
+          "description": "Has the user dance in place, pulling in opposing Pokémon, dealing damage, and leaving them unable to act.\n\nThis move grants the user a shield effect. With each opposing Pokémon this move hits, vibes and this shield effect will increase.\n\nWhen this move causes vibes to reach max, Spinning Edge deals increased damage and grants the user a shield effect.",
           "cooldownSeconds": 100.0,
           "damageInstances": [
             {
@@ -42737,7 +42737,7 @@
       "passiveAbility": {
         "id": "moxie",
         "name": "Moxie",
-        "description": "When the user deals damage with auto attacks or moves, vibes increase, which increase Attack by 5% per stack up to 3. If no vibes are gained within 3s, they are lost, along with the user's boosted gauge.",
+        "description": "When the user's basic attacks and moves hit opposing Pokémon, vibes increase, which increases Attack.\n\nVibes can increase to a maximum of 3, and they lower over time.\n\nWhen vibes reach max, the next basic attack becomes Spinning Edge. Each time Spinning Edge hits opposing Pokémon, the user's movement speed increases.",
         "effects": [],
         "descriptionAdvanced": "When the user deals damage with auto attacks or moves, vibes increase, which increase Attack by 5% per stack up to 3. If no vibes are gained within 3s, they are lost, along with the user's boosted gauge.\n\nAfter evolving into Quaquaval, the next auto attack when vibes are maxed becomes Spinning Edge. Each time Spinning Edge hits opposing Pokémon, the user's movement speed is increased by 15% for 3s, stacking up to 3 times.",
         "iconAsset": "/assets/skills/Quaquaval/Moxie.png"

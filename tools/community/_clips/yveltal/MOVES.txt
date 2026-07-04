@@ -1,0 +1,8 @@
+Yveltal  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves (no passive).
+
+  gust.mp4   →  Gust   [Move 1 · Base]
+  oblivion-wing.mp4   →  Oblivion Wing (Lv 5)   [Move 1 · Final]
+  dark-pulse.mp4   →  Dark Pulse (Lv 7)   [Move 2 · Final]
+  lash-out.mp4   →  Lash Out   [Move 2 · Base]
+  Lumiere-of-demise.mp4   →  Lumiére of Demise   [Unite · Unite]
