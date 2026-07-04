@@ -120,7 +120,7 @@ export function CompareView() {
         <p className="text-sm text-faint">Both builds need a Pokémon selected.</p>
       ) : (
         <>
-          {da.attackSpeed && db.attackSpeed && <CompareRadar da={da} db={db} theme={theme} />}
+          {da.effective && db.effective && <CompareRadar da={da} db={db} theme={theme} />}
           <div className="-mx-1 min-w-0 overflow-x-auto px-1">
             <table className="w-full min-w-[20rem] text-sm">
               <thead>
@@ -199,18 +199,18 @@ function CompareRadar({
   const aInput = {
     hp: da.effective!.hp,
     attack: da.effective!.attack,
-    spAttack: da.effective!.spAttack,
     defense: da.effective!.defense,
+    moveSpeed: da.effective!.moveSpeed,
     spDefense: da.effective!.spDefense,
-    aps: da.attackSpeed!.attacksPerSecond,
+    spAttack: da.effective!.spAttack,
   };
   const bInput = {
     hp: db.effective!.hp,
     attack: db.effective!.attack,
-    spAttack: db.effective!.spAttack,
     defense: db.effective!.defense,
+    moveSpeed: db.effective!.moveSpeed,
     spDefense: db.effective!.spDefense,
-    aps: db.attackSpeed!.attacksPerSecond,
+    spAttack: db.effective!.spAttack,
   };
   const rows = radarRows(aInput, bInput);
   const colorA = theme === "dark" ? "#22d3ee" : "#4f5bd5";

@@ -1,14 +1,14 @@
 export interface RadarInput {
   hp: number;
   attack: number;
-  spAttack: number;
   defense: number;
+  moveSpeed: number;
   spDefense: number;
-  aps: number; // attacks per second
+  spAttack: number;
 }
 
 export interface RadarRow {
-  axis: string; // "HP" | "Atk" | "Sp. Atk" | "Def" | "Sp. Def" | "Atk/s"
+  axis: string; // "HP" | "Atk" | "Def" | "Speed" | "Sp. Def" | "Sp. Atk"
   a: number; // 0–100, normalized per axis
   b: number;
 }
@@ -16,10 +16,10 @@ export interface RadarRow {
 const AXES: { key: keyof Omit<RadarInput, never>; axis: string }[] = [
   { key: "hp", axis: "HP" },
   { key: "attack", axis: "Atk" },
-  { key: "spAttack", axis: "Sp. Atk" },
   { key: "defense", axis: "Def" },
+  { key: "moveSpeed", axis: "Speed" },
   { key: "spDefense", axis: "Sp. Def" },
-  { key: "aps", axis: "Atk/s" },
+  { key: "spAttack", axis: "Sp. Atk" },
 ];
 
 /** Per-axis normalization to max(a, b) × 100 so shapes are comparable

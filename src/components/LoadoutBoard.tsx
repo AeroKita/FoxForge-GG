@@ -104,7 +104,7 @@ export function LoadoutBoard() {
 
   return (
     <section className="rounded-2xl border border-line bg-surface p-4 shadow-sm">
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-1 flex items-center justify-between">
         <h3 className="text-sm font-semibold uppercase tracking-wide text-muted">Loadout</h3>
         <button
           type="button"
@@ -126,6 +126,10 @@ export function LoadoutBoard() {
           </svg>
         </button>
       </div>
+
+      <p className="mb-3 text-xs text-faint">
+        Tap a slot to swap items — tap an item's name to set its grade.
+      </p>
 
       <div className="flex items-center gap-2">
         {loadout.heldItemIds.map((id, slot) => {

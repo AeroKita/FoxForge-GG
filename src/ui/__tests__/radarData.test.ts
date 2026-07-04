@@ -5,10 +5,10 @@ import type { RadarInput } from "../radarData";
 const zero: RadarInput = {
   hp: 0,
   attack: 0,
-  spAttack: 0,
   defense: 0,
+  moveSpeed: 0,
   spDefense: 0,
-  aps: 0,
+  spAttack: 0,
 };
 
 describe("radarRows", () => {
@@ -16,10 +16,10 @@ describe("radarRows", () => {
     const input: RadarInput = {
       hp: 5000,
       attack: 200,
-      spAttack: 150,
       defense: 100,
+      moveSpeed: 3800,
       spDefense: 80,
-      aps: 1.5,
+      spAttack: 150,
     };
     const rows = radarRows(input, input);
     expect(rows).toHaveLength(6);
@@ -49,9 +49,9 @@ describe("radarRows", () => {
 
   it("output length 6 in fixed order", () => {
     const rows = radarRows(
-      { hp: 1, attack: 2, spAttack: 3, defense: 4, spDefense: 5, aps: 6 },
+      { hp: 1, attack: 2, defense: 4, moveSpeed: 6, spDefense: 5, spAttack: 3 },
       zero,
     );
-    expect(rows.map((r) => r.axis)).toEqual(["HP", "Atk", "Sp. Atk", "Def", "Sp. Def", "Atk/s"]);
+    expect(rows.map((r) => r.axis)).toEqual(["HP", "Atk", "Def", "Speed", "Sp. Def", "Sp. Atk"]);
   });
 });
