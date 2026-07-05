@@ -1,8 +1,9 @@
-import { describe, it, expect } from "vitest";
+import { afterEach, beforeEach, describe, it, expect, vi } from "vitest";
 import {
   emptyLoadout,
   encodeLoadout,
   decodeLoadout,
+  loadOwnedEmblems,
   loadoutToFileJSON,
   parseLoadoutFile,
   sanitizeLoadout,
@@ -11,6 +12,65 @@ import {
   parseOwnedEmblemsFile,
   type Loadout,
 } from "../loadout";
+
+function mockLocalStorage() {
+  const store = new Map<string, string>();
+  vi.stubGlobal("localStorage", {
+    getItem: (k: string) => store.get(k) ?? null,
+    setItem: (k: string, v: string) => {
+      store.set(k, v);
+    },
+    removeItem: (k: string) => {
+      store.delete(k);
+    },
+  });
+  return store;
+}
+
+describe("legacy emblem id remap", () => {
+  beforeEach(() => mockLocalStorage());
+  afterEach(() => vi.unstubAllGlobals());
+  it("remaps 152-chicorita to 152-chikorita in sanitizeLoadout", () => {
+    const out = sanitizeLoadout({
+      pokemonId: "pikachu",
+      level: 15,
+      heldItemIds: [null, null, null],
+      battleItemId: null,
+      emblems: [{ emblemId: "152-chicorita", grade: "gold" }],
+      activeBoostIds: [],
+    });
+    expect(out?.emblems).toEqual([{ emblemId: "152-chikorita", grade: "gold" }]);
+  });
+
+  it("passes through non-legacy emblem ids in sanitizeLoadout", () => {
+    const out = sanitizeLoadout({
+      pokemonId: "pikachu",
+      level: 15,
+      heldItemIds: [null, null, null],
+      battleItemId: null,
+      emblems: [{ emblemId: "001-bulbasaur", grade: "gold" }],
+      activeBoostIds: [],
+    });
+    expect(out?.emblems).toEqual([{ emblemId: "001-bulbasaur", grade: "gold" }]);
+  });
+
+  it("remaps 152-chicorita:gold in loadOwnedEmblems", () => {
+    const store = mockLocalStorage();
+    store.set("unite-build-optimizer.ownedEmblems.v2", JSON.stringify(["152-chicorita:gold"]));
+    expect(loadOwnedEmblems()).toEqual(new Set(["152-chikorita:gold"]));
+  });
+
+  it("remaps legacy key in parseOwnedEmblemsFile with validEmblemIds", () => {
+    const valid = new Set(["152-chikorita"]);
+    const parsed = parseOwnedEmblemsFile(JSON.stringify(["152-chicorita:gold"]), valid);
+    expect(parsed).toEqual(new Set(["152-chikorita:gold"]));
+  });
+
+  it("passes through non-legacy keys in parseOwnedEmblemsFile", () => {
+    const parsed = parseOwnedEmblemsFile(JSON.stringify(["001-bulbasaur:gold"]));
+    expect(parsed).toEqual(new Set(["001-bulbasaur:gold"]));
+  });
+});
 
 describe("loadout sharing", () => {
   it("round-trips a loadout through encode/decode", () => {

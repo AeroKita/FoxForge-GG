@@ -26472,7 +26472,7 @@
           ],
           "moveType": "Buff",
           "iconAsset": "/assets/skills/Ho-Oh/Rekindling+Flame.png",
-          "descriptionAdvanced": "When a nearby ally is knocked out, a feather is left in their place until they respawn at base. When Rekindling Flame is used, Ho-oh spreads their wings and consumes all of the Aeos energy held to revive knocked-out allies where their feathers are for 60% of their maximum HP. Rekindling Flame may only be used if there are feathers nearby. The number of available revivals are based on how much Aeos energy is consumed. One ally may be always revived. Up to two allies are revivable if at least 9 energy is consumed. Up to three allies are revivable if at least 17 Aeos energy is consumed. Up to four allies are revivable if at least 25 Aeos energy is consumed.",
+          "descriptionAdvanced": "When a nearby ally is knocked out, a feather is left in their place until they respawn at base. When Rekindling Flame is used, Ho-Oh spreads their wings and consumes all of the Aeos energy held to revive knocked-out allies where their feathers are for 60% of their maximum HP. Rekindling Flame may only be used if there are feathers nearby. The number of available revivals are based on how much Aeos energy is consumed. One ally may be always revived. Up to two allies are revivable if at least 9 energy is consumed. Up to three allies are revivable if at least 17 Aeos energy is consumed. Up to four allies are revivable if at least 25 Aeos energy is consumed.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Ho-Oh/Rekindling+Flame.mp4"
         }
@@ -26480,9 +26480,9 @@
       "passiveAbility": {
         "id": "regenerator",
         "name": "Regenerator",
-        "description": "If this Pokémon doesn't take damage from enemy Pokémon (Wild Pokémon do not count) for 3s, it will recover 3% max HP every 2 seconds. Damage to shields will not deactivate Regenerator. Ho-oh additionally recovers 0.3% max HP every 2 seconds.",
+        "description": "If this Pokémon doesn't take damage from enemy Pokémon (Wild Pokémon do not count) for 3s, it will recover 3% max HP every 2 seconds. Damage to shields will not deactivate Regenerator. Ho-Oh additionally recovers 0.3% max HP every 2 seconds.",
         "effects": [],
-        "descriptionAdvanced": "If this Pokémon doesn't take damage from enemy Pokémon (Wild Pokémon do not count) for 3s, it will recover 3% max HP every 2 seconds. Damage to shields will not deactivate Regenerator. Ho-oh additionally recovers 0.3% max HP every 2 seconds.",
+        "descriptionAdvanced": "If this Pokémon doesn't take damage from enemy Pokémon (Wild Pokémon do not count) for 3s, it will recover 3% max HP every 2 seconds. Damage to shields will not deactivate Regenerator. Ho-Oh additionally recovers 0.3% max HP every 2 seconds.",
         "iconAsset": "/assets/skills/Ho-Oh/Regenerator.png"
       },
       "builds": [
@@ -56977,7 +56977,7 @@
         },
         {
           "id": "lumiere-of-demise",
-          "name": "Lumiere of Demise",
+          "name": "Lumière of Demise",
           "slot": "uniteMove",
           "description": "Has the user fire a violent beam of light at the designated location, dealing continuous damage to opposing Pokémon in the beam's area of effect.\n\nThe longer the beam is fired, the larger the area of effect. Afterward, it creates an explosion, dealing increased damage to opposing Pokémon.\n\nWhile firing the beam, the user is resistant to hindrances.",
           "cooldownSeconds": 100.0,
@@ -68598,8 +68598,8 @@
       "goldOnly": false
     },
     {
-      "id": "152-chicorita",
-      "pokemonName": "Chicorita",
+      "id": "152-chikorita",
+      "pokemonName": "Chikorita",
       "colors": [
         "green"
       ],
@@ -70867,7 +70867,7 @@
     },
     {
       "id": "250-ho-oh",
-      "pokemonName": "Ho-oh",
+      "pokemonName": "Ho-Oh",
       "colors": [
         "brown",
         "white"

@@ -5,4 +5,4 @@ Scope: Base + Final + Unite moves (no passive).
   oblivion-wing.mp4   →  Oblivion Wing (Lv 5)   [Move 1 · Final]
   dark-pulse.mp4   →  Dark Pulse (Lv 7)   [Move 2 · Final]
   lash-out.mp4   →  Lash Out   [Move 2 · Base]
-  Lumiere-of-demise.mp4   →  Lumiére of Demise   [Unite · Unite]
+  Lumiere-of-demise.mp4   →  Lumière of Demise   [Unite · Unite]

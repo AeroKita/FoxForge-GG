@@ -307,6 +307,40 @@ def slugify(s: str) -> str:
     return "".join(c if c.isalnum() else "-" for c in s.lower()).strip("-")
 
 
+# UNITE-DB source data misspells some official Pokémon names. Correct them at
+# normalize time — never in _raw/ (re-downloaded by fetch.py) and never in the
+# generated bundles (overwritten by this script). Keys are case-sensitive, so
+# lowercase slugs/ids like "250-ho-oh" are never touched.
+SPELLING_FIXES = {
+    "Chicorita": "Chikorita",
+    "Ho-oh": "Ho-Oh",
+    # The in-game English text is "Lumière of Demise" (verified against a
+    # game screenshot); UNITE-DB drops the accent. Ids and asset paths stay
+    # ASCII — ids are lowercase (never match) and *Asset fields are skipped
+    # by fix_spelling_deep.
+    "Lumiere": "Lumière",
+}
+
+
+def fix_spelling(s: str) -> str:
+    for wrong, right in SPELLING_FIXES.items():
+        s = s.replace(wrong, right)
+    return s
+
+
+def fix_spelling_deep(obj):
+    if isinstance(obj, str):
+        return fix_spelling(obj)
+    if isinstance(obj, list):
+        return [fix_spelling_deep(item) for item in obj]
+    if isinstance(obj, dict):
+        return {
+            k: v if isinstance(k, str) and k.endswith("Asset") else fix_spelling_deep(v)
+            for k, v in obj.items()
+        }
+    return obj
+
+
 def decode_emblem_link(link: str, pokedex_to_id: dict) -> list:
     """Decode a UNITE-DB boost-emblems link's `build=` param into emblem picks.
 
@@ -700,6 +734,7 @@ def emblem_stat_block(stats_list) -> dict:
 def build_emblems(rows) -> list:
     grouped: dict[str, dict] = {}
     for e in rows:
+        e["display_name"] = fix_spelling(e["display_name"])
         key = e.get("pokedex", e["display_name"])
         pokedex = e.get("pokedex", "")
         g = grouped.setdefault(key, {
@@ -772,6 +807,7 @@ def main() -> None:
         "emblems": emblems,
         "setBonuses": set_bonuses,
     }
+    bundle = fix_spelling_deep(bundle)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "\n")
     print(f"\nWrote {OUT}")

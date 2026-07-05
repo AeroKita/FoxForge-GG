@@ -4,7 +4,14 @@ from __future__ import annotations
 
 import unittest
 
-from normalize import build_upgrade_move, passive_basic_desc, strip_activation_note
+from normalize import (
+    build_emblems,
+    build_upgrade_move,
+    fix_spelling,
+    fix_spelling_deep,
+    passive_basic_desc,
+    strip_activation_note,
+)
 
 
 class TestStripActivationNote(unittest.TestCase):
@@ -49,6 +56,72 @@ class TestBuildUpgradeMove(unittest.TestCase):
         move = build_upgrade_move(up, "move1", "Quaquaval")
         self.assertIn("Upgrade (Level 11):", move["description"])
         self.assertNotIn("Upgrade:", move["description"].replace("Upgrade (Level 11):", ""))
+
+
+class TestFixSpelling(unittest.TestCase):
+    def test_known_misspellings(self):
+        self.assertEqual(fix_spelling("Chicorita"), "Chikorita")
+        self.assertEqual(fix_spelling("Ho-oh"), "Ho-Oh")
+        self.assertEqual(fix_spelling("Lumiere of Demise"), "Lumière of Demise")
+
+    def test_noop_passthrough(self):
+        self.assertEqual(fix_spelling("Pikachu"), "Pikachu")
+
+    def test_lowercase_slugs_untouched(self):
+        self.assertEqual(fix_spelling("250-ho-oh"), "250-ho-oh")
+        self.assertEqual(fix_spelling("lumiere-of-demise"), "lumiere-of-demise")
+
+
+class TestFixSpellingDeep(unittest.TestCase):
+    def test_rewrites_nested_string_values(self):
+        fixture = {
+            "name": "Ho-oh",
+            "nested": {"description": "Ho-oh recovers HP"},
+            "items": ["Chicorita", "plain"],
+            "count": 42,
+        }
+        out = fix_spelling_deep(fixture)
+        self.assertEqual(out["name"], "Ho-Oh")
+        self.assertEqual(out["nested"]["description"], "Ho-Oh recovers HP")
+        self.assertEqual(out["items"], ["Chikorita", "plain"])
+        self.assertEqual(out["count"], 42)
+
+    def test_skips_asset_path_fields(self):
+        fixture = {
+            "name": "Lumiere of Demise",
+            "iconAsset": "/assets/skills/Yveltal/Lumiere+of+Demise.png",
+            "videoAsset": "/assets/skills/Yveltal/Lumiere+of+Demise.mp4",
+        }
+        out = fix_spelling_deep(fixture)
+        self.assertEqual(out["name"], "Lumière of Demise")
+        self.assertEqual(out["iconAsset"], "/assets/skills/Yveltal/Lumiere+of+Demise.png")
+        self.assertEqual(out["videoAsset"], "/assets/skills/Yveltal/Lumiere+of+Demise.mp4")
+
+
+class TestBuildEmblemsSpelling(unittest.TestCase):
+    def test_chicorita_and_ho_oh_display_names(self):
+        rows = [
+            {
+                "name": "152A",
+                "pokedex": "152",
+                "grade": "A",
+                "display_name": "Chicorita",
+                "color1": "Green",
+                "stats": [],
+            },
+            {
+                "name": "250A",
+                "pokedex": "250",
+                "grade": "A",
+                "display_name": "Ho-oh",
+                "color1": "Red",
+                "stats": [],
+            },
+        ]
+        out = build_emblems(rows)
+        by_id = {e["id"]: e for e in out}
+        self.assertEqual(by_id["152-chikorita"]["pokemonName"], "Chikorita")
+        self.assertEqual(by_id["250-ho-oh"]["pokemonName"], "Ho-Oh")
 
 
 if __name__ == "__main__":

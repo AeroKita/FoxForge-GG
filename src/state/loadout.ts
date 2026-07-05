@@ -34,6 +34,29 @@ const STORAGE_KEY = "unite-build-optimizer.loadouts.v1";
 const CURRENT_KEY = "unite-build-optimizer.current.v1";
 const OWNED_KEY = "unite-build-optimizer.ownedEmblems.v2"; // v2: keyed by emblemId:grade
 
+/**
+ * Emblem ids that were renamed when upstream spelling errors were fixed
+ * (see SPELLING_FIXES in tools/community/normalize.py). Remapped on every
+ * load path so pre-rename localStorage data keeps working.
+ */
+const LEGACY_EMBLEM_ID_REMAP: Record<string, string> = {
+  "152-chicorita": "152-chikorita",
+};
+
+function remapEmblemId(emblemId: string): string {
+  return LEGACY_EMBLEM_ID_REMAP[emblemId] ?? emblemId;
+}
+
+/** Remap legacy emblemId prefixes in owned-key strings (`emblemId:grade`). */
+function remapOwnedKey(key: string): string {
+  for (const [oldId, newId] of Object.entries(LEGACY_EMBLEM_ID_REMAP)) {
+    if (key.startsWith(`${oldId}:`)) {
+      return `${newId}:${key.slice(oldId.length + 1)}`;
+    }
+  }
+  return key;
+}
+
 export function emptyLoadout(pokemonId: string | null = null): Loadout {
   return {
     pokemonId,
@@ -186,7 +209,7 @@ export function sanitizeLoadout(x: unknown): Loadout | null {
       return !!p && typeof p.emblemId === "string" && typeof p.grade === "string";
     })
     .slice(0, MAX_EMBLEMS)
-    .map((e) => ({ emblemId: e.emblemId, grade: e.grade }));
+    .map((e) => ({ emblemId: remapEmblemId(e.emblemId), grade: e.grade }));
   return {
     pokemonId: typeof o.pokemonId === "string" ? o.pokemonId : null,
     level: typeof o.level === "number" ? Math.max(1, Math.min(15, Math.round(o.level))) : 15,
@@ -256,7 +279,8 @@ export function ownedKey(emblemId: string, grade: EmblemGrade): string {
 export function loadOwnedEmblems(): Set<string> {
   try {
     const raw = localStorage.getItem(OWNED_KEY);
-    return new Set<string>(raw ? JSON.parse(raw) : []);
+    const keys: string[] = raw ? JSON.parse(raw) : [];
+    return new Set(keys.map(remapOwnedKey));
   } catch {
     return new Set();
   }
@@ -305,10 +329,11 @@ export function parseOwnedEmblemsFile(
 
   const next = new Set<string>();
   for (const entry of parsed as string[]) {
-    const i = entry.lastIndexOf(":");
+    const remapped = remapOwnedKey(entry);
+    const i = remapped.lastIndexOf(":");
     if (i <= 0) continue; // no colon, or empty emblemId → malformed, skip
-    const emblemId = entry.slice(0, i);
-    const grade = entry.slice(i + 1);
+    const emblemId = remapped.slice(0, i);
+    const grade = remapped.slice(i + 1);
     if (!VALID_GRADES.has(grade)) continue;
     if (validEmblemIds && !validEmblemIds.has(emblemId)) continue;
     next.add(ownedKey(emblemId, grade as EmblemGrade));
