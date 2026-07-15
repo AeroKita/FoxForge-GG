@@ -5,6 +5,7 @@ from __future__ import annotations
 import unittest
 
 from normalize import (
+    apply_patch_note_overrides,
     build_emblems,
     build_upgrade_move,
     fix_spelling,
@@ -122,6 +123,156 @@ class TestBuildEmblemsSpelling(unittest.TestCase):
         by_id = {e["id"]: e for e in out}
         self.assertEqual(by_id["152-chikorita"]["pokemonName"], "Chikorita")
         self.assertEqual(by_id["250-ho-oh"]["pokemonName"], "Ho-Oh")
+
+
+def _minimal_override_bundle() -> dict:
+    """One Pokémon with one move and one held item for patch-note override tests."""
+    return {
+        "pokemon": [{
+            "id": "testmon",
+            "moves": [{
+                "id": "test-move",
+                "cooldownSeconds": 8.5,
+                "damageInstances": [
+                    {"ratio": 1.0, "slider": 10.0, "base": 100.0, "scalingStat": "attack", "damageType": "physical"},
+                    {"ratio": 2.0, "slider": 20.0, "base": 200.0, "scalingStat": "attack", "damageType": "physical"},
+                ],
+                "description": "Basic text.",
+                "descriptionAdvanced": "Advanced text with 8.5% max HP.",
+            }],
+        }],
+        "heldItems": [{
+            "id": "test-item",
+            "description": "Boost by 11/14/17%.",
+            "effect": {"label": "HP", "tiers": ["11%", "14%", "17%"]},
+        }],
+    }
+
+
+class TestApplyPatchNoteOverrides(unittest.TestCase):
+    def test_set_move_field_applies_when_expect_matches(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "set",
+            "pokemon": "testmon",
+            "move": "test-move",
+            "field": "cooldownSeconds",
+            "expect": 8.5,
+            "value": 8.0,
+            "why": "test cooldown",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 1)
+        self.assertEqual(skipped, 0)
+        self.assertEqual(bundle["pokemon"][0]["moves"][0]["cooldownSeconds"], 8.0)
+
+    def test_set_move_field_skips_when_expect_mismatches(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "set",
+            "pokemon": "testmon",
+            "move": "test-move",
+            "field": "cooldownSeconds",
+            "expect": 7.0,
+            "value": 8.0,
+            "why": "test cooldown",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 0)
+        self.assertEqual(skipped, 1)
+        self.assertEqual(bundle["pokemon"][0]["moves"][0]["cooldownSeconds"], 8.5)
+
+    def test_set_item_effect_tiers_applies_on_exact_list_match(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "set",
+            "item": "test-item",
+            "field": "effect.tiers",
+            "expect": ["11%", "14%", "17%"],
+            "value": ["17%", "20%", "23%"],
+            "why": "test tiers",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 1)
+        self.assertEqual(skipped, 0)
+        self.assertEqual(
+            bundle["heldItems"][0]["effect"]["tiers"],
+            ["17%", "20%", "23%"],
+        )
+
+    def test_scale_damage_multiplies_listed_instances_only(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "scaleDamage",
+            "pokemon": "testmon",
+            "move": "test-move",
+            "instances": [0],
+            "expectRatios": [1.0],
+            "factor": 1.5,
+            "why": "test scale",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 1)
+        self.assertEqual(skipped, 0)
+        inst0 = bundle["pokemon"][0]["moves"][0]["damageInstances"][0]
+        inst1 = bundle["pokemon"][0]["moves"][0]["damageInstances"][1]
+        self.assertEqual(inst0["ratio"], 1.5)
+        self.assertEqual(inst0["slider"], 15.0)
+        self.assertEqual(inst0["base"], 150.0)
+        self.assertEqual(inst1["ratio"], 2.0)
+        self.assertEqual(inst1["slider"], 20.0)
+        self.assertEqual(inst1["base"], 200.0)
+
+    def test_scale_damage_skips_when_expect_ratios_mismatch(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "scaleDamage",
+            "pokemon": "testmon",
+            "move": "test-move",
+            "instances": [0, 1],
+            "expectRatios": [1.0, 2.5],
+            "factor": 1.5,
+            "why": "test scale",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 0)
+        self.assertEqual(skipped, 1)
+        inst0 = bundle["pokemon"][0]["moves"][0]["damageInstances"][0]
+        inst1 = bundle["pokemon"][0]["moves"][0]["damageInstances"][1]
+        self.assertEqual(inst0["ratio"], 1.0)
+        self.assertEqual(inst1["ratio"], 2.0)
+
+    def test_replace_text_rewrites_named_field(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "replaceText",
+            "pokemon": "testmon",
+            "move": "test-move",
+            "fields": ["descriptionAdvanced"],
+            "find": "8.5% max HP",
+            "replace": "9.35% max HP",
+            "why": "test text",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 1)
+        self.assertEqual(skipped, 0)
+        self.assertIn("9.35% max HP", bundle["pokemon"][0]["moves"][0]["descriptionAdvanced"])
+        self.assertNotIn("8.5% max HP", bundle["pokemon"][0]["moves"][0]["descriptionAdvanced"])
+
+    def test_replace_text_expires_when_find_absent(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "replaceText",
+            "item": "test-item",
+            "fields": ["description"],
+            "find": "by 99/99/99%",
+            "replace": "by 17/20/23%",
+            "why": "test text",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 0)
+        self.assertEqual(skipped, 1)
+        self.assertEqual(bundle["heldItems"][0]["description"], "Boost by 11/14/17%.")
 
 
 if __name__ == "__main__":

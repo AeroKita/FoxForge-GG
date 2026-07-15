@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.2.8",
-  "lastUpdated": "2026-07-04",
+  "lastUpdated": "2026-07-15",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-04"
+    "fetched": "2026-07-15"
   },
   "pokemon": [
     {
@@ -1055,7 +1055,7 @@
           "name": "Wide Guard",
           "slot": "move2",
           "description": "Focus in place for a short time to create a great shield on Aegislash. When this shield appears, boost count increases by 1, granting a shield to Aegislash and shoves enemies in front. While this shield is active, enemy player attacks increase boost count by 1 for each different enemy player (capping at 4). When this move ends, shove enemies in front of Aegislash once again.\n\nUpgrade (Level 13): Cooldown reduced by 1s.",
-          "cooldownSeconds": 8.5,
+          "cooldownSeconds": 8.0,
           "damageInstances": [
             {
               "ratio": 1.7,
@@ -1073,7 +1073,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Focuses in place, becomes unstoppable and grants a shield effect for up to 1.2s; and shoves opposing Pokémon in front for 0.6s. This move can be used again to end the move early. When the shield effect is depleted or the move ends; shoves opposing Pokémon in front for 0.6s and decreases their movement speed by 45% for 2s.\n\n8.5% max HP\n\nIncreases the boost count by 1 unconditionally when granting the shield effect. Increases the boost count by 1 more for each instance of damage received by the shield effect (up to 2 times). Increases boost count by 1 more if an opposing Pokémon is shoved at the end or unconditionally when the shield effect is depleted before it can end normally.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s.",
+          "descriptionAdvanced": "Focuses in place, becomes unstoppable and grants a shield effect for up to 1.2s; and shoves opposing Pokémon in front for 0.6s. This move can be used again to end the move early. When the shield effect is depleted or the move ends; shoves opposing Pokémon in front for 0.6s and decreases their movement speed by 45% for 2s.\n\n9.35% max HP\n\nIncreases the boost count by 1 unconditionally when granting the shield effect. Increases the boost count by 1 more for each instance of damage received by the shield effect (up to 2 times). Increases boost count by 1 more if an opposing Pokémon is shoved at the end or unconditionally when the shield effect is depleted before it can end normally.\n\nUpgrade (Level 13): Reduces this move's cooldown by 1s.",
           "videoAsset": "/assets/skills/Aegislash/Wide+Guard.mp4"
         },
         {
@@ -20213,10 +20213,10 @@
           "cooldownSeconds": 89.0,
           "damageInstances": [
             {
-              "ratio": 3.0,
+              "ratio": 2.4000000000000004,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 900.0,
+              "base": 720.0,
               "damageType": "physical"
             },
             {
@@ -24985,24 +24985,24 @@
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
-              "ratio": 2.0,
+              "ratio": 2.2,
               "scalingStat": "attack",
-              "slider": 16.0,
-              "base": 405.0,
+              "slider": 17.6,
+              "base": 445.50000000000006,
               "damageType": "physical"
             },
             {
-              "ratio": 3.38,
+              "ratio": 3.718,
               "scalingStat": "attack",
-              "slider": 28.0,
-              "base": 680.0,
+              "slider": 30.800000000000004,
+              "base": 748.0000000000001,
               "damageType": "physical"
             },
             {
-              "ratio": 3.887,
+              "ratio": 4.2757000000000005,
               "scalingStat": "attack",
-              "slider": 32.0,
-              "base": 782.0,
+              "slider": 35.2,
+              "base": 860.2,
               "damageType": "physical"
             }
           ],
@@ -25067,17 +25067,17 @@
           "cooldownSeconds": 8.5,
           "damageInstances": [
             {
-              "ratio": 1.78,
+              "ratio": 2.0469999999999997,
               "scalingStat": "attack",
-              "slider": 14.0,
-              "base": 350.0,
+              "slider": 16.099999999999998,
+              "base": 402.49999999999994,
               "damageType": "physical"
             },
             {
-              "ratio": 2.34,
+              "ratio": 2.691,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 520.0,
+              "base": 598.0,
               "damageType": "physical"
             }
           ],
@@ -25089,7 +25089,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Becomes unstoppable and charges power for up to 2.4s, becoming fully charged after 0.8s; then bounces to the designated location forward, damaging opposing Pokémon in the area upon impact. While charging power, increases the range of this move, reaching maximum range when fully charged.\n\nIf fully charged when released, grants a shield for 5s, and throws opposing Pokémon hit for 0.45s. If this move is canceled, it goes on a 2s cooldown.\n\nUpgrade (Level 12): Strengthens the value of the shield effect.",
+          "descriptionAdvanced": "Becomes unstoppable and charges power for up to 2.4s, becoming fully charged after 0.8s; then bounces to the designated location forward, damaging opposing Pokémon in the area upon impact. While charging power, increases the range of this move, reaching maximum range when fully charged.\n\nIf fully charged when released, grants a shield for 5s, and throws opposing Pokémon hit for 0.7s. If this move is canceled, it goes on a 2s cooldown.\n\nUpgrade (Level 12): Strengthens the value of the shield effect.",
           "videoAsset": "/assets/skills/Gyarados/Bounce.mp4"
         },
         {
@@ -48618,7 +48618,7 @@
           "name": "Whirlpool",
           "slot": "move1",
           "description": "Has the user generate a vortex of water at the designated location, dealing damage to opposing Pokémon, puilling them toward its center, and leaving them drenched. If this move is used again, the vortex is moved in the designated dirction, flooding the area it passes through.",
-          "cooldownSeconds": 7.5,
+          "cooldownSeconds": 8.0,
           "damageInstances": [
             {
               "ratio": 0.2,
@@ -48708,7 +48708,7 @@
           "name": "Ice Beam",
           "slot": "move2",
           "description": "Has the user fire an icy-cold beam of energy in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits. If the opposing Pokémon are drenched when hit, they are left frozen. If this move hits a flooded area, that area becomes frozen. A maximum of 2 uses can be kept in reserve for this move.",
-          "cooldownSeconds": 7.5,
+          "cooldownSeconds": 8.0,
           "damageInstances": [
             {
               "ratio": 0.79,
@@ -49332,10 +49332,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 0.48,
+              "ratio": 0.4416,
               "scalingStat": "spAttack",
-              "slider": 12.0,
-              "base": 201.0,
+              "slider": 11.040000000000001,
+              "base": 184.92000000000002,
               "damageType": "special"
             }
           ],
@@ -52559,7 +52559,7 @@
           "name": "Flame Wheel",
           "slot": "move2",
           "description": "Has the user cloak itself in fire and charge forward, dealing damage to opposing Pokémon it hits and leaving them unable to act. The user is also granted a shield efffect, and the next basic attack becomes a boosted attack. If the user hits an opposing Pokémon, the user jumps and crashes down, dealing damage and applying a slowing effect to nearby opposing Pokémon. When the user is at peak rage, opposing Pokémon it hits upon landing are thrown.",
-          "cooldownSeconds": 7.5,
+          "cooldownSeconds": 8.5,
           "damageInstances": [
             {
               "ratio": 0.6,
@@ -53678,7 +53678,7 @@
           "isUpgrade": true,
           "moveType": "Recovery",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Wishes for an ally Pokémon or Umbreon. For 2s, that Pokémon receives 15% reduced damage, then afterward, the wish comes true and heals them. If the targeted Pokémon is knocked out before the wish comes true, a different ally Pokémon near them takes the wish instead.\n\nUpgrade (Level 12): Increases the damage reduction to 25% and amount of healing when the wish comes true.",
+          "descriptionAdvanced": "Wishes for an ally Pokémon or Umbreon. For 2s, that Pokémon receives 20% reduced damage, then afterward, the wish comes true and heals them. If the targeted Pokémon is knocked out before the wish comes true, a different ally Pokémon near them takes the wish instead.\n\nUpgrade (Level 12): Increases the damage reduction to 30% and amount of healing when the wish comes true.",
           "videoAsset": "/assets/skills/Umbreon/Wish.mp4"
         },
         {
@@ -53711,7 +53711,7 @@
           "isUpgrade": true,
           "moveType": "Debuff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Becomes hindrance resistant and begin snarling for 1.5s, dealing damage to enemy Pokémon in the area around Umbreon and decreasing the affected Pokémon's Attack and Sp. Atk stat by 3% for 1.5s and movement speed by 15% for 2s. Also grants the user a shield for 2s. Umbreon is slowed by 30% while snarling. The final shout leaves enemy Pokémon stunned for 0.7s and further decreases their Attack and Sp. Atk by 15% for 3s. The small shout Attack and Sp. Atk decreases can stack up to 6 times and stack with the big shout's Attack and Sp. Atk decreases.\n\n15% Max HP Shield\n\nUpgrade (Level 12): Increases the stun duration of the final shout to 1s.",
+          "descriptionAdvanced": "Becomes hindrance resistant and begin snarling for 1.5s, dealing damage to enemy Pokémon in the area around Umbreon and decreasing the affected Pokémon's Attack and Sp. Atk stat by 3% for 1.5s and movement speed by 15% for 2s. Also grants the user a shield for 3s. Umbreon is slowed by 30% while snarling. The final shout leaves enemy Pokémon stunned for 0.7s and further decreases their Attack and Sp. Atk by 15% for 3s. The small shout Attack and Sp. Atk decreases can stack up to 6 times and stack with the big shout's Attack and Sp. Atk decreases.\n\n20% Max HP Shield\n\nUpgrade (Level 12): Increases the stun duration of the final shout to 1s.",
           "videoAsset": "/assets/skills/Umbreon/Snarl.mp4"
         },
         {
@@ -60831,7 +60831,7 @@
       "id": "choice-scarf",
       "displayName": "Choice Scarf",
       "iconAsset": "/assets/items/held/Choice+Scarf.png",
-      "description": "Dealing auto attack damage to a Pokémon from the opposing team adds 1 stack of a hidden buff for 2s, up to 3 stacks. Taking non movement, non auto attack actions will reset the stack count to 0. After the 3rd stack: increases movement speed by 30/35/40% for 3s (8s CD).",
+      "description": "Dealing auto attack damage to a Pokémon from the opposing team adds 1 stack of a hidden buff for 2s, up to 3 stacks. Taking non movement, non auto attack actions will reset the stack count to 0. After the 3rd stack: increases movement speed by 30/35/40% for 3s (6s CD).",
       "statsByGrade": {
         "1": {
           "attackSpeed": 0.0025,
@@ -63141,7 +63141,7 @@
       "id": "rescue-hood",
       "displayName": "Rescue Hood",
       "iconAsset": "/assets/items/held/Rescue+Hood.png",
-      "description": "Increases HP recovery and shield effects granted to ally Pokémon by 11/14/17%.",
+      "description": "Increases HP recovery and shield effects granted to ally Pokémon by 17/20/23%.",
       "statsByGrade": {
         "1": {
           "defense": 1.0,
@@ -63308,9 +63308,9 @@
       "effect": {
         "label": "Shield and Recovery Effects",
         "tiers": [
-          "11%",
-          "14%",
-          "17%"
+          "17%",
+          "20%",
+          "23%"
         ]
       }
     },
@@ -63455,7 +63455,7 @@
       "id": "rocky-helmet",
       "displayName": "Rocky Helmet",
       "iconAsset": "/assets/items/held/Rocky+Helmet.png",
-      "description": "Upon receiving damage equal to 3% max HP or more from an opposing Pokémon in a single hit: deals 1.2/1.5/1.8% of the holder's max HP as Attack-based damage to nearby opposing Pokémon (0.6s CD).",
+      "description": "Upon receiving damage equal to 3% max HP or more from an opposing Pokémon in a single hit: deals 1.9/2.2/2.5% of the holder's max HP as Attack-based damage to nearby opposing Pokémon (0.6s CD).",
       "statsByGrade": {
         "1": {
           "hp": 9.0,
@@ -63622,9 +63622,9 @@
       "effect": {
         "label": "Max HP",
         "tiers": [
-          "1.2%",
-          "1.5%",
-          "1.8%"
+          "1.9%",
+          "2.2%",
+          "2.5%"
         ]
       }
     },

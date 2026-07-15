@@ -30,7 +30,21 @@ RAW = HERE / "_raw"
 OUT = HERE.parent.parent / "src" / "data" / "patch-current.json"
 CDN = "https://d275t8dp8rxb42.cloudfront.net"
 ASSETS = "/assets"  # local mirror under public/assets (see fetch_art.py)
-PATCH_VERSION = os.environ.get("PATCH_VERSION") or "1.23.2.5"
+
+
+def _read_previous_patch_version(fallback: str = "1.23.2.8") -> str:
+    """Carry forward patchVersion from the existing bundle when PATCH_VERSION is unset."""
+    if OUT.exists():
+        try:
+            bundle = json.loads(OUT.read_text())
+            if v := bundle.get("patchVersion"):
+                return str(v)
+        except (json.JSONDecodeError, OSError):
+            pass
+    return fallback
+
+
+PATCH_VERSION = os.environ.get("PATCH_VERSION") or _read_previous_patch_version()
 
 # Unite-move unlock levels missing from UNITE-DB raw (slug -> level).
 MANUAL_LEVEL = {"psykaboom": 9}
@@ -628,6 +642,147 @@ def apply_curated_builds(pokemon, emblems, held, battle) -> None:
           f"{n_titles} titles renamed, {n_presets} emblem presets")
 
 
+# ---- patch-note overrides --------------------------------------------------
+
+PATCH_NOTE_OVERRIDES = HERE / "patch_note_overrides.json"
+_OVERRIDE_EPS = 1e-9
+
+
+def load_patch_note_overrides() -> list[dict]:
+    """Load self-expiring patch-note overrides from patch_note_overrides.json."""
+    if not PATCH_NOTE_OVERRIDES.exists():
+        print("  (no patch_note_overrides.json — skipping patch-note overlay)")
+        return []
+    return json.loads(PATCH_NOTE_OVERRIDES.read_text()).get("overrides", [])
+
+
+def _override_get_dotted(obj: dict, path: str):
+    cur = obj
+    for part in path.split("."):
+        cur = cur[part]
+    return cur
+
+
+def _override_set_dotted(obj: dict, path: str, value) -> None:
+    parts = path.split(".")
+    cur = obj
+    for part in parts[:-1]:
+        cur = cur[part]
+    cur[parts[-1]] = value
+
+
+def _override_values_equal(actual, expect) -> bool:
+    if isinstance(expect, list):
+        if not isinstance(actual, list) or len(actual) != len(expect):
+            return False
+        return all(_override_values_equal(a, e) for a, e in zip(actual, expect))
+    if isinstance(expect, (int, float)):
+        return abs(float(actual) - float(expect)) < _OVERRIDE_EPS
+    return actual == expect
+
+
+def _override_find_pokemon(bundle: dict, pokemon_id: str) -> dict:
+    by_id = {p["id"]: p for p in bundle.get("pokemon", [])}
+    p = by_id.get(pokemon_id)
+    if p is None:
+        raise ValueError(f"patch-note override: unknown Pokémon id {pokemon_id!r}")
+    return p
+
+
+def _override_find_move(pokemon: dict, move_id: str) -> dict:
+    for m in pokemon.get("moves", []):
+        if m["id"] == move_id:
+            return m
+    raise ValueError(
+        f"patch-note override: unknown move id {move_id!r} for {pokemon['id']!r}"
+    )
+
+
+def _override_find_held_item(bundle: dict, item_id: str) -> dict:
+    for h in bundle.get("heldItems", []):
+        if h["id"] == item_id:
+            return h
+    raise ValueError(f"patch-note override: unknown held item id {item_id!r}")
+
+
+def apply_patch_note_overrides(bundle: dict, overrides: list[dict]) -> tuple[int, int]:
+    """Apply self-expiring patch-note overrides to the normalized bundle (mutates in place).
+
+    Each entry targets a move (pokemon+move ids) or a held item (item id) and is guarded
+    by its pre-patch value; a failed guard means UNITE-DB has shipped post-patch data, so
+    the entry is skipped with a printed notice. Returns (applied, skipped) counts.
+    Kinds: "set" (field must equal `expect`; supports the dotted path "effect.tiers"),
+    "scaleDamage" (each listed damageInstances index must have ratio == expectRatios[k];
+    multiplies ratio, slider, and base by `factor`, exact floats, no rounding),
+    "replaceText" (replaces `find` with `replace` in each named description field;
+    expires when `find` is absent from all of them).
+    """
+    applied = 0
+    skipped = 0
+
+    for entry in overrides:
+        kind = entry["kind"]
+        why = entry.get("why", "")
+
+        if "pokemon" in entry:
+            pokemon = _override_find_pokemon(bundle, entry["pokemon"])
+            target = _override_find_move(pokemon, entry["move"])
+        elif "item" in entry:
+            target = _override_find_held_item(bundle, entry["item"])
+        else:
+            raise ValueError("patch-note override: entry must specify pokemon or item")
+
+        if kind == "set":
+            field = entry["field"]
+            current = _override_get_dotted(target, field)
+            if not _override_values_equal(current, entry["expect"]):
+                print(f"  ! patch-note override expired: {why}")
+                skipped += 1
+                continue
+            _override_set_dotted(target, field, entry["value"])
+            applied += 1
+
+        elif kind == "scaleDamage":
+            instances = target.get("damageInstances", [])
+            expect_ratios = entry["expectRatios"]
+            factor = entry["factor"]
+            mismatch = False
+            for idx, exp in zip(entry["instances"], expect_ratios):
+                if idx >= len(instances) or not _override_values_equal(instances[idx]["ratio"], exp):
+                    mismatch = True
+                    break
+            if mismatch:
+                print(f"  ! patch-note override expired: {why}")
+                skipped += 1
+                continue
+            for idx in entry["instances"]:
+                inst = instances[idx]
+                inst["ratio"] *= factor
+                inst["slider"] *= factor
+                inst["base"] *= factor
+            applied += 1
+
+        elif kind == "replaceText":
+            found_any = False
+            for field in entry["fields"]:
+                text = target.get(field)
+                if not isinstance(text, str) or entry["find"] not in text:
+                    continue
+                found_any = True
+                target[field] = text.replace(entry["find"], entry["replace"])
+            if not found_any:
+                print(f"  ! patch-note override expired: {why}")
+                skipped += 1
+                continue
+            applied += 1
+
+        else:
+            raise ValueError(f"patch-note override: unknown kind {kind!r}")
+
+    print(f"  patch-note overrides: {applied} applied, {skipped} expired/skipped")
+    return applied, skipped
+
+
 # ---- held items ------------------------------------------------------------
 
 HELD_ITEM_MAX_GRADE = 40
@@ -808,6 +963,7 @@ def main() -> None:
         "setBonuses": set_bonuses,
     }
     bundle = fix_spelling_deep(bundle)
+    apply_patch_note_overrides(bundle, load_patch_note_overrides())
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(bundle, indent=2, ensure_ascii=False) + "\n")
     print(f"\nWrote {OUT}")
