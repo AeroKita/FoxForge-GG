@@ -157,12 +157,81 @@ def damage_instances(rsb: dict) -> list:
     return out
 
 
+# Display rewording for UNITE-DB `add{N}_label` strings. Raw labels are
+# datamine-flavored ("Damage - Execute", "Shield - Additional"); this maps each
+# label seen in the data to user-facing phrasing. Unknown (future) labels pass
+# through verbatim via reword_add_label so secondary values always render
+# labeled, never as context-free floating paragraphs.
+ADD_LABEL_REWORDS = {
+    "Shield - Additional": "Shield",
+    "Heal": "Healing",
+    "Heal (Over 3s)": "Healing (over 3s)",
+    "Healing (Per Tick)": "Healing (per tick)",
+    "Healing (2x)": "Healing (2×)",
+    "Healing (4x)": "Healing (4×)",
+    "Healing - Additional": "Additional healing",
+    "Healing - Oran Berry": "Healing (Oran Berry)",
+    "Healing - After Eating Any Berry": "Healing (any berry)",
+    "Healing (Per hit up to 4x based on number of Center hits)":
+        "Healing (per hit, up to 4× based on Center hits)",
+    "Healing (Gooey Center- Per hit up to 4x based on number of Center hits)":
+        "Healing with Gooey Center (per hit, up to 4× based on Center hits)",
+    "Healing - Full Bloom (beyond first tick)": "Full Bloom healing (beyond first tick)",
+    "Self Healing - Attached (per second)": "Self-healing while attached (per second)",
+    "Shield - Attach (Synthesis or Floral Healing)": "Shield on attach (Synthesis or Floral Healing)",
+    "Shield - Attach (Sweet Kiss)": "Shield on attach (Sweet Kiss)",
+    "Damage - Execute": "Execute damage",
+    "Damage - Additional": "Additional damage",
+    "Damage - Additional (Same Target)": "Additional damage (same target)",
+    "Damage - Additional to Marked Targets": "Additional damage to marked targets",
+    "Damage - Additional per tick (x5)": "Additional damage per tick (×5)",
+    "Damage - Subsequent Hits": "Subsequent hits",
+    "Damage - Subsequent Punches": "Subsequent punches",
+    "Damage - Second Hit": "Second hit",
+    "Damage (Second Hit)": "Second hit",
+    "Damage - Slam": "Slam damage",
+    "Damage - Leap": "Leap damage",
+    "Damage - Final Slash": "Final slash damage",
+    "Damage - Reduced (up to 3 Hits)": "Reduced damage (up to 3 hits)",
+    "Damage - DoT": "Damage over time",
+    "Damage - DoT (3 Ticks)": "Damage over time (3 ticks)",
+    "Damage - DoT (21 Ticks)": "Damage over time (21 ticks)",
+    "Damage - Poison (10 Ticks)": "Poison damage (10 ticks)",
+    "Damage - Basic": "Basic attack",
+    "Damage - Basic [Fully Evolved] (2x)": "Basic attack (fully evolved)",
+    "Damage - 3x (Full Gauge)": "Full-gauge damage (3×)",
+    "Damage - Flare (Additional)": "Flare damage",
+    "Damage - Explosion (Additional)": "Explosion damage (additional)",
+    "Damage - Claw (Additional)": "Claw damage (additional)",
+    "Damage - Shadow Ball Bonus": "Shadow Ball bonus damage",
+    "Damage - Full Bloom (beyond first hit)": "Full Bloom damage (beyond first hit)",
+    "Damage - Center (Charged)": "Center hit (charged)",
+    "Damage - Conal (Charged)": "Cone hit (charged)",
+    "Damage - Mid charge": "Mid charge",
+    "Damage - Max Charge": "Max charge",
+    "Damage (Dispatch formation Trooper)": "Trooper damage (Dispatch formation)",
+    "Damage Boost": "Damage boost",
+    "Debuff – Paralysis": "Paralysis debuff",
+    "Attack Speed - Increase": "Attack speed increase",
+    "Charm Duration": "Charm duration",
+    "Between 40%-70% HP": "40–70% HP",
+    "40%-70% HP": "40–70% HP",
+}
+
+
+def reword_add_label(label: str) -> str:
+    """User-facing display form of an add{N}_label (verbatim when unmapped)."""
+    return ADD_LABEL_REWORDS.get(label, label)
+
+
 def advanced_desc(rsb: dict, upgrade_level=None) -> str:
     """UNITE-DB's detailed move text (Advanced mode): true_desc, then any
-    secondary-effect true_descs, then notes, then the level-up bonus line.
-    Mirrors what unite-db.com shows. Returns "" when there is no true_desc
-    (e.g. some non-combat passives) so the UI falls back to the basic text.
-    Paragraphs are joined with a blank line; the tooltip renders newlines."""
+    secondary-effect true_descs (labeled "<label>: <value>" from add{N}_label
+    via reword_add_label, so values never float context-free), then notes,
+    then the level-up bonus line. Mirrors what unite-db.com shows. Returns ""
+    when there is no true_desc (e.g. some non-combat passives) so the UI falls
+    back to the basic text. Paragraphs are joined with a blank line; the
+    tooltip renders newlines."""
     rsb = rsb or {}
     main = (rsb.get("true_desc") or "").strip()
     if not main:
@@ -171,7 +240,8 @@ def advanced_desc(rsb: dict, upgrade_level=None) -> str:
     for i in range(1, 6):
         add = (rsb.get(f"add{i}_true_desc") or "").strip()
         if add:
-            parts.append(add)
+            label = (rsb.get(f"add{i}_label") or "").strip()
+            parts.append(f"{reword_add_label(label)}: {add}" if label else add)
     notes = (rsb.get("notes") or "").strip()
     if notes:
         parts.append(notes)

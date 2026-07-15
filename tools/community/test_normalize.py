@@ -5,12 +5,14 @@ from __future__ import annotations
 import unittest
 
 from normalize import (
+    advanced_desc,
     apply_patch_note_overrides,
     build_emblems,
     build_upgrade_move,
     fix_spelling,
     fix_spelling_deep,
     passive_basic_desc,
+    reword_add_label,
     strip_activation_note,
 )
 
@@ -123,6 +125,55 @@ class TestBuildEmblemsSpelling(unittest.TestCase):
         by_id = {e["id"]: e for e in out}
         self.assertEqual(by_id["152-chikorita"]["pokemonName"], "Chikorita")
         self.assertEqual(by_id["250-ho-oh"]["pokemonName"], "Ho-Oh")
+
+
+class TestAdvancedDescLabels(unittest.TestCase):
+    """advanced_desc must label secondary add{N}_true_desc fragments with their
+    (reworded) add{N}_label so no context-free value paragraphs reach users."""
+
+    def test_add_fragment_is_prefixed_with_reworded_label(self):
+        rsb = {
+            "true_desc": "Main move text.",
+            "add1_label": "Shield - Additional",
+            "add1_true_desc": "8.5% max HP",
+        }
+        self.assertEqual(
+            advanced_desc(rsb),
+            "Main move text.\n\nShield: 8.5% max HP",
+        )
+
+    def test_add_fragment_without_label_stays_bare(self):
+        rsb = {
+            "true_desc": "Main move text.",
+            "add1_label": "",
+            "add1_true_desc": "Deals half damage.",
+        }
+        self.assertEqual(
+            advanced_desc(rsb),
+            "Main move text.\n\nDeals half damage.",
+        )
+
+    def test_multiple_adds_each_get_their_own_label(self):
+        rsb = {
+            "true_desc": "Main move text.",
+            "add1_label": "Above 70% HP",
+            "add1_true_desc": "1.1s Stun",
+            "add2_label": "Below 40% HP",
+            "add2_true_desc": "1.5s Stun",
+        }
+        self.assertEqual(
+            advanced_desc(rsb),
+            "Main move text.\n\nAbove 70% HP: 1.1s Stun\n\nBelow 40% HP: 1.5s Stun",
+        )
+
+    def test_reword_map_covers_common_families(self):
+        self.assertEqual(reword_add_label("Shield - Additional"), "Shield")
+        self.assertEqual(reword_add_label("Damage - Execute"), "Execute damage")
+        self.assertEqual(reword_add_label("Heal"), "Healing")
+        self.assertEqual(reword_add_label("Damage - DoT (21 Ticks)"), "Damage over time (21 ticks)")
+
+    def test_unknown_label_passes_through_verbatim(self):
+        self.assertEqual(reword_add_label("Some Future Label"), "Some Future Label")
 
 
 def _minimal_override_bundle() -> dict:
