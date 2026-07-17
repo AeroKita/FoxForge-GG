@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.2.8",
-  "lastUpdated": "2026-07-15",
+  "lastUpdated": "2026-07-17",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-15"
+    "fetched": "2026-07-17"
   },
   "pokemon": [
     {
@@ -1058,10 +1058,10 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 1.7,
+              "ratio": 1.87,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 340.0,
+              "base": 374.0,
               "damageType": "physical"
             }
           ],
@@ -20210,10 +20210,10 @@
           "name": "Big Jaw Bite",
           "slot": "uniteMove",
           "description": "Has the user let out an intimidating growl, reducing move cooldowns for a short time. When this Unite Move is used again, the user charges at the designated panel from the opposing team and sinks its teeth into them, dealing damage. The amount of damage dealt to Pokémon from the opposing team will be based on the number of additional effects applied by Crunch.",
-          "cooldownSeconds": 89.0,
+          "cooldownSeconds": 100.0,
           "damageInstances": [
             {
-              "ratio": 2.4000000000000004,
+              "ratio": 2.4,
               "scalingStat": "attack",
               "slider": 0.0,
               "base": 720.0,
@@ -24987,22 +24987,22 @@
             {
               "ratio": 2.2,
               "scalingStat": "attack",
-              "slider": 17.6,
-              "base": 445.50000000000006,
+              "slider": 17.0,
+              "base": 445.0,
               "damageType": "physical"
             },
             {
               "ratio": 3.718,
               "scalingStat": "attack",
-              "slider": 30.800000000000004,
-              "base": 748.0000000000001,
+              "slider": 30.0,
+              "base": 748.0,
               "damageType": "physical"
             },
             {
-              "ratio": 4.2757000000000005,
+              "ratio": 4.2757,
               "scalingStat": "attack",
-              "slider": 35.2,
-              "base": 860.2,
+              "slider": 35.0,
+              "base": 860.0,
               "damageType": "physical"
             }
           ],
@@ -25069,15 +25069,15 @@
             {
               "ratio": 2.0469999999999997,
               "scalingStat": "attack",
-              "slider": 16.099999999999998,
-              "base": 402.49999999999994,
+              "slider": 16.0,
+              "base": 402.0,
               "damageType": "physical"
             },
             {
-              "ratio": 2.691,
+              "ratio": 2.574,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 598.0,
+              "base": 572.0,
               "damageType": "physical"
             }
           ],
@@ -29042,7 +29042,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 2 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias generates a beam in the designated direction, sweeping in a cone shape, damaging opposing Pokémon hit and restoring the user's HP once. While firing the beam, Latias moves 60% slower.\n\nThis move gains 2 telekinetic projectiles at 25 and 100 Eon power, and gains 1 projectile at 50 and 75 Eon power for a total of 6 projectiles. Subsequent projectiles hitting the same target deal 15% less damage; further decreasing with each projectile to a maximum of 75% less damage. For every 1 Eon power accumulated beyond 100; the projectile damage increases by 0.5% (Eon power caps at 1099).\n\nUpgrade (Level 10): The beam now slows opposing Pokémon by 30% for 2s",
+          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 2 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias generates a beam in the designated direction, sweeping in a cone shape, damaging opposing Pokémon hit and restoring the user's HP once. While firing the beam, Latias moves 60% slower.\n\nThis move gains 2 telekinetic projectiles at 25 and 100 Eon power, and gains 1 projectile at 50 and 75 Eon power for a total of 6 projectiles. Subsequent projectiles hitting the same target deal 15% less damage; further decreasing with each projectile to a maximum of 75% less damage. For every 1 Eon power accumulated beyond 100; the projectile damage increases by 0.5% (Eon power caps at 1099).\n\nUpgrade (Level 10): The beam now slows opposing Pokémon by 30% for 2s.",
           "videoAsset": "/assets/skills/Latias/Dragon+Pulse.mp4"
         },
         {
@@ -29068,7 +29068,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 3 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias exhales a mighty gust in the designated direction, damaging opposing Pokémon hit, slowing them by 30% for 3s and decreasing their Sp. Def by 30% for 3s.\n\nThis move gains increased range at 31 and 61 Eon Power. For every 1 Eon power accumulated beyond 60; the damage increases by 0.5% (Eon power caps at 1059).\n\nUpgrade (Level 10): The slow is increased to 40% for 3s",
+          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 3 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias exhales a mighty gust in the designated direction, damaging opposing Pokémon hit, slowing them by 30% for 3s and decreasing their Sp. Def by 30% for 3s.\n\nThis move gains increased range at 31 and 61 Eon Power. For every 1 Eon power accumulated beyond 60; the damage increases by 0.5% (Eon power caps at 1059).\n\nUpgrade (Level 10): The slow is increased to 40% for 3s.",
           "videoAsset": "/assets/skills/Latias/Dragon+Breath.mp4"
         },
         {
@@ -42576,10 +42576,10 @@
               "damageType": "physical"
             },
             {
-              "ratio": 0.5,
+              "ratio": 0.55,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 150.0,
+              "base": 165.0,
               "damageType": "physical"
             }
           ],
@@ -46916,7 +46916,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.7s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
+          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.7s. Pokémon under the fear effect walk away from the user's position. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
           "videoAsset": "/assets/skills/Skeledirge/Snarl.mp4"
         },
         {
@@ -48767,7 +48767,7 @@
           "name": "Endless Ice Spikes",
           "slot": "uniteMove",
           "description": "This move can be used while the user is unable to act, and when it is, all status conditions on the user are removed. Has the user create ice spikes in the designated direction, dealing damage to opposing Pokémon they hit and leaving them frozen. After a short time, the spikes explode, dealing damage to opposing Pokémon they hit.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 112.0,
           "damageInstances": [
             {
               "ratio": 0.92,
@@ -49334,8 +49334,8 @@
             {
               "ratio": 0.4416,
               "scalingStat": "spAttack",
-              "slider": 11.040000000000001,
-              "base": 184.92000000000002,
+              "slider": 11.0,
+              "base": 185.0,
               "damageType": "special"
             }
           ],
@@ -52569,10 +52569,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 1.0,
+              "ratio": 0.9,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 350.0,
+              "base": 315.0,
               "damageType": "special"
             }
           ],
@@ -53711,7 +53711,7 @@
           "isUpgrade": true,
           "moveType": "Debuff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Becomes hindrance resistant and begin snarling for 1.5s, dealing damage to enemy Pokémon in the area around Umbreon and decreasing the affected Pokémon's Attack and Sp. Atk stat by 3% for 1.5s and movement speed by 15% for 2s. Also grants the user a shield for 3s. Umbreon is slowed by 30% while snarling. The final shout leaves enemy Pokémon stunned for 0.7s and further decreases their Attack and Sp. Atk by 15% for 3s. The small shout Attack and Sp. Atk decreases can stack up to 6 times and stack with the big shout's Attack and Sp. Atk decreases.\n\nShield: 20% Max HP\n\nUpgrade (Level 12): Increases the stun duration of the final shout to 1s.",
+          "descriptionAdvanced": "Becomes hindrance resistant and begin snarling for 1.5s, dealing damage to enemy Pokémon in the area around Umbreon and decreasing the affected Pokémon's Attack and Sp. Atk stat by 3% for 1.5s and movement speed by 15% for 2s. Also grants the user a shield for 3s. Umbreon is slowed by 30% while snarling. The final shout leaves enemy Pokémon stunned for 0.7s and further decreases their Attack and Sp. Atk by 15% for 3s. The small shout Attack and Sp. Atk decreases can stack up to 6 times and stack with the big shout's Attack and Sp. Atk decreases.\n\nShield: 20% Max HP Shield\n\nUpgrade (Level 12): Increases the stun duration of the final shout to 1s.",
           "videoAsset": "/assets/skills/Umbreon/Snarl.mp4"
         },
         {
@@ -53719,7 +53719,7 @@
           "name": "Moonlight Prance",
           "slot": "uniteMove",
           "description": "Has the user continually recover HP when it is not in combat. Also has the user leap up and absorb the shields of opposing Pokémon in the area around it, taking them for itself. Then, the user lands, dealing damage to opposing Pokémon in the area of effect and leaving them unable to act. For a short time afterward, when an opposing Pokémon in the area of effect is granted a shield, the user absorbs a portion of it and takes it for itself.",
-          "cooldownSeconds": 112.0,
+          "cooldownSeconds": 100.0,
           "damageInstances": [
             {
               "ratio": 2.24,
@@ -63455,7 +63455,7 @@
       "id": "rocky-helmet",
       "displayName": "Rocky Helmet",
       "iconAsset": "/assets/items/held/Rocky+Helmet.png",
-      "description": "Upon receiving damage equal to 3% max HP or more from an opposing Pokémon in a single hit: deals 1.9/2.2/2.5% of the holder's max HP as Attack-based damage to nearby opposing Pokémon (0.6s CD).",
+      "description": "Upon receiving damage equal to 3% max HP or more from an opposing Pokémon in a single hit: deals 1.9%/2.2%/2.5% of the holder's max HP as Attack-based damage to nearby opposing Pokémon (0.6s CD).",
       "statsByGrade": {
         "1": {
           "hp": 9.0,
