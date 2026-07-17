@@ -23,3 +23,7 @@ tools/community/_clips/*/*.mp4
 tools/community/_clips/*/*.MP4
 tools/community/_clips/*/*.mov
 tools/community/_clips/*/*.MOV
+
+# private in-game reference screenshots (move descriptions, etc.) — reference
+# only, never distributed.
+screenshot-references/

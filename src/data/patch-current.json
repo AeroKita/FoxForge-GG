@@ -1,11 +1,11 @@
 {
-  "patchVersion": "1.23.2.8",
-  "lastUpdated": "2026-07-15",
+  "patchVersion": "1.23.3.9",
+  "lastUpdated": "2026-07-17",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-15"
+    "fetched": "2026-07-17"
   },
   "pokemon": [
     {
@@ -59549,6 +59549,433 @@
           "moves": [
             "Night Slash",
             "Cut"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "palkia",
+      "displayName": "Palkia",
+      "role": "AllRounder",
+      "attackType": "special",
+      "difficulty": 2,
+      "imageAsset": "/assets/pokemon/portrait/Palkia.png",
+      "iconAsset": "/assets/pokemon/thumbnail/Palkia.png",
+      "evolutions": [
+        {
+          "level": 1,
+          "formName": "Palkia"
+        }
+      ],
+      "baseStatsByLevel": [
+        {
+          "hp": 3250.0,
+          "attack": 20.0,
+          "defense": 80.0,
+          "spAttack": 80.0,
+          "spDefense": 65.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3325.0,
+          "attack": 21.0,
+          "defense": 86.0,
+          "spAttack": 88.0,
+          "spDefense": 70.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.105,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3415.0,
+          "attack": 23.0,
+          "defense": 94.0,
+          "spAttack": 98.0,
+          "spDefense": 76.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.111,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3523.0,
+          "attack": 25.0,
+          "defense": 103.0,
+          "spAttack": 110.0,
+          "spDefense": 83.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1182,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 4047.0,
+          "attack": 34.0,
+          "defense": 147.0,
+          "spAttack": 169.0,
+          "spDefense": 116.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1531,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4204.0,
+          "attack": 37.0,
+          "defense": 160.0,
+          "spAttack": 187.0,
+          "spDefense": 126.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1635,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4786.0,
+          "attack": 48.0,
+          "defense": 209.0,
+          "spAttack": 252.0,
+          "spDefense": 163.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2023,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5011.0,
+          "attack": 52.0,
+          "defense": 228.0,
+          "spAttack": 277.0,
+          "spDefense": 177.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2173,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5281.0,
+          "attack": 57.0,
+          "defense": 251.0,
+          "spAttack": 307.0,
+          "spDefense": 194.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2353,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5605.0,
+          "attack": 63.0,
+          "defense": 278.0,
+          "spAttack": 343.0,
+          "spDefense": 215.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2569,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5994.0,
+          "attack": 70.0,
+          "defense": 311.0,
+          "spAttack": 387.0,
+          "spDefense": 240.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2829,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6461.0,
+          "attack": 78.0,
+          "defense": 350.0,
+          "spAttack": 440.0,
+          "spDefense": 270.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.314,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7021.0,
+          "attack": 88.0,
+          "defense": 397.0,
+          "spAttack": 503.0,
+          "spDefense": 306.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3514,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7693.0,
+          "attack": 100.0,
+          "defense": 453.0,
+          "spAttack": 579.0,
+          "spDefense": 349.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3962,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 8500.0,
+          "attack": 115.0,
+          "defense": 520.0,
+          "spAttack": 670.0,
+          "spDefense": 400.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.45,
+          "moveSpeed": 4300.0
+        }
+      ],
+      "moves": [
+        {
+          "id": "attack",
+          "name": "Attack",
+          "slot": "basicAttack",
+          "description": "After a set amount of time passes, the next basic attack changes depending on its target. If the target is a wild Pokémon, the basic attack deals increased damage. If the target is a Pokémon from the opposing team, the basic attack becomes a boosted attack, dealing damage to the Pokémon it hits and leaving them unable to act.",
+          "cooldownSeconds": 0.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": []
+        },
+        {
+          "id": "aqua-ring",
+          "name": "Aqua Ring",
+          "slot": "move1",
+          "description": "Has the user summon a ring of water around itself, dealing damage to opposing Pokémon in the area of effect, then continually restoring the user's HP for a short time.",
+          "cooldownSeconds": 5.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Palkia/Aqua+Ring.png",
+          "videoAsset": "/assets/skills/Palkia/Aqua+Ring.mp4"
+        },
+        {
+          "id": "aura-sphere",
+          "name": "Aura Sphere",
+          "slot": "move1",
+          "description": "Has the user let loose a pulse of aura power in the designated direction, dealing damage and marking opposing Pokémon it hits. When the user attacks marked opposing Pokémon, the mark is consumed, dealing additional damage. Consuming a mark restores the user's HP once.\n\nUpgrade (Level 11): Also applies a slowing effect when it hits.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "ranged"
+          ],
+          "iconAsset": "/assets/skills/Palkia/Aura+Sphere.png",
+          "isUpgrade": true,
+          "moveType": "Ranged",
+          "upgradeLevel": 5,
+          "videoAsset": "/assets/skills/Palkia/Aura+Sphere.mp4"
+        },
+        {
+          "id": "slash",
+          "name": "Slash",
+          "slot": "move2",
+          "description": "Has the user dash in the designated direction and slash with its claws, dealing damage to opposing Pokémon it hits.",
+          "cooldownSeconds": 6.5,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "moveType": "Dash",
+          "iconAsset": "/assets/skills/Palkia/Slash.png",
+          "videoAsset": "/assets/skills/Palkia/Slash.mp4"
+        },
+        {
+          "id": "dragon-claw",
+          "name": "Dragon Claw",
+          "slot": "move2",
+          "description": "Has the user bend space to teleport to the designated location before slashing with its sharp claws when it reappears, dealing damage. This move can then be used again. This move's follow-up attack has the user slash forward, dealing damage. The lower the opposing Pokémon's remaining HP, the more damage the attack deals.\n\nUpgrade (Level 13): Increases Defense and Sp. Def based on the number of Pokémon hit by this move's initial attack (up to 3 Pokémon).",
+          "cooldownSeconds": 7.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "iconAsset": "/assets/skills/Palkia/Dragon+Claw.png",
+          "isUpgrade": true,
+          "moveType": "Dash",
+          "upgradeLevel": 7,
+          "videoAsset": "/assets/skills/Palkia/Dragon+Claw.mp4"
+        },
+        {
+          "id": "multi-dimensional-rend",
+          "name": "Multi Dimensional Rend",
+          "slot": "uniteMove",
+          "description": "Has the user disappear into a spacial rift. When this move is used again, the user reappears in the designated area to unleash 3 multilayered slashes that slice up opposing Pokémon and space itself, dealing damage. The more times the user deals damage to opposing Pokémon before using this Unite Move, the more slashes it unleashes, up to a maximum of 7. If the maximum number of slashes are unleashed, all of the user's other move cooldowns are reset.",
+          "cooldownSeconds": 100.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Palkia/Multi+Dimensional+Rend.png",
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Palkia/Multi+Dimensional+Rend.mp4"
+        }
+      ],
+      "passiveAbility": {
+        "id": "pressure",
+        "name": "Pressure",
+        "description": "Whenever one of the Pokémon's moves hits opposing Pokémon, pressure increases (up to 3 times maximum). The Pokémon's next basic attack consumes all built-up pressure, dealing additional damage to opposing Pokémon and restoring its own HP.",
+        "effects": [],
+        "iconAsset": "/assets/skills/Palkia/Pressure.png"
+      },
+      "builds": [
+        {
+          "name": "Dimensional Rend",
+          "emblemName": "Dimensional Rend",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "sp--atk-specs",
+            "slick-spoon",
+            "energy-amplifier"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "003-venusaur",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "137-porygon",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "144-articuno",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "silver"
+            },
+            {
+              "emblemId": "233-porygon2",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Aura Sphere",
+            "Dragon Claw"
+          ]
+        },
+        {
+          "name": "Spatial Awareness",
+          "emblemName": "Spatial Awareness",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "shell-bell",
+            "slick-spoon",
+            "focus-band"
+          ],
+          "battleItemId": "x-speed",
+          "emblems": [
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "242-blissey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "113-chansey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Aura Sphere",
+            "Dragon Claw"
           ]
         }
       ]

@@ -71,6 +71,7 @@ Scope: Base moves, Final (upgrade) moves, Unite moves. **No passives.**
 | Moltres | `moltres/` | 5 |
 | Mr. Mime | `mr-mime/` | 7 |
 | Ninetales | `ninetales/` | 7 |
+| Palkia | `palkia/` | 5 |
 | Pawmot | `pawmot/` | 7 |
 | Pikachu | `pikachu/` | 7 |
 | Psyduck | `psyduck/` | 7 |

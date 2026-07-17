@@ -1042,7 +1042,11 @@
     ]
   },
   "decidueye": {
-    "recommendedTitles": ["Phantom Ranger", "Attack Damage Carry (ADC)", "Deadeye"],
+    "recommendedTitles": [
+      "Phantom Ranger",
+      "Attack Damage Carry (ADC)",
+      "Deadeye"
+    ],
     "creativeBuilds": [
       {
         "name": "Heavy is the Crown",
@@ -1104,16 +1108,34 @@
     ]
   },
   "inteleon": {
-    "recommendedTitles": ["Sniper Elite", "Shaken, not stirred", "The name's leon. Inteleon."]
+    "recommendedTitles": [
+      "Sniper Elite",
+      "Shaken, not stirred",
+      "The name's leon. Inteleon."
+    ]
   },
   "rapidash": {
-    "recommendedTitles": ["Spirit", "Fast Honse", "Friendship is Magic"]
+    "recommendedTitles": [
+      "Spirit",
+      "Fast Honse",
+      "Friendship is Magic"
+    ]
   },
   "meowscarada": {
-    "recommendedTitles": ["Wanna see a Trick?", "Wanna see it again?", "Critical Catnip", "Double Stacker"]
+    "recommendedTitles": [
+      "Wanna see a Trick?",
+      "Wanna see it again?",
+      "Critical Catnip",
+      "Double Stacker"
+    ]
   },
   "meowth": {
-    "recommendedTitles": ["Prepare for trouble!", "Make it double!", "Prepare to fight!", "Meowth! That's right!"]
+    "recommendedTitles": [
+      "Prepare for trouble!",
+      "Make it double!",
+      "Prepare to fight!",
+      "Meowth! That's right!"
+    ]
   },
   "garchomp": {
     "creativeBuilds": [
@@ -1377,41 +1399,233 @@
         "name": "Dark Survival",
         "emblemName": "Dark Survival",
         "lane": "Path Damage",
-        "heldItemIds": ["wise-glasses", "slick-spoon", "focus-band"],
+        "heldItemIds": [
+          "wise-glasses",
+          "slick-spoon",
+          "focus-band"
+        ],
         "battleItemId": "eject-button",
         "emblems": [
-          { "emblemId": "048-venonat", "grade": "gold" },
-          { "emblemId": "012-butterfree", "grade": "gold" },
-          { "emblemId": "249-lugia", "grade": "gold" },
-          { "emblemId": "071-victreebel", "grade": "bronze" },
-          { "emblemId": "045-vileplume", "grade": "gold" },
-          { "emblemId": "049-venomoth", "grade": "gold" },
-          { "emblemId": "088-grimer", "grade": "gold" },
-          { "emblemId": "089-muk", "grade": "gold" },
-          { "emblemId": "211-qwilfish", "grade": "gold" },
-          { "emblemId": "248-tyranitar", "grade": "gold" }
+          {
+            "emblemId": "048-venonat",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "012-butterfree",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "249-lugia",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "071-victreebel",
+            "grade": "bronze"
+          },
+          {
+            "emblemId": "045-vileplume",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "049-venomoth",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "088-grimer",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "089-muk",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "211-qwilfish",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "248-tyranitar",
+            "grade": "gold"
+          }
         ],
-        "moves": ["Oblivion Wing", "Dark Pulse"]
+        "moves": [
+          "Oblivion Wing",
+          "Dark Pulse"
+        ]
       },
       {
         "name": "Lumière of CDR",
         "emblemName": "Lumière of CDR",
         "lane": "Path Damage",
-        "heldItemIds": ["wise-glasses", "drive-lens", "shell-bell"],
+        "heldItemIds": [
+          "wise-glasses",
+          "drive-lens",
+          "shell-bell"
+        ],
         "battleItemId": "eject-button",
         "emblems": [
-          { "emblemId": "169-crobat", "grade": "gold" },
-          { "emblemId": "015-beedrill", "grade": "bronze" },
-          { "emblemId": "251-celebi", "grade": "bronze" },
-          { "emblemId": "041-zubat", "grade": "gold" },
-          { "emblemId": "042-golbat", "grade": "gold" },
-          { "emblemId": "094-gengar", "grade": "gold" },
-          { "emblemId": "045-vileplume", "grade": "gold" },
-          { "emblemId": "049-venomoth", "grade": "gold" },
-          { "emblemId": "249-lugia", "grade": "gold" },
-          { "emblemId": "189-jumpluff", "grade": "gold" }
+          {
+            "emblemId": "169-crobat",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "015-beedrill",
+            "grade": "bronze"
+          },
+          {
+            "emblemId": "251-celebi",
+            "grade": "bronze"
+          },
+          {
+            "emblemId": "041-zubat",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "042-golbat",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "094-gengar",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "045-vileplume",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "049-venomoth",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "249-lugia",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "189-jumpluff",
+            "grade": "gold"
+          }
         ],
-        "moves": ["Oblivion Wing", "Dark Pulse"]
+        "moves": [
+          "Oblivion Wing",
+          "Dark Pulse"
+        ]
+      }
+    ]
+  },
+  "palkia": {
+    "builds": [
+      {
+        "name": "Dimensional Rend",
+        "emblemName": "Dimensional Rend",
+        "lane": "Path Damage",
+        "heldItemIds": [
+          "sp--atk-specs",
+          "slick-spoon",
+          "energy-amplifier"
+        ],
+        "battleItemId": "eject-button",
+        "emblems": [
+          {
+            "emblemId": "003-venusaur",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "012-butterfree",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "045-vileplume",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "049-venomoth",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "137-porygon",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "144-articuno",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "088-grimer",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "249-lugia",
+            "grade": "silver"
+          },
+          {
+            "emblemId": "233-porygon2",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "189-jumpluff",
+            "grade": "gold"
+          }
+        ],
+        "moves": [
+          "Aura Sphere",
+          "Dragon Claw"
+        ]
+      },
+      {
+        "name": "Spatial Awareness",
+        "emblemName": "Spatial Awareness",
+        "lane": "Anywhere Damage",
+        "heldItemIds": [
+          "shell-bell",
+          "slick-spoon",
+          "focus-band"
+        ],
+        "battleItemId": "x-speed",
+        "emblems": [
+          {
+            "emblemId": "045-vileplume",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "049-venomoth",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "048-venonat",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "012-butterfree",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "189-jumpluff",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "249-lugia",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "145-zapdos",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "242-blissey",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "113-chansey",
+            "grade": "gold"
+          },
+          {
+            "emblemId": "248-tyranitar",
+            "grade": "gold"
+          }
+        ],
+        "moves": [
+          "Aura Sphere",
+          "Dragon Claw"
+        ]
       }
     ]
   }

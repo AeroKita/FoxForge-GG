@@ -572,6 +572,13 @@
       "powder-snow": "/assets/skills/Ninetales/Powder+Snow.mp4",
       "snow-globe": "/assets/skills/Ninetales/Snow+Globe.mp4"
     },
+    "palkia": {
+      "aqua-ring": "/assets/skills/Palkia/Aqua+Ring.mp4",
+      "aura-sphere": "/assets/skills/Palkia/Aura+Sphere.mp4",
+      "dragon-claw": "/assets/skills/Palkia/Dragon+Claw.mp4",
+      "multi-dimensional-rend": "/assets/skills/Palkia/Multi+Dimensional+Rend.mp4",
+      "slash": "/assets/skills/Palkia/Slash.mp4"
+    },
     "pawmot": {
       "mach-punch": "/assets/skills/Pawmot/Mach+Punch.mp4",
       "nuzzle": "/assets/skills/Pawmot/Nuzzle.mp4",

@@ -949,6 +949,15 @@
       "snow globe": "Attacks with a chilly blast of snow and ice, dealing damage to enemies in the area of effect when it hits. Deals increased damage to enemies that are frozen.",
       "snow warning": "Causes snow to fall on an enemy, dealing damage to it and decreasing their movement speed by 30% for .75s. Boosted attacks, Snow Warning, and all moves (except Aurora Veil) sling snow; hitting the same target with snow 4 times will freeze them for 1s. This ability has an 8s cooldown."
     },
+    "palkia": {
+      "attack": "After a set amount of time passes, the next basic attack changes depending on its target. If the target is a wild Pokémon, the basic attack deals increased damage. If the target is a Pokémon from the opposing team, the basic attack becomes a boosted attack, dealing damage to the Pokémon it hits and leaving them unable to act.",
+      "aqua ring": "Has the user summon a ring of water around itself, dealing damage to opposing Pokémon in the area of effect, then continually restoring the user's HP for a short time.",
+      "aura sphere": "Has the user let loose a pulse of aura power in the designated direction, dealing damage and marking opposing Pokémon it hits. When the user attacks marked opposing Pokémon, the mark is consumed, dealing additional damage. Consuming a mark restores the user's HP once.\n\nUpgrade (Level 11): Also applies a slowing effect when it hits.",
+      "slash": "Has the user dash in the designated direction and slash with its claws, dealing damage to opposing Pokémon it hits.",
+      "dragon claw": "Has the user bend space to teleport to the designated location before slashing with its sharp claws when it reappears, dealing damage. This move can then be used again. This move's follow-up attack has the user slash forward, dealing damage. The lower the opposing Pokémon's remaining HP, the more damage the attack deals.\n\nUpgrade (Level 13): Increases Defense and Sp. Def based on the number of Pokémon hit by this move's initial attack (up to 3 Pokémon).",
+      "multi dimensional rend": "Has the user disappear into a spacial rift. When this move is used again, the user reappears in the designated area to unleash 3 multilayered slashes that slice up opposing Pokémon and space itself, dealing damage. The more times the user deals damage to opposing Pokémon before using this Unite Move, the more slashes it unleashes, up to a maximum of 7. If the maximum number of slashes are unleashed, all of the user's other move cooldowns are reset.",
+      "pressure": "Whenever one of the Pokémon's moves hits opposing Pokémon, pressure increases (up to 3 times maximum). The Pokémon's next basic attack consumes all built-up pressure, dealing additional damage to opposing Pokémon and restoring its own HP."
+    },
     "pikachu": {
       "attack": "Becomes a boosted attack with every third attack, dealing increased damage. This boosted attack also paralyzes enemies for a short time when it hits.",
       "thunder shock": "Release electricity, dealing damage to enemies in the area of effect. Also paralyzes enemies for a short time.",
