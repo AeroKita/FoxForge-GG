@@ -58740,7 +58740,7 @@
       "builds": [
         {
           "name": "Bolt Cannon",
-          "emblemName": "Standard Special Attacker",
+          "emblemName": "The Thunderbird",
           "lane": "Path Damage",
           "heldItemIds": [
             "wise-glasses",
