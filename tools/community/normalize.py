@@ -22,6 +22,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import unicodedata
 from datetime import date
 from pathlib import Path
 
@@ -479,7 +480,15 @@ def build_one_build(b: dict, pokedex_to_id: dict, valid_moves: set[str]) -> dict
 
 
 def _norm_move_name(name: str) -> str:
+    """Normalize a move/passive display name to an archive/backfill key.
+
+    Strips trailing parentheticals, folds diacritics (NFKD + strip combining
+    marks), lowercases, and drops apostrophes so accented and ASCII spellings
+    share one key (e.g. Lumière / Lumiere → ``lumiere of demise``).
+    """
     n = re.sub(r"\s*\([^)]*\)\s*$", "", name or "")
+    n = unicodedata.normalize("NFKD", n)
+    n = "".join(c for c in n if not unicodedata.combining(c))
     return n.lower().replace("'", "").strip()
 
 

@@ -31,6 +31,14 @@ A new Pokémon needs one thing added by hand — a recommended build. Everything
 
 Move-preview clips are optional — the Pokémon works fine without them; add them later via [Adding move clips](#adding-move-clips). If a move's Basic description is blank (step 2 will tell you), fix it in [Descriptions](#descriptions).
 
+### A Pokémon that is in-game but not on UNITE-DB yet
+
+When a Pokémon ships in UNITE before UNITE-DB carries it, use a two-phase provisional → finalize pattern (executed precedent: Palkia, commits `8c289a3` provisional / `5776656` finalize).
+
+**Phase A (provisional):** Hand-inject the Pokémon into `_raw/pokemon.json` + `_raw/stats.json` per [Single-Pokémon roster add](#manual-fallback) (or the AGENTS.md single-Pokémon section), using stats copied from a similar released Pokémon, a blank `rsb` (no damage numbers/Advanced text), and a fake `id` ≥ 900. Add in-game Basic text to `move_descriptions.json` (transcribed from screenshots, keyed by normalized move name — basic attack key is `attack`). Add curated builds; stage and transcode clips normally; drop placeholder art at `public/assets/pokemon/{portrait,thumbnail}/<Name>.png`. Document what is placeholder in a `_raw/<NAME>-PROVISIONAL.md`. Run normalize → presets → publish → verify.
+
+**Phase B (finalize, once UNITE-DB ships it):** Delete the placeholder art and the PROVISIONAL doc, run a full `npm run data:refresh` (fetch overwrites `_raw`, `fetch_art` pulls real art), re-check `move_descriptions.json` keys against UNITE-DB's real move names, run `data:gaps`, sync `AGENTS.md`, commit as one unit.
+
 The rest of this document is the detailed reference behind these steps.
 
 ## The tool (preferred path)
@@ -40,6 +48,7 @@ Use these npm commands from the repo root (`FoxForge-GG/`):
 | Command | When to use |
 | --- | --- |
 | `npm run data:doctor` | First step — checks Node, Python venv, ffmpeg, and `_raw/` |
+| `npm run test:tools` | Run the Python data-pipeline unit tests |
 | `npm run data:refresh` | One-command pipeline refresh (see modes below) |
 | `npm run data:curate -- scaffold <id> [--write]` | Print or insert a validated stub in `curated_builds.json` |
 | `npm run data:curate -- check` | Validate all curated entries before normalize |

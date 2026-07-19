@@ -65,6 +65,21 @@ const htmlBranding = () => ({
 export default defineConfig({
   base: process.env.VITE_BASE ?? "./",
   define: { __APP_VERSION__: JSON.stringify(version) },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("patch-current.json")) return "game-data";
+          if (
+            id.includes("node_modules/recharts") ||
+            id.includes("node_modules/victory-vendor") ||
+            id.includes("node_modules/d3-")
+          )
+            return "charts";
+        },
+      },
+    },
+  },
   plugins: [
     htmlBranding(),
     react(),

@@ -10,9 +10,28 @@ Usage:  python3 diff_bundle.py OLD.json NEW.json
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any
+
+
+def _num_changed(a: Any, b: Any) -> bool:
+    """True when *a* and *b* differ as numbers beyond float-repr noise.
+
+    Uses math.isclose so renormalizations like 2.4000000000000004 → 2.4 do not
+    produce changelog lines, while real balance deltas still register. None and
+    unequal types are treated as changed / unchanged sensibly.
+    """
+    if a is None and b is None:
+        return False
+    if a is None or b is None:
+        return True
+    if isinstance(a, bool) or isinstance(b, bool):
+        return a != b
+    if isinstance(a, (int, float)) and isinstance(b, (int, float)):
+        return not math.isclose(float(a), float(b), rel_tol=1e-9, abs_tol=1e-9)
+    return a != b
 
 # L15 stats surfaced for Pokémon (index 14 in baseStatsByLevel).
 POKEMON_L15_STATS = ("hp", "attack", "defense", "spAttack", "spDefense")
@@ -266,6 +285,43 @@ def _compare_pokemon(old: dict, new: dict) -> list[str]:
         if old_desc and not new_desc:
             deltas.append(f"⚠ Basic description BLANKED: {name}")
 
+    old_move_by_name = {
+        m.get("name"): m for m in (old.get("moves") or []) if m.get("name")
+    }
+    new_move_by_name = {
+        m.get("name"): m for m in (new.get("moves") or []) if m.get("name")
+    }
+    for name in sorted(set(old_move_by_name) & set(new_move_by_name)):
+        om, nm = old_move_by_name[name], new_move_by_name[name]
+        ov, nv = om.get("cooldownSeconds"), nm.get("cooldownSeconds")
+        if _num_changed(ov, nv):
+            deltas.append(f"{name} cooldown {ov} → {nv}")
+
+        old_inst = om.get("damageInstances") or []
+        new_inst = nm.get("damageInstances") or []
+        damage_changed = len(old_inst) != len(new_inst)
+        if not damage_changed:
+            for oi, ni in zip(old_inst, new_inst):
+                for field in ("ratio", "slider", "base"):
+                    if _num_changed(oi.get(field), ni.get(field)):
+                        damage_changed = True
+                        break
+                if damage_changed:
+                    break
+        if damage_changed:
+            deltas.append(f"{name} damage values updated")
+
+        old_adv = (om.get("descriptionAdvanced") or "").strip()
+        new_adv = (nm.get("descriptionAdvanced") or "").strip()
+        if old_adv and not new_adv:
+            deltas.append(f"⚠ Advanced text BLANKED: {name}")
+        elif old_adv and new_adv and old_adv != new_adv:
+            deltas.append(f"{name} Advanced text updated")
+
+        ov_lvl, nv_lvl = om.get("upgradeLevel"), nm.get("upgradeLevel")
+        if ov_lvl != nv_lvl:
+            deltas.append(f"{name} upgrade level {ov_lvl} → {nv_lvl}")
+
     return deltas
 
 
@@ -277,6 +333,8 @@ def _compare_held_item(old: dict, new: dict) -> list[str]:
 
     if old.get("effect") != new.get("effect"):
         deltas.append("effect changed")
+    if (old.get("description") or "") != (new.get("description") or ""):
+        deltas.append("description updated")
     return deltas
 
 

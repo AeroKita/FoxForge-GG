@@ -10,11 +10,11 @@ REPO = Path(__file__).resolve().parents[2]
 BUNDLE = REPO / "src" / "data" / "patch-current.json"
 
 
-def main() -> None:
-    bundle = json.loads(BUNDLE.read_text())
-    any_gaps = False
+def find_gaps(bundle: dict) -> list[str]:
+    """Return formatted per-Pokémon gap lines for *bundle* (empty if clean)."""
+    lines: list[str] = []
 
-    for p in bundle["pokemon"]:
+    for p in bundle.get("pokemon") or []:
         gaps: list[str] = []
         pid = p["id"]
         name = p.get("name", pid)
@@ -34,11 +34,25 @@ def main() -> None:
             if not m.get("videoAsset") and not m.get("gifAsset"):
                 gaps.append(f"missing clip/gif on {m.get('name', '?')!r}")
 
-        if gaps:
-            any_gaps = True
-            print(f"- **{name}** (`{pid}`): {', '.join(gaps)}")
+        builds = list(p.get("builds") or []) + list(p.get("creativeBuilds") or [])
+        if builds and not any(len(b.get("emblems") or []) == 10 for b in builds):
+            gaps.append(
+                "no complete 10-emblem build (optimizer preset falls back to generic)"
+            )
 
-    if not any_gaps:
+        if gaps:
+            lines.append(f"- **{name}** (`{pid}`): {', '.join(gaps)}")
+
+    return lines
+
+
+def main() -> None:
+    bundle = json.loads(BUNDLE.read_text())
+    lines = find_gaps(bundle)
+    if lines:
+        for line in lines:
+            print(line)
+    else:
         print("✓ no curation gaps found")
     sys.exit(0)
 

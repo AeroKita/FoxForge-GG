@@ -200,6 +200,133 @@ class TestDiffBundles(unittest.TestCase):
         md = render_markdown(diff)
         self.assertIn("Initial data baseline — patch 2.0.0.0 (1 pokemon, 1 held items, 1 emblems)", md)
 
+    def test_move_cooldown_change(self):
+        """CooldownSeconds delta on a shared move name must appear in the changelog."""
+        move = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "",
+            "cooldownSeconds": 6,
+            "damageInstances": [],
+            "effects": [],
+            "tags": [],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move])])
+        new = _minimal_bundle(pokemon=[_pokemon(moves=[{**move, "cooldownSeconds": 5}])])
+        diff = diff_bundles(old, new)
+        self.assertIn("Power-Up Punch cooldown 6 → 5", diff["changed"][0]["deltas"])
+
+    def test_move_damage_instances_change(self):
+        """Any ratio/slider/base change (or instance count) yields one damage-values line per move."""
+        inst = {"ratio": 1.0, "slider": 17.6, "base": 100.0, "scalingStat": "attack", "damageType": "physical"}
+        move = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "",
+            "cooldownSeconds": 6,
+            "damageInstances": [inst],
+            "effects": [],
+            "tags": [],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move])])
+        new = _minimal_bundle(
+            pokemon=[_pokemon(moves=[{**move, "damageInstances": [{**inst, "slider": 17.0}]}])]
+        )
+        diff = diff_bundles(old, new)
+        self.assertIn("Power-Up Punch damage values updated", diff["changed"][0]["deltas"])
+
+    def test_move_float_noise_produces_no_delta(self):
+        """Float-repr renormalization (2.4000000000000004 vs 2.4) must not emit a changelog line."""
+        move_old = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "",
+            "cooldownSeconds": 2.4000000000000004,
+            "damageInstances": [
+                {"ratio": 1.0, "slider": 2.4000000000000004, "base": 100.0, "scalingStat": "attack", "damageType": "physical"}
+            ],
+            "effects": [],
+            "tags": [],
+        }
+        move_new = {
+            **move_old,
+            "cooldownSeconds": 2.4,
+            "damageInstances": [
+                {"ratio": 1.0, "slider": 2.4, "base": 100.0, "scalingStat": "attack", "damageType": "physical"}
+            ],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move_old])])
+        new = _minimal_bundle(pokemon=[_pokemon(moves=[move_new])])
+        diff = diff_bundles(old, new)
+        self.assertEqual(diff["changed"], [])
+
+    def test_move_advanced_text_change(self):
+        """Non-blank Advanced text that differs must report an Advanced-text update."""
+        move = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "",
+            "descriptionAdvanced": "Old advanced.",
+            "cooldownSeconds": 6,
+            "damageInstances": [],
+            "effects": [],
+            "tags": [],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move])])
+        new = _minimal_bundle(
+            pokemon=[_pokemon(moves=[{**move, "descriptionAdvanced": "New advanced."}])]
+        )
+        diff = diff_bundles(old, new)
+        self.assertIn("Power-Up Punch Advanced text updated", diff["changed"][0]["deltas"])
+
+    def test_move_advanced_text_blanked(self):
+        """Non-blank → blank Advanced text must warn like Basic blanking."""
+        move = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "",
+            "descriptionAdvanced": "Old advanced.",
+            "cooldownSeconds": 6,
+            "damageInstances": [],
+            "effects": [],
+            "tags": [],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move])])
+        new = _minimal_bundle(pokemon=[_pokemon(moves=[{**move, "descriptionAdvanced": ""}])])
+        diff = diff_bundles(old, new)
+        self.assertIn("⚠ Advanced text BLANKED: Power-Up Punch", diff["changed"][0]["deltas"])
+
+    def test_move_upgrade_level_change(self):
+        """upgradeLevel delta on a shared move name must appear in the changelog."""
+        move = {
+            "id": "m1",
+            "name": "Power-Up Punch",
+            "slot": "move1",
+            "description": "",
+            "cooldownSeconds": 6,
+            "upgradeLevel": 5,
+            "damageInstances": [],
+            "effects": [],
+            "tags": [],
+        }
+        old = _minimal_bundle(pokemon=[_pokemon(moves=[move])])
+        new = _minimal_bundle(pokemon=[_pokemon(moves=[{**move, "upgradeLevel": 7}])])
+        diff = diff_bundles(old, new)
+        self.assertIn("Power-Up Punch upgrade level 5 → 7", diff["changed"][0]["deltas"])
+
+    def test_held_item_description_change(self):
+        """Held-item description text changes must appear (matching battle-item coverage)."""
+        old = _minimal_bundle(heldItems=[_held_item(description="old desc")])
+        new = _minimal_bundle(heldItems=[_held_item(description="new desc")])
+        diff = diff_bundles(old, new)
+        self.assertEqual(len(diff["changed"]), 1)
+        self.assertIn("description updated", diff["changed"][0]["deltas"])
+
 
 class TestRenderMarkdown(unittest.TestCase):
     def test_omits_empty_sections(self):

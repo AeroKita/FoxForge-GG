@@ -5,6 +5,7 @@ from __future__ import annotations
 import unittest
 
 from normalize import (
+    _norm_move_name,
     advanced_desc,
     apply_patch_note_overrides,
     build_emblems,
@@ -15,6 +16,17 @@ from normalize import (
     reword_add_label,
     strip_activation_note,
 )
+
+
+class TestNormMoveName(unittest.TestCase):
+    """_norm_move_name must fold diacritics so accented and ASCII spellings share one key."""
+
+    def test_folds_diacritics(self):
+        self.assertEqual(_norm_move_name("Lumière of Demise"), "lumiere of demise")
+
+    def test_plain_ascii_unchanged(self):
+        self.assertEqual(_norm_move_name("Thunderbolt"), "thunderbolt")
+        self.assertEqual(_norm_move_name("Power-Up Punch"), "power-up punch")
 
 
 class TestStripActivationNote(unittest.TestCase):

@@ -110,6 +110,26 @@ class TestHarvest(unittest.TestCase):
         self.assertEqual(updated["missingmon"]["some move"], "Hand-written.")
         self.assertEqual(changes, [])
 
+    def test_accented_display_name_updates_unaccented_archive_key(self):
+        """Accented bundle names must update the folded key, not create a diacritic duplicate."""
+        bundle = _bundle(
+            id="yveltal",
+            displayName="Yveltal",
+            moves=[
+                {
+                    "id": "lumiere",
+                    "name": "Lumière of Demise",
+                    "slot": "unite",
+                    "description": "Beam text.",
+                }
+            ],
+        )
+        archive = {"yveltal": {"lumiere of demise": "Old beam text."}}
+        updated, changes = harvest(bundle, archive)
+        self.assertEqual(updated["yveltal"]["lumiere of demise"], "Beam text.")
+        self.assertNotIn("lumière of demise", updated["yveltal"])
+        self.assertEqual(len(changes), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

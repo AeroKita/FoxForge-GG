@@ -1628,5 +1628,29 @@
         ]
       }
     ]
+  },
+  "zapdos": {
+    "builds": [
+      {
+        "name": "Bolt Cannon",
+        "emblemName": "Standard Special Attacker",
+        "lane": "Path Damage",
+        "heldItemIds": ["wise-glasses", "drive-lens", "energy-amplifier"],
+        "battleItemId": "eject-button",
+        "emblems": [
+          { "emblemId": "045-vileplume", "grade": "gold" },
+          { "emblemId": "049-venomoth", "grade": "gold" },
+          { "emblemId": "088-grimer", "grade": "gold" },
+          { "emblemId": "089-muk", "grade": "gold" },
+          { "emblemId": "211-qwilfish", "grade": "gold" },
+          { "emblemId": "248-tyranitar", "grade": "gold" },
+          { "emblemId": "048-venonat", "grade": "gold" },
+          { "emblemId": "012-butterfree", "grade": "gold" },
+          { "emblemId": "249-lugia", "grade": "gold" },
+          { "emblemId": "071-victreebel", "grade": "bronze" }
+        ],
+        "moves": ["Thunderbolt", "Zap Cannon"]
+      }
+    ]
   }
 }

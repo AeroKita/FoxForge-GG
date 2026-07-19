@@ -55,9 +55,15 @@ def main() -> None:
 
     if node_major is None:
         print(f"✗ Node.js not found (need major ≥ {required_node})")
+        print(
+            '  hint: brew install node@24, then export PATH="/opt/homebrew/opt/node@24/bin:$PATH" (add to ~/.zprofile to persist)'
+        )
         hard_fail = True
     elif node_major < required_node:
         print(f"✗ Node.js v{node_major} (need major ≥ {required_node})")
+        print(
+            '  hint: brew install node@24, then export PATH="/opt/homebrew/opt/node@24/bin:$PATH" (add to ~/.zprofile to persist)'
+        )
         hard_fail = True
     else:
         print(f"✓ Node.js major {node_major} (≥ {required_node})")

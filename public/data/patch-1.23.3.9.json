@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.3.9",
-  "lastUpdated": "2026-07-18",
+  "lastUpdated": "2026-07-19",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-18"
+    "fetched": "2026-07-19"
   },
   "pokemon": [
     {
@@ -58740,16 +58740,56 @@
       "builds": [
         {
           "name": "Bolt Cannon",
-          "heldItemIds": [
-            "energy-amplifier",
-            "drive-lens",
-            "wise-glasses"
-          ],
-          "emblems": [],
-          "lane": "Path Damage",
           "emblemName": "Standard Special Attacker",
-          "heldItemOptional": "sp--atk-specs",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "wise-glasses",
+            "drive-lens",
+            "energy-amplifier"
+          ],
           "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "089-muk",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "211-qwilfish",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "071-victreebel",
+              "grade": "bronze"
+            }
+          ],
           "moves": [
             "Thunderbolt",
             "Zap Cannon"
