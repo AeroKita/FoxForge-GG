@@ -15,9 +15,10 @@ Usage:  python3 fetch.py
 from __future__ import annotations
 
 import json
-import urllib.request
 from datetime import date
 from pathlib import Path
+
+import requests
 
 BASE = "https://unite-db.com"
 RAW = Path(__file__).resolve().parent / "_raw"
@@ -36,13 +37,12 @@ def fetch() -> None:
     manifest = {"source": BASE, "fetched": date.today().isoformat(), "files": {}}
     for name in ENDPOINTS:
         url = f"{BASE}/{name}.json"
-        req = urllib.request.Request(url, headers={"User-Agent": "unite-build-optimizer/0.1"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            data = r.read()
-        (RAW / f"{name}.json").write_bytes(data)
-        parsed = json.loads(data)
-        manifest["files"][name] = {"url": url, "bytes": len(data), "count": len(parsed)}
-        print(f"  {name}.json: {len(data):,} bytes, {len(parsed)} entries")
+        r = requests.get(url, headers={"User-Agent": "unite-build-optimizer/0.1"}, timeout=60)
+        r.raise_for_status()
+        (RAW / f"{name}.json").write_bytes(r.content)
+        parsed = r.json()
+        manifest["files"][name] = {"url": url, "bytes": len(r.content), "count": len(parsed)}
+        print(f"  {name}.json: {len(r.content):,} bytes, {len(parsed)} entries")
     (RAW / "_manifest.json").write_text(json.dumps(manifest, indent=2))
     print(f"\nWrote {RAW}/_manifest.json (source={BASE})")
 

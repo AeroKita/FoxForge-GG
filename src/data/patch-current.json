@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.3.9",
-  "lastUpdated": "2026-07-17",
+  "lastUpdated": "2026-07-18",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-17"
+    "fetched": "2026-07-18"
   },
   "pokemon": [
     {
@@ -1058,10 +1058,10 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 1.7,
+              "ratio": 1.87,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 340.0,
+              "base": 374.0,
               "damageType": "physical"
             }
           ],
@@ -20210,10 +20210,10 @@
           "name": "Big Jaw Bite",
           "slot": "uniteMove",
           "description": "Has the user let out an intimidating growl, reducing move cooldowns for a short time. When this Unite Move is used again, the user charges at the designated panel from the opposing team and sinks its teeth into them, dealing damage. The amount of damage dealt to Pokémon from the opposing team will be based on the number of additional effects applied by Crunch.",
-          "cooldownSeconds": 89.0,
+          "cooldownSeconds": 100.0,
           "damageInstances": [
             {
-              "ratio": 2.4000000000000004,
+              "ratio": 2.4,
               "scalingStat": "attack",
               "slider": 0.0,
               "base": 720.0,
@@ -24987,22 +24987,22 @@
             {
               "ratio": 2.2,
               "scalingStat": "attack",
-              "slider": 17.6,
-              "base": 445.50000000000006,
+              "slider": 17.0,
+              "base": 445.0,
               "damageType": "physical"
             },
             {
               "ratio": 3.718,
               "scalingStat": "attack",
-              "slider": 30.800000000000004,
-              "base": 748.0000000000001,
+              "slider": 30.0,
+              "base": 748.0,
               "damageType": "physical"
             },
             {
-              "ratio": 4.2757000000000005,
+              "ratio": 4.2757,
               "scalingStat": "attack",
-              "slider": 35.2,
-              "base": 860.2,
+              "slider": 35.0,
+              "base": 860.0,
               "damageType": "physical"
             }
           ],
@@ -25069,15 +25069,15 @@
             {
               "ratio": 2.0469999999999997,
               "scalingStat": "attack",
-              "slider": 16.099999999999998,
-              "base": 402.49999999999994,
+              "slider": 16.0,
+              "base": 402.0,
               "damageType": "physical"
             },
             {
-              "ratio": 2.691,
+              "ratio": 2.574,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 598.0,
+              "base": 572.0,
               "damageType": "physical"
             }
           ],
@@ -29042,7 +29042,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 2 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias generates a beam in the designated direction, sweeping in a cone shape, damaging opposing Pokémon hit and restoring the user's HP once. While firing the beam, Latias moves 60% slower.\n\nThis move gains 2 telekinetic projectiles at 25 and 100 Eon power, and gains 1 projectile at 50 and 75 Eon power for a total of 6 projectiles. Subsequent projectiles hitting the same target deal 15% less damage; further decreasing with each projectile to a maximum of 75% less damage. For every 1 Eon power accumulated beyond 100; the projectile damage increases by 0.5% (Eon power caps at 1099).\n\nUpgrade (Level 10): The beam now slows opposing Pokémon by 30% for 2s",
+          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 2 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias generates a beam in the designated direction, sweeping in a cone shape, damaging opposing Pokémon hit and restoring the user's HP once. While firing the beam, Latias moves 60% slower.\n\nThis move gains 2 telekinetic projectiles at 25 and 100 Eon power, and gains 1 projectile at 50 and 75 Eon power for a total of 6 projectiles. Subsequent projectiles hitting the same target deal 15% less damage; further decreasing with each projectile to a maximum of 75% less damage. For every 1 Eon power accumulated beyond 100; the projectile damage increases by 0.5% (Eon power caps at 1099).\n\nUpgrade (Level 10): The beam now slows opposing Pokémon by 30% for 2s.",
           "videoAsset": "/assets/skills/Latias/Dragon+Pulse.mp4"
         },
         {
@@ -29068,7 +29068,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 3 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias exhales a mighty gust in the designated direction, damaging opposing Pokémon hit, slowing them by 30% for 3s and decreasing their Sp. Def by 30% for 3s.\n\nThis move gains increased range at 31 and 61 Eon Power. For every 1 Eon power accumulated beyond 60; the damage increases by 0.5% (Eon power caps at 1059).\n\nUpgrade (Level 10): The slow is increased to 40% for 3s",
+          "descriptionAdvanced": "After learning this move: Latias gains 2 Eon power for knocking out a wild Pokémon; or 3 Eon power per Pokémon from the opposing team hit by this move. When this move is used: Latias exhales a mighty gust in the designated direction, damaging opposing Pokémon hit, slowing them by 30% for 3s and decreasing their Sp. Def by 30% for 3s.\n\nThis move gains increased range at 31 and 61 Eon Power. For every 1 Eon power accumulated beyond 60; the damage increases by 0.5% (Eon power caps at 1059).\n\nUpgrade (Level 10): The slow is increased to 40% for 3s.",
           "videoAsset": "/assets/skills/Latias/Dragon+Breath.mp4"
         },
         {
@@ -40474,6 +40474,523 @@
       ]
     },
     {
+      "id": "palkia",
+      "displayName": "Palkia",
+      "role": "AllRounder",
+      "attackType": "special",
+      "difficulty": 2,
+      "imageAsset": "/assets/pokemon/portrait/Palkia.png",
+      "iconAsset": "/assets/pokemon/thumbnail/Palkia.png",
+      "evolutions": [
+        {
+          "level": 1,
+          "formName": "Palkia"
+        }
+      ],
+      "baseStatsByLevel": [
+        {
+          "hp": 3480.0,
+          "attack": 20.0,
+          "defense": 96.0,
+          "spAttack": 118.0,
+          "spDefense": 84.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3652.0,
+          "attack": 23.0,
+          "defense": 110.0,
+          "spAttack": 139.0,
+          "spDefense": 95.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1107,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3842.0,
+          "attack": 27.0,
+          "defense": 126.0,
+          "spAttack": 162.0,
+          "spDefense": 108.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1225,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 4050.0,
+          "attack": 31.0,
+          "defense": 144.0,
+          "spAttack": 187.0,
+          "spDefense": 121.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1355,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 4279.0,
+          "attack": 36.0,
+          "defense": 163.0,
+          "spAttack": 214.0,
+          "spDefense": 136.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1497,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4531.0,
+          "attack": 41.0,
+          "defense": 184.0,
+          "spAttack": 245.0,
+          "spDefense": 153.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1654,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4809.0,
+          "attack": 46.0,
+          "defense": 207.0,
+          "spAttack": 278.0,
+          "spDefense": 171.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1827,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5114.0,
+          "attack": 53.0,
+          "defense": 233.0,
+          "spAttack": 315.0,
+          "spDefense": 191.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.20170000000000002,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5450.0,
+          "attack": 59.0,
+          "defense": 261.0,
+          "spAttack": 356.0,
+          "spDefense": 213.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.22260000000000002,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5819.0,
+          "attack": 67.0,
+          "defense": 292.0,
+          "spAttack": 400.0,
+          "spDefense": 237.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.24559999999999998,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 6225.0,
+          "attack": 75.0,
+          "defense": 326.0,
+          "spAttack": 449.0,
+          "spDefense": 264.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2709,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6672.0,
+          "attack": 84.0,
+          "defense": 364.0,
+          "spAttack": 503.0,
+          "spDefense": 293.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2987,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7164.0,
+          "attack": 93.0,
+          "defense": 405.0,
+          "spAttack": 563.0,
+          "spDefense": 326.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3293,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7705.0,
+          "attack": 104.0,
+          "defense": 450.0,
+          "spAttack": 628.0,
+          "spDefense": 361.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3629,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 8300.0,
+          "attack": 116.0,
+          "defense": 500.0,
+          "spAttack": 700.0,
+          "spDefense": 400.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.4,
+          "moveSpeed": 4300.0
+        }
+      ],
+      "moves": [
+        {
+          "id": "attack",
+          "name": "Attack",
+          "slot": "basicAttack",
+          "description": "After a set amount of time passes, the next basic attack changes depending on its target. If the target is a wild Pokémon, the basic attack deals increased damage. If the target is a Pokémon from the opposing team, the basic attack becomes a boosted attack, dealing damage to the Pokémon it hits and leaving them unable to act.",
+          "cooldownSeconds": 0.0,
+          "damageInstances": [
+            {
+              "ratio": 0.6,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 100.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [],
+          "descriptionAdvanced": "The user slashes at opposing Pokémon with claws. Becomes a boosted attack after 9s pass, dealing increased damage and stunning Pokémon on the opposing team for 1s.\n\nAgainst wild Pokémon, the boosted attack is not used, instead basic attack damage is increased by 10% when the boosted attack is available."
+        },
+        {
+          "id": "aqua-ring",
+          "name": "Aqua Ring",
+          "slot": "move1",
+          "description": "Has the user summon a ring of water around itself, dealing damage to opposing Pokémon in the area of effect, then continually restoring the user's HP for a short time.",
+          "cooldownSeconds": 5.0,
+          "damageInstances": [
+            {
+              "ratio": 1.0,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 300.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.27,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 81.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Palkia/Aqua+Ring.png",
+          "descriptionAdvanced": "The user summons a ring of water around themself, dealing damage to opposing Pokémon, and activating a healing effect if the move hits.\n\nThe healing effect lasts 3s, healing every 1s up to 4 times.",
+          "videoAsset": "/assets/skills/Palkia/Aqua+Ring.mp4"
+        },
+        {
+          "id": "aura-sphere",
+          "name": "Aura Sphere",
+          "slot": "move1",
+          "description": "Has the user let loose a pulse of aura power in the designated direction, dealing damage and marking opposing Pokémon it hits. When the user attacks marked opposing Pokémon, the mark is consumed, dealing additional damage. Consuming a mark restores the user's HP once.\n\nUpgrade (Level 11): Also applies a slowing effect when it hits.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 0.96,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 288.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.64,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 192.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.65,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 195.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "ranged"
+          ],
+          "iconAsset": "/assets/skills/Palkia/Aura+Sphere.png",
+          "isUpgrade": true,
+          "moveType": "Ranged",
+          "upgradeLevel": 5,
+          "descriptionAdvanced": "The user lets loose a sphere of aura power in the designated direction, dealing damage to opposing Pokémon, and marking them for 4s.\n\nThe next time the user deals damage to a marked Pokémon, additional damage is dealt, the user is healed, and the mark is consumed.\n\nUpgrade (Level 11): Applies a 60% slow  for 4s to opposing Pokémon hit, decaying by 15% every 0.5s to a minimum of 15%.",
+          "videoAsset": "/assets/skills/Palkia/Aura+Sphere.mp4"
+        },
+        {
+          "id": "slash",
+          "name": "Slash",
+          "slot": "move2",
+          "description": "Has the user dash in the designated direction and slash with its claws, dealing damage to opposing Pokémon it hits.",
+          "cooldownSeconds": 6.5,
+          "damageInstances": [
+            {
+              "ratio": 0.72,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 216.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "moveType": "Dash",
+          "iconAsset": "/assets/skills/Palkia/Slash.png",
+          "descriptionAdvanced": "The user charges towards the designated area, dealing damage, before slashing in the area dealing damage again.",
+          "videoAsset": "/assets/skills/Palkia/Slash.mp4"
+        },
+        {
+          "id": "dragon-claw",
+          "name": "Dragon Claw",
+          "slot": "move2",
+          "description": "Has the user bend space to teleport to the designated location before slashing with its sharp claws when it reappears, dealing damage. This move can then be used again. This move's follow-up attack has the user slash forward, dealing damage. The lower the opposing Pokémon's remaining HP, the more damage the attack deals.\n\nUpgrade (Level 13): Increases Defense and Sp. Def based on the number of Pokémon hit by this move's initial attack (up to 3 Pokémon).",
+          "cooldownSeconds": 7.0,
+          "damageInstances": [
+            {
+              "ratio": 0.7,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 210.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 1.68,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 504.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "iconAsset": "/assets/skills/Palkia/Dragon+Claw.png",
+          "isUpgrade": true,
+          "moveType": "Dash",
+          "upgradeLevel": 7,
+          "descriptionAdvanced": "The user teleports to the designated area before slashing, dealing damage in the area. This move can be recast within 4s, the user slashes in the designated direction dealing increased damage.\n\nSecond hit: Additional: 6.4% of target missing HP\n\nUpgrade (Level 13): Damaging Pokémon on the opposing team with the first hit increases the user's Def and SpDef by 10% for 5s per target, up to a maximum of 3.",
+          "videoAsset": "/assets/skills/Palkia/Dragon+Claw.mp4"
+        },
+        {
+          "id": "multi-dimensional-rend",
+          "name": "Multi Dimensional Rend",
+          "slot": "uniteMove",
+          "description": "Has the user disappear into a spacial rift. When this move is used again, the user reappears in the designated area to unleash 3 multilayered slashes that slice up opposing Pokémon and space itself, dealing damage. The more times the user deals damage to opposing Pokémon before using this Unite Move, the more slashes it unleashes, up to a maximum of 7. If the maximum number of slashes are unleashed, all of the user's other move cooldowns are reset.",
+          "cooldownSeconds": 38.0,
+          "damageInstances": [
+            {
+              "ratio": 0.21600000000000003,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 65.0,
+              "damageType": "special"
+            },
+            {
+              "ratio": 0.8640000000000001,
+              "scalingStat": "spAttack",
+              "slider": 0.0,
+              "base": 260.0,
+              "damageType": "special"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "moveType": "Area",
+          "iconAsset": "/assets/skills/Palkia/Multi+Dimensional+Rend.png",
+          "descriptionAdvanced": "The user becomes Invincible for up to 3s and disappears into a spacial rift, able to travel freely for up to 2s with 80% increased movement speed. When this move is recast within 2s, or the duration expires, the user reappears in the designated area and unleashes 3 multilayered slashes before shattering the space with a final hit. When this move is learned, the user can gain up to 4 dimensional stacks by dealing damage to Pokémon on the opposing team, increasing the amount of multilayered slashes to a maximum of 7 hits. These dimensional stacks last up to 10s. If the move is used with 4 dimensional stacks, the cooldowns of the user's moves are reset.\n\nPalkia gains 2400 energy per second instead of the usual 900.",
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Palkia/Multi+Dimensional+Rend.mp4"
+        }
+      ],
+      "passiveAbility": {
+        "id": "pressure",
+        "name": "Pressure",
+        "description": "Whenever one of the Pokémon's moves hits opposing Pokémon, pressure increases (up to 3 times maximum). The Pokémon's next basic attack consumes all built-up pressure, dealing additional damage to opposing Pokémon and restoring its own HP.",
+        "effects": [],
+        "descriptionAdvanced": "When the user deals damage with moves, gain a pressure stack for 5s up to a maximum of 3 stacks.  The next auto attack consumes all of the pressure stacks inflicting additional damage and healing the user per pressure stack.",
+        "iconAsset": "/assets/skills/Palkia/Pressure.png"
+      },
+      "builds": [
+        {
+          "name": "Dimensional Rend",
+          "emblemName": "Dimensional Rend",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "sp--atk-specs",
+            "slick-spoon",
+            "energy-amplifier"
+          ],
+          "battleItemId": "eject-button",
+          "emblems": [
+            {
+              "emblemId": "003-venusaur",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "137-porygon",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "144-articuno",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "088-grimer",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "silver"
+            },
+            {
+              "emblemId": "233-porygon2",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Aura Sphere",
+            "Dragon Claw"
+          ]
+        },
+        {
+          "name": "Spatial Awareness",
+          "emblemName": "Spatial Awareness",
+          "lane": "Anywhere Damage",
+          "heldItemIds": [
+            "shell-bell",
+            "slick-spoon",
+            "focus-band"
+          ],
+          "battleItemId": "x-speed",
+          "emblems": [
+            {
+              "emblemId": "045-vileplume",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "049-venomoth",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "048-venonat",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "012-butterfree",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "189-jumpluff",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "249-lugia",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "145-zapdos",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "242-blissey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "113-chansey",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "248-tyranitar",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Aura Sphere",
+            "Dragon Claw"
+          ]
+        }
+      ]
+    },
+    {
       "id": "pawmot",
       "displayName": "Pawmot",
       "role": "AllRounder",
@@ -42576,10 +43093,10 @@
               "damageType": "physical"
             },
             {
-              "ratio": 0.5,
+              "ratio": 0.55,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 150.0,
+              "base": 165.0,
               "damageType": "physical"
             }
           ],
@@ -46916,7 +47433,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.7s. Pokémon under the fear effect walk in the direction the user snarled toward. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
+          "descriptionAdvanced": "The user snarls incessantly, dealing damage and applying a fear effect for 0.7s. Pokémon under the fear effect walk away from the user's position. For 2.5s opposing Pokémon hit by this move deal 20% less damage to the user.\n\nWhen this move hits, the range is extended.\n\nUpgrade (Level 13): Increases the damage debuff to 30%.",
           "videoAsset": "/assets/skills/Skeledirge/Snarl.mp4"
         },
         {
@@ -48767,7 +49284,7 @@
           "name": "Endless Ice Spikes",
           "slot": "uniteMove",
           "description": "This move can be used while the user is unable to act, and when it is, all status conditions on the user are removed. Has the user create ice spikes in the designated direction, dealing damage to opposing Pokémon they hit and leaving them frozen. After a short time, the spikes explode, dealing damage to opposing Pokémon they hit.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 112.0,
           "damageInstances": [
             {
               "ratio": 0.92,
@@ -49334,8 +49851,8 @@
             {
               "ratio": 0.4416,
               "scalingStat": "spAttack",
-              "slider": 11.040000000000001,
-              "base": 184.92000000000002,
+              "slider": 11.0,
+              "base": 185.0,
               "damageType": "special"
             }
           ],
@@ -52569,10 +53086,10 @@
               "damageType": "special"
             },
             {
-              "ratio": 1.0,
+              "ratio": 0.9,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 350.0,
+              "base": 315.0,
               "damageType": "special"
             }
           ],
@@ -53711,7 +54228,7 @@
           "isUpgrade": true,
           "moveType": "Debuff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Becomes hindrance resistant and begin snarling for 1.5s, dealing damage to enemy Pokémon in the area around Umbreon and decreasing the affected Pokémon's Attack and Sp. Atk stat by 3% for 1.5s and movement speed by 15% for 2s. Also grants the user a shield for 3s. Umbreon is slowed by 30% while snarling. The final shout leaves enemy Pokémon stunned for 0.7s and further decreases their Attack and Sp. Atk by 15% for 3s. The small shout Attack and Sp. Atk decreases can stack up to 6 times and stack with the big shout's Attack and Sp. Atk decreases.\n\nShield: 20% Max HP\n\nUpgrade (Level 12): Increases the stun duration of the final shout to 1s.",
+          "descriptionAdvanced": "Becomes hindrance resistant and begin snarling for 1.5s, dealing damage to enemy Pokémon in the area around Umbreon and decreasing the affected Pokémon's Attack and Sp. Atk stat by 3% for 1.5s and movement speed by 15% for 2s. Also grants the user a shield for 3s. Umbreon is slowed by 30% while snarling. The final shout leaves enemy Pokémon stunned for 0.7s and further decreases their Attack and Sp. Atk by 15% for 3s. The small shout Attack and Sp. Atk decreases can stack up to 6 times and stack with the big shout's Attack and Sp. Atk decreases.\n\nShield: 20% Max HP Shield\n\nUpgrade (Level 12): Increases the stun duration of the final shout to 1s.",
           "videoAsset": "/assets/skills/Umbreon/Snarl.mp4"
         },
         {
@@ -53719,7 +54236,7 @@
           "name": "Moonlight Prance",
           "slot": "uniteMove",
           "description": "Has the user continually recover HP when it is not in combat. Also has the user leap up and absorb the shields of opposing Pokémon in the area around it, taking them for itself. Then, the user lands, dealing damage to opposing Pokémon in the area of effect and leaving them unable to act. For a short time afterward, when an opposing Pokémon in the area of effect is granted a shield, the user absorbs a portion of it and takes it for itself.",
-          "cooldownSeconds": 112.0,
+          "cooldownSeconds": 100.0,
           "damageInstances": [
             {
               "ratio": 2.24,
@@ -59552,433 +60069,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "palkia",
-      "displayName": "Palkia",
-      "role": "AllRounder",
-      "attackType": "special",
-      "difficulty": 2,
-      "imageAsset": "/assets/pokemon/portrait/Palkia.png",
-      "iconAsset": "/assets/pokemon/thumbnail/Palkia.png",
-      "evolutions": [
-        {
-          "level": 1,
-          "formName": "Palkia"
-        }
-      ],
-      "baseStatsByLevel": [
-        {
-          "hp": 3250.0,
-          "attack": 20.0,
-          "defense": 80.0,
-          "spAttack": 80.0,
-          "spDefense": 65.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 3325.0,
-          "attack": 21.0,
-          "defense": 86.0,
-          "spAttack": 88.0,
-          "spDefense": 70.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.105,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 3415.0,
-          "attack": 23.0,
-          "defense": 94.0,
-          "spAttack": 98.0,
-          "spDefense": 76.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.111,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 3523.0,
-          "attack": 25.0,
-          "defense": 103.0,
-          "spAttack": 110.0,
-          "spDefense": 83.0,
-          "critRate": 0.0,
-          "cdr": 0.0,
-          "lifesteal": 0.0,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1182,
-          "moveSpeed": 3700.0
-        },
-        {
-          "hp": 4047.0,
-          "attack": 34.0,
-          "defense": 147.0,
-          "spAttack": 169.0,
-          "spDefense": 116.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1531,
-          "moveSpeed": 3850.0
-        },
-        {
-          "hp": 4204.0,
-          "attack": 37.0,
-          "defense": 160.0,
-          "spAttack": 187.0,
-          "spDefense": 126.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.1635,
-          "moveSpeed": 3850.0
-        },
-        {
-          "hp": 4786.0,
-          "attack": 48.0,
-          "defense": 209.0,
-          "spAttack": 252.0,
-          "spDefense": 163.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2023,
-          "moveSpeed": 4000.0
-        },
-        {
-          "hp": 5011.0,
-          "attack": 52.0,
-          "defense": 228.0,
-          "spAttack": 277.0,
-          "spDefense": 177.0,
-          "critRate": 0.1,
-          "cdr": 0.0,
-          "lifesteal": 0.05,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2173,
-          "moveSpeed": 4000.0
-        },
-        {
-          "hp": 5281.0,
-          "attack": 57.0,
-          "defense": 251.0,
-          "spAttack": 307.0,
-          "spDefense": 194.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2353,
-          "moveSpeed": 4150.0
-        },
-        {
-          "hp": 5605.0,
-          "attack": 63.0,
-          "defense": 278.0,
-          "spAttack": 343.0,
-          "spDefense": 215.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2569,
-          "moveSpeed": 4150.0
-        },
-        {
-          "hp": 5994.0,
-          "attack": 70.0,
-          "defense": 311.0,
-          "spAttack": 387.0,
-          "spDefense": 240.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.2829,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 6461.0,
-          "attack": 78.0,
-          "defense": 350.0,
-          "spAttack": 440.0,
-          "spDefense": 270.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.1,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.314,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 7021.0,
-          "attack": 88.0,
-          "defense": 397.0,
-          "spAttack": 503.0,
-          "spDefense": 306.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.15,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.3514,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 7693.0,
-          "attack": 100.0,
-          "defense": 453.0,
-          "spAttack": 579.0,
-          "spDefense": 349.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.15,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.3962,
-          "moveSpeed": 4300.0
-        },
-        {
-          "hp": 8500.0,
-          "attack": 115.0,
-          "defense": 520.0,
-          "spAttack": 670.0,
-          "spDefense": 400.0,
-          "critRate": 0.2,
-          "cdr": 0.0,
-          "lifesteal": 0.15,
-          "spLifesteal": 0.0,
-          "attackSpeed": 0.45,
-          "moveSpeed": 4300.0
-        }
-      ],
-      "moves": [
-        {
-          "id": "attack",
-          "name": "Attack",
-          "slot": "basicAttack",
-          "description": "After a set amount of time passes, the next basic attack changes depending on its target. If the target is a wild Pokémon, the basic attack deals increased damage. If the target is a Pokémon from the opposing team, the basic attack becomes a boosted attack, dealing damage to the Pokémon it hits and leaving them unable to act.",
-          "cooldownSeconds": 0.0,
-          "damageInstances": [],
-          "effects": [],
-          "tags": []
-        },
-        {
-          "id": "aqua-ring",
-          "name": "Aqua Ring",
-          "slot": "move1",
-          "description": "Has the user summon a ring of water around itself, dealing damage to opposing Pokémon in the area of effect, then continually restoring the user's HP for a short time.",
-          "cooldownSeconds": 5.0,
-          "damageInstances": [],
-          "effects": [],
-          "tags": [
-            "area"
-          ],
-          "moveType": "Area",
-          "iconAsset": "/assets/skills/Palkia/Aqua+Ring.png",
-          "videoAsset": "/assets/skills/Palkia/Aqua+Ring.mp4"
-        },
-        {
-          "id": "aura-sphere",
-          "name": "Aura Sphere",
-          "slot": "move1",
-          "description": "Has the user let loose a pulse of aura power in the designated direction, dealing damage and marking opposing Pokémon it hits. When the user attacks marked opposing Pokémon, the mark is consumed, dealing additional damage. Consuming a mark restores the user's HP once.\n\nUpgrade (Level 11): Also applies a slowing effect when it hits.",
-          "cooldownSeconds": 6.0,
-          "damageInstances": [],
-          "effects": [],
-          "tags": [
-            "ranged"
-          ],
-          "iconAsset": "/assets/skills/Palkia/Aura+Sphere.png",
-          "isUpgrade": true,
-          "moveType": "Ranged",
-          "upgradeLevel": 5,
-          "videoAsset": "/assets/skills/Palkia/Aura+Sphere.mp4"
-        },
-        {
-          "id": "slash",
-          "name": "Slash",
-          "slot": "move2",
-          "description": "Has the user dash in the designated direction and slash with its claws, dealing damage to opposing Pokémon it hits.",
-          "cooldownSeconds": 6.5,
-          "damageInstances": [],
-          "effects": [],
-          "tags": [
-            "dash"
-          ],
-          "moveType": "Dash",
-          "iconAsset": "/assets/skills/Palkia/Slash.png",
-          "videoAsset": "/assets/skills/Palkia/Slash.mp4"
-        },
-        {
-          "id": "dragon-claw",
-          "name": "Dragon Claw",
-          "slot": "move2",
-          "description": "Has the user bend space to teleport to the designated location before slashing with its sharp claws when it reappears, dealing damage. This move can then be used again. This move's follow-up attack has the user slash forward, dealing damage. The lower the opposing Pokémon's remaining HP, the more damage the attack deals.\n\nUpgrade (Level 13): Increases Defense and Sp. Def based on the number of Pokémon hit by this move's initial attack (up to 3 Pokémon).",
-          "cooldownSeconds": 7.0,
-          "damageInstances": [],
-          "effects": [],
-          "tags": [
-            "dash"
-          ],
-          "iconAsset": "/assets/skills/Palkia/Dragon+Claw.png",
-          "isUpgrade": true,
-          "moveType": "Dash",
-          "upgradeLevel": 7,
-          "videoAsset": "/assets/skills/Palkia/Dragon+Claw.mp4"
-        },
-        {
-          "id": "multi-dimensional-rend",
-          "name": "Multi Dimensional Rend",
-          "slot": "uniteMove",
-          "description": "Has the user disappear into a spacial rift. When this move is used again, the user reappears in the designated area to unleash 3 multilayered slashes that slice up opposing Pokémon and space itself, dealing damage. The more times the user deals damage to opposing Pokémon before using this Unite Move, the more slashes it unleashes, up to a maximum of 7. If the maximum number of slashes are unleashed, all of the user's other move cooldowns are reset.",
-          "cooldownSeconds": 100.0,
-          "damageInstances": [],
-          "effects": [],
-          "tags": [
-            "area"
-          ],
-          "moveType": "Area",
-          "iconAsset": "/assets/skills/Palkia/Multi+Dimensional+Rend.png",
-          "upgradeLevel": 9,
-          "videoAsset": "/assets/skills/Palkia/Multi+Dimensional+Rend.mp4"
-        }
-      ],
-      "passiveAbility": {
-        "id": "pressure",
-        "name": "Pressure",
-        "description": "Whenever one of the Pokémon's moves hits opposing Pokémon, pressure increases (up to 3 times maximum). The Pokémon's next basic attack consumes all built-up pressure, dealing additional damage to opposing Pokémon and restoring its own HP.",
-        "effects": [],
-        "iconAsset": "/assets/skills/Palkia/Pressure.png"
-      },
-      "builds": [
-        {
-          "name": "Dimensional Rend",
-          "emblemName": "Dimensional Rend",
-          "lane": "Path Damage",
-          "heldItemIds": [
-            "sp--atk-specs",
-            "slick-spoon",
-            "energy-amplifier"
-          ],
-          "battleItemId": "eject-button",
-          "emblems": [
-            {
-              "emblemId": "003-venusaur",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "012-butterfree",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "045-vileplume",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "049-venomoth",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "137-porygon",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "144-articuno",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "088-grimer",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "249-lugia",
-              "grade": "silver"
-            },
-            {
-              "emblemId": "233-porygon2",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "189-jumpluff",
-              "grade": "gold"
-            }
-          ],
-          "moves": [
-            "Aura Sphere",
-            "Dragon Claw"
-          ]
-        },
-        {
-          "name": "Spatial Awareness",
-          "emblemName": "Spatial Awareness",
-          "lane": "Anywhere Damage",
-          "heldItemIds": [
-            "shell-bell",
-            "slick-spoon",
-            "focus-band"
-          ],
-          "battleItemId": "x-speed",
-          "emblems": [
-            {
-              "emblemId": "045-vileplume",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "049-venomoth",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "048-venonat",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "012-butterfree",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "189-jumpluff",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "249-lugia",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "145-zapdos",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "242-blissey",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "113-chansey",
-              "grade": "gold"
-            },
-            {
-              "emblemId": "248-tyranitar",
-              "grade": "gold"
-            }
-          ],
-          "moves": [
-            "Aura Sphere",
-            "Dragon Claw"
-          ]
-        }
-      ]
     }
   ],
   "heldItems": [
@@ -63882,7 +63972,7 @@
       "id": "rocky-helmet",
       "displayName": "Rocky Helmet",
       "iconAsset": "/assets/items/held/Rocky+Helmet.png",
-      "description": "Upon receiving damage equal to 3% max HP or more from an opposing Pokémon in a single hit: deals 1.9/2.2/2.5% of the holder's max HP as Attack-based damage to nearby opposing Pokémon (0.6s CD).",
+      "description": "Upon receiving damage equal to 3% max HP or more from an opposing Pokémon in a single hit: deals 1.9%/2.2%/2.5% of the holder's max HP as Attack-based damage to nearby opposing Pokémon (0.6s CD).",
       "statsByGrade": {
         "1": {
           "hp": 9.0,
