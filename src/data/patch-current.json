@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.3.9",
-  "lastUpdated": "2026-07-19",
+  "lastUpdated": "2026-07-21",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-19"
+    "fetched": "2026-07-21"
   },
   "pokemon": [
     {
@@ -40840,17 +40840,17 @@
           "cooldownSeconds": 38.0,
           "damageInstances": [
             {
-              "ratio": 0.21600000000000003,
+              "ratio": 0.27,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 65.0,
+              "base": 81.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.8640000000000001,
+              "ratio": 1.08,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 260.0,
+              "base": 325.0,
               "damageType": "special"
             }
           ],
