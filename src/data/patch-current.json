@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.3.9",
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-07-23",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-21"
+    "fetched": "2026-07-23"
   },
   "pokemon": [
     {
@@ -57489,7 +57489,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user unleashes a malicious orb in the designated direction, exploding against the first opposing Pokémon hit, or after reaching the edge of the move's range. The explosion deals damage and stuns opposing Pokémon for 0.6s and leaves a damaging zone for 2.5s, dealing damage every 0.5s up to 6 times.\n\nDamage from the lingering zone slows opposing Pokémon by 30% for 2s.\n\nUpgrade (Level 13): Reduces the cooldown of this move by 1s.",
+          "descriptionAdvanced": "The user unleashes a malicious orb in the designated direction, exploding against the first opposing Pokémon hit, or after reaching the edge of the move's range. The explosion deals damage and stuns an opposing Pokémon for 0.6s and leaves a damage zone for 2.5s, dealing damage every 0.5s up to 6 times\n\nDamage from the lingering zone slows opposing Pokémon by 30% for 2s.\n\nUpgrade (Level 13): Reduces the cooldown of this move by 1s.",
           "videoAsset": "/assets/skills/Yveltal/Dark+Pulse.mp4"
         },
         {
