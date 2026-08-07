@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.3.9",
-  "lastUpdated": "2026-07-23",
+  "lastUpdated": "2026-08-07",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-07-23"
+    "fetched": "2026-08-07"
   },
   "pokemon": [
     {
@@ -18939,7 +18939,7 @@
       "passiveAbility": {
         "id": "anticipation",
         "name": "Anticipation",
-        "description": "When Eevee would be affected by a hindrance, the hindrance is negated and Eevee becomes immune to hindrances for a short time (35s cd). Note: Hindrances include slows; multi-layered hindrance moves such as Pikachu's Volt Tackle will only have the very first launch negated.",
+        "description": "When Eevee would be affected by a hindrance, the hindrance is negated and Eevee becomes unstoppable for 0.45s (35s cd).",
         "effects": [],
         "iconAsset": "/assets/skills/Espeon/Anticipation.png"
       },
@@ -22126,7 +22126,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user becomes invincible and vanishes, then reappears at the designated location, damaging opposing Pokémon in the area of effect. If this move hits an opposing Pokémon afflicted by a status condition, the damage dealt to opposing Pokémon is doubled and the cooldown of this move is reduced by 90%.\n\nThe user readies a boosted attack when this move is used.\n\nUpgrade (Level 11): Increases the damage of this move.",
+          "descriptionAdvanced": "The user becomes invincible for 0.33s and vanishes, then reappears at the designated location, damaging opposing Pokémon in the area of effect. If this move hits an opposing Pokémon afflicted by a status condition, the damage dealt to opposing Pokémon is doubled and the cooldown of this move is reduced by 90%.\n\nThe user readies a boosted attack when this move is used.\n\nUpgrade (Level 11): Increases the damage of this move.",
           "videoAsset": "/assets/skills/Gengar/Hex.mp4"
         },
         {
@@ -22150,7 +22150,7 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Gengar/Phantom+Ambush.png",
-          "descriptionAdvanced": "The user becomes unstoppable as they jump forward to the designated location, then enters stealth and increases their movement speed by 30% for 7s. The user exits stealth when they use an attack. If this Unite Move is used again, the user becomes invincible as they jump out to attack, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 50% for 1.5s when it hits.\n\nThe user readies a boosted attack each time this move is used.",
+          "descriptionAdvanced": "The user becomes unstoppable as they jump forward to the designated location, then enters stealth and increases their movement speed by 30% for 7s. The user exits stealth when they use an attack. If this Unite Move is used again, the user becomes invincible for 0.55s as they jump out to attack, damaging opposing Pokémon in the area of effect and decreasing their movement speed by 50% for 1.5s when it hits.\n\nThe user readies a boosted attack each time this move is used.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Gengar/Phantom+Ambush.mp4"
         }
@@ -39093,7 +39093,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Moltres/Firebird+Inferno.png",
-          "descriptionAdvanced": "The user becomes Unstoppable and soars upwards before unleashing a blazing orb towards the designated area, dealing damage, applying 5 ticks of burn damage instantly, and 5 stacks of burn counter to all enemies hit.\n\nFor 20s afterwards, a modest area around the opposing team's goal zones are revealed. Moltres cannot gain unite energy from KO'ing wild Pokémon or scoring.",
+          "descriptionAdvanced": "The user becomes Unstoppable and soars upwards before unleashing a blazing orb towards the designated area, dealing damage, applying 5 ticks of burn damage instantly, and 5 stacks of burn counter to all enemies hit.\n\nFor 20s afterwards, a modest area around the opposing team's goal zones are revealed.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Moltres/Firebird+Inferno.mp4"
         }
@@ -41766,7 +41766,7 @@
           ],
           "moveType": "Sure Hit",
           "iconAsset": "/assets/skills/Pikachu/Thunder+Shock.png",
-          "descriptionAdvanced": "Releases electricity at the designated opposing Pokémon, damaging opposing Pokémon in the area of effect and paralyzing them when it hits.\n\nParalysis debuff: Slows enemies briefly.\n\nThe movement speed of opposing Pokémon paralyzed by this move is decreased by 30% and their basic attack speed is decreased by 10% for 2s.",
+          "descriptionAdvanced": "Releases electricity at the designated opposing Pokémon, damaging opposing Pokémon in the area of effect and paralyzing them when it hits.\n\nThe movement speed of opposing Pokémon paralyzed by this move is decreased by 30% and their basic attack speed is decreased by 10% for 2s.",
           "videoAsset": "/assets/skills/Pikachu/Thunder+Shock.mp4"
         },
         {
@@ -41792,7 +41792,7 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Hurls an electric orb at the designated opposing Pokémon, damaging opposing Pokémon in the area of effect, dealing additional missing HP damage, and paralyzing them when it hits.\n\nExecute damage: 6% of enemy missing HP.\n\nThe movement speed of opposing Pokémon paralyzed by this move is decreased by 50% and their basic attack speed is decreased by 10% for 2s. Against wild Pokémon: additional missing HP damage is capped at 1200.\n\nUpgrade (Level 11): Increases the damage of this move.",
+          "descriptionAdvanced": "Hurls an electric orb at the designated opposing Pokémon, damaging opposing Pokémon in the area of effect, dealing additional missing HP damage, and paralyzing them when it hits.\n\nAdditional damage: 6% of enemy missing HP.\n\nThe movement speed of opposing Pokémon paralyzed by this move is decreased by 50% and their basic attack speed is decreased by 10% for 2s.\n\nUpgrade (Level 11): Increases the damage of this move.",
           "videoAsset": "/assets/skills/Pikachu/Electro+Ball.mp4"
         },
         {
@@ -41868,7 +41868,7 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Becomes unstoppable and dashes at the designated opposing Pokémon, damaging the target 5 times and throwing them in the air for 1.4s; then leaps a set distance back, becoming vulnerable to hindrances and increasing movement speed by 60% for 2s (decaying by 10% every 0.5s; minimum 30% for 0.5s) after the leap.\n\nUpgrade (Level 13): Reduces this move's cooldown by 2s.",
+          "descriptionAdvanced": "Becomes unstoppable and dashes at the designated target, damaging them 5 times and throwing them in the air for 1.4s if the first hit wasn't blocked by unstoppable or hindrance resistance effects; then leaps a set distance back, increasing movement speed by 60% for 2s (decaying by 10% every 0.5s; minimum 30% for 0.5s) after the leap.\n\nPikachu can initiate moves and use basic attacks while leaping backwards. Using a boosted attack will cut the leap short.\n\nUpgrade (Level 13): Reduces this move's cooldown by 2s.",
           "videoAsset": "/assets/skills/Pikachu/Volt+Tackle.mp4"
         },
         {
@@ -41918,7 +41918,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Pikachu/Thunderstorm.png",
-          "descriptionAdvanced": "Becomes unstoppable and jumps into the air, then casts down bolts of lightning 4 times over 3s in a radius around Pikachu. The first cast targets all Pokémon on the opposing team in range with 1 bolt each; these bolts damage up to 1 target each. The following 3 casts target up to 2 random Pokémon from the opposing team in range; these following bolts deal damage to opposing Pokémon in a small area around them, but targets can only be damaged once for each of the following 3 casts.\n\nPikachu can act freely once the first bolts of lightning are cast down.",
+          "descriptionAdvanced": "Pikachu leaps into the air becoming unstoppable for 0.65s, calling down bolts of lightning 4 times over 3s in a radius around Pikachu. The first cast targets all Pokémon on the opposing team in range with single target bolts. The following 3 casts target up to 2 random Pokémon from the opposing team in range with area of effect bolts. Opposing Pokémon in range of overlapping bolts only take damage once.\n\nPikachu can initiate moves and use auto attacks while casting this move.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Pikachu/Thunderstorm.mp4"
         }

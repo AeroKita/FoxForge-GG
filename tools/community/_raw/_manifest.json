@@ -1,10 +1,10 @@
 {
   "source": "https://unite-db.com",
-  "fetched": "2026-07-23",
+  "fetched": "2026-08-07",
   "files": {
     "pokemon": {
       "url": "https://unite-db.com/pokemon.json",
-      "bytes": 3038456,
+      "bytes": 3038161,
       "count": 97
     },
     "stats": {
