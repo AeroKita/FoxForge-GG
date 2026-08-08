@@ -46,7 +46,8 @@ Licensed under [AGPL-3.0-only](LICENSE).
 - [Architecture](docs/02-architecture.md) — tech stack and structure
 - [Calculation Engine](docs/03-Calculation-Engine.md) — the stat/damage math
 - [Data Sourcing](docs/04-data-sourcing.md) — where game data comes from and how to update it
-- [Adding Content](docs/11-adding-content.md) — runbook for adding a Pokémon, item, build, or clip
+- [Adding Content](docs/11-adding-content.md) — human runbook for adding a Pokémon, item, build, or clip (no AI required)
+- [Adding Move Clips](docs/12-adding-move-clips.md) — drop recordings → one command → commit
 - [Implementation Plan](docs/05-implementation-plan.md) — milestones and datamining pipeline
 - [Theme Plan](docs/06-theme-plan.md) — semantic tokens and the light/dark theming approach
 - [Distribution & Updates](docs/07-distribution.md) — Pages web app, PWA install, game-data auto-update

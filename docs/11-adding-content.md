@@ -1,160 +1,260 @@
 # Adding Content
 
-This is the maintenance runbook for the only expected ongoing work on FoxForge GG: adding a Pokémon, held item, trainer (battle) item, curated build or label, or move clip after a balance patch or roster update. Game data is **always regenerated, never hand-edited** — the pipeline rewrites `src/data/patch-current.json` in place. [`AGENTS.md`](../AGENTS.md) remains the architecture authority; this doc is a task-oriented copy-paste sequence drawn from it and the numbered docs.
+Human maintenance runbook for FoxForge GG. Use this when adding a Pokémon, held/trainer item, curated build, description, or move clip. Game data is **always regenerated, never hand-edited** — never edit `src/data/patch-current.json` or `public/data/patch-*.json` by hand.
 
-## Quick start — the 90% path
+Architecture detail lives in [`AGENTS.md`](../AGENTS.md). Clips detail lives in [`12-adding-move-clips.md`](12-adding-move-clips.md).
 
-Two situations cover almost everything you'll ever do. Both finish by pushing to `main`, which auto-deploys the live site a couple of minutes later. **Nothing goes live until you push (or merge the PR), and every path runs the full test gate first — if something is wrong, it stops and tells you instead of shipping it.**
+**Nothing goes live until you push (or merge a PR).** Every path runs the test gate first — if something is wrong, it stops instead of shipping.
 
-> First time on a new computer? Run `npm run data:doctor` once. It checks you have everything installed and prints exactly what's missing.
+---
 
-### A new Held Item or Trainer Item (or a balance patch)
+## Pick your task
 
-These come straight from UNITE-DB — nothing to hand-write. Easiest route, no terminal:
-
-1. On GitHub: **Actions** → **Refresh game data** → **Run workflow**.
-2. Wait for it to finish — it opens a Pull Request listing what changed.
-3. Skim the PR, then **Merge** it. Done.
-
-Prefer the terminal? From the `FoxForge-GG` folder: `npm run data:refresh`, then `git add -A && git commit -m "data: refresh" && git push`.
-
-### A new Pokémon
-
-A new Pokémon needs one thing added by hand — a recommended build. Everything else (stats, art, moves) is automatic. From the `FoxForge-GG` folder:
-
-1. `npm run data:refresh` — pulls the new Pokémon's stats, art, and moves from UNITE-DB.
-2. `npm run data:gaps` — lists what the Pokémon still needs (a build, and maybe a description or clips).
-3. `npm run data:curate -- scaffold <pokemon-id> --write` — drops a fill-in-the-blanks build template into `curated_builds.json`. Fill in the emblems, held items, and moves (the template lists the valid move names for you).
-4. `npm run data:curate -- check` — confirms your entry is valid; it even suggests fixes for typos.
-5. `npm run data:refresh -- --mode curate` — rebuilds and re-verifies with your build.
-6. `git add -A && git commit -m "feat: add <Pokémon>" && git push`.
-
-Move-preview clips are optional — the Pokémon works fine without them; add them later via [Adding move clips](#adding-move-clips). If a move's Basic description is blank (step 2 will tell you), fix it in [Descriptions](#descriptions).
-
-### A Pokémon that is in-game but not on UNITE-DB yet
-
-When a Pokémon ships in UNITE before UNITE-DB carries it, use a two-phase provisional → finalize pattern (executed precedent: Palkia, commits `8c289a3` provisional / `5776656` finalize).
-
-**Phase A (provisional):** Hand-inject the Pokémon into `_raw/pokemon.json` + `_raw/stats.json` per [Single-Pokémon roster add](#manual-fallback) (or the AGENTS.md single-Pokémon section), using stats copied from a similar released Pokémon, a blank `rsb` (no damage numbers/Advanced text), and a fake `id` ≥ 900. Add in-game Basic text to `move_descriptions.json` (transcribed from screenshots, keyed by normalized move name — basic attack key is `attack`). Add curated builds; stage and transcode clips normally; drop placeholder art at `public/assets/pokemon/{portrait,thumbnail}/<Name>.png`. Document what is placeholder in a `_raw/<NAME>-PROVISIONAL.md`. Run normalize → presets → publish → verify.
-
-**Phase B (finalize, once UNITE-DB ships it):** Delete the placeholder art and the PROVISIONAL doc, run a full `npm run data:refresh` (fetch overwrites `_raw`, `fetch_art` pulls real art), re-check `move_descriptions.json` keys against UNITE-DB's real move names, run `data:gaps`, sync `AGENTS.md`, commit as one unit.
-
-The rest of this document is the detailed reference behind these steps.
-
-## The tool (preferred path)
-
-Use these npm commands from the repo root (`FoxForge-GG/`):
-
-| Command | When to use |
+| What you have | Do this |
 | --- | --- |
-| `npm run data:doctor` | First step — checks Node, Python venv, ffmpeg, and `_raw/` |
-| `npm run test:tools` | Run the Python data-pipeline unit tests |
-| `npm run data:refresh` | One-command pipeline refresh (see modes below) |
-| `npm run data:curate -- scaffold <id> [--write]` | Print or insert a validated stub in `curated_builds.json` |
-| `npm run data:curate -- check` | Validate all curated entries before normalize |
-| `npm run data:gaps` | Checklist of missing builds, descriptions, or clips per Pokémon |
-| `npm run data:publish` | Sync `public/data/` mirror after any local normalize |
-| `npm run data:publish:check` | Verify published copy matches baseline (also in CI via `npm test`) |
+| New held item, trainer item, or balance text already on UNITE-DB | [A — Balance / items](#a--balance--items-easiest) |
+| New Pokémon already on [unite-db.com](https://unite-db.com) | [B — New Pokémon](#b--new-pokémon) |
+| New move/passive video recordings | [C — Move clips](#c--move-clips) |
+| Pokémon in UNITE but **not** on UNITE-DB yet | [D — Provisional](#d--provisional-pokémon-not-on-unite-db-yet) |
 
-**Refresh modes** (`npm run data:refresh -- --mode <mode>`):
-
-| Mode | Use case |
-| --- | --- |
-| `full` (default) | New patch / new Pokémon from UNITE-DB |
-| `curate` | After editing `curated_builds.json` or `move_descriptions.json` (no re-fetch) |
-| `clips` | After dropping new raw recordings |
-
-Flags: `--patch-version X` (new patch id for normalize), `--no-verify` (skip final gate), `--skip-art` (full mode only — skip art mirror).
-
-## When you need this
-
-| Task | Sections |
-| --- | --- |
-| New Pokémon (roster addition) | [The tool](#the-tool-preferred-path) or [Manual fallback](#manual-fallback), then [Curating a Pokémon](#curating-a-pokémon-builds-labels-descriptions), [Publish + verify](#publish--verify) |
-| New held item | [The tool](#the-tool-preferred-path) or [Manual fallback](#manual-fallback), [Publish + verify](#publish--verify) |
-| New trainer (battle) item | [The tool](#the-tool-preferred-path) or [Manual fallback](#manual-fallback), [Publish + verify](#publish--verify) |
-| New curated build or label | [Curating a Pokémon](#curating-a-pokémon-builds-labels-descriptions), [Publish + verify](#publish--verify) |
-| New move clip | [Adding move clips](#adding-move-clips), [Publish + verify](#publish--verify) |
-
-**Key asymmetry:** held items and battle (trainer) items flow straight from UNITE-DB through `fetch.py` → `build_held_items` / `build_battle_items` with no curation needed. Only Pokémon need curated builds, labels, descriptions, and clips.
-
-## The easy path: trigger a data refresh
-
-GitHub → Actions → **Refresh game data** → *Run workflow* (`.github/workflows/data.yml`).
-
-The workflow re-scrapes UNITE-DB, normalizes, regenerates emblem-optimizer presets, mirrors art, publishes `public/data/`, and opens (or updates) a review PR on `data/auto-refresh` with a field-level changelog from `tools/community/diff_bundle.py`. Optionally pass `patch_version` when the UNITE patch id should change.
-
-Anything UNITE-DB already carries — most new items and base Pokémon data — arrives this way with no local work beyond reviewing the PR.
-
-## Manual fallback
-
-The tool above replaces this manual sequence. Keep it as a reference if `data:refresh` is unavailable.
-
-From the repo root, with the Python venv activated:
+First time on a machine? From `FoxForge-GG/`:
 
 ```bash
-cd tools/community && source ../extract/.venv/bin/activate
-python3 fetch.py && python3 normalize.py && cd ../.. && npm run generate:presets && cd tools/community && python3 fetch_art.py && python3 normalize_as_boosts.py
+npm run data:doctor
 ```
 
-`normalize.py` writes `src/data/patch-current.json`, backfilling blank UNITE-DB move text from the owned `move_descriptions.json` (see [Descriptions](#descriptions)).
-
-Then **publish** the runtime copy and verify:
+Fix anything it prints (Node **24+**, Python venv, ffmpeg). On Apple Silicon, if doctor wants Node 24:
 
 ```bash
-npm run data:publish
-npm run verify
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 ```
 
-For curated-build- or description-only edits (no UNITE-DB re-fetch):
+---
+
+## A — Balance / items (easiest)
+
+No hand-written builds. Two options:
+
+### GitHub only (no laptop)
+
+1. GitHub → **Actions** → **Refresh game data** → **Run workflow**.
+2. Optional: set `patch_version` (e.g. `1.23.3.12`) when the in-game patch id changed.
+3. Wait for the PR on `data/auto-refresh`.
+4. Skim the changelog → **Merge**. Pages redeploys from `main`.
+
+If the PR fails tests (common when a new Pokémon arrived with blank Basic move text), do not merge — use [B — New Pokémon](#b--new-pokémon) instead.
+
+### Terminal
+
+```bash
+cd FoxForge-GG
+npm run data:refresh -- --patch-version <X>   # omit --patch-version if patch id unchanged
+git add -A
+git commit -m "chore(data): refresh UNITE data"
+git push
+```
+
+---
+
+## B — New Pokémon
+
+**About 20–40 minutes** once UNITE-DB has the Pokémon (longer if you also add clips).
+
+Hand work is usually: (1) Basic move/passive text if UNITE-DB left them blank, (2) one Recommended build, (3) optional version bumps, (4) optional clips.
+
+### Do now — checklist
+
+Run every command from `FoxForge-GG/`. Replace `<id>` with the slug (e.g. `reshiram`) and `<Name>` with the display name.
+
+1. **Pull UNITE-DB into the project** (use the real in-game patch id when it changed):
+
+```bash
+npm run data:refresh -- --patch-version <X>
+```
+
+If this fails `verify` on blank Basic descriptions, that is expected for many launches — continue; steps 3–4 fix it. If it fails for another reason, stop and read the error.
+
+2. **See what is still missing:**
+
+```bash
+npm run data:gaps
+```
+
+Read the lines for `<id>`. Typical leftovers: no Recommended builds, blank descriptions, missing clips.
+
+3. **Fill blank Basic descriptions (required when `data:gaps` or `verify` says so).**
+
+Edit `tools/community/move_descriptions.json`: add a `"<id>"` object. Keys are **normalized move/passive names** — lowercase, strip trailing `(…)` and apostrophes (`Sirfetch'd` → `sirfetchd`). Example:
+
+```json
+"reshiram": {
+  "turboblaze": "Has the user …",
+  "dragon breath": "Has the user …",
+  "blue flare": "Has the user …\n\nUpgrade (Level 13): …"
+}
+```
+
+Tips:
+
+- Copy in-game Basic tooltip text. Keep `\n\n` between paragraphs.
+- Prefer `Upgrade (Level N):` using the upgrade’s second level from UNITE-DB (often 11 or 13).
+- If Basic already has body text but no Upgrade line, normalize will copy **only** the Advanced Upgrade paragraph automatically — you do not need to paste numbers by hand.
+- No `attack` key needed unless you have basic-attack Basic text (basic attacks are excluded from the blank-description gate).
+
+4. **Scaffold and fill one Recommended build:**
+
+```bash
+npm run data:curate -- scaffold <id> --write
+```
+
+Open `tools/community/curated_builds.json`, find `"<id>"`, and fill:
+
+- `name` / `emblemName` (same string is fine)
+- `lane` (e.g. `Anywhere Damage` or `Path Damage`)
+- `heldItemIds` (three ids, e.g. `energy-amplifier`)
+- `battleItemId` (e.g. `eject-button`)
+- `emblems` (exactly 10 × `{ "emblemId": "048-venonat", "grade": "gold" }`)
+- `moves` (the two **final** move names from the scaffold `_comment`)
+
+```bash
+npm run data:curate -- check
+```
+
+Fix anything it reports (it suggests nearby ids for typos).
+
+5. **Rebuild with your curation:**
 
 ```bash
 npm run data:refresh -- --mode curate
 ```
 
-## Curating a Pokémon (builds, labels, descriptions)
-
-[`tools/community/curated_builds.json`](../tools/community/curated_builds.json) is the **only** place to add Recommended/Creative builds and label overrides. `normalize.py`'s `apply_curated_builds` merges them and **hard-validates** every entry — an unknown emblem/held/battle id or bad grade fails the build loudly.
-
-### Three footguns
-
-1. **Never hand-edit `emblemName` or any field in `patch-current.json`.** Regeneration clobbers it. Use `curated_builds.json` instead: top-level `_emblemNameRemap` / `_emblemNamePrefixRemap`, and per-Pokémon `builds`, `recommendedTitles`, `creativeBuilds`, or `emblemPreset`.
-2. **`builds` and `recommendedTitles` are mutually exclusive** per Pokémon. `creativeBuilds` may coexist with either.
-3. **After editing builds, run `npm run generate:presets`** (or `npm run data:post-normalize`) or CI fails on `presetsSync.test.ts`.
-
-Use a per-Pokémon `builds` overlay (not `recommendedTitles`) when both display order and labels must stay pinned against UNITE-DB reordering.
-
-### Descriptions
-
-Move **Advanced** descriptions come from UNITE-DB (`rsb` text via `advanced_desc()`). Move **Basic** descriptions come from UNITE-DB where it ships them, and otherwise from [`tools/community/move_descriptions.json`](../tools/community/move_descriptions.json) — an **owned, hand-maintained** data file that `normalize.py` uses to backfill any move whose UNITE-DB Basic text is blank. (It was originally seeded from Serebii, but the scraper has been retired; this file is now yours to edit directly.)
-
-To add or fix a Basic description, edit `move_descriptions.json`: under the Pokémon's id, add an entry keyed by the **normalized move name** — lowercase, with a trailing parenthetical and apostrophes stripped (e.g. `Sovereign Slide` → `sovereign slide`, `Sirfetch'd`'s moves drop the apostrophe). The key must match UNITE-DB's exact move spelling, or the backfill won't find it. Then run `npm run data:refresh -- --mode curate`. Run `npm run data:gaps` to list moves still missing a Basic description. See [`AGENTS.md`](../AGENTS.md) **Data Bundle Versioning** for the full schema.
-
-### Single-Pokémon roster add
-
-When a full `fetch.py` would pull unrelated drift from live UNITE-DB: append that Pokémon's rows to `_raw/pokemon.json` and `_raw/stats.json`, inject any missing Basic move/passive text, add curated `builds` in `curated_builds.json` when the raw placeholder is empty, then `normalize.py` → `npm run generate:presets` → `fetch_art.py` → publish (below). Regenerate only — do not hand-edit `patch-current.json`.
-
-## Adding move clips
-
-Follow the dedicated batch runbook: [`plans/2026-06-20-add-move-clips-runbook.md`](../../plans/2026-06-20-add-move-clips-runbook.md) (raw recordings → `transcode_clips.py` → `normalize.py` → verify).
-
-## Publish + verify
-
-FoxForge GG keeps **two copies** of the bundle:
-
-| Copy | Path | Role |
-| --- | --- | --- |
-| Build-time baseline | `src/data/patch-current.json` | Stable filename; shipped with the app build |
-| Published runtime copy | `public/data/patch-<patchVersion>.json` + `manifest.json` | Cache-busted fetch target for live data updates |
-
-The `manifest.json` `version` field must equal the bundle's `lastUpdated` (not `patchVersion`). After any local `normalize.py` run, **re-sync the published copy** with `npm run data:publish` — a stale `public/data/` is the most common drift.
-
-Gate everything with:
+Must finish with `verify` green. Then:
 
 ```bash
-npm run verify
+npm run data:gaps
 ```
 
-## Per-patch checklist
+`<id>` should no longer list blank descriptions or missing builds. Missing clips are OK for ship.
 
-For the full balance-patch workflow (source tiers, spot-checks, forum watch, release), see [`docs/10-patch-watch-checklist.md`](10-patch-watch-checklist.md).
+6. **Bump the app version** (Settings → App version). Roster add → minor; tiny follow-up → patch:
+
+```bash
+npm version 2.4.0 --no-git-tag-version   # example: new Pokémon after 2.3.x
+```
+
+Update the “currently `x.y.z`” / roster / `patchVersion` sentences in `AGENTS.md` if they still show the old numbers.
+
+7. **Optional clips now** (or later via [C](#c--move-clips)):
+
+```bash
+# after dropping raws in tools/community/_clips/<id>/
+npm run data:refresh -- --mode clips
+```
+
+You need this second pass even if you already ran full refresh — full mode transcodes *before* the new Pokémon exists in the bundle.
+
+8. **Ship:**
+
+```bash
+git add -A
+git commit -m "feat(data): add <Name> — patch <X> (vY.Z.W)"
+git push origin main
+```
+
+9. **Smoke-check live** (or `npm run dev` first): picker shows the Pokémon, Recommended build applies, Basic/Advanced tooltips look right, Settings shows the new game-data and app versions.
+
+### Footguns (read once)
+
+1. **Never hand-edit** `patch-current.json` or `public/data/patch-*.json`.
+2. **Blank Basic text fails CI** — fill `move_descriptions.json`, then `--mode curate`. Closing a failed auto-refresh PR and doing section B is normal.
+3. **`builds` vs `recommendedTitles`** — mutually exclusive per Pokémon. New mons use `builds`.
+4. **Scaffold needs the Pokémon in the bundle** — run step 1 before step 4.
+5. **Clips after roster add** — always finish with `--mode clips` if you staged recordings.
+
+---
+
+## C — Move clips
+
+Follow [`12-adding-move-clips.md`](12-adding-move-clips.md).
+
+Short path when the Pokémon is already in the bundle:
+
+```bash
+# drop 1280×720 files into tools/community/_clips/<id>/ as <skill-id>.mp4
+npm run data:refresh -- --mode clips
+git add -A && git commit -m "feat(media): add clips for <Name>" && git push
+```
+
+---
+
+## D — Provisional (Pokémon not on UNITE-DB yet)
+
+Use only when the mon is playable in UNITE but missing from `https://unite-db.com/pokemon.json`. This is the hard path (~1–2 hours). Precedent: Palkia.
+
+**Phase A — ship a placeholder**
+
+1. Append rows to `tools/community/_raw/pokemon.json` and `_raw/stats.json` (copy stats from a similar mon; blank `rsb`; temporary `id` ≥ 900).
+2. Add Basic text in `move_descriptions.json`.
+3. Add curated `builds` (section B steps 4–5).
+4. Drop placeholder art at `public/assets/pokemon/{portrait,thumbnail}/<Name>.png`.
+5. Write `tools/community/_raw/<NAME>-PROVISIONAL.md` listing what is fake.
+6. `npm run data:refresh -- --mode curate` (or normalize → presets → art → publish → verify).
+7. Commit. Clips: [`12-adding-move-clips.md`](12-adding-move-clips.md).
+
+**Phase B — when UNITE-DB catches up**
+
+1. Delete placeholder art and the `*-PROVISIONAL.md` file.
+2. `npm run data:refresh -- --patch-version <X>` (fetch overwrites `_raw`, art refreshes).
+3. Re-check `move_descriptions.json` keys against real move names.
+4. `npm run data:gaps` → fix leftovers → bump app version → commit.
+
+---
+
+## Command cheat sheet
+
+| Command | When |
+| --- | --- |
+| `npm run data:doctor` | First step on a new machine |
+| `npm run data:refresh` | Full pull from UNITE-DB (+ verify) |
+| `npm run data:refresh -- --patch-version X` | Full pull and set game-data patch id |
+| `npm run data:refresh -- --mode curate` | After editing builds or descriptions |
+| `npm run data:refresh -- --mode clips` | After dropping new recordings |
+| `npm run data:gaps` | “What is still missing?” |
+| `npm run data:curate -- scaffold <id> --write` | Insert build template |
+| `npm run data:curate -- check` | Validate `curated_builds.json` |
+| `npm run verify` | Full local CI gate |
+| `npm version X.Y.Z --no-git-tag-version` | Bump Settings app version |
+
+Refresh modes: `full` (default) = doctor → fetch → transcode → normalize → presets → harvest → art → boosts → publish → verify. `curate` and `clips` run smaller subsets.
+
+---
+
+## Descriptions (reference)
+
+- **Advanced** — from UNITE-DB (`rsb`); automatic.
+- **Basic** — from UNITE-DB when present; else from `tools/community/move_descriptions.json`.
+- After backfill, normalize punctuates Basic paragraphs and appends Advanced’s Upgrade paragraph onto Basic when Basic lacks an Upgrade marker.
+- Edit archive → `npm run data:refresh -- --mode curate`.
+
+---
+
+## Curated builds (reference)
+
+Only edit [`tools/community/curated_builds.json`](../tools/community/curated_builds.json).
+
+1. Never hand-edit `emblemName` (or anything else) in patch JSON.
+2. Per Pokémon: `builds` **or** `recommendedTitles`, not both. `creativeBuilds` may coexist.
+3. After build edits, `--mode curate` (or `npm run generate:presets`) — CI fails on stale `emblemOptimizerPresets.json`.
+
+---
+
+## Publish + verify (reference)
+
+| Copy | Path |
+| --- | --- |
+| Build-time baseline | `src/data/patch-current.json` |
+| Published runtime | `public/data/patch-<patchVersion>.json` + `manifest.json` |
+
+`manifest.json` `version` must equal the bundle’s `lastUpdated`. `npm run data:refresh` / `data:publish` keep them aligned. Gate with `npm run verify`.
+
+Balance-patch watch list: [`10-patch-watch-checklist.md`](10-patch-watch-checklist.md).
