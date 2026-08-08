@@ -18,11 +18,12 @@ window. It updates automatically on reload.
 
 ### 2. Run from source
 
-Requires **[Node.js](https://nodejs.org) 24+** (matches CI). Clone, install, and start the dev server:
+Requires **[Node.js](https://nodejs.org) 24+** (matches CI). Version is pinned in [`.nvmrc`](.nvmrc) — use [NVM](https://github.com/nvm-sh/nvm). Clone, install, and start the dev server:
 
 ```bash
 git clone https://github.com/AeroKita/FoxForge-GG.git
 cd FoxForge-GG
+nvm install && nvm use   # reads .nvmrc
 npm install
 npm run dev        # open the printed URL (default http://localhost:5173)
 ```

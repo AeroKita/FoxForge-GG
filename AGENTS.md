@@ -178,11 +178,11 @@ TypeScript/React SPA with a pure calculation engine and community-sourced game d
 
 ### Environment Setup
 
-- **Node.js 24+** (pinned in `.node-version`; matches CI in `.github/workflows/`; `package.json` `engines.node` is `>=24`). On Homebrew machines where the default `node` is older, put `/opt/homebrew/opt/node@24/bin` first on `PATH` (or follow the hint printed by `npm run data:doctor` when the major is too low).
+- **Node.js 24+** (pinned in `.nvmrc` and `.node-version`; matches CI in `.github/workflows/`; `package.json` `engines.node` is `>=24`). Manage it with [NVM](https://github.com/nvm-sh/nvm): from the repo root run `nvm install && nvm use` (or set `nvm alias default 24` once). Do not rely on Homebrew `node@24` PATH overrides. `npm run data:doctor` prints an NVM hint when the major is too low.
 - **npm** for JS dependencies and scripts (`package.json`).
 - **Python 3** with a venv under `tools/extract/.venv` for community data refresh scripts (`tools/community/`). Run `npm run data:doctor` before data work to verify Node, the venv, and optional clip tooling.
 
-Clone, `npm install`, and you're ready to develop. The `prepare` script installs a Husky pre-commit hook (`.husky/pre-commit`) that runs `lint-staged` to auto-format staged `src/**/*.{ts,tsx}` and `vite.config.ts` with oxfmt before each commit.
+Clone, `nvm use`, `npm install`, and you're ready to develop. The `prepare` script installs a Husky pre-commit hook (`.husky/pre-commit`) that runs `lint-staged` to auto-format staged `src/**/*.{ts,tsx}` and `vite.config.ts` with oxfmt before each commit.
 
 ### Build Tools
 

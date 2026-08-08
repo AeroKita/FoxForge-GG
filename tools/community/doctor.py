@@ -29,6 +29,18 @@ def _required_node_major() -> int:
     return int(NODE_VERSION_FILE.read_text().strip())
 
 
+def node_version_hint(required_major: int) -> str:
+    """Return a one-line install hint when Node is missing or too old.
+
+    Prefer NVM + the repo ``.nvmrc`` so maintainers (and agents) do not need
+    Homebrew PATH overrides.
+    """
+    return (
+        f"  hint: install NVM (https://github.com/nvm-sh/nvm), then from the repo root: "
+        f"nvm install && nvm use  # reads .nvmrc (Node {required_major})"
+    )
+
+
 def _venv_deps_ok() -> bool:
     if not VENV_PY.exists():
         return False
@@ -55,15 +67,11 @@ def main() -> None:
 
     if node_major is None:
         print(f"✗ Node.js not found (need major ≥ {required_node})")
-        print(
-            '  hint: brew install node@24, then export PATH="/opt/homebrew/opt/node@24/bin:$PATH" (add to ~/.zprofile to persist)'
-        )
+        print(node_version_hint(required_node))
         hard_fail = True
     elif node_major < required_node:
         print(f"✗ Node.js v{node_major} (need major ≥ {required_node})")
-        print(
-            '  hint: brew install node@24, then export PATH="/opt/homebrew/opt/node@24/bin:$PATH" (add to ~/.zprofile to persist)'
-        )
+        print(node_version_hint(required_node))
         hard_fail = True
     else:
         print(f"✓ Node.js major {node_major} (≥ {required_node})")
