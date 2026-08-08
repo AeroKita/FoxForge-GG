@@ -28,9 +28,9 @@
         "emblemName": "Singing Special Attacker",
         "lane": "Anywhere Damage",
         "heldItemIds": [
+          "energy-amplifier",
           "slick-spoon",
-          "wise-glasses",
-          "choice-specs"
+          "drive-lens"
         ],
         "battleItemId": "eject-button",
         "emblems": [
@@ -85,9 +85,9 @@
         "emblemName": "Mobile Special Attacker",
         "lane": "Anywhere Damage",
         "heldItemIds": [
-          "drive-lens",
-          "wise-glasses",
-          "choice-specs"
+          "energy-amplifier",
+          "slick-spoon",
+          "curse-incense"
         ],
         "battleItemId": "x-speed",
         "emblems": [
@@ -1626,6 +1626,34 @@
           "Aura Sphere",
           "Dragon Claw"
         ]
+      }
+    ]
+  },
+  "reshiram": {
+    "builds": [
+      {
+        "name": "World of Truth",
+        "emblemName": "World of Truth",
+        "lane": "Anywhere Damage",
+        "heldItemIds": [
+          "energy-amplifier",
+          "slick-spoon",
+          "drive-lens"
+        ],
+        "battleItemId": "eject-button",
+        "emblems": [
+          { "emblemId": "048-venonat", "grade": "gold" },
+          { "emblemId": "012-butterfree", "grade": "gold" },
+          { "emblemId": "249-lugia", "grade": "gold" },
+          { "emblemId": "071-victreebel", "grade": "bronze" },
+          { "emblemId": "045-vileplume", "grade": "gold" },
+          { "emblemId": "049-venomoth", "grade": "gold" },
+          { "emblemId": "088-grimer", "grade": "gold" },
+          { "emblemId": "089-muk", "grade": "gold" },
+          { "emblemId": "211-qwilfish", "grade": "gold" },
+          { "emblemId": "248-tyranitar", "grade": "gold" }
+        ],
+        "moves": ["Blue Flare", "Dragon Dance"]
       }
     ]
   },

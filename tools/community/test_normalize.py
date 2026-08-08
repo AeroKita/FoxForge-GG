@@ -7,9 +7,11 @@ import unittest
 from normalize import (
     _norm_move_name,
     advanced_desc,
+    append_upgrade_from_advanced,
     apply_patch_note_overrides,
     build_emblems,
     build_upgrade_move,
+    ensure_sentence_end,
     fix_spelling,
     fix_spelling_deep,
     passive_basic_desc,
@@ -44,6 +46,84 @@ class TestStripActivationNote(unittest.TestCase):
 
     def test_noop(self):
         self.assertEqual(strip_activation_note("A plain sentence."), "A plain sentence.")
+
+
+class TestEnsureSentenceEnd(unittest.TestCase):
+    """ensure_sentence_end adds terminal .?! punctuation per Basic paragraph."""
+
+    def test_empty(self):
+        self.assertEqual(ensure_sentence_end(""), "")
+
+    def test_already_ended(self):
+        self.assertEqual(ensure_sentence_end("Deals damage."), "Deals damage.")
+
+    def test_adds_period(self):
+        self.assertEqual(ensure_sentence_end("Deals damage"), "Deals damage.")
+
+    def test_preserves_exclamation_and_question(self):
+        self.assertEqual(ensure_sentence_end("Deals damage!"), "Deals damage!")
+        self.assertEqual(ensure_sentence_end("Deals damage?"), "Deals damage?")
+
+    def test_multi_paragraph(self):
+        self.assertEqual(
+            ensure_sentence_end("Line one\n\nLine two"),
+            "Line one.\n\nLine two.",
+        )
+
+    def test_upgrade_line(self):
+        self.assertEqual(
+            ensure_sentence_end("Upgrade (Level 13): Increased damage"),
+            "Upgrade (Level 13): Increased damage.",
+        )
+
+
+class TestAppendUpgradeFromAdvanced(unittest.TestCase):
+    """append_upgrade_from_advanced copies only Advanced's Upgrade paragraph onto Basic."""
+
+    def test_basic_already_has_level_upgrade_unchanged(self):
+        basic = "Body text.\n\nUpgrade (Level 11): More damage."
+        advanced = "Adv body.\n\nUpgrade (Level 11): Different wording with 20%."
+        self.assertEqual(append_upgrade_from_advanced(basic, advanced), basic)
+
+    def test_basic_already_has_bare_upgrade_unchanged(self):
+        basic = "Body text.\n\nUpgrade: More damage."
+        advanced = "Adv body.\n\nUpgrade (Level 11): Different wording."
+        self.assertEqual(append_upgrade_from_advanced(basic, advanced), basic)
+
+    def test_appends_upgrade_paragraph_only(self):
+        basic = "Has the user throw consecutive flames."
+        advanced = (
+            "Throws consecutive flames in an arc.\n\n"
+            "Burns tick every 0.5s for 5 damage ticks.\n\n"
+            "Upgrade (Level 11): This move's cooldown is reduced by 1s."
+        )
+        out = append_upgrade_from_advanced(basic, advanced)
+        self.assertEqual(
+            out,
+            "Has the user throw consecutive flames.\n\n"
+            "Upgrade (Level 11): This move's cooldown is reduced by 1s.",
+        )
+        self.assertNotIn("Throws consecutive", out)
+        self.assertNotIn("Burns tick", out)
+
+    def test_empty_basic_returns_upgrade_only(self):
+        advanced = "Body.\n\nUpgrade (Level 13): Increases the slow."
+        self.assertEqual(
+            append_upgrade_from_advanced("", advanced),
+            "Upgrade (Level 13): Increases the slow.",
+        )
+
+    def test_no_upgrade_in_advanced_leaves_basic(self):
+        basic = "Body text."
+        self.assertEqual(append_upgrade_from_advanced(basic, "No upgrade here."), basic)
+
+    def test_idempotent(self):
+        basic = "Has the user shoot fire."
+        advanced = "Shoot fire.\n\nUpgrade (Level 11): If the explosion hits, +20% damage."
+        once = append_upgrade_from_advanced(basic, advanced)
+        twice = append_upgrade_from_advanced(once, advanced)
+        self.assertEqual(once, twice)
+        self.assertEqual(once.count("Upgrade (Level 11):"), 1)
 
 
 class TestPassiveBasicDesc(unittest.TestCase):

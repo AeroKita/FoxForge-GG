@@ -288,6 +288,50 @@ def strip_activation_note(text: str) -> str:
     return cleaned
 
 
+def ensure_sentence_end(text: str) -> str:
+    """Ensure each ``\\n\\n``-separated Basic paragraph ends with ``.``, ``!``, or ``?``."""
+    if not text:
+        return text
+    parts: list[str] = []
+    for para in text.split("\n\n"):
+        stripped = para.strip()
+        if not stripped:
+            parts.append(para)
+            continue
+        if stripped[-1] not in ".!?":
+            # Preserve leading/trailing whitespace shape of the original paragraph
+            # by appending to the rstrip'd body and keeping any trailing spaces out.
+            parts.append(para.rstrip() + ".")
+        else:
+            parts.append(para)
+    return "\n\n".join(parts)
+
+
+_UPGRADE_START = re.compile(r"^Upgrade(?:\s*\([^)]*\))?:\s*", re.I)
+_UPGRADE_ANY = re.compile(r"Upgrade(?:\s*\([^)]*\))?:", re.I)
+
+
+def extract_upgrade_paragraph(advanced: str) -> str:
+    """Return the first paragraph in *advanced* that starts with Upgrade / Upgrade (Level N):."""
+    for para in (advanced or "").split("\n\n"):
+        p = para.strip()
+        if _UPGRADE_START.match(p):
+            return p
+    return ""
+
+
+def append_upgrade_from_advanced(basic: str, advanced: str) -> str:
+    """If Basic lacks an Upgrade marker, append Advanced's Upgrade paragraph only."""
+    basic = basic or ""
+    if _UPGRADE_ANY.search(basic):
+        return basic
+    upgrade = extract_upgrade_paragraph(advanced or "")
+    if not upgrade:
+        return basic
+    basic = basic.rstrip()
+    return f"{basic}\n\n{upgrade}" if basic else upgrade
+
+
 def passive_basic_desc(passive: dict | None, over: dict) -> str:
     """Resolve Basic-tier passive text: UNITE-DB description, then move_descriptions
     override, then Advanced (rsb.true_desc). Returns empty string when passive is None."""
@@ -295,11 +339,13 @@ def passive_basic_desc(passive: dict | None, over: dict) -> str:
         return ""
     desc = paragraphize_upgrade((passive.get("description") or "").strip())
     if desc.strip():
-        return desc
+        return ensure_sentence_end(desc)
     override = strip_activation_note(over.get(_norm_move_name(passive.get("name", "")), ""))
     if override.strip():
-        return paragraphize_upgrade(override)
-    return paragraphize_upgrade(((passive.get("rsb") or {}).get("true_desc") or "").strip())
+        return ensure_sentence_end(paragraphize_upgrade(override))
+    return ensure_sentence_end(
+        paragraphize_upgrade(((passive.get("rsb") or {}).get("true_desc") or "").strip())
+    )
 
 
 def build_move(skill: dict, slot: str, folder: str) -> dict:
@@ -310,7 +356,9 @@ def build_move(skill: dict, slot: str, folder: str) -> dict:
         "id": slugify(name or slot),
         "name": name,
         "slot": slot,
-        "description": paragraphize_upgrade(skill.get("description", "") or ""),
+        "description": ensure_sentence_end(
+            paragraphize_upgrade(skill.get("description", "") or "")
+        ),
         "cooldownSeconds": num(skill.get("cd")),
         "damageInstances": damage_instances(rsb),
         "effects": [],
@@ -380,6 +428,10 @@ def build_upgrade_move(up: dict, slot: str, folder: str) -> dict:
     adv = advanced_desc(rsb, up.get("level2"))
     if adv:
         move["descriptionAdvanced"] = paragraphize_upgrade(adv)
+    # Do NOT append Advanced Upgrade here — blank Basic must stay blank so
+    # build_pokemon's move_descriptions backfill can supply the full in-game
+    # body first. append_upgrade_from_advanced runs after that backfill.
+    move["description"] = ensure_sentence_end(move["description"])
     return move
 
 
@@ -531,9 +583,20 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
         if over:
             for m in moves:
                 if not (m.get("description") or "").strip():
-                    m["description"] = strip_activation_note(
-                        over.get(_norm_move_name(m["name"]), m.get("description", ""))
+                    m["description"] = ensure_sentence_end(
+                        strip_activation_note(
+                            over.get(_norm_move_name(m["name"]), m.get("description", ""))
+                        )
                     )
+        # After archive backfill, copy Advanced's Upgrade paragraph onto Basic when
+        # Basic still lacks an Upgrade marker (covers the roster-wide Basic gap).
+        for m in moves:
+            adv = m.get("descriptionAdvanced") or ""
+            if not adv:
+                continue
+            m["description"] = ensure_sentence_end(
+                append_upgrade_from_advanced(m.get("description") or "", adv)
+            )
         passive_desc = passive_basic_desc(passive, over)
         passive_adv = paragraphize_upgrade(advanced_desc((passive or {}).get("rsb"))) if passive else ""
         pokemon_gifs = gifs.get(pid, {})

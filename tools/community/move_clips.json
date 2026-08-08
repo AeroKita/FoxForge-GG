@@ -631,6 +631,13 @@
       "tackle": "/assets/skills/Rapidash/Tackle.mp4",
       "triad-blitz": "/assets/skills/Rapidash/Triad+Blitz.mp4"
     },
+    "reshiram": {
+      "blue-flare": "/assets/skills/Reshiram/Blue+Flare.mp4",
+      "dragon-breath": "/assets/skills/Reshiram/Dragon+Breath.mp4",
+      "dragon-dance": "/assets/skills/Reshiram/Dragon+Dance.mp4",
+      "flames-that-bring-lightning": "/assets/skills/Reshiram/Flames+That+Bring+Lightning.mp4",
+      "tailwind": "/assets/skills/Reshiram/Tailwind.mp4"
+    },
     "sableye": {
       "astonish": "/assets/skills/Sableye/Astonish.mp4",
       "chaos-glower": "/assets/skills/Sableye/Chaos+Glower.mp4",
