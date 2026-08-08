@@ -44,12 +44,20 @@ VF = (
 
 
 def move_index(bundle: dict) -> dict:
-    """(pokemon-id, move-id) -> move dict, for moves that can have a clip."""
+    """(pokemon-id, move-id) -> move/passive dict, for skills that can have a clip.
+
+    Includes Move 1/2, Unite moves, and passives that carry ``iconAsset`` (used to
+    derive the output path under ``public/assets/skills/``). Basic attacks are
+    excluded. Passives are optional — most folders ship without a passive clip.
+    """
     idx = {}
     for p in bundle["pokemon"]:
         for m in p["moves"]:
             if m.get("slot") in ("move1", "move2", "uniteMove"):
                 idx[(p["id"], m["id"])] = m
+        pa = p.get("passiveAbility") or {}
+        if pa.get("id") and pa.get("iconAsset"):
+            idx[(p["id"], pa["id"])] = pa
     return idx
 
 

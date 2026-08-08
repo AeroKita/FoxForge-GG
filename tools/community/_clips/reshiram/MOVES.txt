@@ -1,6 +1,7 @@
 Reshiram  —  drop each file here as <move-id>.mp4
-Scope: Base + Final + Unite moves (no passive).
+Scope: Base + Final + Unite moves + optional Passive.
 
+  turboblaze.mp4                     →  Turboblaze                       [Passive]
   dragon-breath.mp4                  →  Dragon Breath                    [Move 1 · Base]
   blue-flare.mp4                     →  Blue Flare (Lv 7)                [Move 1 · Final]
   tailwind.mp4                       →  Tailwind                         [Move 2 · Base]

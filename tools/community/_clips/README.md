@@ -2,7 +2,7 @@
 
 Drop your recorded `.mp4` here as `<move-id>.mp4` (see each folder's MOVES.txt).
 
-Scope: Base moves, Final (upgrade) moves, Unite moves. **No passives.**
+Scope: Base moves, Final (upgrade) moves, Unite moves. Passives are optional (`<passive-id>.mp4` when recorded).
 
 | Pokémon | folder | clips needed |
 |---|---|---|
@@ -78,6 +78,7 @@ Scope: Base moves, Final (upgrade) moves, Unite moves. **No passives.**
 | Quaquaval | `quaquaval/` | 5 |
 | Raichu | `raichu/` | 7 |
 | Rapidash | `rapidash/` | 7 |
+| Reshiram | `reshiram/` | 6 |
 | Sableye | `sableye/` | 7 |
 | Scizor | `scizor/` | 6 |
 | Scyther | `scyther/` | 6 |

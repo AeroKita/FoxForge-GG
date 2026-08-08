@@ -44958,7 +44958,8 @@
         "description": "Has the user attack with a blazing fireball, dealing damage to opposing Pokémon and destroying a set amount of the opposing Pokémon's shield.",
         "effects": [],
         "descriptionAdvanced": "Reshiram launches a blazing blue fireball at a target, dealing damage and removing 50% of remaining shields (20s cd).",
-        "iconAsset": "/assets/skills/Reshiram/Turboblaze.png"
+        "iconAsset": "/assets/skills/Reshiram/Turboblaze.png",
+        "videoAsset": "/assets/skills/Reshiram/Turboblaze.mp4"
       },
       "builds": [
         {

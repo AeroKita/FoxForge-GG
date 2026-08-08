@@ -140,6 +140,7 @@ export function MovesCard() {
                 <span className="font-semibold">{passive.name}</span>
                 {passiveDesc && <span className="mt-0.5 block text-faint">{passiveDesc}</span>}
                 <MoveMedia
+                  videoAsset={passive.videoAsset}
                   gifAsset={passive.gifAsset}
                   iconAsset={passive.iconAsset}
                   name={passive.name}

@@ -617,9 +617,13 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
             **({"iconAsset": skill_icon(name, passive["name"])} if passive and passive.get("name") else {}),
         }
         if passive and passive.get("name"):
-            gif_path = pokemon_gifs.get(_norm_gif_key(passive["name"]))
-            if gif_path:
-                passive_ability["gifAsset"] = gif_path
+            clip_path = pokemon_clips.get(passive_ability["id"])
+            if clip_path:
+                passive_ability["videoAsset"] = clip_path
+            else:
+                gif_path = pokemon_gifs.get(_norm_gif_key(passive["name"]))
+                if gif_path:
+                    passive_ability["gifAsset"] = gif_path
         out.append({
             "id": pid,
             "displayName": p.get("display_name", name),

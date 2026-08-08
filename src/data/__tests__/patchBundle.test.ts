@@ -248,7 +248,18 @@ describe("community data bundle", () => {
           expect(m.videoAsset, `${p.id}/${m.name}`).toMatch(/^\/assets\/skills\//);
           expect(m.videoAsset, `${p.id}/${m.name}`).toMatch(/\.mp4$/);
         }
+        if (p.passiveAbility.videoAsset) {
+          expect(p.passiveAbility.videoAsset, `${p.id}/passive`).toMatch(/^\/assets\/skills\//);
+          expect(p.passiveAbility.videoAsset, `${p.id}/passive`).toMatch(/\.mp4$/);
+        }
       }
+    });
+
+    it("Reshiram Turboblaze passive has a videoAsset and no redundant gifAsset", () => {
+      const reshiram = bundle.pokemon.find((p) => p.id === "reshiram")!;
+      expect(reshiram.passiveAbility.id).toBe("turboblaze");
+      expect(reshiram.passiveAbility.videoAsset).toBe("/assets/skills/Reshiram/Turboblaze.mp4");
+      expect(reshiram.passiveAbility.gifAsset).toBeUndefined();
     });
 
     it("a move with videoAsset does not carry a redundant gifAsset", () => {
