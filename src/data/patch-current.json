@@ -1,11 +1,11 @@
 {
-  "patchVersion": "1.23.3.12",
-  "lastUpdated": "2026-08-08",
+  "patchVersion": "1.23.3.13",
+  "lastUpdated": "2026-08-23",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-08-08"
+    "fetched": "2026-08-23"
   },
   "pokemon": [
     {
@@ -1669,7 +1669,7 @@
           "id": "recover",
           "name": "Recover",
           "slot": "move1",
-          "description": "Has the user place a dollop of whipped cream at the designated location. The dollop stays at that location for a short time. When an ally Pokémon picks up the dollop, their HP is restored, their movement speed increases and the user's sweet gauge increases. When the user's sweet gauge si full, the next dollop becomes sweeter, restoring more HP and increasing movement speed even more.\n\nUpgrade (Level 10): The maximum number of uses that can be kept in reserve is increased to 3.",
+          "description": "Has the user place a dollop of whipped cream at the designated location. The dollop stays at that location for a short time. When an ally Pokémon picks up the dollop, their HP is restored, their movement speed increases and the user's sweet gauge increases. When the user's sweet gauge is full, the next dollop becomes sweeter, restoring more HP and increasing movement speed even more.\n\nUpgrade (Level 10): The maximum number of uses that can be kept in reserve is increased to 3.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -1716,7 +1716,7 @@
           "id": "charm",
           "name": "Charm",
           "slot": "move2",
-          "description": "Has the user send its cute voice in the designated direction, applying a slowing effect on opposing Pokémon it hits, dercreasing their Attack and Sp. At and increasing the user's sweet gauge.",
+          "description": "Has the user send its cute voice in the designated direction, applying a slowing effect on opposing Pokémon it hits, decreasing their Attack and Sp. Atk and increasing the user's sweet gauge.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -2344,7 +2344,7 @@
           "id": "will-o-wisp",
           "name": "Will-o-Wisp",
           "slot": "move2",
-          "description": "Has the user shoot a flame in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits and leaving hem burned for a short time. After using this move, the user's next basic attack becomes a boosted attack.",
+          "description": "Has the user shoot a flame in the designated direction, dealing damage and applying a slowing effect to opposing Pokémon it hits and leaving them burned for a short time. After using this move, the user's next basic attack becomes a boosted attack.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -43718,7 +43718,7 @@
           "id": "thunderbolt",
           "name": "Thunderbolt",
           "slot": "move2",
-          "description": "Has the user release a strong electric blast in the designated direction, dealing damage to opposing Pokémon it hits and leaving them paralyzed. If this move hits an electric orb created by Electro Ball, the orb releases its electricty and deals damage to nearby opposing Pokémon.\n\nUpgrade (Level 13): Immobilizes opposing Pokémon hit for 1s instead of paralyzing them.",
+          "description": "Has the user release a strong electric blast in the designated direction, dealing damage to opposing Pokémon it hits and leaving them paralyzed. If this move hits an electric orb created by Electro Ball, the orb releases its electricity and deals damage to nearby opposing Pokémon.\n\nUpgrade (Level 13): Immobilizes opposing Pokémon hit for 1s instead of paralyzing them.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -44279,7 +44279,7 @@
           "id": "fairy-wind",
           "name": "Fairy Wind",
           "slot": "move1",
-          "description": "Has the user jump in the direction it's facing and, when it lands, stir up a fairy wind that deals damage to nearby opposing Pokémon. This move can be used again, up to 2 times total. If it's used 2 times, then on the final time, the user deals increase damage based on its movement speed and throws opposing Pokémon.\n\nUpgrade (Level 11): Decreases the movement speed of opposing Pokémon hit by 20% for 2s with each use.",
+          "description": "Has the user jump in the direction it's facing and, when it lands, stir up a fairy wind that deals damage to nearby opposing Pokémon. This move can be used again, up to 2 times total. If it's used 2 times, then on the final time, the user deals increased damage based on its movement speed and throws opposing Pokémon.\n\nUpgrade (Level 11): Decreases the movement speed of opposing Pokémon hit by 20% for 2s with each use.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -44312,7 +44312,7 @@
           "id": "tackle",
           "name": "Tackle",
           "slot": "move2",
-          "description": "Has the user charge, slamming into opposing Pokémon with its whole body while dealing damage and applying a slowinf effect to them.",
+          "description": "Has the user charge, slamming into opposing Pokémon with its whole body while dealing damage and applying a slowing effect to them.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -44662,7 +44662,7 @@
           "defense": 65.0,
           "spAttack": 175.0,
           "spDefense": 54.0,
-          "critRate": 0.1,
+          "critRate": 0.05,
           "cdr": 0.05,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44675,7 +44675,7 @@
           "defense": 72.0,
           "spAttack": 203.0,
           "spDefense": 60.0,
-          "critRate": 0.1,
+          "critRate": 0.05,
           "cdr": 0.05,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44688,7 +44688,7 @@
           "defense": 104.0,
           "spAttack": 331.0,
           "spDefense": 89.0,
-          "critRate": 0.1,
+          "critRate": 0.05,
           "cdr": 0.05,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44701,7 +44701,7 @@
           "defense": 114.0,
           "spAttack": 372.0,
           "spDefense": 98.0,
-          "critRate": 0.1,
+          "critRate": 0.05,
           "cdr": 0.05,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44714,7 +44714,7 @@
           "defense": 126.0,
           "spAttack": 421.0,
           "spDefense": 109.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.05,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44727,7 +44727,7 @@
           "defense": 141.0,
           "spAttack": 479.0,
           "spDefense": 122.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.05,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44740,7 +44740,7 @@
           "defense": 158.0,
           "spAttack": 549.0,
           "spDefense": 138.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.1,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44753,7 +44753,7 @@
           "defense": 179.0,
           "spAttack": 633.0,
           "spDefense": 157.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.1,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44766,7 +44766,7 @@
           "defense": 204.0,
           "spAttack": 734.0,
           "spDefense": 180.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.1,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44779,7 +44779,7 @@
           "defense": 234.0,
           "spAttack": 855.0,
           "spDefense": 207.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.1,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -44792,7 +44792,7 @@
           "defense": 270.0,
           "spAttack": 1000.0,
           "spDefense": 240.0,
-          "critRate": 0.2,
+          "critRate": 0.1,
           "cdr": 0.1,
           "lifesteal": 0.0,
           "spLifesteal": 0.0,
@@ -49303,6 +49303,584 @@
           "moves": [
             "Flail",
             "Yawn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solgaleo",
+      "displayName": "Solgaleo",
+      "role": "AllRounder",
+      "attackType": "physical",
+      "difficulty": 2,
+      "imageAsset": "/assets/pokemon/portrait/Solgaleo.png",
+      "iconAsset": "/assets/pokemon/thumbnail/Solgaleo.png",
+      "evolutions": [
+        {
+          "level": 1,
+          "formName": "Solgaleo"
+        }
+      ],
+      "baseStatsByLevel": [
+        {
+          "hp": 3200.0,
+          "attack": 160.0,
+          "defense": 70.0,
+          "spAttack": 20.0,
+          "spDefense": 54.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3264.0,
+          "attack": 165.0,
+          "defense": 75.0,
+          "spAttack": 21.0,
+          "spDefense": 58.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1043,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3341.0,
+          "attack": 172.0,
+          "defense": 81.0,
+          "spAttack": 23.0,
+          "spDefense": 63.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.10949999999999999,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3434.0,
+          "attack": 179.0,
+          "defense": 88.0,
+          "spAttack": 25.0,
+          "spDefense": 68.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1157,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3771.0,
+          "attack": 207.0,
+          "defense": 121.0,
+          "spAttack": 32.0,
+          "spDefense": 95.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1381,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 3905.0,
+          "attack": 218.0,
+          "defense": 131.0,
+          "spAttack": 35.0,
+          "spDefense": 103.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1471,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4839.0,
+          "attack": 268.0,
+          "defense": 206.0,
+          "spAttack": 48.0,
+          "spDefense": 185.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.18780000000000002,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5079.0,
+          "attack": 284.0,
+          "defense": 226.0,
+          "spAttack": 52.0,
+          "spDefense": 204.0,
+          "critRate": 0.1,
+          "cdr": 0.0,
+          "lifesteal": 0.05,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2006,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 5367.0,
+          "attack": 303.0,
+          "defense": 250.0,
+          "spAttack": 57.0,
+          "spDefense": 227.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2161,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5712.0,
+          "attack": 326.0,
+          "defense": 279.0,
+          "spAttack": 63.0,
+          "spDefense": 254.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2346,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 6127.0,
+          "attack": 353.0,
+          "defense": 313.0,
+          "spAttack": 70.0,
+          "spDefense": 287.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2568,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6625.0,
+          "attack": 386.0,
+          "defense": 354.0,
+          "spAttack": 79.0,
+          "spDefense": 327.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.1,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.28350000000000003,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7223.0,
+          "attack": 426.0,
+          "defense": 404.0,
+          "spAttack": 89.0,
+          "spDefense": 374.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3155,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 7940.0,
+          "attack": 473.0,
+          "defense": 464.0,
+          "spAttack": 101.0,
+          "spDefense": 431.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3539,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 8800.0,
+          "attack": 530.0,
+          "defense": 535.0,
+          "spAttack": 116.0,
+          "spDefense": 500.0,
+          "critRate": 0.2,
+          "cdr": 0.0,
+          "lifesteal": 0.15,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.4,
+          "moveSpeed": 4300.0
+        }
+      ],
+      "moves": [
+        {
+          "id": "attack---cosmog",
+          "name": "Attack - Cosmog",
+          "slot": "basicAttack",
+          "description": "Cosmog shoots an orb of energy. Becomes a boosted attack with every third attack.",
+          "cooldownSeconds": 0.0,
+          "damageInstances": [
+            {
+              "ratio": 1.0,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 0.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.0,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 309.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": []
+        },
+        {
+          "id": "teleport",
+          "name": "Teleport",
+          "slot": "move1",
+          "description": "Has the user instantly teleport to the designated location.\n\nThe user's next basic attack becomes a boosted attack.",
+          "cooldownSeconds": 5.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "moveType": "Dash",
+          "iconAsset": "/assets/skills/Solgaleo/Teleport.png",
+          "descriptionAdvanced": "The user instantly teleports to the designated location, and readies a boosted attack.",
+          "videoAsset": "/assets/skills/Solgaleo/Teleport.mp4"
+        },
+        {
+          "id": "iron-head",
+          "name": "Iron Head",
+          "slot": "move1",
+          "description": "Has the user charge in the designated direction, dealing damage and shoving opposing Pokémon with its steel-hard head. If this move is used again, the user leaps toward opposing Pokémon in front of itself, leaving them unable to act and dealing damage multiple times while restoring the user's HP.\n\nUpgrade (Level 9): Increases the duration opposing Pokémon are left unable to act.",
+          "cooldownSeconds": 6.5,
+          "damageInstances": [
+            {
+              "ratio": 0.98,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 294.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 0.65,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 195.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 2.6,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 780.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "iconAsset": "/assets/skills/Solgaleo/Iron+Head.png",
+          "isUpgrade": true,
+          "moveType": "Dash",
+          "upgradeLevel": 7,
+          "descriptionAdvanced": "The user charges in the designated direction, dealing damage and shoving opposing Pokémon for 0.5s. If the move hits, a follow up becomes available for 2s.\n\nWhen recast; the user leaps forward, an opposing Pokémon hit by the attack is barraged with 4 attacks, each stunning for 0.2s for up to a 0.8s duration, and restoring the user's health by 40% of the damage dealt. Against targets that cannot be stunned, only one instance of increased damage is dealt. This barrage will end early if the user inputs movement.\n\nUpgrade (Level 9): A fifth hit is added to the barrage, increasing the total stun duration to up to 1s. Against targets that cannot be stunned, the damage is increased.",
+          "videoAsset": "/assets/skills/Solgaleo/Iron+Head.mp4"
+        },
+        {
+          "id": "cosmic-power",
+          "name": "Cosmic Power",
+          "slot": "move2",
+          "description": "Has the user absorb mystical power from space, increasing Defense and Sp. Def for a short time. The user's next basic attack also becomes a boosted attack.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [],
+          "effects": [],
+          "tags": [
+            "buff"
+          ],
+          "moveType": "Buff",
+          "iconAsset": "/assets/skills/Solgaleo/Cosmic+Power.png",
+          "descriptionAdvanced": "Increases the user's Def and SpDef by 30% for 5s, and readies a boosted attack.",
+          "videoAsset": "/assets/skills/Solgaleo/Cosmic+Power.mp4"
+        },
+        {
+          "id": "psyshock",
+          "name": "Psyshock",
+          "slot": "move2",
+          "description": "Has the user charge power, then attack by materializing a mysterious psychic wave, dealing damage to opposing Pokémon and throwing them.\n\nWhile the user charges power, its movement speed is increased, damage received is reduced, and it initially becomes resistant to hindrances for a short time.\n\nWhen the psychic wave hits opposing Pokémon, the user can perform a follow-up attack.\n\nThe follow-up attack has the user slash in front of itself with sharp claws, dealing damage and applying a slowing effect to opposing Pokémon in the area of effect and restoring the user's HP.\n\nWhen this follow-up attack hits Pokémon from the opposing team, it can be used again once.\n\nUpgrade (Level 11): Increases the amount of HP restored by this move.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 1.1,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 330.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.21,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 363.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.32,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 396.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.43,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 429.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 0.68,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 204.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 0.7,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 210.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "area"
+          ],
+          "iconAsset": "/assets/skills/Solgaleo/Psyshock.png",
+          "isUpgrade": true,
+          "moveType": "Area",
+          "upgradeLevel": 7,
+          "descriptionAdvanced": "The user begins charging psyschic power for up to 4s granting 30% damage reduction, and becoming Hindrance Resistant for the first 2s. Additionally the user's movement speed is increased by 13%, further increasing by 13% every 0.5s to a max of 78% until the move ends. When the move is unleashed, damage is dealt in an area around the user increasing with charge level, and opposing Pokémon are thrown for 0.3/0.4/0.45/0.55s based on the charge level. If this move hits a follow up becomes available for 5s.\n\nWhen recast; the user slashes in the designated direction, dealing damage twice, applying a 40% slow for 3s, and healing the user. If this follow up hits, a second recast becomes available, performing the same attack.\n\nUpgrade (Level 11): Increases the healing of the claw swipes.",
+          "videoAsset": "/assets/skills/Solgaleo/Psyshock.mp4"
+        },
+        {
+          "id": "shining-meteor-crush",
+          "name": "Shining Meteor Crush",
+          "slot": "uniteMove",
+          "description": "Has the user unleash immense power and enter Radiant Sun phase, then jump up high and charge toward the designated Pokémon from the opposing team, dealing damage and ignoring the Defense and shield of opposing Pokémon in the area of effect.\n\nWhile in Radiant Sun phase, the user is able to see nearby Pokémon that are in stealth or hiding in tall grass. The user's moves, basic attacks, and boosted attacks also ignore opposing Pokémon's Defense and shield.\n\nWhen nearby ally Pokémon get knocked out, the Unite Move gauge charges.",
+          "cooldownSeconds": 112.0,
+          "damageInstances": [
+            {
+              "ratio": 2.2,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 660.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "sure hit"
+          ],
+          "moveType": "Sure Hit",
+          "iconAsset": "/assets/skills/Solgaleo/Shining+Meteor+Crush.png",
+          "descriptionAdvanced": "Solgaleo becomes Unstoppable and unleashes immense power, entering Radiant Sun phase, before charging towards the designated Pokémon and dealing damage in the area. Radiant Sun phase lasts 10s. Ally Pokémon who are KO'd nearby grant 10000 energy.\n\nWhile in Radiant Sun phase, Solagaleo can see hidden Pokémon, and Solgaleo's auto attacks and moves deal True type damage.",
+          "upgradeLevel": 7,
+          "videoAsset": "/assets/skills/Solgaleo/Shining+Meteor+Crush.mp4"
+        }
+      ],
+      "passiveAbility": {
+        "id": "full-metal-body",
+        "name": "Full Metal Body",
+        "description": "This Pokémon's Attack does not decrease when affected by opposing Pokémon's moves and Abilities.",
+        "effects": [],
+        "descriptionAdvanced": "Solgaleo's Attack stat cannot be lowered through debuffs.",
+        "iconAsset": "/assets/skills/Solgaleo/Full+Metal+Body.png"
+      },
+      "builds": [
+        {
+          "name": "Emissary of the Sun",
+          "emblemName": "Emissary of the Sun",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "razor-claw",
+            "muscle-band"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "031-nidoqueen",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "206-dunsparce",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "115-kangaskhan",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "235-smeargle",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Iron Head",
+            "Psyshock"
+          ]
+        },
+        {
+          "name": "The Beast That Devours The Sun",
+          "emblemName": "The Beast That Devours The Sun",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "razor-claw",
+            "aeos-cookie"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "028-sandslash",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "130-gyarados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "128-tauros",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "115-kangaskhan",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "141-kabutops",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Iron Head",
+            "Psyshock"
+          ]
+        },
+        {
+          "name": "Radiant Sun",
+          "emblemName": "Radiant Sun",
+          "lane": "Path Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "razor-claw",
+            "resonant-guard"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "031-nidoqueen",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "206-dunsparce",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "115-kangaskhan",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "235-smeargle",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Iron Head",
+            "Psyshock"
           ]
         }
       ]

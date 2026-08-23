@@ -332,6 +332,38 @@ def append_upgrade_from_advanced(basic: str, advanced: str) -> str:
     return f"{basic}\n\n{upgrade}" if basic else upgrade
 
 
+def resolve_playable_passive(skill: dict | None, pokemon_name: str = "") -> dict | None:
+    """Return the Passive skill the app should display for *pokemon_name*.
+
+    UNITE-DB stores pre-evolution Abilities as the Passive skill ``name`` and
+    later forms as ``passive2_name`` / ``passive3_name``. Solgaleo is played as
+    the final evolution for most of a match, so the tooltip must show Full
+    Metal Body rather than Cosmog's Unaware. Other Pokémon keep the raw skill
+    (existing Dragonite / Tyranitar display is unchanged).
+
+    When promoting Solgaleo's staged Ability, Basic ``description`` is cleared
+    so ``move_descriptions.json`` can supply in-game Basic text. Advanced uses
+    the staged ``passive3_description`` (or ``passive2_description``) only —
+    Unaware's ``rsb`` is not copied.
+    """
+    if skill is None:
+        return None
+    if slugify(pokemon_name) != "solgaleo":
+        return skill
+    final_name = (skill.get("passive3_name") or skill.get("passive2_name") or "").strip()
+    if not final_name:
+        return skill
+    staged_desc = (
+        skill.get("passive3_description") if skill.get("passive3_name") else skill.get("passive2_description")
+    ) or ""
+    staged_desc = staged_desc.strip()
+    out = dict(skill)
+    out["name"] = final_name
+    out["description"] = ""
+    out["rsb"] = {"true_desc": staged_desc} if staged_desc else {}
+    return out
+
+
 def passive_basic_desc(passive: dict | None, over: dict) -> str:
     """Resolve Basic-tier passive text: UNITE-DB description, then move_descriptions
     override, then Advanced (rsb.true_desc). Returns empty string when passive is None."""
@@ -562,7 +594,10 @@ def build_pokemon(pokemon_rows, stats_rows, pokedex_to_id: dict, descs: dict | N
             continue
         tags = p.get("tags") or {}
         skills = p.get("skills") or []
-        passive = next((s for s in skills if s.get("ability") == "Passive"), None)
+        passive = resolve_playable_passive(
+            next((s for s in skills if s.get("ability") == "Passive"), None),
+            name,
+        )
         moves = []
         for s in skills:
             slot = SLOT_MAP.get(s.get("ability", ""))

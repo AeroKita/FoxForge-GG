@@ -15,6 +15,7 @@ from normalize import (
     fix_spelling,
     fix_spelling_deep,
     passive_basic_desc,
+    resolve_playable_passive,
     reword_add_label,
     strip_activation_note,
 )
@@ -143,6 +144,61 @@ class TestPassiveBasicDesc(unittest.TestCase):
 
     def test_none_passive_returns_empty(self):
         self.assertEqual(passive_basic_desc(None, {}), "")
+
+
+class TestResolvePlayablePassive(unittest.TestCase):
+    """resolve_playable_passive picks Solgaleo's final-form Ability over Cosmog Unaware."""
+
+    _SOLGALEO = {
+        "ability": "Passive",
+        "name": "Unaware",
+        "description": "Reduces physical and special type damage by 30%.",
+        "passive2_name": "Sturdy",
+        "passive2_description": "The user has 30% damage reduction.",
+        "passive3_name": "Full Metal Body",
+        "passive3_description": "Solgaleo's Attack stat cannot be lowered through debuffs.",
+        "rsb": {"true_desc": "Unaware Advanced. Ignores 30% Atk and Sp. Atk."},
+    }
+
+    def test_none_passthrough(self):
+        self.assertIsNone(resolve_playable_passive(None, "Solgaleo"))
+
+    def test_other_pokemon_keeps_pre_evo_name(self):
+        skill = {
+            "name": "Guts",
+            "description": "Larvitar Attack increase.",
+            "passive3_name": "Sand Stream",
+            "passive3_description": "Summons a sandstorm.",
+            "rsb": {"true_desc": "Guts Advanced."},
+        }
+        out = resolve_playable_passive(skill, "Tyranitar")
+        self.assertIs(out, skill)
+        self.assertEqual(out["name"], "Guts")
+
+    def test_solgaleo_uses_passive3_name(self):
+        out = resolve_playable_passive(self._SOLGALEO, "Solgaleo")
+        self.assertEqual(out["name"], "Full Metal Body")
+
+    def test_solgaleo_blanks_description_for_archive_backfill(self):
+        out = resolve_playable_passive(self._SOLGALEO, "Solgaleo")
+        self.assertEqual(out["description"], "")
+        self.assertEqual(
+            passive_basic_desc(out, {"full metal body": "This Pokémon's Attack does not decrease."}),
+            "This Pokémon's Attack does not decrease.",
+        )
+
+    def test_solgaleo_advanced_uses_staged_text_not_unaware_rsb(self):
+        out = resolve_playable_passive(self._SOLGALEO, "Solgaleo")
+        self.assertEqual(
+            (out.get("rsb") or {}).get("true_desc"),
+            "Solgaleo's Attack stat cannot be lowered through debuffs.",
+        )
+        self.assertNotIn("Unaware Advanced", (out.get("rsb") or {}).get("true_desc") or "")
+
+    def test_solgaleo_without_staged_names_unchanged(self):
+        skill = {"name": "Unaware", "description": "Pre-evo only.", "rsb": {"true_desc": "Adv."}}
+        out = resolve_playable_passive(skill, "Solgaleo")
+        self.assertIs(out, skill)
 
 
 class TestBuildUpgradeMove(unittest.TestCase):

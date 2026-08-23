@@ -698,6 +698,13 @@
       "tackle": "/assets/skills/Snorlax/Tackle.mp4",
       "yawn": "/assets/skills/Snorlax/Yawn.mp4"
     },
+    "solgaleo": {
+      "cosmic-power": "/assets/skills/Solgaleo/Cosmic+Power.mp4",
+      "iron-head": "/assets/skills/Solgaleo/Iron+Head.mp4",
+      "psyshock": "/assets/skills/Solgaleo/Psyshock.mp4",
+      "shining-meteor-crush": "/assets/skills/Solgaleo/Shining+Meteor+Crush.mp4",
+      "teleport": "/assets/skills/Solgaleo/Teleport.mp4"
+    },
     "suicune": {
       "avalanche": "/assets/skills/Suicune/Avalanche.mp4",
       "endless-ice-spikes": "/assets/skills/Suicune/Endless+Ice+Spikes.mp4",

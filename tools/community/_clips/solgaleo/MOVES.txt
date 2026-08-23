@@ -1,0 +1,9 @@
+Solgaleo  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves + optional Passive.
+
+  full-metal-body.mp4            →  Full Metal Body                 [Passive]
+  teleport.mp4                   →  Teleport                        [Move 1 · Base]
+  iron-head.mp4                  →  Iron Head (Lv 7)                [Move 1 · Final]
+  cosmic-power.mp4               →  Cosmic Power                    [Move 2 · Base]
+  psyshock.mp4                   →  Psyshock (Lv 7)                 [Move 2 · Final]
+  shining-meteor-crush.mp4       →  Shining Meteor Crush            [Unite · Unite]

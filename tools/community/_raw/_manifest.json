@@ -1,16 +1,16 @@
 {
   "source": "https://unite-db.com",
-  "fetched": "2026-08-08",
+  "fetched": "2026-08-23",
   "files": {
     "pokemon": {
       "url": "https://unite-db.com/pokemon.json",
-      "bytes": 3060394,
-      "count": 98
+      "bytes": 3087014,
+      "count": 99
     },
     "stats": {
       "url": "https://unite-db.com/stats.json",
-      "bytes": 249207,
-      "count": 98
+      "bytes": 251749,
+      "count": 99
     },
     "held_items": {
       "url": "https://unite-db.com/held_items.json",
