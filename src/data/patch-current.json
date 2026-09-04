@@ -1,11 +1,11 @@
 {
   "patchVersion": "1.23.3.13",
-  "lastUpdated": "2026-08-23",
+  "lastUpdated": "2026-09-04",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-08-23"
+    "fetched": "2026-09-04"
   },
   "pokemon": [
     {
@@ -25993,7 +25993,8 @@
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
           "moves": [
-            "Dragon Breath"
+            "Dragon Breath",
+            "Waterfall"
           ]
         },
         {
@@ -26051,7 +26052,8 @@
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
           "moves": [
-            "Dragon Breath"
+            "Dragon Breath",
+            "Waterfall"
           ]
         }
       ]
@@ -34807,7 +34809,7 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user hurls a gold coin at the designated Pokémon, dealing damage, slowing down the target by 30% for 1.5s, and dropping a gold coin.\n\n2 uses can be kept in reserve, picking up a gold coin reduces the cooldown of a use by 4s.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
+          "descriptionAdvanced": "The user applies a coin mark on opposing Pokémon they hit with this attack, the coin mark has up to 5 stacks and lasts for 5s. The user hurls a gold coin at the designated Pokémon, dealing damage, slowing down the target by 30% for 1.5s, and dropping a gold coin.\n\n2 uses can be kept in reserve, picking up a gold coin reduces the cooldown of a use by 4s.\n\nUpgrade (Level 11): Increases the damage dealt by this move.",
           "videoAsset": "/assets/skills/Meowth/Pay+Day.mp4"
         },
         {
@@ -49674,7 +49676,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user begins charging psyschic power for up to 4s granting 30% damage reduction, and becoming Hindrance Resistant for the first 2s. Additionally the user's movement speed is increased by 13%, further increasing by 13% every 0.5s to a max of 78% until the move ends. When the move is unleashed, damage is dealt in an area around the user increasing with charge level, and opposing Pokémon are thrown for 0.3/0.4/0.45/0.55s based on the charge level. If this move hits a follow up becomes available for 5s.\n\nWhen recast; the user slashes in the designated direction, dealing damage twice, applying a 40% slow for 3s, and healing the user. If this follow up hits, a second recast becomes available, performing the same attack.\n\nUpgrade (Level 11): Increases the healing of the claw swipes.",
+          "descriptionAdvanced": "The user begins charging psychic power for up to 4s, granting 30% damage reduction and becoming Hindrance Resistant for the first 2s. Additionally, the user's movement speed is increased by 13%, further increasing by 13% every 0.5s to a max of 78% until the move ends. When the move is unleashed, damage is dealt in an area around the user, increasing with charge level, and opposing Pokémon are thrown for 0.3/0.4/0.45/0.55s based on the charge level. If this move hits a follow up becomes available for 5s.\n\nWhen recast; the user slashes in the designated direction, dealing damage twice, applying a 40% slow for 3s, and healing the user. If this follow up hits, a second recast becomes available, performing the same attack.\n\nUpgrade (Level 11): Increases the healing of the claw swipes.",
           "videoAsset": "/assets/skills/Solgaleo/Psyshock.mp4"
         },
         {
