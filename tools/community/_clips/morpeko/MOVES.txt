@@ -1,0 +1,9 @@
+Morpeko  —  drop each file here as <move-id>.mp4
+Scope: Base + Final + Unite moves + optional Passive.
+
+  hunger-switch.mp4              →  Hunger Switch                   [Passive]
+  thunder-shock.mp4              →  Thunder Shock                   [Move 1 · Base]
+  spark.mp4                      →  Spark (Lv 5)                    [Move 1 · Final]
+  power-trip.mp4                 →  Power Trip                      [Move 2 · Base]
+  assurance.mp4                  →  Assurance (Lv 7)                [Move 2 · Final]
+  hungry-supercharge-wheel.mp4   →  Hungry Supercharge Wheel        [Unite · Unite]

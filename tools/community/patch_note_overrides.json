@@ -1,6 +1,43 @@
 {
-  "_source": "https://community.pokemon.com/en-us/discussion/24939/enduring-formation-part-2-patch-notes",
-  "_patch": "Enduring Formation [Part 2] — live 2026-07-16 07:00 UTC",
-  "_note": "Interim patch-note deltas layered onto pre-patch UNITE-DB raw data by normalize.py. Every entry has a guard (expect*/find) equal to the PRE-patch value; once UNITE-DB ships post-patch data the guard stops matching and the entry expires (skipped with a notice). Prune expired entries when the post-patch data-refresh PR lands. All Enduring Formation Part 2 overrides were pruned 2026-07-18 after UNITE-DB shipped post-patch data (0 applied / 19 expired on refresh).",
-  "overrides": []
+  "_source": "https://www.pokemonunite.jp/en/topics/battle/20260902-1/",
+  "_patch": "Drive to Victory — 1.24.1.3 (official notes labeled 1.24.1.1, live 2026-09-03 04:00 UTC)",
+  "_note": "Interim patch-note deltas layered onto pre-patch UNITE-DB raw data by normalize.py. Every entry has a guard (expect*/find) equal to the PRE-patch value; once UNITE-DB ships post-patch data the guard stops matching and the entry expires (skipped with a notice). Prune expired entries when the post-patch data-refresh PR lands.",
+  "overrides": [
+    {
+      "kind": "replaceText",
+      "pokemon": "crustle",
+      "move": "rock-tomb",
+      "fields": ["descriptionAdvanced"],
+      "find": "for 2s",
+      "replace": "for 3s",
+      "why": "official Drive to Victory Rock Tomb slow 2s → 3s while UNITE-DB Advanced still says 2s"
+    },
+    {
+      "kind": "replaceText",
+      "pokemon": "sylveon",
+      "move": "draining-kiss",
+      "fields": ["descriptionAdvanced"],
+      "find": "0.5s If",
+      "replace": "0.5s. If",
+      "why": "UNITE-DB Advanced Draining Kiss is missing the period after 0.5s"
+    },
+    {
+      "kind": "replaceText",
+      "pokemon": "sylveon",
+      "move": "draining-kiss",
+      "fields": ["description"],
+      "find": "restore  HP",
+      "replace": "restore HP",
+      "why": "UNITE-DB Basic Draining Kiss has a double space before HP"
+    },
+    {
+      "kind": "replaceText",
+      "pokemon": "sylveon",
+      "move": "calm-mind",
+      "fields": ["description"],
+      "find": "nulliffied",
+      "replace": "nullified",
+      "why": "UNITE-DB Basic Calm Mind misspells nullified; archive fix cannot overwrite non-blank Basic"
+    }
+  ]
 }

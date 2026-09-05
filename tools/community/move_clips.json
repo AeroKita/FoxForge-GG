@@ -554,6 +554,13 @@
       "sky-attack": "/assets/skills/Moltres/Sky+Attack.mp4",
       "wing-attack": "/assets/skills/Moltres/Wing+Attack.mp4"
     },
+    "morpeko": {
+      "assurance": "/assets/skills/Morpeko/Assurance.mp4",
+      "hungry-supercharge-wheel": "/assets/skills/Morpeko/Hungry+Supercharge+Wheel.mp4",
+      "power-trip": "/assets/skills/Morpeko/Power+Trip.mp4",
+      "spark": "/assets/skills/Morpeko/Spark.mp4",
+      "thunder-shock": "/assets/skills/Morpeko/Thunder+Shock.mp4"
+    },
     "mr-mime": {
       "barrier": "/assets/skills/Mr.Mime/Barrier.mp4",
       "confusion": "/assets/skills/Mr.Mime/Confusion.mp4",

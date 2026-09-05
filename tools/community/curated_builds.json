@@ -1721,6 +1721,50 @@
       }
     ]
   },
+  "morpeko": {
+    "builds": [
+      {
+        "name": "Full Belly Mode",
+        "emblemName": "Full Belly Mode",
+        "lane": "Center Damage",
+        "heldItemIds": ["attack-weight", "razor-claw", "muscle-band"],
+        "battleItemId": "full-heal",
+        "emblems": [
+          { "emblemId": "057-primeape", "grade": "gold" },
+          { "emblemId": "068-machamp", "grade": "gold" },
+          { "emblemId": "105-marowak", "grade": "gold" },
+          { "emblemId": "250-ho-oh", "grade": "gold" },
+          { "emblemId": "142-aerodactyl", "grade": "bronze" },
+          { "emblemId": "130-gyarados", "grade": "gold" },
+          { "emblemId": "022-fearow", "grade": "gold" },
+          { "emblemId": "141-kabutops", "grade": "gold" },
+          { "emblemId": "018-pidgeot", "grade": "gold" },
+          { "emblemId": "128-tauros", "grade": "gold" }
+        ],
+        "moves": ["Spark", "Assurance"]
+      },
+      {
+        "name": "Hangry Mode",
+        "emblemName": "Hangry Mode",
+        "lane": "Center Damage",
+        "heldItemIds": ["attack-weight", "razor-claw", "accel-bracer"],
+        "battleItemId": "full-heal",
+        "emblems": [
+          { "emblemId": "028-sandslash", "grade": "gold" },
+          { "emblemId": "068-machamp", "grade": "gold" },
+          { "emblemId": "105-marowak", "grade": "gold" },
+          { "emblemId": "250-ho-oh", "grade": "gold" },
+          { "emblemId": "142-aerodactyl", "grade": "gold" },
+          { "emblemId": "130-gyarados", "grade": "gold" },
+          { "emblemId": "022-fearow", "grade": "gold" },
+          { "emblemId": "128-tauros", "grade": "gold" },
+          { "emblemId": "115-kangaskhan", "grade": "gold" },
+          { "emblemId": "141-kabutops", "grade": "gold" }
+        ],
+        "moves": ["Spark", "Assurance"]
+      }
+    ]
+  },
   "zapdos": {
     "builds": [
       {

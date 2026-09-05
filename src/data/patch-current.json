@@ -1,11 +1,11 @@
 {
-  "patchVersion": "1.23.3.13",
-  "lastUpdated": "2026-08-23",
+  "patchVersion": "1.24.1.3",
+  "lastUpdated": "2026-09-05",
   "dataSource": {
     "provider": "UNITE-DB",
     "url": "https://unite-db.com",
     "note": "Community-sourced (APK bundles encrypted; see tools/extract/ENCRYPTION-FINDINGS.md). Held-item values span grades 1–40 (in-game max 40). Percentages stored as decimals.",
-    "fetched": "2026-08-23"
+    "fetched": "2026-09-05"
   },
   "pokemon": [
     {
@@ -2982,7 +2982,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user fires a slow traveling beam of icy cold energy in the designated direction, dealing damage to opposing Pokémon and slowing them by 30% for 2.5s.\n\nIf the target has at least 1 stack of the freeze counter, they will become frozen consuming the counter. If the target is already frozen the move instead deals increased damage.\n\nUpgrade (Level 13): Increases the freeze duration to 2s when opponents are frozen by the move.",
+          "descriptionAdvanced": "The user fires a slow traveling beam of icy cold energy in the designated direction, dealing damage to opposing Pokémon and slowing them by 40% for 2.5s.\n\nIf the target has at least 1 stack of the freeze counter, they will become frozen consuming the counter. If the target is already frozen the move instead deals increased damage.\n\nUpgrade (Level 13): Increases the freeze duration to 2s when opponents are frozen by the move.",
           "videoAsset": "/assets/skills/Articuno/Ice+Beam.mp4"
         },
         {
@@ -2993,10 +2993,10 @@
           "cooldownSeconds": 100.0,
           "damageInstances": [
             {
-              "ratio": 0.68,
+              "ratio": 0.748,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 340.0,
+              "base": 374.0,
               "damageType": "special"
             }
           ],
@@ -3006,7 +3006,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.png",
-          "descriptionAdvanced": "The user becomes Unstoppable and immobile, summoning a raging blizzard centered on themself, dealing damage in 5 waves. The second wave deals 5% more damage, third 10%, fourth 15%, and the fifth deals 100% more damage.\n\nIce Chunk: 9000 HP, 0 Def and SpDef. Unaffected by some status effects and damage over time.\n\nIf the move hits an ally goal zone, a chunk of ice forms on the zone, blocking movement and scoring. The goal zone still provides healing and shielding by standing at the edge of it. This chunk of ice will remain until it is destroyed.",
+          "descriptionAdvanced": "The user becomes Unstoppable and immobile, summoning a raging blizzard centered on themself, dealing damage in 5 waves. The second wave deals 5% more damage, third 10%, fourth 15%, and the fifth deals 100% more damage.\n\nIce Chunk: 10,000 HP, 0 Def and SpDef. Unaffected by some status effects and damage over time.\n\nIf the move hits an ally goal zone, a chunk of ice forms on the zone, blocking movement and scoring. The goal zone still provides healing and shielding by standing at the edge of it. This chunk of ice will remain until it is destroyed.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Articuno/Ice+Wing+Whiteout.mp4"
         }
@@ -5964,7 +5964,7 @@
           "name": "Superpower",
           "slot": "move2",
           "description": "Consumes the entire muscle gauge and has the user run in the designated direction and grab an opposing Pokémon. The user then slams the opposing Pokémon down on the ground at full strength, dealing damage to opposing Pokémon in the area of effect. The damage dealt by this move and the shield effect it grants increases the more muscle gauge increments are consumed.\n\nUpgrade (Level 11): Reduces the cooldown of this move by 3s when the user's muscle gauge reaches maximum.",
-          "cooldownSeconds": 8.0,
+          "cooldownSeconds": 7.5,
           "damageInstances": [
             {
               "ratio": 0.69,
@@ -10701,7 +10701,7 @@
           "name": "Sweet Kiss",
           "slot": "move1",
           "description": "When the user is not attached to an ally Pokémon, it attaches itself to the designated ally Pokémon and grants it a shield. When the user is attached to an ally Pokémon, it charges power before making opposing Pokémon in the area of effect infatuated. Infatuated Pokémon approach the user against their will. The longer power is charged, the larger the area of effect; and the more flowers that are consumed, the longer Pokémon are infatuated. If the user releases, it will stop being attached and move in the designated direction.\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 50% for 2s while charging power.",
-          "cooldownSeconds": 6.0,
+          "cooldownSeconds": 7.0,
           "damageInstances": [
             {
               "ratio": 0.8045,
@@ -10719,7 +10719,7 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "If detached: attaches to the designated ally Pokémon and grants them a Triage shield effect; adds additional shield value to the Triage shield effect with Sweet Kiss.\n\nCharm duration: 0.6s + 0.1s per flower\n\nIf attached to an ally Pokémon: charges power for up to 2.5s, reaching maximum charge after 1.5s; then infatuates opposing Pokémon in the area of effect when released for a minimum of 0.6s. Increases the range of this move with charging. Infatuated Pokémon are unable to act and approach the user against their will. Infatuates opposing Pokémon hit for an additional 0.1s for each flower that is consumed (up to an additional 0.8s with 8 flowers; maximum 1.4s). (Note: it is impossible to use Sweet Kiss with fewer than 2 flowers due to the rate of gaining flowers and the cooldown reduction cap.)\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 50% for 2s while charging power.",
+          "descriptionAdvanced": "If detached: attaches to the designated ally Pokémon and grants them a Triage shield effect; adds additional shield value to the Triage shield effect with Sweet Kiss.\n\nCharm duration: 0.6s + 0.1s per flower\n\nIf attached to an ally Pokémon: charges power for up to 2.5s, reaching maximum charge after 1.5s; then infatuates opposing Pokémon in the area of effect when released for a minimum of 0.2s. Increases the range of this move with charging. Infatuated Pokémon are unable to act and approach the user against their will. Infatuates opposing Pokémon hit for an additional 0.1s for each flower that is consumed (up to an additional 0.8s with 8 flowers; maximum 1.4s). (Note: it is impossible to use Sweet Kiss with fewer than 2 flowers due to the rate of gaining flowers and the cooldown reduction cap.)\n\nUpgrade (Level 10): While attached: increases the movement speed of the ally Pokémon by 50% for 2s while charging power.",
           "videoAsset": "/assets/skills/Comfey/Sweet+Kiss.mp4"
         },
         {
@@ -10854,7 +10854,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Comfey/Flowery+Fields+Forever.png",
-          "descriptionAdvanced": "Briefly becomes unstoppable and creates a large area of tall grass around their location for 6s. Pokémon in this tall grass cannot be seen, just as with other tall grass on the map. Restores the HP of teammates in this Unite Move's tall grass every 0.5s.\n\nEmpowered Sweet Kiss: Increases infatuation base duration by 1.3s\n\nGains special flowers from this tall grass, which grant access to an empowered use of Floral Healing or Sweet Kiss.",
+          "descriptionAdvanced": "Briefly becomes unstoppable and creates a large area of tall grass around their location for 6s. Pokémon in this tall grass cannot be seen, just as with other tall grass on the map. Restores the HP of teammates in this Unite Move's tall grass every 0.5s.\n\nEmpowered Sweet Kiss: Increases infatuation base duration by 1.4s\n\nGains special flowers from this tall grass, which grant access to an empowered use of Floral Healing or Sweet Kiss.",
           "upgradeLevel": 8,
           "videoAsset": "/assets/skills/Comfey/Flowery+Fields+Forever.mp4"
         }
@@ -12008,7 +12008,7 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "The user splits open the ground in a line towards the designated location, damaging opposing Pokémon in the path and decreasing their movement speed by 60% for 2s. A curved wall of rock is then created at the designated location that remains for up to 3s. When the wall of rock is created or destroyed, opposing Pokémon near the wall are damaged and their movement speed is decreased by 60% for 2s.\n\nThe user can use this move again to destroy the wall of rock early.\n\nUpgrade (Level 11): Strengthens the movement speed decrease from this move to 80%.",
+          "descriptionAdvanced": "The user splits open the ground in a line towards the designated location, damaging opposing Pokémon in the path and decreasing their movement speed by 60% for 3s. A curved wall of rock is then created at the designated location that remains for up to 3s. When the wall of rock is created or destroyed, opposing Pokémon near the wall are damaged and their movement speed is decreased by 60% for 3s.\n\nThe user can use this move again to destroy the wall of rock early.\n\nUpgrade (Level 11): Strengthens the movement speed decrease from this move to 80%.",
           "videoAsset": "/assets/skills/Crustle/Rock+Tomb.mp4"
         },
         {
@@ -12124,7 +12124,7 @@
           "name": "Rubble Rouser",
           "slot": "uniteMove",
           "description": "Gain a shield for a short time and leave nearby enemies unable to act, dealing damage over time to them. If the user receives damage while this move is in effect, the move deals additional hits to nearby enemies.",
-          "cooldownSeconds": 134.0,
+          "cooldownSeconds": 123.0,
           "damageInstances": [
             {
               "ratio": 1.6,
@@ -15165,17 +15165,17 @@
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
-              "ratio": 0.7879999999999999,
+              "ratio": 0.851,
               "scalingStat": "attack",
               "slider": 2.0,
-              "base": 72.0,
+              "base": 78.0,
               "damageType": "physical"
             },
             {
-              "ratio": 0.7879999999999999,
+              "ratio": 0.851,
               "scalingStat": "attack",
               "slider": 2.0,
-              "base": 72.0,
+              "base": 78.0,
               "damageType": "physical"
             }
           ],
@@ -15237,7 +15237,7 @@
           "name": "Jump Kick",
           "slot": "move2",
           "description": "Dodrio leaps forward while kicking. If this move makes contact with an enemy or obstacle, Dodrio leaps over it and stomps the ground when landing, dealing damage to enemies in the area-of-effect and decreases their movement speed for a short time and the sprint gauge charges. If this move makes contact with an enemy, this move's cooldown is reduced.\n\nUpgrade (Level 13): When stomping the ground after leaping, enemies in the area are also left unable to act.",
-          "cooldownSeconds": 6.5,
+          "cooldownSeconds": 6.0,
           "damageInstances": [
             {
               "ratio": 0.66,
@@ -15270,7 +15270,7 @@
           "name": "Triple Trample",
           "slot": "uniteMove",
           "description": "Dodrio runs to a designated location. While running, Dodrio is immune to hindrances. If Dodrio makes contact with an enemy while running, they are dealt damage and thrown into the air. When Dodrio arrives at the designated location, Dodrio gains increased Attack for a short time, is granted a shield, and the sprint gauge charges faster for a short time.",
-          "cooldownSeconds": 134.0,
+          "cooldownSeconds": 123.0,
           "damageInstances": [
             {
               "ratio": 1.73,
@@ -16833,7 +16833,7 @@
           "name": "Flash Cannon",
           "slot": "move1",
           "description": "Duraludon ruptures the ground around themself and in a designated direction; dealing damage to enemies in the area of effect and decreasing their movement speed by 50% for 1s. Afterward, go into \"Cannon Mode\" rooting Duraludon for 6s or if a basic attack is not made for 2.5s or this move can be cancelled early. While in Cannon Mode, basic attacks have longer range, attack speed is increased by 100% but decays by 20% per second over 5 seconds, dealing increased damage and splash damage. Exiting \"Cannon mode\" will prematurely remove the attack speed buff. Metal Claw, Stealth Rock, Dragon Tail, and boosted attacks can be used while in this mode and boosted attacks decrease the movement speed of enemies hit by 60% for 1s and also pierce.\n\nUpgrade (Level 11): Enemies in the ruptured ground's area of effect are also unable to act for 1s.",
-          "cooldownSeconds": 5.0,
+          "cooldownSeconds": 6.0,
           "damageInstances": [
             {
               "ratio": 0.58,
@@ -16981,7 +16981,7 @@
           "name": "Revolving Ruin",
           "slot": "uniteMove",
           "description": "Fire a beam of light at the ground in a sweeping circle around Duraludon. If this beam hits an enemy, it deals damage to them, grants Duraludon a shield and increases their Attack by 8% for a short time. Both the shield effect and the Attack increase are strengthened for each enemy that is hit by the beam. Damage is dealt to any enemy in the area of effect after the beam of light is fired. A burning ring is also left where the beam of light touched the ground, and enemies that touch this ring take additional damage and have their movement speed decreased by 50% for 1s refreshing as damage continus to be taken from the burning ground.",
-          "cooldownSeconds": 112.0,
+          "cooldownSeconds": 123.0,
           "damageInstances": [
             {
               "ratio": 1.63,
@@ -20102,10 +20102,10 @@
           "cooldownSeconds": 4.0,
           "damageInstances": [
             {
-              "ratio": 2.208,
+              "ratio": 1.9869999999999999,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 662.0,
+              "base": 596.0,
               "damageType": "physical"
             },
             {
@@ -20163,7 +20163,7 @@
           "name": "Waterfall",
           "slot": "move2",
           "description": "Has the user storm in the designated direction, dealing damage to opposing Pokémon and granting the user a shield effect. When this move hits opposing Pokémon, its effect differs depending on the distance stormed. If the distance was under a certain amount, the Pokémon are left unable to act. If the distance was over a certain amount, the Pokémon are thrown.\n\nUpgrade (Level 13): The point blank hit will now throw opposing Pokémon for 0.45s.",
-          "cooldownSeconds": 6.5,
+          "cooldownSeconds": 7.5,
           "damageInstances": [
             {
               "ratio": 1.7,
@@ -20187,10 +20187,10 @@
               "damageType": "physical"
             },
             {
-              "ratio": 2.4,
+              "ratio": 2.04,
               "scalingStat": "attack",
               "slider": 0.0,
-              "base": 720.0,
+              "base": 612.0,
               "damageType": "physical"
             }
           ],
@@ -20605,7 +20605,7 @@
           "name": "Dragon Rush",
           "slot": "move1",
           "description": "Back up to create distance before diving to attack in the designated direction, shoving enemies. The user can use Dragon Claw while creating distance at the start of this move to create a combo attack. (This move can crit).\n\nUpgrade (Level 11): Decreases the movement speed of enemies for a short time when they are shoved the maximum distance.",
-          "cooldownSeconds": 5.5,
+          "cooldownSeconds": 6.0,
           "damageInstances": [
             {
               "ratio": 1.21,
@@ -20688,7 +20688,7 @@
           "name": "Dragon Claw",
           "slot": "move2",
           "description": "Attack twice in front of itself using its claws. The first attack deals damage to enemies and throws them. The second attack deals increased damage. After the move ends, basic attack speed is increased for a short time. (This move can crit).\n\nUpgrade (Level 13): Increase damage dealt.",
-          "cooldownSeconds": 4.0,
+          "cooldownSeconds": 5.0,
           "damageInstances": [
             {
               "ratio": 0.8,
@@ -23524,9 +23524,9 @@
         {
           "hp": 3135.0,
           "attack": 174.0,
-          "defense": 85.0,
+          "defense": 84.0,
           "spAttack": 22.0,
-          "spDefense": 69.0,
+          "spDefense": 68.0,
           "critRate": 0.0,
           "cdr": 0.0,
           "lifesteal": 0.0,
@@ -23537,9 +23537,9 @@
         {
           "hp": 3290.0,
           "attack": 178.0,
-          "defense": 97.0,
+          "defense": 95.0,
           "spAttack": 24.0,
-          "spDefense": 79.0,
+          "spDefense": 77.0,
           "critRate": 0.0,
           "cdr": 0.0,
           "lifesteal": 0.0,
@@ -23550,9 +23550,9 @@
         {
           "hp": 3469.0,
           "attack": 183.0,
-          "defense": 111.0,
+          "defense": 108.0,
           "spAttack": 27.0,
-          "spDefense": 91.0,
+          "spDefense": 88.0,
           "critRate": 0.0,
           "cdr": 0.0,
           "lifesteal": 0.0,
@@ -23563,9 +23563,9 @@
         {
           "hp": 4285.0,
           "attack": 206.0,
-          "defense": 173.0,
+          "defense": 165.0,
           "spAttack": 40.0,
-          "spDefense": 144.0,
+          "spDefense": 136.0,
           "critRate": 0.0,
           "cdr": 0.05,
           "lifesteal": 0.0,
@@ -23576,9 +23576,9 @@
         {
           "hp": 4522.0,
           "attack": 213.0,
-          "defense": 191.0,
+          "defense": 181.0,
           "spAttack": 44.0,
-          "spDefense": 159.0,
+          "spDefense": 150.0,
           "critRate": 0.0,
           "cdr": 0.05,
           "lifesteal": 0.0,
@@ -23589,9 +23589,9 @@
         {
           "hp": 4794.0,
           "attack": 221.0,
-          "defense": 212.0,
+          "defense": 200.0,
           "spAttack": 48.0,
-          "spDefense": 177.0,
+          "spDefense": 166.0,
           "critRate": 0.0,
           "cdr": 0.05,
           "lifesteal": 0.0,
@@ -23602,9 +23602,9 @@
         {
           "hp": 5107.0,
           "attack": 230.0,
-          "defense": 236.0,
+          "defense": 222.0,
           "spAttack": 53.0,
-          "spDefense": 198.0,
+          "spDefense": 184.0,
           "critRate": 0.0,
           "cdr": 0.05,
           "lifesteal": 0.0,
@@ -23615,9 +23615,9 @@
         {
           "hp": 5467.0,
           "attack": 240.0,
-          "defense": 263.0,
+          "defense": 247.0,
           "spAttack": 59.0,
-          "spDefense": 222.0,
+          "spDefense": 206.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23628,9 +23628,9 @@
         {
           "hp": 5882.0,
           "attack": 252.0,
-          "defense": 295.0,
+          "defense": 276.0,
           "spAttack": 66.0,
-          "spDefense": 249.0,
+          "spDefense": 230.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23641,9 +23641,9 @@
         {
           "hp": 6359.0,
           "attack": 266.0,
-          "defense": 331.0,
+          "defense": 309.0,
           "spAttack": 74.0,
-          "spDefense": 280.0,
+          "spDefense": 258.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23654,9 +23654,9 @@
         {
           "hp": 6908.0,
           "attack": 282.0,
-          "defense": 373.0,
+          "defense": 347.0,
           "spAttack": 83.0,
-          "spDefense": 316.0,
+          "spDefense": 291.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23667,9 +23667,9 @@
         {
           "hp": 7539.0,
           "attack": 300.0,
-          "defense": 421.0,
+          "defense": 391.0,
           "spAttack": 93.0,
-          "spDefense": 357.0,
+          "spDefense": 328.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23680,9 +23680,9 @@
         {
           "hp": 8265.0,
           "attack": 321.0,
-          "defense": 476.0,
+          "defense": 442.0,
           "spAttack": 104.0,
-          "spDefense": 405.0,
+          "spDefense": 371.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23693,9 +23693,9 @@
         {
           "hp": 9099.0,
           "attack": 345.0,
-          "defense": 540.0,
+          "defense": 500.0,
           "spAttack": 117.0,
-          "spDefense": 460.0,
+          "spDefense": 420.0,
           "critRate": 0.0,
           "cdr": 0.1,
           "lifesteal": 0.0,
@@ -23865,7 +23865,7 @@
           "name": "Berry Belly Flop",
           "slot": "uniteMove",
           "description": "Greedent eats a berry to recover HP and then leaps to the designated area, dealing damage and throwing enemies within the area of effect. Greedent then eats a special berry, allowing an unlimited amount of berries to be stored for a short time and resets cooldowns of all moves.",
-          "cooldownSeconds": 100.0,
+          "cooldownSeconds": 112.0,
           "damageInstances": [
             {
               "ratio": 2.41,
@@ -25993,7 +25993,8 @@
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
           "moves": [
-            "Dragon Breath"
+            "Dragon Breath",
+            "Waterfall"
           ]
         },
         {
@@ -26051,7 +26052,8 @@
           "battleItemId": "eject-button",
           "battleItemOptional": "potion",
           "moves": [
-            "Dragon Breath"
+            "Dragon Breath",
+            "Waterfall"
           ]
         }
       ]
@@ -37298,10 +37300,10 @@
           "cooldownSeconds": 0.0,
           "damageInstances": [
             {
-              "ratio": 0.43,
+              "ratio": 0.473,
               "scalingStat": "spAttack",
               "slider": 4.0,
-              "base": 80.0,
+              "base": 88.0,
               "damageType": "special"
             }
           ],
@@ -39019,7 +39021,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user dashes in the designated direction, dealing damage along the path. Each hit increases the user's Def and SpDef by 8% for 4s, stacking up to 5 times.\n\nUpgrade (Level 13): Grants a shield on a successful hit for 3s.",
+          "descriptionAdvanced": "The user dashes in the designated direction, dealing damage along the path. Each hit increases the user's Def and SpDef by 10% for 4s, stacking up to 5 times.\n\nUpgrade (Level 13): Grants a shield on a successful hit for 3s.",
           "videoAsset": "/assets/skills/Moltres/Sky+Attack.mp4"
         },
         {
@@ -39080,10 +39082,10 @@
           "cooldownSeconds": 112.0,
           "damageInstances": [
             {
-              "ratio": 1.4,
+              "ratio": 1.54,
               "scalingStat": "spAttack",
-              "slider": 10.0,
-              "base": 700.0,
+              "slider": 11.0,
+              "base": 770.0,
               "damageType": "special"
             }
           ],
@@ -39162,6 +39164,509 @@
           "moves": [
             "Sky Attack",
             "Heat Wave"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "morpeko",
+      "displayName": "Morpeko",
+      "role": "Speedster",
+      "attackType": "physical",
+      "difficulty": 2,
+      "imageAsset": "/assets/pokemon/portrait/Morpeko.png",
+      "iconAsset": "/assets/pokemon/thumbnail/Morpeko.png",
+      "evolutions": [
+        {
+          "level": 1,
+          "formName": "Morpeko"
+        }
+      ],
+      "baseStatsByLevel": [
+        {
+          "hp": 3300.0,
+          "attack": 188.0,
+          "defense": 70.0,
+          "spAttack": 20.0,
+          "spDefense": 70.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3425.0,
+          "attack": 206.0,
+          "defense": 78.0,
+          "spAttack": 23.0,
+          "spDefense": 78.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1107,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3563.0,
+          "attack": 225.0,
+          "defense": 86.0,
+          "spAttack": 27.0,
+          "spDefense": 86.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1225,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3714.0,
+          "attack": 246.0,
+          "defense": 95.0,
+          "spAttack": 31.0,
+          "spDefense": 95.0,
+          "critRate": 0.0,
+          "cdr": 0.0,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1355,
+          "moveSpeed": 3700.0
+        },
+        {
+          "hp": 3880.0,
+          "attack": 269.0,
+          "defense": 105.0,
+          "spAttack": 36.0,
+          "spDefense": 105.0,
+          "critRate": 0.05,
+          "cdr": 0.1,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1497,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4063.0,
+          "attack": 295.0,
+          "defense": 116.0,
+          "spAttack": 41.0,
+          "spDefense": 116.0,
+          "critRate": 0.05,
+          "cdr": 0.1,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1654,
+          "moveSpeed": 3850.0
+        },
+        {
+          "hp": 4265.0,
+          "attack": 323.0,
+          "defense": 128.0,
+          "spAttack": 46.0,
+          "spDefense": 128.0,
+          "critRate": 0.05,
+          "cdr": 0.1,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.1827,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 4487.0,
+          "attack": 354.0,
+          "defense": 141.0,
+          "spAttack": 53.0,
+          "spDefense": 141.0,
+          "critRate": 0.05,
+          "cdr": 0.1,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.20170000000000002,
+          "moveSpeed": 4000.0
+        },
+        {
+          "hp": 4730.0,
+          "attack": 388.0,
+          "defense": 156.0,
+          "spAttack": 59.0,
+          "spDefense": 156.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.22260000000000002,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 4999.0,
+          "attack": 426.0,
+          "defense": 172.0,
+          "spAttack": 67.0,
+          "spDefense": 172.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.24559999999999998,
+          "moveSpeed": 4150.0
+        },
+        {
+          "hp": 5293.0,
+          "attack": 467.0,
+          "defense": 190.0,
+          "spAttack": 75.0,
+          "spDefense": 190.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2709,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 5618.0,
+          "attack": 512.0,
+          "defense": 209.0,
+          "spAttack": 84.0,
+          "spDefense": 209.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.2987,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 5975.0,
+          "attack": 563.0,
+          "defense": 231.0,
+          "spAttack": 93.0,
+          "spDefense": 231.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3293,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6368.0,
+          "attack": 617.0,
+          "defense": 254.0,
+          "spAttack": 104.0,
+          "spDefense": 254.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.3629,
+          "moveSpeed": 4300.0
+        },
+        {
+          "hp": 6800.0,
+          "attack": 678.0,
+          "defense": 280.0,
+          "spAttack": 116.0,
+          "spDefense": 280.0,
+          "critRate": 0.1,
+          "cdr": 0.2,
+          "lifesteal": 0.0,
+          "spLifesteal": 0.0,
+          "attackSpeed": 0.4,
+          "moveSpeed": 4300.0
+        }
+      ],
+      "moves": [
+        {
+          "id": "attack",
+          "name": "Attack",
+          "slot": "basicAttack",
+          "description": "",
+          "cooldownSeconds": 0.0,
+          "damageInstances": [
+            {
+              "ratio": 1.0,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 0.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [],
+          "descriptionAdvanced": "The user punches at opposing Pokémon, becoming a boosted attack every third attack, increasing the user's movement speed by 50% for 2s, decaying by 10% every 0.5s, when it lands."
+        },
+        {
+          "id": "thunder-shock",
+          "name": "Thunder Shock",
+          "slot": "move1",
+          "description": "Has the user attack the designated opposing Pokémon and nearby opposing Pokémon with a jolt of electricity, dealing damage and leaving them paralyzed for a short time.",
+          "cooldownSeconds": 6.0,
+          "damageInstances": [
+            {
+              "ratio": 0.95,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 380.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "sure hit"
+          ],
+          "moveType": "Sure Hit",
+          "iconAsset": "/assets/skills/Morpeko/Thunder+Shock.png",
+          "descriptionAdvanced": "The user attacks the designated target with a jolt of electricity, dealing damage in a small area and paralyzing opponents for 1s. This paralysis lowers movement speed by 30% and attack speed by a flat 10%.",
+          "videoAsset": "/assets/skills/Morpeko/Thunder+Shock.mp4"
+        },
+        {
+          "id": "spark",
+          "name": "Spark",
+          "slot": "move1",
+          "description": "Has the user attack the designated opposing Pokémon by unleashing a spark of electricity, dealing damage, applying a bolt mark, and leaving them paralyzed for a short time.\n\nFull Belly Mode: After unleashing a spark of electricity, for a short time, the user can perform a follow-up attack. The follow-up attack will have the user leap at the designated opposing Pokémon, dealing damage to them and nearby opposing Pokémon.\n\nWhen a follow-up attack is used, this move's cooldown is slightly reduced.\n\nHangry Mode: Applies a bolt mark to the opposing Pokémon hit by this move.\n\nUpgrade (Level 11): The user is granted a shield effect during the follow-up attack in Full Belly Mode.",
+          "cooldownSeconds": 7.0,
+          "damageInstances": [
+            {
+              "ratio": 1.7,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 360.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 1.71,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 684.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "sure hit"
+          ],
+          "iconAsset": "/assets/skills/Morpeko/Spark.png",
+          "isUpgrade": true,
+          "moveType": "Sure Hit",
+          "upgradeLevel": 5,
+          "descriptionAdvanced": "The user attacks the designated target with a spark, marking the designated target with a bolt mark for 5s, dealing damage in a small area, and paralyzing opponents for 4s. This paralysis lowers movement speed by 30% and attack speed by a flat 10%.\n\nWhile in Full Belly mode: The move's cooldown is lowered by 50% of the max cooldown, and a recast becomes available for 2.5s. When recast the user charges towards the marked Pokémon and deals increased damage in an area. While in Hangry mode: all opposing Pokémon that were damaged are also marked.\n\nUpgrade (Level 11): When the recast is used, the user gains a shield for 6s.",
+          "videoAsset": "/assets/skills/Morpeko/Spark.mp4"
+        },
+        {
+          "id": "power-trip",
+          "name": "Power Trip",
+          "slot": "move2",
+          "description": "Has the user charge in the designated direction, dealing damage to opposing Pokémon. The user's next basic attack becomes a boosted attack.",
+          "cooldownSeconds": 5.0,
+          "damageInstances": [
+            {
+              "ratio": 1.1,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 440.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "moveType": "Dash",
+          "iconAsset": "/assets/skills/Morpeko/Power+Trip.png",
+          "descriptionAdvanced": "The user charges in the designated direction, dealing damage and readying a boosted attack.",
+          "videoAsset": "/assets/skills/Morpeko/Power+Trip.mp4"
+        },
+        {
+          "id": "assurance",
+          "name": "Assurance",
+          "slot": "move2",
+          "description": "Has the user charge in the designated direction and deal damage to opposing Pokémon.\n\nAdditional damage is dealt to opposing Pokémon paralyzed by the user.\n\nHangry Mode: When opposing Pokémon with a bolt mark are hit, the mark is consumed and this move's cooldown is reset.\n\nUpgrade (Level 13): If this move hits, the next basic attack becomes a boosted attack and is guaranteed to be a critical hit.",
+          "cooldownSeconds": 5.0,
+          "damageInstances": [
+            {
+              "ratio": 1.8,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 720.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 0.6,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 240.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "iconAsset": "/assets/skills/Morpeko/Assurance.png",
+          "isUpgrade": true,
+          "moveType": "Dash",
+          "upgradeLevel": 7,
+          "descriptionAdvanced": "The user charges in the designated direction, dealing damage. Additional damage is dealt if the target was paralyzed by the user.\n\nWhile in Hangry mode: If this move hits a Pokémon with a bolt mark, the cooldown is reset and the mark is consumed.\n\nUpgrade (Level 13): When this move is used, the user readies a guaranteed critical hit boosted attack.",
+          "videoAsset": "/assets/skills/Morpeko/Assurance.mp4"
+        },
+        {
+          "id": "hungry-supercharge-wheel",
+          "name": "Hungry Supercharge Wheel",
+          "slot": "uniteMove",
+          "description": "Has the user attack by unleashing the energy stored in its cheeks and driving an electric wheel in the designated direction.\n\nFull Belly Mode: Has the user deal damage to opposing Pokémon it hits, leaving them paralyzed for a short time and unable to act.\n\nHangry Mode: Has the user deal increased damage to opposing Pokémon it hits, applying a bolt mark and leaving them unable to act for a short time.",
+          "cooldownSeconds": 100.0,
+          "damageInstances": [
+            {
+              "ratio": 2.6,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 1040.0,
+              "damageType": "physical"
+            },
+            {
+              "ratio": 2.6,
+              "scalingStat": "attack",
+              "slider": 0.0,
+              "base": 1200.0,
+              "damageType": "physical"
+            }
+          ],
+          "effects": [],
+          "tags": [
+            "dash"
+          ],
+          "moveType": "Dash",
+          "iconAsset": "/assets/skills/Morpeko/Hungry+Supercharge+Wheel.png",
+          "descriptionAdvanced": "The user becomes unstoppable and attacks by charging with an electric wheel in the designated direction, dealing damage and stunning opposing Pokémon for 1s.\n\nWhile in Full Belly mode: the move also paralyzes opposing Pokémon hit for 4s. This paralysis lowers movement speed by 30% and attack speed by 10%. While in Hangry mode: this move deals increased damage and marks opposing Pokémon hit with a bolt mark for 5s.",
+          "upgradeLevel": 9,
+          "videoAsset": "/assets/skills/Morpeko/Hungry+Supercharge+Wheel.mp4"
+        }
+      ],
+      "passiveAbility": {
+        "id": "hunger-switch",
+        "name": "Hunger Switch",
+        "description": "This Pokémon's form and move effects change depending on its fullness gauge.\n\nWhen the Pokémon changes form, its move cooldowns are reset. Eating Berries will also increase the Pokémon's fullness gauge.\n\nFull Belly Mode: Upon entering this form, the Pokémon recovers some of its HP. The fullness gauge will decrease over time and whenever the Pokémon uses moves. When the gauge reaches zero, the Pokémon goes berserk and enters Hangry Mode.\n\nHangry Mode: Upon entering this form, the Pokémon applies a fear effect to nearby opposing Pokémon, and its movement speed is slightly increased. The fullness gauge will increase over time, and when the Pokémon is full, it will eat the seeds stored in its pocket-like pouches to enter Full Belly Mode.",
+        "effects": [],
+        "descriptionAdvanced": "Morpeko changes form based on the hunger meter. When the meter reaches 0, the user transforms into Hangry mode. When the meter reaches 6, the user transforms into Full Belly mode.\n\nWhen transforming into Full Belly mode: the cooldowns of Thundershock and Spark are reset, and the user restores some health. While in Full Belly mode, the hunger meter decreases every 12s or when a move is used. When transforming into Hangry mode: the cooldowns of Power Trip and Assurance are reset, and the user inflicts fear onto nearby opposing Pokémon for 1s. While in Hangry mode, the user gains 20% movemenr speed, and the hunger meter increases every 3s. Eating berries increases the hunger meter by 1 in either form.",
+        "iconAsset": "/assets/skills/Morpeko/Hunger+Switch.png"
+      },
+      "builds": [
+        {
+          "name": "Full Belly Mode",
+          "emblemName": "Full Belly Mode",
+          "lane": "Center Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "razor-claw",
+            "muscle-band"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "057-primeape",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "bronze"
+            },
+            {
+              "emblemId": "130-gyarados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "141-kabutops",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "018-pidgeot",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "128-tauros",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Spark",
+            "Assurance"
+          ]
+        },
+        {
+          "name": "Hangry Mode",
+          "emblemName": "Hangry Mode",
+          "lane": "Center Damage",
+          "heldItemIds": [
+            "attack-weight",
+            "razor-claw",
+            "accel-bracer"
+          ],
+          "battleItemId": "full-heal",
+          "emblems": [
+            {
+              "emblemId": "028-sandslash",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "068-machamp",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "105-marowak",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "250-ho-oh",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "142-aerodactyl",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "130-gyarados",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "022-fearow",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "128-tauros",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "115-kangaskhan",
+              "grade": "gold"
+            },
+            {
+              "emblemId": "141-kabutops",
+              "grade": "gold"
+            }
+          ],
+          "moves": [
+            "Spark",
+            "Assurance"
           ]
         }
       ]
@@ -40103,10 +40608,10 @@
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
-              "ratio": 0.4,
+              "ratio": 0.44,
               "scalingStat": "spAttack",
-              "slider": 9.0,
-              "base": 208.0,
+              "slider": 10.0,
+              "base": 229.0,
               "damageType": "special"
             }
           ],
@@ -41426,7 +41931,7 @@
           "id": "zip-zap-full-charge-spark",
           "name": "Zip Zap Full-Charge Spark",
           "slot": "uniteMove",
-          "description": "Has the user charge toward the designated Pokémon from the opposing team and discarge electricity sotred in the user's fluffy fur, dealing damage to the Pokémon and nearby opposing Pokémon. After using this Unite Move, the user loses all the electricity stored in its fluffy fur and enters Fighter Mode for a set amount of time. The Unite Move gauge will only charge when the user's basic attacks and moves hit Pokémon from the opposing team. Fighter Mode: Basic atack and move effects change, and the Unite Move gauge does not charge.",
+          "description": "Has the user charge toward the designated Pokémon from the opposing team and discharge electricity stored in the user's fluffy fur, dealing damage to the Pokémon and nearby opposing Pokémon. After using this Unite Move, the user loses all the electricity stored in its fluffy fur and enters Fighter Mode for a set amount of time. The Unite Move gauge will only charge when the user's basic attacks and moves hit Pokémon from the opposing team. Fighter Mode: Basic attack and move effects change, and the Unite Move gauge does not charge.",
           "cooldownSeconds": 0.0,
           "damageInstances": [
             {
@@ -44818,7 +45323,7 @@
           ],
           "effects": [],
           "tags": [],
-          "descriptionAdvanced": "The user spits flame at the target dealing damage. Becomes a boosted attack every third attack or after a move, dealing increased damage in an area.\n\nWhen a boosted attack hits, the current charge of Flames That Bring Lightning is reduced by 15% of its remaining cooldown."
+          "descriptionAdvanced": "The user spits flame at the target dealing damage. Becomes a boosted attack every third attack or after a move, dealing increased damage in an area.\n\nWhen a boosted attack hits, the current charge of Flames That Bring Lightning is reduced by 10% of its remaining cooldown."
         },
         {
           "id": "dragon-breath",
@@ -44852,17 +45357,17 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 1.1,
+              "ratio": 0.99,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 700.0,
+              "base": 630.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.11,
+              "ratio": 0.099,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 70.0,
+              "base": 63.0,
               "damageType": "special"
             }
           ],
@@ -44927,17 +45432,17 @@
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
-              "ratio": 1.0,
+              "ratio": 0.9,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 500.0,
+              "base": 450.0,
               "damageType": "special"
             },
             {
-              "ratio": 0.6,
+              "ratio": 0.54,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 300.0,
+              "base": 270.0,
               "damageType": "special"
             }
           ],
@@ -49674,7 +50179,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "The user begins charging psyschic power for up to 4s granting 30% damage reduction, and becoming Hindrance Resistant for the first 2s. Additionally the user's movement speed is increased by 13%, further increasing by 13% every 0.5s to a max of 78% until the move ends. When the move is unleashed, damage is dealt in an area around the user increasing with charge level, and opposing Pokémon are thrown for 0.3/0.4/0.45/0.55s based on the charge level. If this move hits a follow up becomes available for 5s.\n\nWhen recast; the user slashes in the designated direction, dealing damage twice, applying a 40% slow for 3s, and healing the user. If this follow up hits, a second recast becomes available, performing the same attack.\n\nUpgrade (Level 11): Increases the healing of the claw swipes.",
+          "descriptionAdvanced": "The user begins charging psychic power for up to 4s, granting 30% damage reduction and becoming Hindrance Resistant for the first 2s. Additionally, the user's movement speed is increased by 13%, further increasing by 13% every 0.5s to a max of 78% until the move ends. When the move is unleashed, damage is dealt in an area around the user, increasing with charge level, and opposing Pokémon are thrown for 0.3/0.4/0.45/0.55s based on the charge level. If this move hits, a follow up becomes available for 5s. If the move is fully charged until it wears off, the cooldown of the move is instead 5s.\n\nWhen recast; the user slashes in the designated direction, dealing damage twice, applying a 40% slow for 3s, and healing the user. If this follow up hits, a second recast becomes available, performing the same attack.\n\nUpgrade (Level 11): Increases the healing of the claw swipes.",
           "videoAsset": "/assets/skills/Solgaleo/Psyshock.mp4"
         },
         {
@@ -50144,7 +50649,7 @@
           "id": "whirlpool",
           "name": "Whirlpool",
           "slot": "move1",
-          "description": "Has the user generate a vortex of water at the designated location, dealing damage to opposing Pokémon, puilling them toward its center, and leaving them drenched. If this move is used again, the vortex is moved in the designated dirction, flooding the area it passes through.\n\nUpgrade (Level 11): Reduces this move's cooldown by 1s.",
+          "description": "Has the user generate a vortex of water at the designated location, dealing damage to opposing Pokémon, pulling them toward its center, and leaving them drenched. If this move is used again, the vortex is moved in the designated direction, flooding the area it passes through.\n\nUpgrade (Level 11): Reduces this move's cooldown by 1s.",
           "cooldownSeconds": 8.0,
           "damageInstances": [
             {
@@ -50905,7 +51410,7 @@
           "id": "draining-kiss",
           "name": "Draining Kiss",
           "slot": "move2",
-          "description": "Blow a kiss at an enemy that goes back and forth between Sylveon and the target multiple times. When the kiss touches Sylveon, restore  HP. When it hits the enemy, deal damage and decrease their movement speed for a short time. If Sylveon and the enemy move too far away from each other, the kiss will disappear faster than normal.\n\nUpgrade (Level 12): Increases the amount of HP this move restores.",
+          "description": "Blow a kiss at an enemy that goes back and forth between Sylveon and the target multiple times. When the kiss touches Sylveon, restore HP. When it hits the enemy, deal damage and decrease their movement speed for a short time. If Sylveon and the enemy move too far away from each other, the kiss will disappear faster than normal.\n\nUpgrade (Level 12): Increases the amount of HP this move restores.",
           "cooldownSeconds": 9.0,
           "damageInstances": [
             {
@@ -50931,14 +51436,14 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Blow a kiss at an enemy that goes back and forth between Sylveon and the target multiple times. When the kiss touches Sylveon, restore HP. When it hits the enemy, deal damage and decrease their movement speed by 50% for 1s on each kiss hit. This movement speed decrease decays by 15% after 0.5s If Sylveon and the enemy move too far away from each other, the kiss will disappear. The closer Sylveon and the target is, the faster the damage and healing occur.\n\nUpgrade (Level 12): Increased healing.",
+          "descriptionAdvanced": "Blow a kiss at an enemy that goes back and forth between Sylveon and the target multiple times. When the kiss touches Sylveon, restore HP. When it hits the enemy, deal damage and decrease their movement speed by 50% for 1s on each kiss hit. This movement speed decrease decays by 15% after 0.5s. If Sylveon and the enemy move too far away from each other, the kiss will disappear. The closer Sylveon and the target is, the faster the damage and healing occur.\n\nUpgrade (Level 12): Increased healing.",
           "videoAsset": "/assets/skills/Sylveon/Draining+Kiss.mp4"
         },
         {
           "id": "calm-mind",
           "name": "Calm Mind",
           "slot": "move2",
-          "description": "Sylveon quietly focuses their mind and calms their spirit, increasing movement speed, Sp. Attack by 40% and Sp. Defense by 10% for a short time.\n\nUpgrade (Level 12): One time only while using this move, if Sylveon is hit by an Enemy's move, the damage is completely nulliffied and Sylveon is granted a shield.",
+          "description": "Sylveon quietly focuses their mind and calms their spirit, increasing movement speed, Sp. Attack by 40% and Sp. Defense by 10% for a short time.\n\nUpgrade (Level 12): One time only while using this move, if Sylveon is hit by an Enemy's move, the damage is completely nullified and Sylveon is granted a shield.",
           "cooldownSeconds": 8.0,
           "damageInstances": [],
           "effects": [],
@@ -52132,7 +52637,7 @@
           "id": "ice-hammer",
           "name": "Ice Hammer",
           "slot": "move2",
-          "description": "Has the user leap in the designated direction and swing down ites freezing hammer, dealing damage, applying a slowing effect to opposing Pokémon in the area of effect and decreasing their Attack and Sp. Atk for a short time.\n\nUpgrade (Level 11): Strengthens the Attack decrease of opposing Pokémon hit to 50% and the Sp. Atk decrease to 30%.",
+          "description": "Has the user leap in the designated direction and swing down its freezing hammer, dealing damage, applying a slowing effect to opposing Pokémon in the area of effect and decreasing their Attack and Sp. Atk for a short time.\n\nUpgrade (Level 11): Strengthens the Attack decrease of opposing Pokémon hit to 50% and the Sp. Atk decrease to 30%.",
           "cooldownSeconds": 5.0,
           "damageInstances": [
             {
@@ -56833,7 +57338,8 @@
           "name": "Flip Splash",
           "heldItemIds": [
             "energy-amplifier",
-            "buddy-barrier"
+            "buddy-barrier",
+            "resonant-guard"
           ],
           "emblems": [
             {
@@ -58420,10 +58926,10 @@
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
-              "ratio": 2.44,
+              "ratio": 2.318,
               "scalingStat": "spAttack",
               "slider": 0.0,
-              "base": 684.0,
+              "base": 650.0,
               "damageType": "special"
             }
           ],
@@ -58540,7 +59046,7 @@
         "name": "Dark Aura",
         "description": "When the Pokémon deals damage to opposing Pokémon with a boosted attack, a move, or its Unite Move, the hit Pokémon's destruction counter increases. The higher the hit Pokémon's destruction counter, the more damage it receives.\n\nWhen Pokémon from the opposing team have a maxed destruction counter and take damage from this Pokémon's moves, they are immediately knocked out if their HP drops below a certain percentage.\n\nWhen this Pokémon immediately knocks out a Pokémon from the opposing team, its own HP is restored. If the Pokémon exceeds its max HP, a set percentage is converted into a shield effect.",
         "effects": [],
-        "descriptionAdvanced": "When this Pokémon deals damage with boosted attacks or moves, a mark of destruction is applied onto opposing Pokémon. This mark lasts 3s and stacks up to 5 times, increasing Yveltal's damage towards the marked Pokémon by 3% per stack.\n\nWhen Yveltal hits a Pokémon on the opposing team with a move or boosted attack, if that Pokémon has 5 marks of destruction and is below 10% Max HP, Yveltal will additionally deal 40% of that Pokémon's Max HP as true damage (Effectively 46% Max HP due to the required 5 marks of destruction). Pokémon KO'd by this damage will heal Yveltal, any healing exceeding the user's Max HP will be converted into a shield for 3s, at a 50% conversion rate.",
+        "descriptionAdvanced": "When this Pokémon deals damage with boosted attacks or moves, a mark of destruction is applied onto opposing Pokémon. This mark lasts 3s and stacks up to 5 times, increasing Yveltal's damage towards the marked Pokémon by 2% per stack.\n\nWhen Yveltal hits a Pokémon on the opposing team with a move or boosted attack, if that Pokémon has 5 marks of destruction and is below 10% Max HP, Yveltal will additionally deal 40% of that Pokémon's Max HP as true damage (Effectively 44% Max HP due to the required 5 marks of destruction). Pokémon KO'd by this damage will heal Yveltal, any healing exceeding the user's Max HP will be converted into a shield for 3s, at a 50% conversion rate.",
         "iconAsset": "/assets/skills/Yveltal/Dark+Aura.png"
       },
       "builds": [
