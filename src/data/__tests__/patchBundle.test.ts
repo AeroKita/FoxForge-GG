@@ -148,6 +148,54 @@ describe("community data bundle", () => {
         ).toBeGreaterThan(0);
       }
     });
+
+    it("does not ship known UNITE-DB prose misspellings or broken sentences", () => {
+      const banned = [
+        "movemenr",
+        "oppposing",
+        "intial",
+        "deacrease",
+        "damge",
+        "attakck",
+        "nulliffied",
+        "Thundershock",
+        "shadoww",
+        "isnide",
+        "speeed",
+        "hitos",
+        "pases",
+        "can the be",
+        "the project deals",
+        "damage-over time",
+        "5s This field",
+        "0.6s,  There",
+        "0.6s, There",
+      ];
+      const texts: string[] = [];
+      for (const p of bundle.pokemon) {
+        for (const m of p.moves) {
+          if (m.description) texts.push(`${p.id}/${m.id} description: ${m.description}`);
+          if (m.descriptionAdvanced) {
+            texts.push(`${p.id}/${m.id} descriptionAdvanced: ${m.descriptionAdvanced}`);
+          }
+        }
+        const pa = p.passiveAbility;
+        if (pa.description) texts.push(`${p.id}/${pa.id} description: ${pa.description}`);
+        if (pa.descriptionAdvanced) {
+          texts.push(`${p.id}/${pa.id} descriptionAdvanced: ${pa.descriptionAdvanced}`);
+        }
+      }
+      for (const item of [...bundle.heldItems, ...(bundle.battleItems ?? [])]) {
+        if (item.description) texts.push(`${item.id} description: ${item.description}`);
+      }
+      for (const bad of banned) {
+        const hit = texts.find((t) => t.includes(bad));
+        expect(
+          hit,
+          `banned fragment ${JSON.stringify(bad)} still in ${hit ?? "bundle"}`,
+        ).toBeUndefined();
+      }
+    });
   });
 
   // Curated-merge regression guard: normalize.py must keep hand-curated emblemName labels.

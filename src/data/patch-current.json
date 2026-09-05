@@ -1792,7 +1792,7 @@
           "isUpgrade": true,
           "moveType": "Debuff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Launch a sweet scent at a designated location, dealing damage to opposing Pokémon in the area and lowering their movement speed by 30%, decaying by 10% every 0.5s. The outer ring of the scent remains for 3s, dealing damage, applying a 100% slow lasting 0.5s to oppposing Pokémon who touch the ring. Both the intial area and outer ring can hit at the same time. Increases the Sweet Gauge by 2 for every hit.\n\nUpgrade (Level 12): Increases the duration of the outer ring slow to 1.5s.",
+          "descriptionAdvanced": "Launch a sweet scent at a designated location, dealing damage to opposing Pokémon in the area and lowering their movement speed by 30%, decaying by 10% every 0.5s. The outer ring of the scent remains for 3s, dealing damage, applying a 100% slow lasting 0.5s to opposing Pokémon who touch the ring. Both the initial area and outer ring can hit at the same time. Increases the Sweet Gauge by 2 for every hit.\n\nUpgrade (Level 12): Increases the duration of the outer ring slow to 1.5s.",
           "videoAsset": "/assets/skills/Alcremie/Sweet+Scent.mp4"
         },
         {
@@ -4782,7 +4782,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Fire a ball of focused energy in the designated direction. The ball of focused energy explodes upon hitting an enemy or after traveling a set distance, dealing damage to enemies  in the explosion's area-of-effect and decreasing their movement speed by 35% for 2s.\n\nUpgrade (Level 13): Increases the movement speed decrease to 60%.",
+          "descriptionAdvanced": "Fire a ball of focused energy in the designated direction. The ball of focused energy explodes upon hitting an enemy or after traveling a set distance, dealing damage to enemies in the explosion's area-of-effect and decreasing their movement speed by 35% for 2s.\n\nUpgrade (Level 13): Increases the movement speed decrease to 60%.",
           "videoAsset": "/assets/skills/Blaziken/Focus+Blast.mp4"
         },
         {
@@ -7337,7 +7337,7 @@
           "isUpgrade": true,
           "moveType": "Area",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Create a zone of mysterious power and mirages of floating furniture.  Pokémon that come in contact with a mirage take damage.  Pokémon that come in contact with a mirage or the edge of the zone are slowed by 65% decaying to a 40% slow over 1s. Then the 40% slow lingers for an additional second.\n\nUpgrade (Level 13): Increases the slow to 80% for 1s decaying to 50% for 1s.",
+          "descriptionAdvanced": "Create a zone of mysterious power and mirages of floating furniture. Pokémon that come in contact with a mirage take damage. Pokémon that come in contact with a mirage or the edge of the zone are slowed by 65% decaying to a 40% slow over 1s. Then the 40% slow lingers for an additional second.\n\nUpgrade (Level 13): Increases the slow to 80% for 1s decaying to 50% for 1s.",
           "videoAsset": "/assets/skills/Chandelure/Poltergeist.mp4"
         },
         {
@@ -12734,7 +12734,7 @@
           "id": "dark-pulse",
           "name": "Dark Pulse",
           "slot": "move2",
-          "description": "Has the user hide in a circle of shadow and creates six additional circles of shadow around itself. While the circles of shadoww are active, the user can move between them freely. When this move is used again, the user appears from the designated circle of shadow and releases a horrible aura imbued with ill intent, dealing damage to opposing Pokémon it hits. While the user is hiding in a circle of shadow, it can use Shadow Claw to attack with claws from that shadow and deal damage to opposing Pokémon it hits.\n\nUpgrade (Level 13): Dealing damage with this move causes Darkrai to gain a shield for 2.5 seconds.",
+          "description": "Has the user hide in a circle of shadow and creates six additional circles of shadow around itself. While the circles of shadow are active, the user can move between them freely. When this move is used again, the user appears from the designated circle of shadow and releases a horrible aura imbued with ill intent, dealing damage to opposing Pokémon it hits. While the user is hiding in a circle of shadow, it can use Shadow Claw to attack with claws from that shadow and deal damage to opposing Pokémon it hits.\n\nUpgrade (Level 13): Dealing damage with this move causes Darkrai to gain a shield for 2.5 seconds.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -12760,7 +12760,7 @@
           "id": "worst-nightmare",
           "name": "Worst Nightmare",
           "slot": "uniteMove",
-          "description": "Has the user send the designated opposing Pokémon into a nightmare. The user then suddenly appears in the nightmare. When the user deals damage to the opposing Pokémon isnide the nightmare, damage is also dealt to that same opposing Pokémon outside of the nightmare. When this move is used, all the user's move cooldowns are reset.",
+          "description": "Has the user send the designated opposing Pokémon into a nightmare. The user then suddenly appears in the nightmare. When the user deals damage to the opposing Pokémon inside the nightmare, damage is also dealt to that same opposing Pokémon outside of the nightmare. When this move is used, all the user's move cooldowns are reset.",
           "cooldownSeconds": 100.0,
           "damageInstances": [],
           "effects": [],
@@ -12777,9 +12777,9 @@
       "passiveAbility": {
         "id": "bad-dreams",
         "name": "Bad Dreams",
-        "description": "When an enemy is forcibly put to sleep near Darkrai, Darkrai deals damage to the target and gains a boosted attack. When Darkrai uses this boosted, every enemy that has been marked with bad dreams in the last 2.7s is attacked simultaneously.  Sleeping enemies near Darkrai take damage over time, and Darkrai deals 10% more damage to them while they remain asleep. Damage from this Ability doesn't wake up sleeping enemies.",
+        "description": "When an enemy is forcibly put to sleep near Darkrai, Darkrai deals damage to the target and gains a boosted attack. When Darkrai uses this boosted, every enemy that has been marked with bad dreams in the last 2.7s is attacked simultaneously. Sleeping enemies near Darkrai take damage over time, and Darkrai deals 10% more damage to them while they remain asleep. Damage from this Ability doesn't wake up sleeping enemies.",
         "effects": [],
-        "descriptionAdvanced": "When an enemy is forcibly put to sleep near Darkrai, Darkrai deals damage to the target and gains a boosted attack. When Darkrai uses this boosted, every enemy that has been marked with bad dreams in the last 2.7s is attacked simultaneously.  Sleeping enemies near Darkrai take damage over time, and Darkrai deals 10% more damage to them while they remain asleep. Damage from this Ability doesn't wake up sleeping enemies.\n\nDamage over time: 2% max HP every 0.5s",
+        "descriptionAdvanced": "When an enemy is forcibly put to sleep near Darkrai, Darkrai deals damage to the target and gains a boosted attack. When Darkrai uses this boosted, every enemy that has been marked with bad dreams in the last 2.7s is attacked simultaneously. Sleeping enemies near Darkrai take damage over time, and Darkrai deals 10% more damage to them while they remain asleep. Damage from this Ability doesn't wake up sleeping enemies.\n\nDamage over time: 2% max HP every 0.5s",
         "iconAsset": "/assets/skills/Darkrai/Bad+Dreams.png"
       },
       "builds": [
@@ -13326,7 +13326,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Summons whirling razor leaves.  While active, Decidueye's auto attack is replaced by a new auto attack that targets up to 2 additional enemies in range, as well as increasing Attack by 10% and auto attack speed. This buff lasts for 5.5s.",
+          "descriptionAdvanced": "Summons whirling razor leaves. While active, Decidueye's auto attack is replaced by a new auto attack that targets up to 2 additional enemies in range, as well as increasing Attack by 10% and auto attack speed. This buff lasts for 5.5s.",
           "videoAsset": "/assets/skills/Decidueye/Razor+Leaf.mp4"
         },
         {
@@ -15114,7 +15114,7 @@
           "id": "tri-attack",
           "name": "Tri Attack",
           "slot": "move1",
-          "description": "Dodrio attacks with their beaks in a cone in front of themself, dealing damage to enemies and applying one of the following random effects to enemies hit: decrease Attack and deal damage-over-time for a set amount of time, deacrease auto attack speed, or decrease movement speed. When the sprint gauge is full, Dodrio instead shoots out 3 projectiles in a designated direction. If a projectile hits an enemy, the project deals damage and applies one of the aforementioned effects based on its color. After this move is used, Dodrio's next auto attack deals additional damage and restores HP. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nUpgrade (Level 11): When the sprint gauge is full, this move's cooldown is reduced.",
+          "description": "Dodrio attacks with their beaks in a cone in front of themself, dealing damage to enemies and applying one of the following random effects to enemies hit: decrease Attack and deal damage-over-time for a set amount of time, decrease auto attack speed, or decrease movement speed. When the sprint gauge is full, Dodrio instead shoots out 3 projectiles in a designated direction. If a projectile hits an enemy, the projectile deals damage and applies one of the aforementioned effects based on its color. After this move is used, Dodrio's next auto attack deals additional damage and restores HP. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nUpgrade (Level 11): When the sprint gauge is full, this move's cooldown is reduced.",
           "cooldownSeconds": 6.0,
           "damageInstances": [
             {
@@ -15154,7 +15154,7 @@
           "isUpgrade": true,
           "moveType": "Melee",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dodrio attacks with their beaks in a cone in front of themself, dealing damage to enemies and applying one of the following random effects to enemies hit: Burn, Paralyze, or Freeze. When the sprint gauge is full, Dodrio instead shoots out 3 projectiles in the facing direction. If a projectile hits an enemy, the projectile deals damage but only the first projectile of random colour/type applies one of the following enhanced random effects to enemies hit: Burn, Paralyze, or Freeze corresponding to the colour/type. After this move is used, Dodrio's next basic attack deals additional damage and restores HP. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nBasic attack: Also heals Dodrio for 7% max HP.\n\nBurn: 8% Attack decrease for 2s, 12% Attack decrease if Sprint empowered. Paralyze: 8% Attack Speed decrease and 10% Movement speeed decrease for 2s, 12% Attack Speed decrease and 15% Movement speed decrease if Sprint empowered. Freeze: 20% Movement speed decrease for 2s, 40% if Sprint empowered.\n\nUpgrade (Level 11): The next auto attack gains additional healing by 3% of max HP. When using full sprint gauge attack the charge time for this move is additionally reduced by 1s.",
+          "descriptionAdvanced": "Dodrio attacks with their beaks in a cone in front of themself, dealing damage to enemies and applying one of the following random effects to enemies hit: Burn, Paralyze, or Freeze. When the sprint gauge is full, Dodrio instead shoots out 3 projectiles in the facing direction. If a projectile hits an enemy, the projectile deals damage but only the first projectile of random colour/type applies one of the following enhanced random effects to enemies hit: Burn, Paralyze, or Freeze corresponding to the colour/type. After this move is used, Dodrio's next basic attack deals additional damage and restores HP. Holds 2 uses in reserve and cannot be used more than once every 1s.\n\nBasic attack: Also heals Dodrio for 7% max HP.\n\nBurn: 8% Attack decrease for 2s, 12% Attack decrease if Sprint empowered. Paralyze: 8% Attack Speed decrease and 10% Movement speed decrease for 2s, 12% Attack Speed decrease and 15% Movement speed decrease if Sprint empowered. Freeze: 20% Movement speed decrease for 2s, 40% if Sprint empowered.\n\nUpgrade (Level 11): The next auto attack gains additional healing by 3% of max HP. When using full sprint gauge attack the charge time for this move is additionally reduced by 1s.",
           "videoAsset": "/assets/skills/Dodrio/Tri+Attack.mp4"
         },
         {
@@ -15854,7 +15854,7 @@
           "id": "phantom-force",
           "name": "Phantom Force",
           "slot": "move2",
-          "description": "For a short time, increases the user's movement speed and enters stealth. While the user is in stealth, the boosted basic attakck gauge increases. When stealth ends, Dragapult's basic attack speed is increased for a short time. After this move is learned, if the user knocks out an enemy, this move's cooldown is reset and Dragapult's Attack is increased by 6 until the end of battle. This Attack increase can stack up to 8 times.\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.5s when the user deals damage to enemies with basic attacks.",
+          "description": "For a short time, increases the user's movement speed and enters stealth. While the user is in stealth, the boosted basic attack gauge increases. When stealth ends, Dragapult's basic attack speed is increased for a short time. After this move is learned, if the user knocks out an enemy, this move's cooldown is reset and Dragapult's Attack is increased by 6 until the end of battle. This Attack increase can stack up to 8 times.\n\nUpgrade (Level 11): Reduces this move's cooldown by 0.5s when the user deals damage to enemies with basic attacks.",
           "cooldownSeconds": 12.0,
           "damageInstances": [],
           "effects": [],
@@ -16316,7 +16316,7 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Dash toward the designated enemy, damaging and slowing all enemies in a small radius around the target upon impact by 50% for 2s, throwing the primary target and shoving others away.  Using this move resets the cooldown of Multiscale.\n\nUpgrade (Level 11): If Dragonite's movement speed is currently decreased when this move is used, that movement speed decrease is negated before the move is used.",
+          "descriptionAdvanced": "Dash toward the designated enemy, damaging and slowing all enemies in a small radius around the target upon impact by 50% for 2s, throwing the primary target and shoving others away. Using this move resets the cooldown of Multiscale.\n\nUpgrade (Level 11): If Dragonite's movement speed is currently decreased when this move is used, that movement speed decrease is negated before the move is used.",
           "videoAsset": "/assets/skills/Dragonite/Extreme+Speed.mp4"
         },
         {
@@ -16347,7 +16347,7 @@
           "id": "hyper-beam",
           "name": "Hyper Beam",
           "slot": "move2",
-          "description": "Fires a beam of energy toward the targeted enemy after a delay, dealing damage to all enemies that it hits, as well as additional damage based on their Max HP. The move changes Stages based on the number of stacks of Dragon Dance that Dragonite has, from 0 to 3. The Max HP damage is 5%/10%/15%/20%, determined by the current Stage.  Dragonite cannot act during the duration of this move.\n\nUpgrade (Level 13): Reduces damage taken by 50% while charging this move.",
+          "description": "Fires a beam of energy toward the targeted enemy after a delay, dealing damage to all enemies that it hits, as well as additional damage based on their Max HP. The move changes Stages based on the number of stacks of Dragon Dance that Dragonite has, from 0 to 3. The Max HP damage is 5%/10%/15%/20%, determined by the current Stage. Dragonite cannot act during the duration of this move.\n\nUpgrade (Level 13): Reduces damage taken by 50% while charging this move.",
           "cooldownSeconds": 10.5,
           "damageInstances": [
             {
@@ -16947,7 +16947,7 @@
           "id": "stealth-rock",
           "name": "Stealth Rock",
           "slot": "move2",
-          "description": "Hurl a stone at the designated area, creating an invisible field of stones. The field deals damage over time to enemies in the area of effect and decreases their movement speed for a short time. If the hurled stone hits an enemy before the designated area, the area of effect will instead be centered on where the stone hit that Pokémon. Once an enemy takes damage from the field, it will become visible to enemies.  If an enemy takes damage from this move 4 times, that enemy becomes unable to move for a short time. After this move is used, Duraludon's next basic attack becomes a boosted attack. A maximum of two uses can be kept in reserve for this move. There is a 1.1s cooldown between uses.\n\nUpgrade (Level 13): Increases the maximum number of uses that can be kept in reserve for this move.",
+          "description": "Hurl a stone at the designated area, creating an invisible field of stones. The field deals damage over time to enemies in the area of effect and decreases their movement speed for a short time. If the hurled stone hits an enemy before the designated area, the area of effect will instead be centered on where the stone hit that Pokémon. Once an enemy takes damage from the field, it will become visible to enemies. If an enemy takes damage from this move 4 times, that enemy becomes unable to move for a short time. After this move is used, Duraludon's next basic attack becomes a boosted attack. A maximum of two uses can be kept in reserve for this move. There is a 1.1s cooldown between uses.\n\nUpgrade (Level 13): Increases the maximum number of uses that can be kept in reserve for this move.",
           "cooldownSeconds": 8.5,
           "damageInstances": [
             {
@@ -18798,7 +18798,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Espeon materializes psychic projectiles and launches them at a designated location; dealing damage to enemies hit by the projectiles and decreasing their movement speed for each projectile hit by 15% for 3s (maximum 75%). Orbs start in a horizontal line perpendicular to Espeon's facing and continue flying in the  designated direction until the maximum range of the move. Targets hit by all five projectiles are stunned for 1.25s. When an enemy is hit by a projectile, subsequent projectiles deal 70% less damage. When Psyshock is enhanced via Future Sight reset, it launches stronger psychic projectiles at a designated location. These projectiles at their point of convergence cause an explosion, dealing damage to enemies in the area-of-effect. There is no damage increase.\n\nUpgrade (Level 10): Increase the speed at which projectiles travel.",
+          "descriptionAdvanced": "Espeon materializes psychic projectiles and launches them at a designated location; dealing damage to enemies hit by the projectiles and decreasing their movement speed for each projectile hit by 15% for 3s (maximum 75%). Orbs start in a horizontal line perpendicular to Espeon's facing and continue flying in the designated direction until the maximum range of the move. Targets hit by all five projectiles are stunned for 1.25s. When an enemy is hit by a projectile, subsequent projectiles deal 70% less damage. When Psyshock is enhanced via Future Sight reset, it launches stronger psychic projectiles at a designated location. These projectiles at their point of convergence cause an explosion, dealing damage to enemies in the area-of-effect. There is no damage increase.\n\nUpgrade (Level 10): Increase the speed at which projectiles travel.",
           "videoAsset": "/assets/skills/Espeon/Psyshock.mp4"
         },
         {
@@ -21486,9 +21486,9 @@
       "passiveAbility": {
         "id": "synchronize",
         "name": "Synchronize",
-        "description": "When an enemy inflicts decreased movement speed or a damge-over-time condition on the Pokémon, the same is inflicted on that opponent. This ability goes on cooldown after it's triggered.",
+        "description": "When an enemy inflicts decreased movement speed or a damage-over-time condition on the Pokémon, the same is inflicted on that opponent. This ability goes on cooldown after it's triggered.",
         "effects": [],
-        "descriptionAdvanced": "When an opposing Pokémon decreases this Pokémon's movement speed, also decreases that opposing Pokémon's movement speed by 40% for 3s; or, when an opposing Pokémon inflicts a damage-over-time status condition on this Pokémon, also inflicts a damage-over time effect on that opposing Pokémon for 3s (8s CD).",
+        "descriptionAdvanced": "When an opposing Pokémon decreases this Pokémon's movement speed, also decreases that opposing Pokémon's movement speed by 40% for 3s; or, when an opposing Pokémon inflicts a damage-over-time status condition on this Pokémon, also inflicts a damage-over-time effect on that opposing Pokémon for 3s (8s CD).",
         "iconAsset": "/assets/skills/Gardevoir/Synchronize.png"
       },
       "builds": [
@@ -22617,7 +22617,7 @@
           "isUpgrade": true,
           "moveType": "Sure Hit",
           "upgradeLevel": 4,
-          "descriptionAdvanced": "Glaceon launches all of its stored ice crystals in rapid succession at the designated enemy. If Glaceon has no ice crystals when this move is used, 2 ice crystals are instantly created and are launched. Launched ice crystals can hit enemies on the opposing team that are not the designated target of this move. The crystals shatter when they hit any enemy, dealing damage to all enemies in the area. Ice crystals launched by this move deal  5% increased damage each time they hit the same enemy (capped at 35%). When this move is used, Ice Shard's cooldown is reduced by 2s and Freeze Dry's cooldown is reduced by 2.5s. A maximum of 12 ice crystals may be launched.\n\nAgainst wild Pokémon; ice crystals will pass through the Pokémon that are not the designated target, dealing damage but not benefitting from the consecutive hit bonus.\n\nUpgrade (Level 10): Each launched ice crystal also deals additional damage to enemies hit equal to 0.5% of their remaining HP.  When crystals pass through wild Pokémon who are not the designated target, this additional damage is not applied.",
+          "descriptionAdvanced": "Glaceon launches all of its stored ice crystals in rapid succession at the designated enemy. If Glaceon has no ice crystals when this move is used, 2 ice crystals are instantly created and are launched. Launched ice crystals can hit enemies on the opposing team that are not the designated target of this move. The crystals shatter when they hit any enemy, dealing damage to all enemies in the area. Ice crystals launched by this move deal 5% increased damage each time they hit the same enemy (capped at 35%). When this move is used, Ice Shard's cooldown is reduced by 2s and Freeze Dry's cooldown is reduced by 2.5s. A maximum of 12 ice crystals may be launched.\n\nAgainst wild Pokémon; ice crystals will pass through the Pokémon that are not the designated target, dealing damage but not benefitting from the consecutive hit bonus.\n\nUpgrade (Level 10): Each launched ice crystal also deals additional damage to enemies hit equal to 0.5% of their remaining HP. When crystals pass through wild Pokémon who are not the designated target, this additional damage is not applied.",
           "videoAsset": "/assets/skills/Glaceon/Icicle+Spear.mp4"
         },
         {
@@ -26361,7 +26361,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 7,
-          "descriptionAdvanced": "Generate a blazing vortex around yourself and gain a shield. While the vortex is active, Ho-Oh slows itself by 40% and cannot attack. The first time an enemy interacts with the vortex, they receive an 80% movement speed decrease decaying by 10% every 0.5s over 4s. The vortex also deals damage to enemies. If allies are within the vortex, 60% of post-mitigation damage those allies would take is redirected to Ho-Oh as true damage (without ignoring shields).\n\nShield: 33% Max HP\n\nIf there is a shield after 4s or if this move is used again while this move's shield is intact, a heat wave is released around the user, dealing damage to enemies, and additional damage equal to the percentage of the damage the shield received. The emitted heat wave additionally stuns non-allied Pokémon it hits for 0.6s,  There is a 1.5s delay before the shield may be detonated from the start of the vortex. If the shield is destroyed before detonation, no damage is dealt.\n\nUpgrade (Level 13): When the shield is broken, the heat wave is now automatically released.",
+          "descriptionAdvanced": "Generate a blazing vortex around yourself and gain a shield. While the vortex is active, Ho-Oh slows itself by 40% and cannot attack. The first time an enemy interacts with the vortex, they receive an 80% movement speed decrease decaying by 10% every 0.5s over 4s. The vortex also deals damage to enemies. If allies are within the vortex, 60% of post-mitigation damage those allies would take is redirected to Ho-Oh as true damage (without ignoring shields).\n\nShield: 33% Max HP\n\nIf there is a shield after 4s or if this move is used again while this move's shield is intact, a heat wave is released around the user, dealing damage to enemies, and additional damage equal to the percentage of the damage the shield received. The emitted heat wave additionally stuns non-allied Pokémon it hits for 0.6s. There is a 1.5s delay before the shield may be detonated from the start of the vortex. If the shield is destroyed before detonation, no damage is dealt.\n\nUpgrade (Level 13): When the shield is broken, the heat wave is now automatically released.",
           "videoAsset": "/assets/skills/Ho-Oh/Fire+Spin.mp4"
         },
         {
@@ -28921,7 +28921,7 @@
           "id": "mist-ball",
           "name": "Mist Ball",
           "slot": "move1",
-          "description": "Has the user release a mist-like flurry of down in the designated direction, dealing damage, applying a slowing effect, and marking opposing Pokémon it hitos. After a set amount of time pases, or if the move is used again, the flurry of down bursts, creating a zone of mist. Opposing Pokémon in the zone take damage, receive a slowing effect, and are marked. Marked opposing Pokémon deal decreased damage. If either Latias or Latios deal damage to opposing marked Pokémon, the duration those Pokémon remain marked increases.\n\nUpgrade (Level 12): Increased mark base duration to 3s.",
+          "description": "Has the user release a mist-like flurry of down in the designated direction, dealing damage, applying a slowing effect, and marking opposing Pokémon it hits. After a set amount of time passes, or if the move is used again, the flurry of down bursts, creating a zone of mist. Opposing Pokémon in the zone take damage, receive a slowing effect, and are marked. Marked opposing Pokémon deal decreased damage. If either Latias or Latios deal damage to opposing marked Pokémon, the duration those Pokémon remain marked increases.\n\nUpgrade (Level 12): Increased mark base duration to 3s.",
           "cooldownSeconds": 7.0,
           "damageInstances": [
             {
@@ -28980,7 +28980,7 @@
           "isUpgrade": true,
           "moveType": "Buff",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Rallies the designated ally Pokémon, granting a shield for 3s and extra damage for the next hit up to 3s: if the user targeted themself, the user will gain the shield and the extra damage. If an ally was targeted, the ally will gain the shield and the extra damage, while the user only gains the shield. The move can the be recasted within 3s, the recast must target an ally other than the user. When used, the ally will gain the shield and the extra damage, while the user will only gain the extra damage. If the designated ally is Latios, then Latios will additionally gain 20% movement speed for 2s.\n\nWhen this move is recast; Latias will fly towards the designated ally. This move's cooldown begins once the recast is used or expires. The damage increase is based on the rallied Pokémon's level.\n\nUpgrade (Level 12): Increased the strength of the shield.",
+          "descriptionAdvanced": "Rallies the designated ally Pokémon, granting a shield for 3s and extra damage for the next hit up to 3s: if the user targeted themself, the user will gain the shield and the extra damage. If an ally was targeted, the ally will gain the shield and the extra damage, while the user only gains the shield. The move can then be recasted within 3s, the recast must target an ally other than the user. When used, the ally will gain the shield and the extra damage, while the user will only gain the extra damage. If the designated ally is Latios, then Latios will additionally gain 20% movement speed for 2s.\n\nWhen this move is recast; Latias will fly towards the designated ally. This move's cooldown begins once the recast is used or expires. The damage increase is based on the rallied Pokémon's level.\n\nUpgrade (Level 12): Increased the strength of the shield.",
           "videoAsset": "/assets/skills/Latias/Dragon+Cheer.mp4"
         },
         {
@@ -36298,7 +36298,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Mew/Mystical+Mirage.png",
-          "descriptionAdvanced": "Mew becomes unstoppable and floats in the air for 1s, then becoming invincible and invisible for up to 6s until using an attack or move. A field is created around Mew for 5s This field travels with Mew. Mew and all allies within the area become stealthed for 4s. After the field expires, this move deals damage to enemies within the area-of-effect.",
+          "descriptionAdvanced": "Mew becomes unstoppable and floats in the air for 1s, then becoming invincible and invisible for up to 6s until using an attack or move. A field is created around Mew for 5s. This field travels with Mew. Mew and all allies within the area become stealthed for 4s. After the field expires, this move deals damage to enemies within the area-of-effect.",
           "upgradeLevel": 8,
           "videoAsset": "/assets/skills/Mew/Mystical+Mirage.mp4"
         }
@@ -39551,7 +39551,7 @@
         "name": "Hunger Switch",
         "description": "This Pokémon's form and move effects change depending on its fullness gauge.\n\nWhen the Pokémon changes form, its move cooldowns are reset. Eating Berries will also increase the Pokémon's fullness gauge.\n\nFull Belly Mode: Upon entering this form, the Pokémon recovers some of its HP. The fullness gauge will decrease over time and whenever the Pokémon uses moves. When the gauge reaches zero, the Pokémon goes berserk and enters Hangry Mode.\n\nHangry Mode: Upon entering this form, the Pokémon applies a fear effect to nearby opposing Pokémon, and its movement speed is slightly increased. The fullness gauge will increase over time, and when the Pokémon is full, it will eat the seeds stored in its pocket-like pouches to enter Full Belly Mode.",
         "effects": [],
-        "descriptionAdvanced": "Morpeko changes form based on the hunger meter. When the meter reaches 0, the user transforms into Hangry mode. When the meter reaches 6, the user transforms into Full Belly mode.\n\nWhen transforming into Full Belly mode: the cooldowns of Thundershock and Spark are reset, and the user restores some health. While in Full Belly mode, the hunger meter decreases every 12s or when a move is used. When transforming into Hangry mode: the cooldowns of Power Trip and Assurance are reset, and the user inflicts fear onto nearby opposing Pokémon for 1s. While in Hangry mode, the user gains 20% movemenr speed, and the hunger meter increases every 3s. Eating berries increases the hunger meter by 1 in either form.",
+        "descriptionAdvanced": "Morpeko changes form based on the hunger meter. When the meter reaches 0, the user transforms into Hangry mode. When the meter reaches 6, the user transforms into Full Belly mode.\n\nWhen transforming into Full Belly mode: the cooldowns of Thunder Shock and Spark are reset, and the user restores some health. While in Full Belly mode, the hunger meter decreases every 12s or when a move is used. When transforming into Hangry mode: the cooldowns of Power Trip and Assurance are reset, and the user inflicts fear onto nearby opposing Pokémon for 1s. While in Hangry mode, the user gains 20% movement speed, and the hunger meter increases every 3s. Eating berries increases the hunger meter by 1 in either form.",
         "iconAsset": "/assets/skills/Morpeko/Hunger+Switch.png"
       },
       "builds": [
@@ -41277,7 +41277,7 @@
           "isUpgrade": true,
           "moveType": "Ranged",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "The user lets loose a sphere of aura power in the designated direction, dealing damage to opposing Pokémon, and marking them for 4s.\n\nThe next time the user deals damage to a marked Pokémon, additional damage is dealt, the user is healed, and the mark is consumed.\n\nUpgrade (Level 11): Applies a 60% slow  for 4s to opposing Pokémon hit, decaying by 15% every 0.5s to a minimum of 15%.",
+          "descriptionAdvanced": "The user lets loose a sphere of aura power in the designated direction, dealing damage to opposing Pokémon, and marking them for 4s.\n\nThe next time the user deals damage to a marked Pokémon, additional damage is dealt, the user is healed, and the mark is consumed.\n\nUpgrade (Level 11): Applies a 60% slow for 4s to opposing Pokémon hit, decaying by 15% every 0.5s to a minimum of 15%.",
           "videoAsset": "/assets/skills/Palkia/Aura+Sphere.mp4"
         },
         {
@@ -41375,7 +41375,7 @@
         "name": "Pressure",
         "description": "Whenever one of the Pokémon's moves hits opposing Pokémon, pressure increases (up to 3 times maximum). The Pokémon's next basic attack consumes all built-up pressure, dealing additional damage to opposing Pokémon and restoring its own HP.",
         "effects": [],
-        "descriptionAdvanced": "When the user deals damage with moves, gain a pressure stack for 5s up to a maximum of 3 stacks.  The next auto attack consumes all of the pressure stacks inflicting additional damage and healing the user per pressure stack.",
+        "descriptionAdvanced": "When the user deals damage with moves, gain a pressure stack for 5s up to a maximum of 3 stacks. The next auto attack consumes all of the pressure stacks inflicting additional damage and healing the user per pressure stack.",
         "iconAsset": "/assets/skills/Palkia/Pressure.png"
       },
       "builds": [
@@ -45913,7 +45913,7 @@
           "isUpgrade": true,
           "moveType": "Hindrance",
           "upgradeLevel": 6,
-          "descriptionAdvanced": "Fires a sinister ray in the designated direction, dealing damage to enemies hit. If this move hits enemy players, they are also left confused for 2s. While confused, enemies are  unable to act and continuously attack nearby enemies with basic attacks. Confused enemies will target nearby enemies in the following order of priority: first, their allies; then, wild Pokémon; last, Pokémon on Sableye's team. Knock outs for wild Pokémon will be attributed to Sableye, stealing the effects of the wild Pokémon being knocked out as well as the Aeos energy.\n\nWhile confused, outgoing damage is decreased for auto attacks and move 1 by 50%. If the confused target knocks out a Wild Pokémon, Sableye receives the KO.\n\nUpgrade (Level 12): Also increases target's movement speed by 30% and attack speed by 50% while confused from this move.",
+          "descriptionAdvanced": "Fires a sinister ray in the designated direction, dealing damage to enemies hit. If this move hits enemy players, they are also left confused for 2s. While confused, enemies are unable to act and continuously attack nearby enemies with basic attacks. Confused enemies will target nearby enemies in the following order of priority: first, their allies; then, wild Pokémon; last, Pokémon on Sableye's team. Knock outs for wild Pokémon will be attributed to Sableye, stealing the effects of the wild Pokémon being knocked out as well as the Aeos energy.\n\nWhile confused, outgoing damage is decreased for auto attacks and move 1 by 50%. If the confused target knocks out a Wild Pokémon, Sableye receives the KO.\n\nUpgrade (Level 12): Also increases target's movement speed by 30% and attack speed by 50% while confused from this move.",
           "videoAsset": "/assets/skills/Sableye/Confuse+Ray.mp4"
         },
         {
@@ -47894,7 +47894,7 @@
           ],
           "moveType": "Dash",
           "iconAsset": "/assets/skills/Sirfetchd/Lunging+Leek+Nova+Blast.png",
-          "descriptionAdvanced": "The user becomes Unstoppable,  as well as maxing out the Steadfast gauge, and charges in the designated direction, shoving any opposing Pokémon along the way for up to 1s, dealing damage to them up to 5 times. If this move does damage near the end of the dash an explosion occurs dealing double damage and stunning opponents in the area for 0.4s.\n\nThis move can go through walls if there is enough distance left.",
+          "descriptionAdvanced": "The user becomes Unstoppable, as well as maxing out the Steadfast gauge, and charges in the designated direction, shoving any opposing Pokémon along the way for up to 1s, dealing damage to them up to 5 times. If this move does damage near the end of the dash an explosion occurs dealing double damage and stunning opponents in the area for 0.4s.\n\nThis move can go through walls if there is enough distance left.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Sirfetchd/Lunging+Leek+Nova+Blast.mp4"
         }
@@ -55578,7 +55578,7 @@
           ],
           "effects": [],
           "tags": [],
-          "descriptionAdvanced": "Becomes a boosted attack every third attack, lunging at a Pokémon  and dealing damage. This boosted attack also heals the user's HP. The lower the user's remaining HP, the more HP is restored."
+          "descriptionAdvanced": "Becomes a boosted attack every third attack, lunging at a Pokémon and dealing damage. This boosted attack also heals the user's HP. The lower the user's remaining HP, the more HP is restored."
         },
         {
           "id": "swift",
@@ -55684,7 +55684,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Umbreon/Fake+Tears.png",
-          "descriptionAdvanced": "Feigns crying, dealing damage to nearby Pokémon  and decreases their Defense and Sp. Def by 20% for 2s. Also grants a shield for 4s.\n\nShield: 12% Max HP",
+          "descriptionAdvanced": "Feigns crying, dealing damage to nearby Pokémon and decreases their Defense and Sp. Def by 20% for 2s. Also grants a shield for 4s.\n\nShield: 12% Max HP",
           "videoAsset": "/assets/skills/Umbreon/Fake+Tears.mp4"
         },
         {
@@ -59507,7 +59507,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Releases a shock wave in the designated direction, dealing damage to opposing Pokémon hit and decreasing their movement speed by 30% for 3s. As the shock wave moves forward, projectiles from non-allied Pokémon it hits are negated. After releasing the shock wave,  Zacian charges in that direction and deals damage to opposing Pokémon, stopping at the first opposing Pokémon hit. If the charge hits an enemy, Zacian's attack speed is increased by 80% for 4s or 6 attacks, whichever comes first. When this move is boosted with Aeos energy, the shock wave's size and travel distance are increased and the intensity of the slow is increased to 45% for 3s.\n\nUpgrade (Level 11): Reduces this move's cooldown by 1s.",
+          "descriptionAdvanced": "Releases a shock wave in the designated direction, dealing damage to opposing Pokémon hit and decreasing their movement speed by 30% for 3s. As the shock wave moves forward, projectiles from non-allied Pokémon it hits are negated. After releasing the shock wave, Zacian charges in that direction and deals damage to opposing Pokémon, stopping at the first opposing Pokémon hit. If the charge hits an enemy, Zacian's attack speed is increased by 80% for 4s or 6 attacks, whichever comes first. When this move is boosted with Aeos energy, the shock wave's size and travel distance are increased and the intensity of the slow is increased to 45% for 3s.\n\nUpgrade (Level 11): Reduces this move's cooldown by 1s.",
           "videoAsset": "/assets/skills/Zacian/Metal+Claw.mp4"
         },
         {
@@ -59696,9 +59696,9 @@
       "passiveAbility": {
         "id": "intrepid-sword",
         "name": "Intrepid Sword",
-        "description": "If the goal scoring button is held down, Zacian charges its sword  with Aeos energy. For a short time, its basic attacks become boosted attacks. In addition, during this time, Zacian can use a boosted version of one of its moves once (this use does not share the same cooldown as the base move). The longer the goal scoring button is held down, the more Aeos energy is charged into the sword, lengthening the duration of the boost effect on basic attacks and moves. This Ability goes on an 8s cooldown after it’s triggered.",
+        "description": "If the goal scoring button is held down, Zacian charges its sword with Aeos energy. For a short time, its basic attacks become boosted attacks. In addition, during this time, Zacian can use a boosted version of one of its moves once (this use does not share the same cooldown as the base move). The longer the goal scoring button is held down, the more Aeos energy is charged into the sword, lengthening the duration of the boost effect on basic attacks and moves. This Ability goes on an 8s cooldown after it’s triggered.",
         "effects": [],
-        "descriptionAdvanced": "If the goal scoring button is held down, Zacian charges its sword  with Aeos energy. For a short time, its basic attacks become boosted attacks. In addition, during this time, Zacian can use a boosted version of one of its moves once (this use does not share the same cooldown as the base move). The longer the goal scoring button is held down, the more Aeos energy is charged into the sword, lengthening the duration of the boost effect on basic attacks and moves. This Ability goes on an 8s cooldown after it’s triggered.\n\nMinimum 5 energy is required to charge with a maximum of 10 (except for Unite Move). Duration for buff window is 3s for 5 energy, 6s for 8 energy, 10s for 10 energy. Charging occurs at a rate of 1 energy per 0.1s.",
+        "descriptionAdvanced": "If the goal scoring button is held down, Zacian charges its sword with Aeos energy. For a short time, its basic attacks become boosted attacks. In addition, during this time, Zacian can use a boosted version of one of its moves once (this use does not share the same cooldown as the base move). The longer the goal scoring button is held down, the more Aeos energy is charged into the sword, lengthening the duration of the boost effect on basic attacks and moves. This Ability goes on an 8s cooldown after it’s triggered.\n\nMinimum 5 energy is required to charge with a maximum of 10 (except for Unite Move). Duration for buff window is 3s for 5 energy, 6s for 8 energy, 10s for 10 energy. Charging occurs at a rate of 1 energy per 0.1s.",
         "iconAsset": "/assets/skills/Zacian/Intrepid+Sword.png"
       },
       "builds": [
@@ -60240,7 +60240,7 @@
           ],
           "moveType": "Area",
           "iconAsset": "/assets/skills/Zapdos/High-Voltage+Siege.png",
-          "descriptionAdvanced": "Has the user continuously drop lightning bolts in the designated area every 1s. If the user moves a certain distance from the area,  it will be dragged towards the user's position. Electric fields are created where the lightning strikes. The lightning bolts paralyze and deal damage to opposing Pokémon they hit. If lightning bolts hit the same Pokémon 3 consecutive times, that Pokémon will be left unable to act. If lightning bolts hit one of the opposing team's goal zones 5 times, that goal zone will become defenseless (scoring is instant) for 5s or until a goal is scored.\n\nThe movement speed of opposing Pokémon paralyzed by this Ability is decreased by 30% and their basic attack speed is decreased by 10% for 2.5s.",
+          "descriptionAdvanced": "Has the user continuously drop lightning bolts in the designated area every 1s. If the user moves a certain distance from the area, it will be dragged towards the user's position. Electric fields are created where the lightning strikes. The lightning bolts paralyze and deal damage to opposing Pokémon they hit. If lightning bolts hit the same Pokémon 3 consecutive times, that Pokémon will be left unable to act. If lightning bolts hit one of the opposing team's goal zones 5 times, that goal zone will become defenseless (scoring is instant) for 5s or until a goal is scored.\n\nThe movement speed of opposing Pokémon paralyzed by this Ability is decreased by 30% and their basic attack speed is decreased by 10% for 2.5s.",
           "upgradeLevel": 9,
           "videoAsset": "/assets/skills/Zapdos/High-Voltage+Siege.mp4"
         }
@@ -61436,7 +61436,7 @@
           "isUpgrade": true,
           "moveType": "Dash",
           "upgradeLevel": 5,
-          "descriptionAdvanced": "Gains the Night Slash buff for 2.5s, changing the next movement to a dash attack, damaging opposing Pokémon in the path. If the dash attack hits: changes the next auto attack to a unique boosted attack with increased range. If Zoroark hits opposing Pokémon with Slash, Shadow Claw, Cut, or unique boosted attacks: resets the Night Slash buff duration to 2.5s, repeating this chain of attacks. This move ends if the user moves when they're unable to use the Night Slash dash attack.\n\nFinal slash damage: Deals an additional 10% missing HP damage. Against wild Pokémon: total damage is capped at 1000.\n\nIf Zoroark hits opposing Pokémon with a total of 6 valid attacks: cleanses status conditions and becomes invincible for 1.4s,  jumping into the air then landing after 1.2s. When the user lands: slashes a cross-shaped area of effect, damaging opposing Pokémon with two diagonal slashes, and dealing additional missing HP damage when it hits; restores HP once for each of the two diagonal areas of the cross slash that hits an opposing Pokémon (up to 2 times if both slashes hit).  This cross-shaped attack deals move damage if triggered by a final move hit, or auto attack damage if triggered by a final unique boosted attack. While jumping, the user is able to use Slash, Shadow Claw, or Cut to move a set distance.\n\nUpgrade (Level 11): Reduces this move's cooldown by 1s.",
+          "descriptionAdvanced": "Gains the Night Slash buff for 2.5s, changing the next movement to a dash attack, damaging opposing Pokémon in the path. If the dash attack hits: changes the next auto attack to a unique boosted attack with increased range. If Zoroark hits opposing Pokémon with Slash, Shadow Claw, Cut, or unique boosted attacks: resets the Night Slash buff duration to 2.5s, repeating this chain of attacks. This move ends if the user moves when they're unable to use the Night Slash dash attack.\n\nFinal slash damage: Deals an additional 10% missing HP damage. Against wild Pokémon: total damage is capped at 1000.\n\nIf Zoroark hits opposing Pokémon with a total of 6 valid attacks: cleanses status conditions and becomes invincible for 1.4s, jumping into the air then landing after 1.2s. When the user lands: slashes a cross-shaped area of effect, damaging opposing Pokémon with two diagonal slashes, and dealing additional missing HP damage when it hits; restores HP once for each of the two diagonal areas of the cross slash that hits an opposing Pokémon (up to 2 times if both slashes hit). This cross-shaped attack deals move damage if triggered by a final move hit, or auto attack damage if triggered by a final unique boosted attack. While jumping, the user is able to use Slash, Shadow Claw, or Cut to move a set distance.\n\nUpgrade (Level 11): Reduces this move's cooldown by 1s.",
           "videoAsset": "/assets/skills/Zoroark/Night+Slash.mp4"
         },
         {

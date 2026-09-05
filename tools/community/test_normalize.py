@@ -214,6 +214,23 @@ class TestFixSpelling(unittest.TestCase):
         self.assertEqual(fix_spelling("Chicorita"), "Chikorita")
         self.assertEqual(fix_spelling("Ho-oh"), "Ho-Oh")
         self.assertEqual(fix_spelling("Lumiere of Demise"), "Lumière of Demise")
+        self.assertEqual(fix_spelling("20% movemenr speed"), "20% movement speed")
+        self.assertEqual(fix_spelling("oppposing Pokémon"), "opposing Pokémon")
+        self.assertEqual(fix_spelling("the intial area"), "the initial area")
+        self.assertEqual(fix_spelling("deacrease auto attack"), "decrease auto attack")
+        self.assertEqual(fix_spelling("a damge-over-time condition"), "a damage-over-time condition")
+        self.assertEqual(fix_spelling("boosted basic attakck gauge"), "boosted basic attack gauge")
+        self.assertEqual(fix_spelling("nulliffied"), "nullified")
+        self.assertEqual(fix_spelling("Thundershock and Spark"), "Thunder Shock and Spark")
+        self.assertEqual(fix_spelling("circles of shadoww are"), "circles of shadow are")
+        self.assertEqual(fix_spelling("Pokémon isnide the nightmare"), "Pokémon inside the nightmare")
+        self.assertEqual(fix_spelling("Movement speeed decrease"), "Movement speed decrease")
+        self.assertEqual(fix_spelling("Pokémon it hitos"), "Pokémon it hits")
+        self.assertEqual(fix_spelling("time pases, or"), "time passes, or")
+
+    def test_collapses_extra_spaces(self):
+        self.assertEqual(fix_spelling("enemies  in the explosion"), "enemies in the explosion")
+        self.assertEqual(fix_spelling("already single"), "already single")
 
     def test_noop_passthrough(self):
         self.assertEqual(fix_spelling("Pikachu"), "Pikachu")
@@ -325,7 +342,7 @@ class TestAdvancedDescLabels(unittest.TestCase):
 
 
 def _minimal_override_bundle() -> dict:
-    """One Pokémon with one move and one held item for patch-note override tests."""
+    """One Pokémon with one move, one passive, and one held item for override tests."""
     return {
         "pokemon": [{
             "id": "testmon",
@@ -339,6 +356,11 @@ def _minimal_override_bundle() -> dict:
                 "description": "Basic text.",
                 "descriptionAdvanced": "Advanced text with 8.5% max HP.",
             }],
+            "passiveAbility": {
+                "id": "test-passive",
+                "description": "Passive basic.",
+                "descriptionAdvanced": "Passive Advanced with damage-over time.",
+            },
         }],
         "heldItems": [{
             "id": "test-item",
@@ -457,6 +479,29 @@ class TestApplyPatchNoteOverrides(unittest.TestCase):
         self.assertEqual(skipped, 0)
         self.assertIn("9.35% max HP", bundle["pokemon"][0]["moves"][0]["descriptionAdvanced"])
         self.assertNotIn("8.5% max HP", bundle["pokemon"][0]["moves"][0]["descriptionAdvanced"])
+
+    def test_replace_text_rewrites_passive_field(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "replaceText",
+            "pokemon": "testmon",
+            "move": "test-passive",
+            "fields": ["descriptionAdvanced"],
+            "find": "damage-over time",
+            "replace": "damage-over-time",
+            "why": "test passive text",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 1)
+        self.assertEqual(skipped, 0)
+        self.assertIn(
+            "damage-over-time",
+            bundle["pokemon"][0]["passiveAbility"]["descriptionAdvanced"],
+        )
+        self.assertNotIn(
+            "damage-over time",
+            bundle["pokemon"][0]["passiveAbility"]["descriptionAdvanced"],
+        )
 
     def test_replace_text_expires_when_find_absent(self):
         bundle = _minimal_override_bundle()

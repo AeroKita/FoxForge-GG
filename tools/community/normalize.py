@@ -476,10 +476,14 @@ def slugify(s: str) -> str:
     return "".join(c if c.isalnum() else "-" for c in s.lower()).strip("-")
 
 
-# UNITE-DB source data misspells some official Pokémon names. Correct them at
-# normalize time — never in _raw/ (re-downloaded by fetch.py) and never in the
-# generated bundles (overwritten by this script). Keys are case-sensitive, so
-# lowercase slugs/ids like "250-ho-oh" are never touched.
+# UNITE-DB source data misspells some official Pokémon names and ships prose
+# typos in Basic/Advanced text. Correct them at normalize time — never in
+# _raw/ (re-downloaded by fetch.py) and never in the generated bundles
+# (overwritten by this script). Keys are case-sensitive, so lowercase
+# slugs/ids like "250-ho-oh" are never touched. When UNITE-DB ships the
+# corrected string the replace is a no-op. Sentence-level or context-specific
+# fixes (missing periods, "project" vs "projectile") stay in
+# patch_note_overrides.json so they can expire per field.
 SPELLING_FIXES = {
     "Chicorita": "Chikorita",
     "Ho-oh": "Ho-Oh",
@@ -488,13 +492,26 @@ SPELLING_FIXES = {
     # ASCII — ids are lowercase (never match) and *Asset fields are skipped
     # by fix_spelling_deep.
     "Lumiere": "Lumière",
+    "Thundershock": "Thunder Shock",
+    "movemenr": "movement",
+    "oppposing": "opposing",
+    "intial": "initial",
+    "deacrease": "decrease",
+    "damge": "damage",
+    "attakck": "attack",
+    "nulliffied": "nullified",
+    "shadoww": "shadow",
+    "isnide": "inside",
+    "speeed": "speed",
+    "hitos": "hits",
+    "pases": "passes",
 }
 
 
 def fix_spelling(s: str) -> str:
     for wrong, right in SPELLING_FIXES.items():
         s = s.replace(wrong, right)
-    return s
+    return re.sub(r" {2,}", " ", s)
 
 
 def fix_spelling_deep(obj):
@@ -874,6 +891,11 @@ def _override_find_move(pokemon: dict, move_id: str) -> dict:
     for m in pokemon.get("moves", []):
         if m["id"] == move_id:
             return m
+    passive = pokemon.get("passiveAbility")
+    passives = passive if isinstance(passive, list) else ([passive] if isinstance(passive, dict) else [])
+    for p in passives:
+        if p.get("id") == move_id:
+            return p
     raise ValueError(
         f"patch-note override: unknown move id {move_id!r} for {pokemon['id']!r}"
     )
@@ -889,7 +911,7 @@ def _override_find_held_item(bundle: dict, item_id: str) -> dict:
 def apply_patch_note_overrides(bundle: dict, overrides: list[dict]) -> tuple[int, int]:
     """Apply self-expiring patch-note overrides to the normalized bundle (mutates in place).
 
-    Each entry targets a move (pokemon+move ids) or a held item (item id) and is guarded
+    Each entry targets a move or passive (pokemon+move ids) or a held item (item id) and is guarded
     by its pre-patch value; a failed guard means UNITE-DB has shipped post-patch data, so
     the entry is skipped with a printed notice. Returns (applied, skipped) counts.
     Kinds: "set" (field must equal `expect`; supports the dotted path "effect.tiers"),
