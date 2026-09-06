@@ -227,6 +227,55 @@ class TestFixSpelling(unittest.TestCase):
         self.assertEqual(fix_spelling("Movement speeed decrease"), "Movement speed decrease")
         self.assertEqual(fix_spelling("Pokémon it hitos"), "Pokémon it hits")
         self.assertEqual(fix_spelling("time pases, or"), "time passes, or")
+        self.assertEqual(fix_spelling("leaving it uanble to act"), "leaving it unable to act")
+        self.assertEqual(fix_spelling("If othr Pokémon"), "If other Pokémon")
+        self.assertEqual(fix_spelling("Unite guage is consumed"), "Unite gauge is consumed")
+        self.assertEqual(fix_spelling("sprint gauage is full"), "sprint gauge is full")
+        self.assertEqual(fix_spelling("min disatance"), "min distance")
+        self.assertEqual(fix_spelling("oppsing Pokémon"), "opposing Pokémon")
+        self.assertEqual(fix_spelling("blasing out a huge volume"), "blasting out a huge volume")
+        self.assertEqual(fix_spelling("Blass intense"), "Blasts intense")
+        self.assertEqual(fix_spelling("spin rapdily"), "spin rapidly")
+        self.assertEqual(fix_spelling("psychich projectiles"), "psychic projectiles")
+        self.assertEqual(fix_spelling("charging forawrd"), "charging forward")
+        self.assertEqual(fix_spelling("designated dirrection"), "designated direction")
+        self.assertEqual(fix_spelling("whiile cloaked"), "while cloaked")
+        self.assertEqual(fix_spelling("and bcomes hard"), "and becomes hard")
+        self.assertEqual(fix_spelling("a shield efffect"), "a shield effect")
+        self.assertEqual(fix_spelling("the user recoves"), "the user recovers")
+        self.assertEqual(fix_spelling("left unabled to act"), "left unable to act")
+        self.assertEqual(fix_spelling("an illusary copy"), "an illusory copy")
+        self.assertEqual(fix_spelling("non targetted enemy"), "non targeted enemy")
+        self.assertEqual(fix_spelling("the preceeding waves"), "the preceding waves")
+        self.assertEqual(fix_spelling("30% inititally"), "30% initially")
+        self.assertEqual(fix_spelling("During the blink, Meowsacarda is"), "During the blink, Meowscarada is")
+        self.assertEqual(fix_spelling("Solagaleo can see"), "Solgaleo can see")
+        self.assertEqual(fix_spelling("opposing Pokmon"), "opposing Pokémon")
+        self.assertEqual(fix_spelling("opposing Pokémn"), "opposing Pokémon")
+        self.assertEqual(fix_spelling("Wild Pokemon"), "Wild Pokémon")
+        self.assertEqual(fix_spelling("Hinderances and status"), "Hindrances and status")
+        self.assertEqual(fix_spelling("damage continus to"), "damage continues to")
+        self.assertEqual(fix_spelling("when it bounceds"), "when it bounces")
+        self.assertEqual(fix_spelling("two illusionary copies"), "two illusory copies")
+        self.assertEqual(fix_spelling("15% SpAtk for 8s"), "15% Sp. Atk for 8s")
+        self.assertEqual(fix_spelling("while the uesr is flying"), "while the user is flying")
+        self.assertEqual(fix_spelling("Pokémon it hit's"), "Pokémon it hits")
+        self.assertEqual(fix_spelling("in front of it'self"), "in front of itself")
+        self.assertEqual(fix_spelling("increasing it's movement speed"), "increasing its movement speed")
+        self.assertEqual(fix_spelling("it's basic attack pattern"), "its basic attack pattern")
+        self.assertEqual(fix_spelling("oor hits Pokémon"), "or hits Pokémon")
+        self.assertEqual(fix_spelling("the user lungest toward"), "the user lunges toward")
+        self.assertEqual(fix_spelling("while the users Attack is"), "while the user's Attack is")
+        self.assertEqual(fix_spelling("in designated direction"), "in the designated direction")
+        self.assertEqual(fix_spelling("Reduces this moves cooldown"), "Reduces this move's cooldown")
+        self.assertEqual(fix_spelling("the Trooper's total damage"), "the Troopers' total damage")
+        self.assertEqual(fix_spelling("increases Mewtwo attack by"), "increases Mewtwo's Attack by")
+
+    def test_cooldown_abbrev_uppercases_cd(self):
+        self.assertEqual(fix_spelling("triggered (4s cd)."), "triggered (4s CD).")
+        self.assertEqual(fix_spelling("goes on a 4s cd after"), "goes on a 4s CD after")
+        self.assertEqual(fix_spelling("berry drop (4.5s cd)."), "berry drop (4.5s CD).")
+        self.assertEqual(fix_spelling("already (4s CD)."), "already (4s CD).")
 
     def test_collapses_extra_spaces(self):
         self.assertEqual(fix_spelling("enemies  in the explosion"), "enemies in the explosion")
@@ -238,6 +287,7 @@ class TestFixSpelling(unittest.TestCase):
     def test_lowercase_slugs_untouched(self):
         self.assertEqual(fix_spelling("250-ho-oh"), "250-ho-oh")
         self.assertEqual(fix_spelling("lumiere-of-demise"), "lumiere-of-demise")
+        self.assertEqual(fix_spelling("some-pokemon-id"), "some-pokemon-id")
 
 
 class TestFixSpellingDeep(unittest.TestCase):
@@ -342,7 +392,7 @@ class TestAdvancedDescLabels(unittest.TestCase):
 
 
 def _minimal_override_bundle() -> dict:
-    """One Pokémon with one move, one passive, and one held item for override tests."""
+    """One Pokémon with one move, one passive, one held item, and one battle item."""
     return {
         "pokemon": [{
             "id": "testmon",
@@ -366,6 +416,10 @@ def _minimal_override_bundle() -> dict:
             "id": "test-item",
             "description": "Boost by 11/14/17%.",
             "effect": {"label": "HP", "tiers": ["11%", "14%", "17%"]},
+        }],
+        "battleItems": [{
+            "id": "test-battle",
+            "description": "Additional applications on an affected goal zone overrides the previous effects.",
         }],
     }
 
@@ -517,6 +571,22 @@ class TestApplyPatchNoteOverrides(unittest.TestCase):
         self.assertEqual(applied, 0)
         self.assertEqual(skipped, 1)
         self.assertEqual(bundle["heldItems"][0]["description"], "Boost by 11/14/17%.")
+
+    def test_replace_text_rewrites_battle_item_by_item_id(self):
+        bundle = _minimal_override_bundle()
+        overrides = [{
+            "kind": "replaceText",
+            "item": "test-battle",
+            "fields": ["description"],
+            "find": "zone overrides the",
+            "replace": "zone override the",
+            "why": "test battle-item text",
+        }]
+        applied, skipped = apply_patch_note_overrides(bundle, overrides)
+        self.assertEqual(applied, 1)
+        self.assertEqual(skipped, 0)
+        self.assertIn("zone override the", bundle["battleItems"][0]["description"])
+        self.assertNotIn("zone overrides the", bundle["battleItems"][0]["description"])
 
 
 if __name__ == "__main__":
