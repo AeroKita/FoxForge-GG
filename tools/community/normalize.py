@@ -505,12 +505,57 @@ SPELLING_FIXES = {
     "speeed": "speed",
     "hitos": "hits",
     "pases": "passes",
+    "uanble": "unable",
+    "othr": "other",
+    "guage": "gauge",
+    "gauage": "gauge",
+    "disatance": "distance",
+    "oppsing": "opposing",
+    "blasing": "blasting",
+    "Blass": "Blasts",
+    "rapdily": "rapidly",
+    "psychich": "psychic",
+    "forawrd": "forward",
+    "dirrection": "direction",
+    "whiile": "while",
+    "bcomes": "becomes",
+    "efffect": "effect",
+    "recoves": "recovers",
+    "unabled": "unable",
+    "illusary": "illusory",
+    "targetted": "targeted",
+    "preceeding": "preceding",
+    "inititally": "initially",
+    "Meowsacarda": "Meowscarada",
+    "Solagaleo": "Solgaleo",
+    "Pokmon": "Pokémon",
+    "Pokémn": "Pokémon",
+    "Pokemon": "Pokémon",
+    "Hinderances": "Hindrances",
+    "continus": "continues",
+    "bounceds": "bounces",
+    "illusionary": "illusory",
+    "SpAtk": "Sp. Atk",
+    "uesr": "user",
+    "hit's": "hits",
+    "it'self": "itself",
+    "it's movement": "its movement",
+    "it's basic": "its basic",
+    "oor hits": "or hits",
+    "lungest": "lunges",
+    "the users ": "the user's ",
+    "in designated direction": "in the designated direction",
+    "this moves cooldown": "this move's cooldown",
+    "the Trooper's total": "the Troopers' total",
+    "Mewtwo attack": "Mewtwo's Attack",
 }
 
 
 def fix_spelling(s: str) -> str:
     for wrong, right in SPELLING_FIXES.items():
         s = s.replace(wrong, right)
+    # Cooldown shorthand: "4s cd)" / "4s cd after" — not a second spelling map.
+    s = re.sub(r"(\d+(?:\.\d+)?)s cd\b", r"\1s CD", s)
     return re.sub(r" {2,}", " ", s)
 
 
@@ -902,16 +947,20 @@ def _override_find_move(pokemon: dict, move_id: str) -> dict:
 
 
 def _override_find_held_item(bundle: dict, item_id: str) -> dict:
+    """Resolve a held or battle item by the shared `item` override key."""
     for h in bundle.get("heldItems", []):
         if h["id"] == item_id:
             return h
-    raise ValueError(f"patch-note override: unknown held item id {item_id!r}")
+    for b in bundle.get("battleItems", []):
+        if b["id"] == item_id:
+            return b
+    raise ValueError(f"patch-note override: unknown item id {item_id!r}")
 
 
 def apply_patch_note_overrides(bundle: dict, overrides: list[dict]) -> tuple[int, int]:
     """Apply self-expiring patch-note overrides to the normalized bundle (mutates in place).
 
-    Each entry targets a move or passive (pokemon+move ids) or a held item (item id) and is guarded
+    Each entry targets a move or passive (pokemon+move ids) or a held/battle item (item id) and is guarded
     by its pre-patch value; a failed guard means UNITE-DB has shipped post-patch data, so
     the entry is skipped with a printed notice. Returns (applied, skipped) counts.
     Kinds: "set" (field must equal `expect`; supports the dotted path "effect.tiers"),

@@ -4,6 +4,28 @@ import { computeEmblemLoadout } from "../../engine/emblems";
 import { computeEffectiveStats } from "../../engine/formulas";
 import type { CalcContext } from "../../types";
 import raw from "../patch-current.json";
+import type { GameDataBundle } from "../../types";
+
+function collectUserFacingTexts(bundle: GameDataBundle): string[] {
+  const texts: string[] = [];
+  for (const p of bundle.pokemon) {
+    for (const m of p.moves) {
+      if (m.description) texts.push(`${p.id}/${m.id} description: ${m.description}`);
+      if (m.descriptionAdvanced) {
+        texts.push(`${p.id}/${m.id} descriptionAdvanced: ${m.descriptionAdvanced}`);
+      }
+    }
+    const pa = p.passiveAbility;
+    if (pa.description) texts.push(`${p.id}/${pa.id} description: ${pa.description}`);
+    if (pa.descriptionAdvanced) {
+      texts.push(`${p.id}/${pa.id} descriptionAdvanced: ${pa.descriptionAdvanced}`);
+    }
+  }
+  for (const item of [...bundle.heldItems, ...(bundle.battleItems ?? [])]) {
+    if (item.description) texts.push(`${item.id} description: ${item.description}`);
+  }
+  return texts;
+}
 
 // Guards the live community bundle (UNITE-DB) against schema drift and bad data.
 describe("community data bundle", () => {
@@ -170,30 +192,171 @@ describe("community data bundle", () => {
         "5s This field",
         "0.6s,  There",
         "0.6s, There",
+        "uanble",
+        "othr",
+        "guage",
+        "gauage",
+        "disatance",
+        "oppsing",
+        "blasing",
+        "Blass",
+        "rapdily",
+        "psychich",
+        "forawrd",
+        "dirrection",
+        "whiile",
+        "bcomes",
+        "efffect",
+        "recoves",
+        "unabled",
+        "illusary",
+        "targetted",
+        "preceeding",
+        "inititally",
+        "Meowsacarda",
+        "Solagaleo",
+        "Pokmon",
+        "Pokémn",
+        "Pokemon",
+        "Hinderances",
+        "continus",
+        "bounceds",
+        "illusionary",
+        "SpAtk",
+        "uesr",
+        "hit's",
+        "it'self",
+        "it's movement",
+        "it's basic",
+        "oor hits",
+        "lungest",
+        "the users ",
+        "in designated direction",
+        "this moves cooldown",
+        "the Trooper's total",
+        "Mewtwo attack",
+        "leaving the munable",
+        "itsm ovement",
+        "comet s",
+        "used agai and",
+        "Compute and Crash",
+        "increases.<",
+        "whip cream",
+        "HP equals to",
+        "Every attack more damage",
+        "a boosted with every",
+        "its not fully",
+        "self healing",
+        "non movement, non auto attack",
+        "One of the variety",
+        "zone overrides the",
+        "designated panel",
+        "jab the in the",
+        "damage over tim and",
+        "and the decreasing their",
+        "damaging opposing over time",
+        "once only Fighter Mode",
+        "Pokémon it hit.",
+        "an cone",
+        "attacks enemies their feet",
+        "for aa set",
+        "boosted boosted",
+        "the the amount",
+        " in in ",
+        "within in ",
+        "them an slowing",
+        "After a dela,",
+        "The users throws",
+        "area of effect After",
+        "to marked enemy",
+        "the Enemy falls",
+        "while the user in the cloud",
+        "times.If",
+        "hits.When",
+        "hits.The",
+        "move.When",
+        "direction.The",
+        "time.If",
+        "attacks.When",
+        "ally.Afterward",
+        "hits.At",
+        "hits Once",
+        "time. .",
+        "gauge When",
+        "\\u201c",
+        "\\u201d",
+        "coached on allies",
+        "A maximum of {0}",
+        "hits {0} times",
+        "2 use(s)",
+        "1 stored use(s)",
+        "3 time(s)",
       ];
-      const texts: string[] = [];
-      for (const p of bundle.pokemon) {
-        for (const m of p.moves) {
-          if (m.description) texts.push(`${p.id}/${m.id} description: ${m.description}`);
-          if (m.descriptionAdvanced) {
-            texts.push(`${p.id}/${m.id} descriptionAdvanced: ${m.descriptionAdvanced}`);
-          }
-        }
-        const pa = p.passiveAbility;
-        if (pa.description) texts.push(`${p.id}/${pa.id} description: ${pa.description}`);
-        if (pa.descriptionAdvanced) {
-          texts.push(`${p.id}/${pa.id} descriptionAdvanced: ${pa.descriptionAdvanced}`);
-        }
-      }
-      for (const item of [...bundle.heldItems, ...(bundle.battleItems ?? [])]) {
-        if (item.description) texts.push(`${item.id} description: ${item.description}`);
-      }
+      const texts = collectUserFacingTexts(bundle);
       for (const bad of banned) {
         const hit = texts.find((t) => t.includes(bad));
         expect(
           hit,
           `banned fragment ${JSON.stringify(bad)} still in ${hit ?? "bundle"}`,
         ).toBeUndefined();
+      }
+    });
+
+    it("does not ship UNITE-DB placeholders or leftover templates", () => {
+      const texts = collectUserFacingTexts(bundle);
+      for (const bad of ["{0}", "{1}", "{2}", "use(s)", "time(s)"]) {
+        const hit = texts.find((t) => t.includes(bad));
+        expect(hit, `template ${JSON.stringify(bad)} still in ${hit ?? "bundle"}`).toBeUndefined();
+      }
+    });
+
+    it("does not ship ASCII Pokemon or truncated Pokmon marks", () => {
+      const texts = collectUserFacingTexts(bundle);
+      const hit = texts.find(
+        (t) => /\bPokemon\b/.test(t) || t.includes("Pokmon") || t.includes("Pokémn"),
+      );
+      expect(hit, `Pokémon mark still in ${hit ?? "bundle"}`).toBeUndefined();
+    });
+
+    it("does not ship known glued sentences or duplicate words", () => {
+      const texts = collectUserFacingTexts(bundle);
+      const glues = [
+        "times.If",
+        "hits.When",
+        "hits.The",
+        "move.When",
+        "direction.The",
+        "time.If",
+        "attacks.When",
+        "ally.Afterward",
+        "hits.At",
+        "hits Once",
+        "time. .",
+        "gauge When",
+        "effect After",
+        "the the ",
+        " in in ",
+        "within in ",
+      ];
+      for (const bad of glues) {
+        const hit = texts.find((t) => t.includes(bad));
+        expect(hit, `glue ${JSON.stringify(bad)} still in ${hit ?? "bundle"}`).toBeUndefined();
+      }
+    });
+
+    it("does not ship known unique garbles", () => {
+      const texts = collectUserFacingTexts(bundle);
+      for (const bad of [
+        "itsm ovement",
+        "uanble",
+        "munable",
+        "Compute and Crash",
+        "Meowsacarda",
+        "Solagaleo",
+        "increases.<",
+      ]) {
+        const hit = texts.find((t) => t.includes(bad));
+        expect(hit, `garble ${JSON.stringify(bad)} still in ${hit ?? "bundle"}`).toBeUndefined();
       }
     });
   });

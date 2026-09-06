@@ -7,7 +7,9 @@
       "kind": "replaceText",
       "pokemon": "crustle",
       "move": "rock-tomb",
-      "fields": ["descriptionAdvanced"],
+      "fields": [
+        "descriptionAdvanced"
+      ],
       "find": "for 2s",
       "replace": "for 3s",
       "why": "official Drive to Victory Rock Tomb slow 2s → 3s while UNITE-DB Advanced still says 2s"
@@ -16,7 +18,9 @@
       "kind": "replaceText",
       "pokemon": "sylveon",
       "move": "draining-kiss",
-      "fields": ["descriptionAdvanced"],
+      "fields": [
+        "descriptionAdvanced"
+      ],
       "find": "0.5s If",
       "replace": "0.5s. If",
       "why": "UNITE-DB Advanced Draining Kiss is missing the period after 0.5s"
@@ -25,7 +29,9 @@
       "kind": "replaceText",
       "pokemon": "mew",
       "move": "mystical-mirage",
-      "fields": ["descriptionAdvanced"],
+      "fields": [
+        "descriptionAdvanced"
+      ],
       "find": "5s This field",
       "replace": "5s. This field",
       "why": "UNITE-DB Advanced Mystical Mirage is missing the period after 5s"
@@ -34,7 +40,9 @@
       "kind": "replaceText",
       "pokemon": "ho-oh",
       "move": "fire-spin",
-      "fields": ["descriptionAdvanced"],
+      "fields": [
+        "descriptionAdvanced"
+      ],
       "find": "0.6s, There",
       "replace": "0.6s. There",
       "why": "UNITE-DB Advanced Fire Spin uses a comma instead of a period before There"
@@ -43,7 +51,9 @@
       "kind": "replaceText",
       "pokemon": "dodrio",
       "move": "tri-attack",
-      "fields": ["description"],
+      "fields": [
+        "description"
+      ],
       "find": "the project deals",
       "replace": "the projectile deals",
       "why": "UNITE-DB Basic Tri Attack says project instead of projectile"
@@ -52,7 +62,9 @@
       "kind": "replaceText",
       "pokemon": "gardevoir",
       "move": "synchronize",
-      "fields": ["descriptionAdvanced"],
+      "fields": [
+        "descriptionAdvanced"
+      ],
       "find": "damage-over time",
       "replace": "damage-over-time",
       "why": "UNITE-DB Advanced Synchronize drops the hyphen in damage-over-time"
@@ -61,10 +73,1607 @@
       "kind": "replaceText",
       "pokemon": "latias",
       "move": "dragon-cheer",
-      "fields": ["descriptionAdvanced"],
+      "fields": [
+        "descriptionAdvanced"
+      ],
       "find": "can the be",
       "replace": "can then be",
       "why": "UNITE-DB Advanced Dragon Cheer drops the n in then"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "A maximum of {0} use(s)",
+      "replace": "A maximum of 2 uses",
+      "why": "UNITE-DB Pay Day Basic leaves a {0} use(s) template; Advanced says 2 uses",
+      "pokemon": "meowth",
+      "move": "pay-day"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "A maximum of {0} use(s)",
+      "replace": "A maximum of 2 uses",
+      "why": "UNITE-DB Beat Up Basic leaves a {0} template; Advanced says 2 uses",
+      "pokemon": "falinks",
+      "move": "beat-up"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "Pokémon it hit.",
+      "replace": "Pokémon it hits.",
+      "why": "UNITE-DB Beat Up Basic uses hit instead of hits",
+      "pokemon": "falinks",
+      "move": "beat-up"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "hits {0} times",
+      "replace": "hits 5 times",
+      "why": "UNITE-DB Liquidation Basic leaves {0}; Advanced threshold is 5 hits, not 8 projectiles",
+      "pokemon": "inteleon",
+      "move": "liquidation"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": ", damage the opposing Pokémon takes",
+      "replace": ", the damage the opposing Pokémon takes",
+      "why": "UNITE-DB Liquidation Basic drops 'the' before damage",
+      "pokemon": "inteleon",
+      "move": "liquidation"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "2 use(s)",
+      "replace": "2 uses",
+      "why": "UNITE-DB Flame Charge Basic leaves a use(s) template",
+      "pokemon": "ceruledge",
+      "move": "flame-charge"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "2 use(s)",
+      "replace": "2 uses",
+      "why": "UNITE-DB Charge Beam Basic leaves a use(s) template",
+      "pokemon": "miraidon",
+      "move": "charge-beam"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "2 use(s)",
+      "replace": "2 uses",
+      "why": "UNITE-DB Electro Drift Basic leaves a use(s) template",
+      "pokemon": "miraidon",
+      "move": "electro-drift"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "1 stored use(s)",
+      "replace": "1 stored use",
+      "why": "UNITE-DB Parabolic Charge Basic leaves a use(s) template",
+      "pokemon": "miraidon",
+      "move": "parabolic-charge"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "3 time(s)",
+      "replace": "3 times",
+      "why": "UNITE-DB Stone Edge Basic leaves a time(s) template",
+      "pokemon": "tyranitar",
+      "move": "stone-edge"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "Pokémon it hit.",
+      "replace": "Pokémon it hits.",
+      "why": "UNITE-DB Thunder Punch Basic uses hit instead of hits",
+      "pokemon": "pawmot",
+      "move": "thunder-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "leaving the munable to act",
+      "replace": "leaving them unable to act",
+      "why": "UNITE-DB Heavy Slam Basic garbles them unable",
+      "pokemon": "dhelmise",
+      "move": "heavy-slam"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "its anchor dealing",
+      "replace": "its anchor, dealing",
+      "why": "UNITE-DB Bulldoze Basic is missing a comma",
+      "pokemon": "dhelmise",
+      "move": "bulldoze"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "used agai and",
+      "replace": "used again and",
+      "why": "UNITE-DB Shadow Claw Basic drops the n in again",
+      "pokemon": "darkrai",
+      "move": "shadow-claw"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "itsm ovement speed",
+      "replace": "its movement speed",
+      "why": "UNITE-DB Mega Lucario Power-Up Punch Basic splits its movement",
+      "pokemon": "mega-lucario",
+      "move": "power-up-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "one of the user's move hits",
+      "replace": "one of the user's moves hits",
+      "why": "UNITE-DB Mega Lucario Power-Up Punch Basic drops the s on moves",
+      "pokemon": "mega-lucario",
+      "move": "power-up-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "area of effect After using",
+      "replace": "area of effect. After using",
+      "why": "UNITE-DB Aura Cannon Basic is missing the period before After",
+      "pokemon": "mega-lucario",
+      "move": "aura-cannon"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Power-Up punch",
+      "replace": "Power-Up Punch",
+      "why": "UNITE-DB Close Combat Advanced lowercases Punch",
+      "pokemon": "mega-lucario",
+      "move": "close-combat"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "gauge When 3",
+      "replace": "gauge. When 3",
+      "why": "UNITE-DB Compute and Crush Basic is missing the period before When",
+      "pokemon": "metagross",
+      "move": "compute-and-crush"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Compute and Crash",
+      "replace": "Compute and Crush",
+      "why": "UNITE-DB Compute and Crush Advanced misspells Crush as Crash",
+      "pokemon": "metagross",
+      "move": "compute-and-crush"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "\\u201ccoached\\u201d",
+      "replace": "\"coached\"",
+      "why": "UNITE-DB Coaching Basic ships a literal \\u201c escape instead of quotes",
+      "pokemon": "mew",
+      "move": "coaching"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "coached on allies",
+      "replace": "coached allies",
+      "why": "UNITE-DB Coaching upgrade inserts a stray on",
+      "pokemon": "mew",
+      "move": "coaching"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "increases.< If",
+      "replace": "increases. If",
+      "why": "UNITE-DB Trailblaze Basic leaves a stray <",
+      "pokemon": "meowscarada",
+      "move": "trailblaze"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "The users throws",
+      "replace": "The user throws",
+      "why": "UNITE-DB Night Slash Advanced uses users instead of user",
+      "pokemon": "meowscarada",
+      "move": "night-slash"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "comet s",
+      "replace": "comets",
+      "why": "UNITE-DB Draco Meteor Basic splits comets",
+      "pokemon": "latios",
+      "move": "draco-meteor"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the move comets are summoned",
+      "replace": "the more comets are summoned",
+      "why": "UNITE-DB Draco Meteor Basic says move instead of more",
+      "pokemon": "latios",
+      "move": "draco-meteor"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "designated panel from the opposing team",
+      "replace": "designated Pokémon from the opposing team",
+      "why": "UNITE-DB Big Jaw Bite Basic says panel instead of Pokémon",
+      "pokemon": "feraligatr",
+      "move": "big-jaw-bite"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "jab the in the",
+      "replace": "jab in the",
+      "why": "UNITE-DB Peck Advanced inserts a stray the",
+      "pokemon": "dodrio",
+      "move": "peck"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "sprint gauged attack",
+      "replace": "sprint-gauge attack",
+      "why": "UNITE-DB Dodrio Attack Advanced says gauged instead of gauge",
+      "pokemon": "dodrio",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "damage over tim and",
+      "replace": "damage over time and",
+      "why": "UNITE-DB Dragon Breath Basic drops the e in time",
+      "pokemon": "dragapult",
+      "move": "dragon-breath"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "and the decreasing their",
+      "replace": "and decreasing their",
+      "why": "UNITE-DB Dragon Breath Basic inserts a stray the",
+      "pokemon": "dragapult",
+      "move": "dragon-breath"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "Dragon's Breath's cooldown",
+      "replace": "Dragon Breath's cooldown",
+      "why": "UNITE-DB Dragon Dance Basic adds a false possessive on Dragon Breath",
+      "pokemon": "dragapult",
+      "move": "dragon-dance"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "its attacks also restores HP",
+      "replace": "its attacks also restore HP",
+      "why": "UNITE-DB Dragon Dance Basic uses restores with a plural subject",
+      "pokemon": "dragapult",
+      "move": "dragon-dance"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "damaging opposing over time",
+      "replace": "damaging opposing Pokémon over time",
+      "why": "UNITE-DB Water Spout Advanced drops Pokémon",
+      "pokemon": "blastoise",
+      "move": "water-spout"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "once only Fighter Mode;",
+      "replace": "once only. Fighter Mode:",
+      "why": "UNITE-DB Volt Switch Basic glues the Fighter Mode clause",
+      "pokemon": "pawmot",
+      "move": "volt-switch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "an cone",
+      "replace": "a cone",
+      "why": "UNITE-DB Chaos Glower Basic uses an before cone",
+      "pokemon": "sableye",
+      "move": "chaos-glower"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "attacks enemies their feet",
+      "replace": "attacks enemies with their feet",
+      "why": "UNITE-DB Stomp Basic drops with",
+      "pokemon": "tsareena",
+      "move": "stomp"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "for aa set time",
+      "replace": "for a set time",
+      "why": "UNITE-DB Seismic Slam Basic doubles a",
+      "pokemon": "mega-charizard-y",
+      "move": "seismic-slam"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "boosted boosted",
+      "replace": "boosted",
+      "why": "UNITE-DB Aegislash Attack Basic repeats boosted",
+      "pokemon": "aegislash",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "time. . This",
+      "replace": "time. This",
+      "why": "UNITE-DB Freeze-Dry Basic doubles the period",
+      "pokemon": "glaceon",
+      "move": "freeze-dry"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the the amount",
+      "replace": "the amount",
+      "why": "UNITE-DB Mega Mewtwo Y Future Sight Basic repeats the",
+      "pokemon": "mewtwoy",
+      "move": "future-sight"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "in in the",
+      "replace": "in the",
+      "why": "UNITE-DB Glacial Stage Advanced repeats in",
+      "pokemon": "glaceon",
+      "move": "glacial-stage"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "within in the",
+      "replace": "within the",
+      "why": "UNITE-DB Dark Void Advanced inserts a stray in",
+      "pokemon": "darkrai",
+      "move": "dark-void"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "to marked enemy",
+      "replace": "to the marked enemy",
+      "why": "UNITE-DB Dark Void Advanced drops the",
+      "pokemon": "darkrai",
+      "move": "dark-void"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "the Enemy falls",
+      "replace": "the enemy falls",
+      "why": "UNITE-DB Dark Void Advanced capitalizes Enemy mid-sentence",
+      "pokemon": "darkrai",
+      "move": "dark-void"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "them an slowing",
+      "replace": "them and slowing",
+      "why": "UNITE-DB Red Illusion Dive Advanced says an instead of and",
+      "pokemon": "scizor",
+      "move": "red-illusion-dive"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "After a dela,",
+      "replace": "After a delay,",
+      "why": "UNITE-DB Psychic Solare Basic drops the y in delay",
+      "pokemon": "espeon",
+      "move": "psychic-solare"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "whip cream",
+      "replace": "whipped cream",
+      "why": "UNITE-DB Alcremie Attack Advanced says whip cream",
+      "pokemon": "alcremie",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "HP equals to",
+      "replace": "HP equal to",
+      "why": "UNITE-DB Bitter Blade Advanced uses equals instead of equal",
+      "pokemon": "ceruledge",
+      "move": "bitter-blade"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Every attack more damage",
+      "replace": "Every attack deals more damage",
+      "why": "UNITE-DB Livid Outrage Advanced drops deals",
+      "pokemon": "garchomp",
+      "move": "livid-outrage"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "a boosted with every",
+      "replace": "a boosted attack with every",
+      "why": "UNITE-DB Zoroark Attack Advanced drops attack",
+      "pokemon": "zoroark",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "as the user release",
+      "replace": "Has the user release",
+      "why": "UNITE-DB Metal Claw Basic truncates Has the user",
+      "pokemon": "zacian",
+      "move": "metal-claw"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "while the user in the cloud",
+      "replace": "while the user is in the cloud",
+      "why": "UNITE-DB Sand Tomb Basic drops is",
+      "pokemon": "tyranitar",
+      "move": "sand-tomb"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "times.If",
+      "replace": "times. If",
+      "why": "UNITE-DB Fire Spin Basic glues times.If",
+      "pokemon": "armarouge",
+      "move": "fire-spin"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "hits.When",
+      "replace": "hits. When",
+      "why": "UNITE-DB Aerial Ace Basic glues hits.When",
+      "pokemon": "blaziken",
+      "move": "aerial-ace"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "hits.The",
+      "replace": "hits. The",
+      "why": "UNITE-DB Fire Punch Basic glues hits.The",
+      "pokemon": "blaziken",
+      "move": "fire-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "move.When",
+      "replace": "move. When",
+      "why": "UNITE-DB Fire Punch Basic glues move.When",
+      "pokemon": "blaziken",
+      "move": "fire-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "hits.The",
+      "replace": "hits. The",
+      "why": "UNITE-DB Overheat Basic glues hits.The",
+      "pokemon": "blaziken",
+      "move": "overheat"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "direction.The",
+      "replace": "direction. The",
+      "why": "UNITE-DB Focus Blast Basic glues direction.The",
+      "pokemon": "blaziken",
+      "move": "focus-blast"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "time.If",
+      "replace": "time. If",
+      "why": "UNITE-DB Blaze Kick Basic glues time.If",
+      "pokemon": "blaziken",
+      "move": "blaze-kick"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "attacks.When",
+      "replace": "attacks. When",
+      "why": "UNITE-DB Follow Me Basic glues attacks.When",
+      "pokemon": "clefable",
+      "move": "follow-me"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "ally.Afterward",
+      "replace": "ally. Afterward",
+      "why": "UNITE-DB Wonder Wish Basic glues ally.Afterward",
+      "pokemon": "clefable",
+      "move": "wonder-wish"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "hits.At",
+      "replace": "hits. At",
+      "why": "UNITE-DB Avalanche Basic glues hits.At",
+      "pokemon": "suicune",
+      "move": "avalanche"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "hits Once",
+      "replace": "hits. Once",
+      "why": "UNITE-DB Icy Wind Basic is missing the period before Once",
+      "pokemon": "suicune",
+      "move": "icy-wind"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "its not fully",
+      "replace": "it's not fully",
+      "why": "UNITE-DB Assault Vest drops the apostrophe in it's",
+      "item": "assault-vest"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "self healing",
+      "replace": "self-healing",
+      "why": "UNITE-DB Big Root drops the hyphen in self-healing",
+      "item": "big-root"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "non movement, non auto attack",
+      "replace": "non-movement, non-auto-attack",
+      "why": "UNITE-DB Choice Scarf drops hyphens on non-movement compounds",
+      "item": "choice-scarf"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "One of the variety",
+      "replace": "One of a variety",
+      "why": "UNITE-DB Charizardite X says the variety instead of a variety",
+      "item": "charizardite-x"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "One of the variety",
+      "replace": "One of a variety",
+      "why": "UNITE-DB Charizardite Y says the variety instead of a variety",
+      "item": "charizardite-y"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "One of the variety",
+      "replace": "One of a variety",
+      "why": "UNITE-DB Gyaradosite says the variety instead of a variety",
+      "item": "gyaradosite"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "One of the variety",
+      "replace": "One of a variety",
+      "why": "UNITE-DB Lucarionite says the variety instead of a variety",
+      "item": "lucarionite"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "zone overrides the",
+      "replace": "zone override the",
+      "why": "UNITE-DB Goal Hacker uses overrides with applications",
+      "item": "goal-hacker"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies HP",
+      "replace": "the enemies' HP",
+      "why": "UNITE-DB Night Slash Basic drops the possessive on enemies",
+      "pokemon": "absol",
+      "move": "night-slash"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "the recipients Attack",
+      "replace": "the recipient's Attack",
+      "why": "UNITE-DB Helping Hand Advanced drops the possessive on recipient",
+      "pokemon": "alcremie",
+      "move": "helping-hand"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Special Attack by 25 for 3s",
+      "replace": "Special Attack by 25 for 3s.",
+      "why": "UNITE-DB Helping Hand Advanced has no closing period",
+      "pokemon": "alcremie",
+      "move": "helping-hand"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "is used the user gains",
+      "replace": "is used, the user gains",
+      "why": "UNITE-DB Snow Cloak is missing the comma after used",
+      "pokemon": "articuno",
+      "move": "snow-cloak"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "it restored",
+      "replace": "it restores",
+      "why": "UNITE-DB Whirlpool Basic uses restored instead of restores",
+      "pokemon": "azumarill",
+      "move": "whirlpool"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "the area effect",
+      "replace": "the area of effect",
+      "why": "UNITE-DB Belly Bash Advanced drops of in area of effect",
+      "pokemon": "azumarill",
+      "move": "belly-bash"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "designed direction",
+      "replace": "designated direction",
+      "why": "UNITE-DB Overheat Advanced says designed instead of designated",
+      "pokemon": "blaziken",
+      "move": "overheat"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "for a 4s",
+      "replace": "for 4s",
+      "why": "UNITE-DB Spinning Flame Kick Advanced inserts a stray a",
+      "pokemon": "blaziken",
+      "move": "spinning-flame-kick"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "allies movement speed",
+      "replace": "allies' movement speed",
+      "why": "UNITE-DB Helping Hand Basic drops the possessive on allies",
+      "pokemon": "blissey",
+      "move": "helping-hand"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "designated ally HP",
+      "replace": "designated ally's HP",
+      "why": "UNITE-DB Heal Pulse Basic drops the possessive on ally",
+      "pokemon": "blissey",
+      "move": "heal-pulse"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "overwrites",
+      "replace": "overwrite",
+      "why": "UNITE-DB Soft-Boiled Advanced uses overwrites with a plural subject",
+      "pokemon": "blissey",
+      "move": "soft-boiled"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "all status condition",
+      "replace": "all status conditions",
+      "why": "UNITE-DB Natural Cure Basic uses singular condition after all",
+      "pokemon": "blissey",
+      "move": "natural-cure"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "buzzwole can",
+      "replace": "Buzzwole can",
+      "why": "UNITE-DB Smack Down Advanced lowercases Buzzwole",
+      "pokemon": "buzzwole",
+      "move": "smack-down"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "in the zone or enter the zone",
+      "replace": "in the zone or that enter the zone",
+      "why": "UNITE-DB Imprison Advanced drops that before enter",
+      "pokemon": "chandelure",
+      "move": "imprison"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Attention of enemies hit and enemies near the designated location are drawn",
+      "replace": "The attention of enemies hit and enemies near the designated location is drawn",
+      "why": "UNITE-DB Follow Me Advanced has a broken attention clause",
+      "pokemon": "clefable",
+      "move": "follow-me"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "HP with for each",
+      "replace": "HP for each",
+      "why": "UNITE-DB Synthesis Advanced inserts a stray with",
+      "pokemon": "comfey",
+      "move": "synthesis"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "rocks damage nearby",
+      "replace": "rocks damages nearby",
+      "why": "UNITE-DB Rubble Rouser Advanced uses damage with a singular subject",
+      "pokemon": "crustle",
+      "move": "rubble-rouser"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "uses this boosted,",
+      "replace": "uses this boosted attack,",
+      "why": "UNITE-DB Bad Dreams drops attack after boosted",
+      "pokemon": "darkrai",
+      "move": "bad-dreams"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "turn the boosted and all",
+      "replace": "turn the boosted attack and all",
+      "why": "UNITE-DB Nasty Plot Advanced drops attack after boosted",
+      "pokemon": "darkrai",
+      "move": "nasty-plot"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies remaining HP",
+      "replace": "the enemies' remaining HP",
+      "why": "UNITE-DB Razor Leaf Basic drops the possessive on enemies",
+      "pokemon": "decidueye",
+      "move": "razor-leaf"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies remaining HP",
+      "replace": "the enemies' remaining HP",
+      "why": "UNITE-DB Nock Nock Basic drops the possessive on enemies",
+      "pokemon": "decidueye",
+      "move": "nock-nock"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "and recover 5%",
+      "replace": "and recovers 5%",
+      "why": "UNITE-DB Dratini Attack Basic uses recover with a singular subject",
+      "pokemon": "dragonite",
+      "move": "attack---dratini"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Opposing Duraludon's can",
+      "replace": "Opposing Duraludons can",
+      "why": "UNITE-DB Dragon Pulse Advanced uses a false possessive on Duraludons",
+      "pokemon": "duraludon",
+      "move": "dragon-pulse"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "a shield for 3s, can stack",
+      "replace": "a shield for 3s that can stack",
+      "why": "UNITE-DB Stealth Rock Advanced drops that before can stack",
+      "pokemon": "duraludon",
+      "move": "stealth-rock"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "Increased the shield",
+      "replace": "Increases the shield",
+      "why": "UNITE-DB Metal Claw upgrade uses Increased instead of Increases",
+      "pokemon": "empoleon",
+      "move": "metal-claw"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "when the blasts hits",
+      "replace": "when the blasts hit",
+      "why": "UNITE-DB Future Sight Basic uses hits with a plural subject",
+      "pokemon": "espeon",
+      "move": "future-sight"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "targets missing HP",
+      "replace": "target's missing HP",
+      "why": "UNITE-DB Future Sight Advanced drops the possessive on target",
+      "pokemon": "espeon",
+      "move": "future-sight"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Natural cure",
+      "replace": "Natural Cure",
+      "why": "UNITE-DB Future Sight Advanced lowercases Cure",
+      "pokemon": "espeon",
+      "move": "future-sight"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Espeons relative",
+      "replace": "Espeon's relative",
+      "why": "UNITE-DB Psybeam Advanced drops the possessive on Espeon",
+      "pokemon": "espeon",
+      "move": "psybeam"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "that enemies movement",
+      "replace": "that enemy's movement",
+      "why": "UNITE-DB Icy Wind Basic drops the possessive on enemy",
+      "pokemon": "glaceon",
+      "move": "icy-wind"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "The defenses bonus",
+      "replace": "The defense bonus",
+      "why": "UNITE-DB Muddy Water Advanced pluralizes defense",
+      "pokemon": "goodra",
+      "move": "muddy-water"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": ", Decreases their",
+      "replace": ", decreases their",
+      "why": "UNITE-DB Gooey capitalizes Decreases mid-sentence",
+      "pokemon": "goodra",
+      "move": "gooey"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "While the Ho-Oh is",
+      "replace": "While Ho-Oh is",
+      "why": "UNITE-DB Sky Attack inserts a stray the before Ho-Oh",
+      "pokemon": "ho-oh",
+      "move": "sky-attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "may be always revived",
+      "replace": "may always be revived",
+      "why": "UNITE-DB Rekindling Flame Advanced splits always",
+      "pokemon": "ho-oh",
+      "move": "rekindling-flame"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "shoves in the direction",
+      "replace": "shoves it in the direction",
+      "why": "UNITE-DB Ice Shard Advanced drops it",
+      "pokemon": "lapras",
+      "move": "ice-shard"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "Latias or Latios deal damage",
+      "replace": "Latias or Latios deals damage",
+      "why": "UNITE-DB Mist Ball Basic uses deal with an either/or subject",
+      "pokemon": "latias",
+      "move": "mist-ball"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "and damage they deal",
+      "replace": "and the more damage they deal",
+      "why": "UNITE-DB Dragon Pulse Basic drops the more before damage",
+      "pokemon": "latios",
+      "move": "dragon-pulse"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "itself and with a ring",
+      "replace": "itself with a ring",
+      "why": "UNITE-DB Leaf Blade Advanced inserts a stray and",
+      "pokemon": "leafeon",
+      "move": "leaf-blade"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "enemy on the outer ring",
+      "replace": "enemy on the outer ring.",
+      "why": "UNITE-DB Leaf Blade Advanced has no closing period",
+      "pokemon": "leafeon",
+      "move": "leaf-blade"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Each fan, the first leaf",
+      "replace": "For each fan, the first leaf",
+      "why": "UNITE-DB Razor Leaf Advanced drops For before each fan",
+      "pokemon": "leafeon",
+      "move": "razor-leaf"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "a boosted attack non-Chlorophyll empowered",
+      "replace": "a boosted attack, non-Chlorophyll empowered",
+      "why": "UNITE-DB Aerial Ace Advanced is missing a comma",
+      "pokemon": "leafeon",
+      "move": "aerial-ace"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies remaining HP",
+      "replace": "the enemies' remaining HP",
+      "why": "UNITE-DB Power-Up Punch Basic drops the possessive on enemies",
+      "pokemon": "lucario",
+      "move": "power-up-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "auto attacks increases",
+      "replace": "auto attacks increase",
+      "why": "UNITE-DB Cross Chop Advanced uses increases with a plural subject",
+      "pokemon": "machamp",
+      "move": "cross-chop"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "and become immune",
+      "replace": "and becomes immune",
+      "why": "UNITE-DB Submission Basic uses become with a singular subject",
+      "pokemon": "machamp",
+      "move": "submission"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "movement speed and basic attack speed is increased",
+      "replace": "movement speed and basic attack speed are increased",
+      "why": "UNITE-DB Dynamic Punch Basic uses is with a compound subject",
+      "pokemon": "machamp",
+      "move": "dynamic-punch"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "then becoming invincible",
+      "replace": "then becomes invincible",
+      "why": "UNITE-DB Mystical Mirage Advanced uses becoming instead of becomes",
+      "pokemon": "mew",
+      "move": "mystical-mirage"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "deal increased damage and becomes a boosted attack with every third attack",
+      "replace": "every third attack deals increased damage and becomes a boosted attack",
+      "why": "UNITE-DB Mega Mewtwo X Attack drops the subject of the Mega Evolve clause",
+      "pokemon": "mewtwox",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "damage dealt increases",
+      "replace": "damage dealt increase",
+      "why": "UNITE-DB Teleport Basic uses increases with a compound subject",
+      "pokemon": "mewtwoy",
+      "move": "teleport"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "and refresh the duration",
+      "replace": "and refreshes the duration",
+      "why": "UNITE-DB Shadow Sneak Advanced uses refresh with a singular subject",
+      "pokemon": "mimikyu",
+      "move": "shadow-sneak"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies remaining HP",
+      "replace": "the enemies' remaining HP",
+      "why": "UNITE-DB Electro Ball Basic drops the possessive on enemies",
+      "pokemon": "pikachu",
+      "move": "electro-ball"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "If this move it used again",
+      "replace": "If this move is used again",
+      "why": "UNITE-DB Psychic Basic says it used instead of is used",
+      "pokemon": "psyduck",
+      "move": "psychic"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "charge boosted attack immediately",
+      "replace": "charge a boosted attack immediately",
+      "why": "UNITE-DB Sableye Attack Basic drops a before boosted",
+      "pokemon": "sableye",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "slowing 20% for 2s",
+      "replace": "slowing them by 20% for 2s",
+      "why": "UNITE-DB Thief Advanced drops them by before 20%",
+      "pokemon": "sableye",
+      "move": "thief"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "stealth's Sableye",
+      "replace": "stealths Sableye",
+      "why": "UNITE-DB Shadow Sneak Advanced uses stealth's instead of stealths",
+      "pokemon": "sableye",
+      "move": "shadow-sneak"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "status condition;",
+      "replace": "status conditions;",
+      "why": "UNITE-DB Endless Ice Spikes Advanced uses singular condition",
+      "pokemon": "suicune",
+      "move": "endless-ice-spikes"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Sylveon and the target is",
+      "replace": "Sylveon and the target are",
+      "why": "UNITE-DB Draining Kiss Advanced uses is with a compound subject",
+      "pokemon": "sylveon",
+      "move": "draining-kiss"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies defense",
+      "replace": "the enemies' Defense",
+      "why": "UNITE-DB Flame Charge Basic drops the possessive on enemies",
+      "pokemon": "talonflame",
+      "move": "flame-charge"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "and heal for 5%",
+      "replace": "and healing for 5%",
+      "why": "UNITE-DB Trevenant Attack Advanced uses heal instead of healing",
+      "pokemon": "trevenant",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description",
+        "descriptionAdvanced"
+      ],
+      "find": "moves damage",
+      "replace": "moves damages",
+      "why": "UNITE-DB Natural Cure uses damage with a singular moves subject",
+      "pokemon": "trevenant",
+      "move": "natural-cure"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "Pokémon, damage nearby",
+      "replace": "Pokémon, damaging nearby",
+      "why": "UNITE-DB Tsareena Attack Basic uses damage instead of damaging",
+      "pokemon": "tsareena",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "Bounsweet, Steenee;",
+      "replace": "Bounsweet or Steenee,",
+      "why": "UNITE-DB Oblivious Basic lists Bounsweet, Steenee without or",
+      "pokemon": "tsareena",
+      "move": "oblivious"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "and inflicts a burn",
+      "replace": "and inflict a burn",
+      "why": "UNITE-DB Ember Advanced uses inflicts after will target",
+      "pokemon": "typhlosion",
+      "move": "ember"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "and begin snarling",
+      "replace": "and begins snarling",
+      "why": "UNITE-DB Snarl Advanced uses begin with a singular subject",
+      "pokemon": "umbreon",
+      "move": "snarl"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "the enemies missing HP",
+      "replace": "the enemies' missing HP",
+      "why": "UNITE-DB Wicked Blow Advanced drops the possessive on enemies",
+      "pokemon": "urshifu",
+      "move": "wicked-blow"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "Has the user shoots",
+      "replace": "Has the user shoot",
+      "why": "UNITE-DB Swift Advanced uses shoots after Has the user",
+      "pokemon": "vaporeon",
+      "move": "swift"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "wave gains a buff",
+      "replace": "wave gain a buff",
+      "why": "UNITE-DB Aqua Ring Advanced uses gains with a plural subject",
+      "pokemon": "vaporeon",
+      "move": "aqua-ring"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "and make them immune",
+      "replace": "and making them immune",
+      "why": "UNITE-DB Starlight Recital Basic uses make instead of making",
+      "pokemon": "wigglytuff",
+      "move": "starlight-recital"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "an enemies attack",
+      "replace": "an enemy's attack",
+      "why": "UNITE-DB Cute Charm Basic uses enemies instead of enemy's",
+      "pokemon": "wigglytuff",
+      "move": "cute-charm"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "is increased, deals increased damage and also slows of Pokémon",
+      "replace": "is increased, it deals increased damage and also slows Pokémon",
+      "why": "UNITE-DB Slash Advanced drops it and inserts of after slows",
+      "pokemon": "zacian",
+      "move": "slash"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "descriptionAdvanced"
+      ],
+      "find": "and then unleashes",
+      "replace": "and then unleash",
+      "why": "UNITE-DB Sovereign Sword Advanced uses unleashes after Has the user",
+      "pokemon": "zacian",
+      "move": "sovereign-sword"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "and become invincible",
+      "replace": "and becomes invincible",
+      "why": "UNITE-DB Feint Basic uses become with a singular subject",
+      "pokemon": "cinderace",
+      "move": "feint"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies movement",
+      "replace": "the enemies' movement",
+      "why": "UNITE-DB Eldegoss Attack Basic drops the possessive on enemies",
+      "pokemon": "eldegoss",
+      "move": "attack"
+    },
+    {
+      "kind": "replaceText",
+      "fields": [
+        "description"
+      ],
+      "find": "the enemies remaining HP",
+      "replace": "the enemies' remaining HP",
+      "why": "UNITE-DB Greninja Attack Basic drops the possessive on enemies",
+      "pokemon": "greninja",
+      "move": "attack"
     }
   ]
 }
