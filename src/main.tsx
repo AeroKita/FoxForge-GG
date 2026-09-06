@@ -2,6 +2,7 @@ import { Component, StrictMode, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import { APP_NAME } from "./ui/brand";
 
 class BootErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
   state = { error: null as Error | null };
@@ -14,7 +15,7 @@ class BootErrorBoundary extends Component<{ children: ReactNode }, { error: Erro
     if (this.state.error) {
       return (
         <div className="mx-auto max-w-md p-6 pt-16 text-center font-sans text-ink">
-          <h1 className="mb-2 text-lg font-semibold">FoxForge GG couldn&apos;t start</h1>
+          <h1 className="mb-2 text-lg font-semibold">{APP_NAME} couldn&apos;t start</h1>
           <p className="mb-4 text-sm text-muted">{this.state.error.message}</p>
           <button
             type="button"

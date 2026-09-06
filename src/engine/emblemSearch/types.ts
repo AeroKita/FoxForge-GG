@@ -4,7 +4,7 @@
  * Algorithm provenance: algorithms in this module are a clean-room TypeScript
  * reimplementation inspired by the combinatorial search techniques in
  * uniteemblemfinder.github.io (AGPL-3.0). No source was copied verbatim;
- * all code is an independent port to the FoxForge-GG type system.
+ * all code is an independent port to the FoxForge-UNITE type system.
  */
 
 import type {

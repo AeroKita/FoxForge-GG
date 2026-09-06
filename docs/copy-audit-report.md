@@ -1,4 +1,4 @@
-# FoxForge GG end-user copy audit (full roster)
+# FoxForge UNITE end-user copy audit (full roster)
 
 **Coverage:** every Pokémon Basic + Advanced move and passive in `src/data/patch-current.json` (100 Pokémon, 1,660 description fields), plus all 41 held-item descriptions (and labels/tiers), and the 10 battle-item descriptions users see in tooltips.
 

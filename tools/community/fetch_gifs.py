@@ -16,7 +16,7 @@ PUBLIC = PROJECT / "public" / "assets"
 OUT = HERE / "move_gifs.json"
 API = "https://pokemonunite.fandom.com/api.php"
 WIDTH = 180  # fandom serves an animated WebP at this scaled width
-UA = "FoxForge-GG art mirror (non-commercial; github.com/AeroKita/FoxForge-GG)"
+UA = "FoxForge-UNITE art mirror (non-commercial; github.com/AeroKita/FoxForge-UNITE)"
 PAGE_ALIASES = {
     "Mega Charizard X": "Charizard", "Mega Charizard Y": "Charizard",
     "Mega Gyarados": "Gyarados", "Mega Lucario": "Lucario",

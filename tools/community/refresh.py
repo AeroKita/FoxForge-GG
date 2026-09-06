@@ -1,4 +1,4 @@
-"""One-command orchestrator for the FoxForge GG data pipeline."""
+"""One-command orchestrator for the FoxForge UNITE data pipeline."""
 
 from __future__ import annotations
 
@@ -130,7 +130,7 @@ def run_mode(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run the FoxForge GG data pipeline in one command.",
+        description="Run the FoxForge UNITE data pipeline in one command.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""Modes:
   full          (default) doctor → fetch → transcode → normalize →

@@ -1,8 +1,8 @@
-# Contributing to FoxForge GG
+# Contributing to FoxForge UNITE
 
 Thanks for helping forge better UNITE loadouts! This is a step-by-step guide to getting set up, making a change, and opening a pull request that passes review on the first try.
 
-FoxForge GG is a non-commercial fan project under [AGPL-3.0-only](LICENSE). By contributing, you agree your work is licensed the same way.
+FoxForge UNITE is a non-commercial fan project under [AGPL-3.0-only](LICENSE). By contributing, you agree your work is licensed the same way.
 
 The authoritative description of *how the project works* lives in [`AGENTS.md`](AGENTS.md). Deeper dives live in [`docs/`](docs/).
 
@@ -11,13 +11,13 @@ The authoritative description of *how the project works* lives in [`AGENTS.md`](
 Set these up once before your first contribution.
 
 1. **Install Node.js 24+.** The exact major is pinned in [`.node-version`](.node-version) and matched by CI; anything older may pass locally and fail in CI.
-2. **Have `git` and a GitHub account.** Contributions land through pull requests against [`AeroKita/FoxForge-GG`](https://github.com/AeroKita/FoxForge-GG).
+2. **Have `git` and a GitHub account.** Contributions land through pull requests against [`AeroKita/FoxForge-UNITE`](https://github.com/AeroKita/FoxForge-UNITE).
 3. **(Game-data work only) Install Python 3.** You only need it if you intend to refresh game data via `tools/community/`. App and engine changes do not require Python. Run `npm run data:doctor` first to confirm your environment; for step-by-step content updates (new Pokémon, items, builds, or clips), follow [`docs/11-adding-content.md`](docs/11-adding-content.md).
 4. **Clone and install.** This also installs the Husky pre-commit hook (via the `prepare` script), which auto-formats your staged TypeScript on commit.
 
 ```bash
-git clone https://github.com/AeroKita/FoxForge-GG.git
-cd FoxForge-GG
+git clone https://github.com/AeroKita/FoxForge-UNITE.git
+cd FoxForge-UNITE
 npm install
 ```
 

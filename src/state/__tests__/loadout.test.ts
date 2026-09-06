@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, it, expect, vi } from "vitest";
+import { APP_NAME } from "../../ui/brand";
 import {
   emptyLoadout,
   encodeLoadout,
@@ -133,6 +134,22 @@ describe("loadout file export/import", () => {
 
   it("round-trips a loadout through the file wrapper", () => {
     expect(parseLoadoutFile(loadoutToFileJSON(sample))).toEqual(sample);
+  });
+
+  it("labels the export with the current app name", () => {
+    const parsed = JSON.parse(loadoutToFileJSON(sample)) as { app: string };
+    expect(parsed.app).toBe(APP_NAME);
+  });
+
+  it("imports a file exported under the previous FoxForge GG app label", () => {
+    const legacy = {
+      app: "FoxForge GG",
+      kind: "foxforge.loadout",
+      schemaVersion: 1,
+      exportedAt: 0,
+      loadout: sample,
+    };
+    expect(parseLoadoutFile(JSON.stringify(legacy))).toEqual(sample);
   });
 
   it("accepts a bare loadout object (no wrapper)", () => {

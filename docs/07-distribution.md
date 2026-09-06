@@ -24,8 +24,7 @@ service worker auto-updates it on reload.
 ## One-time setup (in GitHub repo settings)
 
 1. **Pages**: Settings → Pages → Source = GitHub Actions.
-2. If the repo/owner ever changes, update the data URLs in `dataSource.ts` (`DATA_BASE`,
-   or set `VITE_DATA_BASE_URL`) and `data.yml`.
+2. If the repo/owner ever changes, update `GITHUB_REPO_SLUG` in `src/ui/brand.ts`, `VITE_BASE` in `package.json` (`build:pages`), and `BASE_URL` in `tools/community/publish_bundle.py`. You can still override the fetch URL at build time with `VITE_DATA_BASE_URL`.
 
 ## Notes
 

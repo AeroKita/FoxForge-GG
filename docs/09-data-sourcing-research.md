@@ -1,7 +1,7 @@
 # Data Sourcing Research — where UNITE data actually comes from
 
 Research into how unite-db.com and uniteapi.dev obtain their Pokémon UNITE data,
-and what that means for keeping FoxForge GG updated. (Findings as of June 2026.)
+and what that means for keeping FoxForge UNITE updated. (Findings as of June 2026.)
 
 ## TL;DR
 - **No official API exists.** Nintendo/TiMi publish no "gamemaster" data file; every
@@ -48,7 +48,7 @@ CloudFront CDN. An unofficial wrapper exists: <https://github.com/jaynewey/py-un
 - <https://github.com/hiramr97/unite-database>
 - <https://github.com/pvpoke/pvpoke-unite>
 
-## Plan for FoxForge GG updates (tiered)
+## Plan for FoxForge UNITE updates (tiered)
 
 **Tier 1 — Keep UNITE-DB as primary (recommended; already built).** Best-curated, includes
 builds. Harden: pin endpoints, zod-validate on fetch (done), **alert on schema drift**, add a

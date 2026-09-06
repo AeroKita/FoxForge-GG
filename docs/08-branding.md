@@ -10,17 +10,22 @@ full, exact process.
 Edit [`src/ui/brand.ts`](../src/ui/brand.ts):
 
 ```ts
-export const APP_NAME = "FoxForge GG";          // header title, HTML <title>, PWA name
+export const APP_NAME = "FoxForge UNITE";        // header title, HTML <title>, PWA name
 export const APP_SHORT_NAME = "FoxForge";        // PWA home-screen label
 export const APP_TAGLINE = "Forge your UNITE Loadout!"; // header subtitle
 export const APP_DESCRIPTION = "…";              // PWA + meta description
+export const GITHUB_REPO_SLUG = "FoxForge-UNITE"; // repo name, Pages path, VITE_BASE
 ```
 
 That single file drives:
 - the in-app header title + tagline ([`src/App.tsx`](../src/App.tsx)),
 - the browser tab title (`index.html` `__APP_NAME__` placeholder, replaced by the
   `htmlBranding` plugin in [`vite.config.ts`](../vite.config.ts)),
-- the PWA manifest `name` / `short_name` / `description`.
+- the PWA manifest `name` / `short_name` / `description`,
+- exported loadout `app` labels ([`src/state/loadout.ts`](../src/state/loadout.ts)),
+- the default remote data URL ([`src/data/dataSource.ts`](../src/data/dataSource.ts)).
+
+If you change `GITHUB_REPO_SLUG`, also update the same slug in `package.json` (`build:pages` `VITE_BASE`) and `tools/community/publish_bundle.py` (`BASE_URL`). Those files cannot import TypeScript.
 
 ### 2. Do NOT change
 

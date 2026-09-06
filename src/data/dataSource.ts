@@ -10,12 +10,11 @@
 //   <base>/manifest.json -> { "version": "2026-06-20", "patchVersion": "1.24.0.0", "url": "<base>/patch-1.24.0.0.json" }
 //   <base>/patch-x.y.z.json -> a full GameDataBundle
 
+import { PAGES_DATA_BASE } from "../ui/brand";
 import { loadBundle } from "./loadBundle";
 
 const CACHE_KEY = "unite-build-optimizer.dataCache.v1";
-const DATA_BASE =
-  (import.meta.env.VITE_DATA_BASE_URL as string | undefined) ??
-  "https://aerokita.github.io/FoxForge-GG/data";
+const DATA_BASE = (import.meta.env.VITE_DATA_BASE_URL as string | undefined) ?? PAGES_DATA_BASE;
 const MANIFEST_URL = `${DATA_BASE}/manifest.json`;
 
 interface CacheEntry {

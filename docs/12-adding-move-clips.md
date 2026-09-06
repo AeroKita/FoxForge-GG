@@ -1,6 +1,6 @@
 # Adding Move Clips
 
-Data/asset work only — no TypeScript changes. Run from the `FoxForge-GG/` folder.
+Data/asset work only — no TypeScript changes. Run from the `FoxForge-UNITE/` folder.
 
 ## Prerequisites
 

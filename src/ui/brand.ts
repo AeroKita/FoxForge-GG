@@ -7,7 +7,7 @@
 // alongside this file for a full rename — see docs/08-branding.md for the list
 // and the icon-regeneration process.
 
-export const APP_NAME = "FoxForge GG";
+export const APP_NAME = "FoxForge UNITE";
 
 // Compact form for tight spots (home-screen PWA label, etc.).
 export const APP_SHORT_NAME = "FoxForge";
@@ -17,7 +17,14 @@ export const APP_TAGLINE = "Forge your UNITE Loadout!";
 
 // Used for the PWA manifest + meta description.
 export const APP_DESCRIPTION =
-  "FoxForge GG — design optimized Pokémon UNITE loadouts: emblems, held & trainer items, attack speed, and live stats.";
+  "FoxForge UNITE — design optimized Pokémon UNITE loadouts: emblems, held & trainer items, attack speed, and live stats.";
+
+// GitHub repo slug + hosted Pages URLs. Display name stays "FoxForge UNITE";
+// the hyphenated slug is for paths, remotes, and VITE_BASE.
+export const GITHUB_REPO_SLUG = "FoxForge-UNITE";
+export const GITHUB_REPO = `AeroKita/${GITHUB_REPO_SLUG}`;
+export const PAGES_BASE_PATH = `/${GITHUB_REPO_SLUG}/`;
+export const PAGES_DATA_BASE = `https://aerokita.github.io/${GITHUB_REPO_SLUG}/data`;
 
 // ---------------------------------------------------------------- ownership --
 // The person/handle who created + maintains the project. Surfaced in

@@ -1,4 +1,4 @@
-"""Environment preflight for FoxForge GG data pipeline maintainers."""
+"""Environment preflight for FoxForge UNITE data pipeline maintainers."""
 
 from __future__ import annotations
 

@@ -2,7 +2,7 @@
  * Emblem → EmblemCandidate adapter.
  *
  * Provenance: clean-room TypeScript port of pool-building concepts from
- * uniteemblemfinder.github.io, adapted for FoxForge-GG's type system.
+ * uniteemblemfinder.github.io, adapted for FoxForge-UNITE's type system.
  */
 
 import type { Emblem, EmblemGrade } from "../../types";

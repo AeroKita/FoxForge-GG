@@ -3,6 +3,7 @@
 // (battle) item, an emblem set, and which active effects are toggled on.
 
 import type { EmblemGrade } from "../types";
+import { APP_NAME } from "../ui/brand";
 import { generateId } from "../utils/generateId";
 
 export interface EmblemPick {
@@ -185,7 +186,7 @@ export interface LoadoutFile {
 /** Serialize the current loadout into a shareable, versioned JSON string. */
 export function loadoutToFileJSON(loadout: Loadout): string {
   const payload: LoadoutFile = {
-    app: "FoxForge GG",
+    app: APP_NAME,
     kind: FILE_KIND,
     schemaVersion: FILE_SCHEMA_VERSION,
     exportedAt: Date.now(),

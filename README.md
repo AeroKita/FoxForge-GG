@@ -1,4 +1,4 @@
-# FoxForge GG
+# FoxForge UNITE
 
 **Forge your UNITE loadout!** A build optimizer for Pokémon UNITE that helps
 players design optimized builds — recommending Emblem loadouts and Held Items
@@ -11,7 +11,7 @@ Two ways to use the tool — pick whichever suits you.
 
 ### 1. Use it in your browser (no install)
 
-Open the hosted web app: **<https://aerokita.github.io/FoxForge-GG/>**
+Open the hosted web app: **<https://aerokita.github.io/FoxForge-UNITE/>**
 
 It's a PWA, so you can "Install" it from the browser for an app-like, offline-capable
 window. It updates automatically on reload.
@@ -21,8 +21,8 @@ window. It updates automatically on reload.
 Requires **[Node.js](https://nodejs.org) 24+** (matches CI). Version is pinned in [`.nvmrc`](.nvmrc) — use [NVM](https://github.com/nvm-sh/nvm). Clone, install, and start the dev server:
 
 ```bash
-git clone https://github.com/AeroKita/FoxForge-GG.git
-cd FoxForge-GG
+git clone https://github.com/AeroKita/FoxForge-UNITE.git
+cd FoxForge-UNITE
 nvm install && nvm use   # reads .nvmrc
 npm install
 npm run dev        # open the printed URL (default http://localhost:5173)
@@ -162,7 +162,7 @@ and recompute pick it up automatically.
 - [x] **Themes** — light + dark (neon "Neo"-derived palette), toggleable in the header and
   persisted; all surfaces read from semantic Tailwind tokens ([`src/index.css`](src/index.css)).
 - [x] **Distribution** ([docs/07-distribution.md](docs/07-distribution.md)) — hosted web app +
-  installable PWA on [GitHub Pages](https://aerokita.github.io/FoxForge-GG/)
+  installable PWA on [GitHub Pages](https://aerokita.github.io/FoxForge-UNITE/)
   ([`pages.yml`](.github/workflows/pages.yml)); the service worker auto-updates the app on
   reload. Game-data updates are fetched at runtime from Pages
   ([`SettingsMenu.tsx`](src/components/SettingsMenu.tsx)), so a patch needs no app rebuild.

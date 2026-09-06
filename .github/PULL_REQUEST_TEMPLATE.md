@@ -1,5 +1,5 @@
 <!--
-Thanks for contributing to FoxForge GG! Keep this short — describe the change so the
+Thanks for contributing to FoxForge UNITE! Keep this short — describe the change so the
 diff is legible, don't restate it. The PR title should be a conventional-commit line
 (feat/fix/chore/docs/refactor/test), so there's no "type of change" box to tick here.
 -->

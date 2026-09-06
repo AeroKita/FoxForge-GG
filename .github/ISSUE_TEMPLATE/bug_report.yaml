@@ -56,9 +56,9 @@ body:
   - type: dropdown
     id: environment
     attributes:
-      label: Where are you running FoxForge GG?
+      label: Where are you running FoxForge UNITE?
       options:
-        - Hosted app (aerokita.github.io/FoxForge-GG)
+        - Hosted app (aerokita.github.io/FoxForge-UNITE)
         - Local dev (`npm run dev`)
         - Installed PWA
         - Not sure

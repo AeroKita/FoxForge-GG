@@ -19,7 +19,7 @@ describe("published bundle sync", () => {
     expect(manifest).toEqual({
       version: VER,
       patchVersion: PATCH,
-      url: `https://aerokita.github.io/FoxForge-GG/data/patch-${PATCH}.json`,
+      url: `https://aerokita.github.io/FoxForge-UNITE/data/patch-${PATCH}.json`,
     });
   });
 });

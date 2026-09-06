@@ -27,8 +27,8 @@ Do not edit `src/data/patch-current.json` or `public/data/patch-….json` to fix
 
 ### How to read the commands in this doc
 
-1. **Project folder** = the `FoxForge-GG` directory on your computer (the one that contains `package.json`). Before any `npm …` or `git …` command, make that folder your terminal’s current directory.
-2. **Check you are in the right folder:** run `pwd`. The printed path should end with `FoxForge-GG`.
+1. **Project folder** = the `FoxForge-UNITE` directory on your computer (the one that contains `package.json`). Before any `npm …` or `git …` command, make that folder your terminal’s current directory.
+2. **Check you are in the right folder:** run `pwd`. The printed path should end with `FoxForge-UNITE`.
 3. **Angle-bracket placeholders are not typed literally.** Replace them, and omit the `<` and `>`:
    - `<id>` → Pokémon slug, lowercase with hyphens (example: `reshiram`, not `Reshiram`)
    - `<Name>` → display name (example: `Reshiram`)
@@ -52,10 +52,10 @@ Architecture detail: [`AGENTS.md`](../AGENTS.md). Clips deep dive: [`12-adding-m
 2. Go to the project folder. Example if the repo lives in your home Documents area:
 
 ```bash
-cd "/Users/aerokita/UNITE Build Project/FoxForge-GG"
+cd "/Users/aerokita/UNITE Build Project/FoxForge-UNITE"
 ```
 
-   Use your real path if different. Confirm with `pwd` (path should end with `FoxForge-GG`).
+   Use your real path if different. Confirm with `pwd` (path should end with `FoxForge-UNITE`).
 3. Install/select the Node version this repo wants (files `.nvmrc` and `.node-version` both say `24`). [NVM](https://github.com/nvm-sh/nvm) must already be installed:
 
 ```bash
@@ -84,7 +84,7 @@ npm run data:doctor
 
 ### A1 — GitHub only (no laptop)
 
-1. Open the FoxForge-GG repo on GitHub in a browser.
+1. Open the FoxForge-UNITE repo on GitHub in a browser.
 2. Click **Actions** → **Refresh game data** → **Run workflow**.
 3. Optional: set `patch_version` (e.g. `1.23.3.12`) when the in-game patch id changed.
 4. Wait for GitHub to open a **pull request** (a proposed change) from the branch named `data/auto-refresh`.
@@ -99,7 +99,7 @@ npm run data:doctor
 
 ### A2 — Terminal
 
-1. Open Terminal and go to the project folder (`pwd` should end with `FoxForge-GG`).
+1. Open Terminal and go to the project folder (`pwd` should end with `FoxForge-UNITE`).
 2. Refresh game data. If the in-game patch id did **not** change, omit `--patch-version …` entirely:
 
 ```bash
@@ -134,7 +134,7 @@ Hand work is usually:
 3. Optional app version bump
 4. Optional clips
 
-Before any command below: your terminal’s current directory must be the `FoxForge-GG` project folder (`pwd` ends with `FoxForge-GG`). Commands are not “inside” that folder as a list — you run them **while you are in** that folder.
+Before any command below: your terminal’s current directory must be the `FoxForge-UNITE` project folder (`pwd` ends with `FoxForge-UNITE`). Commands are not “inside” that folder as a list — you run them **while you are in** that folder.
 
 Replace placeholders as in [How to read the commands](#how-to-read-the-commands-in-this-doc).
 
@@ -259,7 +259,7 @@ npm run data:refresh -- --mode clips
 
 Short path when the Pokémon is **already** in the bundle (already appears in the app’s data):
 
-1. In Terminal, go to the `FoxForge-GG` project folder (`pwd` ends with `FoxForge-GG`).
+1. In Terminal, go to the `FoxForge-UNITE` project folder (`pwd` ends with `FoxForge-UNITE`).
 2. Copy 1280×720 video files into `tools/community/_clips/<id>/`, named `<skill-id>.mp4` (example folder: `tools/community/_clips/reshiram/blue-flare.mp4`).
 3. Process clips only:
 
@@ -287,7 +287,7 @@ git push
 
 ### D — Phase A (ship a placeholder)
 
-1. In Terminal, go to the `FoxForge-GG` project folder.
+1. In Terminal, go to the `FoxForge-UNITE` project folder.
 2. Append rows to `tools/community/_raw/pokemon.json` and `tools/community/_raw/stats.json` (copy stats from a similar mon; leave `rsb` empty; use a temporary numeric `id` of 900 or higher).
 3. Add Basic text in `move_descriptions.json`.
 4. Add curated `builds` using [B steps 8–15](#b--do-now) (scaffold → fill → check → `--mode curate` → gaps).
@@ -335,7 +335,7 @@ npm run data:gaps
 
 ## Command cheat sheet
 
-Use while mid-path. Skip if you already know the command. All of these assume your terminal is already in the `FoxForge-GG` project folder.
+Use while mid-path. Skip if you already know the command. All of these assume your terminal is already in the `FoxForge-UNITE` project folder.
 
 | Command | When |
 | --- | --- |

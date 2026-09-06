@@ -4,16 +4,16 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
-import { APP_NAME, APP_SHORT_NAME, APP_DESCRIPTION } from "./src/ui/brand";
+import { APP_NAME, APP_SHORT_NAME, APP_DESCRIPTION, PAGES_BASE_PATH } from "./src/ui/brand";
 
 // Single source for the displayed version: package.json. Injected via `define` below.
 const { version } = createRequire(import.meta.url)("./package.json") as { version: string };
 
-// GitHub Pages build (VITE_BASE=/FoxForge-GG/): no active service worker.
+// GitHub Pages build (VITE_BASE=/FoxForge-UNITE/): no active service worker.
 // Returning visitors may still have an old SW that serves a stale index.html
 // pointing at removed JS bundles → blank white page. A one-shot self-destructing
 // sw.js (same URL) lets legacy pages unregister + reload; new HTML never re-registers.
-const isPagesDeploy = process.env.VITE_BASE === "/FoxForge-GG/";
+const isPagesDeploy = process.env.VITE_BASE === PAGES_BASE_PATH;
 
 // Runs before the module bundle — purge SW/caches and show a recovery UI if React never mounts.
 const BOOT_SHELL = `<script>
@@ -43,7 +43,7 @@ const BOOT_SHELL = `<script>
   setTimeout(function(){
     var r=document.getElementById("root");
     if(!r||r.childElementCount)return;
-    r.innerHTML='<div style="font:16px/1.5 system-ui,sans-serif;padding:24px;max-width:28rem;margin:40px auto;text-align:center"><p style="font-weight:600;margin:0 0 8px">FoxForge GG didn\\'t load</p><p style="color:#5b6472;margin:0 0 16px">Try clearing cached site data from an older version.</p><button type="button" id="foxforge-recover" style="background:#4f46e5;color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer">Clear cache &amp; reload</button></div>';
+    r.innerHTML='<div style="font:16px/1.5 system-ui,sans-serif;padding:24px;max-width:28rem;margin:40px auto;text-align:center"><p style="font-weight:600;margin:0 0 8px">${APP_NAME} didn\\'t load</p><p style="color:#5b6472;margin:0 0 16px">Try clearing cached site data from an older version.</p><button type="button" id="foxforge-recover" style="background:#4f46e5;color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer">Clear cache &amp; reload</button></div>';
     var btn=document.getElementById("foxforge-recover");
     if(btn)btn.onclick=function(){
       try{localStorage.removeItem("unite-build-optimizer.dataCache.v1");}catch(e){}
@@ -61,7 +61,7 @@ const htmlBranding = () => ({
 });
 
 // base: relative "./" by default (works at a domain root or any sub-path); the
-// Pages build overrides with VITE_BASE=/FoxForge-GG/.
+// Pages build overrides with VITE_BASE=/FoxForge-UNITE/.
 export default defineConfig({
   base: process.env.VITE_BASE ?? "./",
   define: { __APP_VERSION__: JSON.stringify(version) },

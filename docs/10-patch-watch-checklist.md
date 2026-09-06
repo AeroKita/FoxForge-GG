@@ -1,6 +1,6 @@
 # Patch Watch & Deferred Data Sources
 
-A lightweight, repeatable process for keeping FoxForge GG accurate after a
+A lightweight, repeatable process for keeping FoxForge UNITE accurate after a
 Pokémon UNITE balance patch — and a record of data sources we have evaluated
 but **deliberately deferred**. UNITE-DB stays the primary source; this doc is the
 checklist, not a new pipeline.
