@@ -70,7 +70,7 @@ Before you open a PR, confirm every box. CI runs the same gate and will block th
 - [ ] New or changed behavior is covered by a test that you wrote *before* the implementation.
 - [ ] No game math or stat formatting was reimplemented in a component — it routes through the engine and `src/ui/format.ts`.
 - [ ] No React/DOM imports leaked into `src/engine/`.
-- [ ] No generated bundle JSON (`src/data/`, `public/data/`) or curated label was hand-edited; data changes go through `tools/community/` scripts.
+- [ ] No generated bundle JSON (`src/data/`, `public/data/`) or curated label was hand-edited; data changes go through `tools/community/` scripts. User-facing prose/typo fixes go through `SPELLING_FIXES` or `patch_note_overrides.json` in normalize, not the bundle.
 - [ ] Commits use conventional-commit prefixes (and reference a relevant issue, `#<n>`, if one applies).
 - [ ] Architecture-affecting changes are reflected in `AGENTS.md` and/or `docs/`.
 - [ ] The branch is focused on a single logical change and is up to date with `main`.

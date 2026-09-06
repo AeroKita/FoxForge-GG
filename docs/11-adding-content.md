@@ -15,6 +15,16 @@ Hard rules (every path):
 2. Nothing goes live until you upload your changes with `git push` (or merge a pull request on GitHub).
 3. Every ship path runs automated checks first — if something is wrong, it stops instead of shipping.
 
+## Fixing user-facing typos
+
+Do not edit `src/data/patch-current.json` or `public/data/patch-….json` to fix tooltip text. A later data refresh will overwrite those edits.
+
+- **Word-level typo** (safe in every string, not a substring of a correct word): add a pair to `SPELLING_FIXES` in `tools/community/normalize.py`, add a `TestFixSpelling` assert in `tools/community/test_normalize.py`, and add the old spelling to the banned list in `src/data/__tests__/patchBundle.test.ts`.
+- **Sentence-level typo** (only wrong in one move or item): add a guarded `replaceText` entry in `tools/community/patch_note_overrides.json` (`find` must be the pre-fix substring), and add that `find` to the same banned list. The `item` key resolves held items and battle items.
+- Then regenerate: `npm run data:refresh -- --mode curate`.
+
+`{0}`, `use(s)`, literal `\u201c`, and ASCII `Pokemon` are CI gates in `patchBundle.test.ts`. If you invent a number for `{0}`, you are doing it wrong — take the number from Advanced text, rewrite the sentence without a numeral, or skip.
+
 ### How to read the commands in this doc
 
 1. **Project folder** = the `FoxForge-GG` directory on your computer (the one that contains `package.json`). Before any `npm …` or `git …` command, make that folder your terminal’s current directory.
